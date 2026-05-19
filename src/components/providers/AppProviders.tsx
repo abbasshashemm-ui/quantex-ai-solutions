@@ -1,6 +1,7 @@
 "use client";
 
 import type { ReactNode } from "react";
+import { SolutionsScrollHandler } from "./SolutionsScrollHandler";
 import { SmoothScrollProvider } from "./SmoothScrollProvider";
 
 type AppProvidersProps = {
@@ -8,5 +9,10 @@ type AppProvidersProps = {
 };
 
 export function AppProviders({ children }: AppProvidersProps) {
-  return <SmoothScrollProvider>{children}</SmoothScrollProvider>;
+  return (
+    <SmoothScrollProvider>
+      <SolutionsScrollHandler />
+      {children}
+    </SmoothScrollProvider>
+  );
 }

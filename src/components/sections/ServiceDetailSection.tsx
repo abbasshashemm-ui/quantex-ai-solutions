@@ -15,7 +15,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
   return (
     <article
       id="service-page"
-      className="relative min-h-[100dvh] px-4 pb-20 pt-[calc(5.5rem+env(safe-area-inset-top))] sm:px-6 sm:pt-28"
+      className="relative min-h-[100dvh] px-4 pb-20 pt-[calc(6rem+env(safe-area-inset-top))] sm:px-6 sm:pt-32"
     >
       <div className="mx-auto max-w-3xl">
         <Link

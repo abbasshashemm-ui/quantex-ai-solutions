@@ -86,14 +86,14 @@ body {
     height: 100svh;
   }
 
-  .spline-viewport > div {
+  .spline-viewport__stage {
     position: absolute !important;
     inset: 0 !important;
     width: 100% !important;
     height: 100% !important;
     min-height: 100dvh;
     min-height: 100svh;
-    transform: scale(1.06);
+    transform: scale(1.22);
     transform-origin: 50% 40%;
   }
 
@@ -133,6 +133,7 @@ body {
 /* ——— Services section ——— */
 .services-section {
   min-height: auto;
+  scroll-margin-top: 6rem;
 }
 
 @media (min-width: 768px) {

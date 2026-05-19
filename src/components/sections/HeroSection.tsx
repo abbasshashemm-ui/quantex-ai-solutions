@@ -5,7 +5,7 @@ export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative grid min-h-[100dvh] grid-rows-[minmax(0,1.15fr)_auto_minmax(4.5rem,0.72fr)] px-4 pt-[calc(5.5rem+env(safe-area-inset-top))] sm:px-6 sm:pt-28 md:grid-rows-[minmax(0,1.05fr)_auto_minmax(5rem,0.85fr)]"
+      className="relative grid min-h-[100dvh] grid-rows-[minmax(0,1.15fr)_auto_minmax(4.5rem,0.72fr)] px-4 pt-[calc(6rem+env(safe-area-inset-top))] sm:px-6 sm:pt-32 md:grid-rows-[minmax(0,1.05fr)_auto_minmax(5rem,0.85fr)]"
     >
       <div aria-hidden className="min-h-0" />
 

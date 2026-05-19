@@ -6,6 +6,7 @@ import { gsap, registerGsapPlugins, ScrollTrigger } from "@/lib/gsap/register";
 import { useMounted } from "@/hooks/useMounted";
 import { SERVICES } from "@/lib/services/data";
 import { sceneScrollStore } from "@/lib/scene/scene-scroll-store";
+import { SERVICES_SCROLL_TRIGGER_ID } from "@/lib/scroll/scroll-to-solutions";
 import { ServiceCard } from "./ServiceCard";
 
 const SCROLL_PER_SERVICE = 0.85;
@@ -97,6 +98,7 @@ export function ServicesSection() {
 
       const timeline = gsap.timeline({
         scrollTrigger: {
+          id: SERVICES_SCROLL_TRIGGER_ID,
           trigger: section,
           start: "top top",
           end: `+=${scrollLength}%`,

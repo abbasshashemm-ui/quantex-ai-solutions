@@ -50,9 +50,11 @@ function resetCamerasToBaseline(app: Application) {
   }
 }
 
-/** Mobile portrait: near-default zoom — wide enough to see the bot, not the badge hunt. */
+const MOBILE_ZOOM = 1.15;
+
+/** Mobile portrait: slight zoom-in so the bot reads larger on small screens. */
 function getMobilePortraitZoom() {
-  return 1;
+  return MOBILE_ZOOM;
 }
 
 function getDesktopPortraitZoom(width: number, height: number) {
@@ -107,7 +109,7 @@ export function applySplineViewportFit(app: Application): () => void {
       applyMobilePortraitFit(app, w, h);
     } else if (mobile) {
       resetCamerasToBaseline(app);
-      app.setZoom(1);
+      app.setZoom(MOBILE_ZOOM);
     } else if (aspect < 1) {
       applyDesktopPortraitNudge(app, w, h);
     } else {

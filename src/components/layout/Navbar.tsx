@@ -28,14 +28,14 @@ export function Navbar() {
     <header className="fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)]">
       <nav
         aria-label="Primary"
-        className="mx-auto flex max-w-7xl items-center justify-between gap-3 border-b border-white/5 bg-void/40 px-4 py-3 backdrop-blur-xl backdrop-saturate-150 supports-[backdrop-filter]:bg-void/30 sm:px-6 sm:py-4"
+        className="mx-auto flex max-w-7xl items-center justify-between gap-4 border-b border-white/5 bg-void/40 px-4 py-4 backdrop-blur-xl backdrop-saturate-150 supports-[backdrop-filter]:bg-void/30 sm:px-6 sm:py-5"
       >
         <a
           href="/"
-          className="inline-flex min-h-11 min-w-11 shrink-0 items-center"
+          className="inline-flex min-h-12 shrink-0 items-center sm:min-h-14"
           onClick={close}
         >
-          <BrandLogo priority className="h-7 w-auto sm:h-8" />
+          <BrandLogo priority className="h-10 w-auto max-w-[min(240px,52vw)] sm:h-12 md:h-[3.25rem]" />
         </a>
 
         <ul className="hidden items-center gap-6 lg:gap-8 md:flex">
@@ -43,7 +43,7 @@ export function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="inline-flex min-h-11 items-center text-sm text-foreground transition-opacity hover:opacity-80"
+                className="inline-flex min-h-12 items-center text-sm text-foreground transition-opacity hover:opacity-80 sm:text-base"
               >
                 {link.label}
               </a>
@@ -56,7 +56,7 @@ export function Navbar() {
             href={CONTACT.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden min-h-11 items-center rounded-full border border-white/20 bg-white/5 px-4 text-xs font-medium tracking-wide text-foreground uppercase transition-colors hover:border-white/40 hover:bg-white/10 sm:inline-flex"
+            className="hidden min-h-12 items-center rounded-full border border-white/20 bg-white/5 px-5 text-xs font-medium tracking-wide text-foreground uppercase transition-colors hover:border-white/40 hover:bg-white/10 sm:inline-flex sm:text-sm"
           >
             Book Strategy Call
           </a>
@@ -92,7 +92,7 @@ export function Navbar() {
         <div
           id="mobile-nav"
           className="fixed inset-0 z-40 bg-void/95 backdrop-blur-lg md:hidden"
-          style={{ paddingTop: "calc(4.5rem + env(safe-area-inset-top))" }}
+          style={{ paddingTop: "calc(5.25rem + env(safe-area-inset-top))" }}
         >
           <ul className="flex flex-col px-4 pb-[env(safe-area-inset-bottom)]">
             {SITE_NAV.map((link) => (

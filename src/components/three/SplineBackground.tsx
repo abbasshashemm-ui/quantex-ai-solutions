@@ -13,7 +13,9 @@ import {
 import { SPLINE_BOT_SCENE } from "@/lib/scene/spline";
 
 function SplineFallback() {
-  return <div className="h-full w-full bg-void" aria-hidden />;
+  return (
+    <div className="spline-viewport__stage h-full w-full bg-void" aria-hidden />
+  );
 }
 
 const Spline = dynamic(() => import("@splinetool/react-spline"), {
@@ -79,7 +81,7 @@ export function SplineBackground() {
       {mounted ? (
         <Spline
           scene={SPLINE_BOT_SCENE}
-          className="h-full min-h-[100dvh] min-h-[100svh] w-full touch-auto"
+          className="spline-viewport__stage h-full min-h-[100dvh] min-h-[100svh] w-full touch-auto"
           onLoad={handleLoad}
           renderOnDemand={false}
         />
@@ -88,7 +90,7 @@ export function SplineBackground() {
       )}
       {/* Tiny cover on the badge only — avoids zooming the whole scene */}
       <div
-        className="pointer-events-none absolute right-2 bottom-[max(0.5rem,env(safe-area-inset-bottom))] z-10 h-5 w-[5.5rem] rounded-sm bg-void max-md:h-[1.125rem] max-md:w-[4.75rem] md:right-3 md:bottom-6 md:h-9 md:w-[9.75rem] md:rounded-md lg:bottom-7 lg:right-4"
+        className="spline-watermark-cover pointer-events-none absolute right-2 bottom-[max(0.5rem,env(safe-area-inset-bottom))] z-10 h-5 w-[5.5rem] rounded-sm bg-void max-md:h-[1.125rem] max-md:w-[4.75rem] md:right-3 md:bottom-6 md:h-9 md:w-[9.75rem] md:rounded-md lg:bottom-7 lg:right-4"
         aria-hidden
       />
     </div>
