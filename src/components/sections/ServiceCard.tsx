@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useRef, type PointerEvent } from "react";
 import type { Service } from "@/lib/services/data";
 
@@ -44,22 +45,27 @@ export function ServiceCard({ service, className = "" }: ServiceCardProps) {
   };
 
   return (
-    <article
-      ref={cardRef}
-      data-service-card
-      data-service-index={service.index}
+    <Link
+      href={`/services/${service.slug}`}
       data-interactive
-      className={`service-card ${accentMap[service.accent]} ${className}`.trim()}
-      onPointerMove={handlePointerMove}
-      onPointerLeave={handlePointerLeave}
+      className={`block ${className}`.trim()}
     >
-      <div className="service-card__inner">
-        <span className="service-card__index">
-          {String(service.index + 1).padStart(2, "0")}
-        </span>
-        <h3 className="service-card__title">{service.title}</h3>
-        <p className="service-card__description">{service.description}</p>
-      </div>
-    </article>
+      <article
+        ref={cardRef}
+        data-service-card
+        data-service-index={service.index}
+        className={`service-card ${accentMap[service.accent]}`}
+        onPointerMove={handlePointerMove}
+        onPointerLeave={handlePointerLeave}
+      >
+        <div className="service-card__inner">
+          <span className="service-card__index">
+            {String(service.index + 1).padStart(2, "0")}
+          </span>
+          <h3 className="service-card__title">{service.title}</h3>
+          <p className="service-card__description">{service.description}</p>
+        </div>
+      </article>
+    </Link>
   );
 }

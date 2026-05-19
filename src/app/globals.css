@@ -93,6 +93,8 @@ body {
     height: 100% !important;
     min-height: 100dvh;
     min-height: 100svh;
+    transform: scale(1.06);
+    transform-origin: 50% 40%;
   }
 
   .spline-viewport canvas {

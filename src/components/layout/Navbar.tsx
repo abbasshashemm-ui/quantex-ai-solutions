@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { SITE_NAV, CONTACT } from "@/lib/site/contact";
 import { BrandLogo } from "./BrandLogo";
 
-const NAV_LINKS = SITE_NAV.filter((item) => item.href !== "#home");
+const NAV_LINKS = SITE_NAV.filter((item) => item.href !== "/");
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -31,7 +31,7 @@ export function Navbar() {
         className="mx-auto flex max-w-7xl items-center justify-between gap-3 border-b border-white/5 bg-void/40 px-4 py-3 backdrop-blur-xl backdrop-saturate-150 supports-[backdrop-filter]:bg-void/30 sm:px-6 sm:py-4"
       >
         <a
-          href="#home"
+          href="/"
           className="inline-flex min-h-11 min-w-11 shrink-0 items-center"
           onClick={close}
         >

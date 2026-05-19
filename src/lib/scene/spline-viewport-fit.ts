@@ -6,6 +6,10 @@ function clamp(value: number, min: number, max: number) {
 
 const CAMERA_BASELINE = new Map<string, { x: number; y: number; z: number }>();
 
+function isMobileViewport() {
+  return window.matchMedia("(max-width: 767px)").matches;
+}
+
 function getViewportSize() {
   const vv = window.visualViewport;
   return {
@@ -18,6 +22,10 @@ function findCameras(app: Application): SPEObject[] {
   return app
     .getAllObjects()
     .filter((obj) => obj.visible && /camera/i.test(obj.name));
+}
+
+export function resetSplineCameraBaselines() {
+  CAMERA_BASELINE.clear();
 }
 
 function ensureCameraBaselines(app: Application) {
@@ -42,42 +50,32 @@ function resetCamerasToBaseline(app: Application) {
   }
 }
 
-/** Lower values zoom the camera out (wider framing) in Spline runtime. */
-export function getSplineZoomForViewport(
-  width: number,
-  height: number,
-  isMobile = false,
-): number {
+/** Mobile portrait: near-default zoom — wide enough to see the bot, not the badge hunt. */
+function getMobilePortraitZoom() {
+  return 1;
+}
+
+function getDesktopPortraitZoom(width: number, height: number) {
   const aspect = width / height;
-
-  if (aspect >= 1) {
-    return 1;
-  }
-
-  const narrowness = 1 - aspect;
-
-  if (isMobile) {
-    return clamp(0.42, 0.28 + aspect * 0.52, 0.72);
-  }
-
   return clamp(0.55, 0.42 + aspect * 0.5, 1);
 }
 
 function applyMobilePortraitFit(app: Application, width: number, height: number) {
   ensureCameraBaselines(app);
+  resetCamerasToBaseline(app);
 
   const aspect = width / height;
   const narrowness = 1 - aspect;
 
-  app.setZoom(getSplineZoomForViewport(width, height, true));
+  app.setZoom(getMobilePortraitZoom());
 
   for (const camera of findCameras(app)) {
     const base = CAMERA_BASELINE.get(camera.uuid);
     if (!base) continue;
 
     camera.position.x = base.x;
-    camera.position.z = base.z + 220 + narrowness * 100;
-    camera.position.y = base.y - narrowness * 28;
+    camera.position.z = base.z + 80 + narrowness * 40;
+    camera.position.y = base.y - narrowness * 16;
   }
 }
 
@@ -87,7 +85,7 @@ function applyDesktopPortraitNudge(app: Application, width: number, height: numb
   const aspect = width / height;
   const narrowness = 1 - aspect;
 
-  app.setZoom(getSplineZoomForViewport(width, height, false));
+  app.setZoom(getDesktopPortraitZoom(width, height));
 
   for (const camera of findCameras(app)) {
     const base = CAMERA_BASELINE.get(camera.uuid)!;
@@ -97,19 +95,17 @@ function applyDesktopPortraitNudge(app: Application, width: number, height: numb
   }
 }
 
-export function applySplineViewportFit(
-  app: Application,
-  isMobile = false,
-): () => void {
+export function applySplineViewportFit(app: Application): () => void {
   const apply = () => {
     const { width: w, height: h } = getViewportSize();
     const aspect = w / h;
+    const mobile = isMobileViewport();
 
     ensureCameraBaselines(app);
 
-    if (isMobile && aspect < 1) {
+    if (mobile && aspect < 1) {
       applyMobilePortraitFit(app, w, h);
-    } else if (isMobile) {
+    } else if (mobile) {
       resetCamerasToBaseline(app);
       app.setZoom(1);
     } else if (aspect < 1) {
@@ -124,8 +120,8 @@ export function applySplineViewportFit(
 
   apply();
   requestAnimationFrame(apply);
-  const delayed = window.setTimeout(apply, 150);
-  const delayedAgain = window.setTimeout(apply, 600);
+
+  const delays = [150, 500, 1000, 1800].map((ms) => window.setTimeout(apply, ms));
 
   const onResize = () => apply();
   window.addEventListener("resize", onResize, { passive: true });
@@ -133,8 +129,7 @@ export function applySplineViewportFit(
   window.visualViewport?.addEventListener("resize", onResize, { passive: true });
 
   return () => {
-    window.clearTimeout(delayed);
-    window.clearTimeout(delayedAgain);
+    delays.forEach((id) => window.clearTimeout(id));
     window.removeEventListener("resize", onResize);
     window.removeEventListener("orientationchange", onResize);
     window.visualViewport?.removeEventListener("resize", onResize);

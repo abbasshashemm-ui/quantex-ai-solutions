@@ -6,7 +6,10 @@ import { useCallback, useEffect, useRef } from "react";
 import { useMounted } from "@/hooks/useMounted";
 import { useIsCoarsePointer, useIsMobile } from "@/hooks/useMediaQuery";
 import { attachSplineCursorFollow } from "@/lib/scene/spline-cursor-follow";
-import { applySplineViewportFit } from "@/lib/scene/spline-viewport-fit";
+import {
+  applySplineViewportFit,
+  resetSplineCameraBaselines,
+} from "@/lib/scene/spline-viewport-fit";
 import { SPLINE_BOT_SCENE } from "@/lib/scene/spline";
 
 function SplineFallback() {
@@ -30,7 +33,7 @@ export function SplineBackground() {
       detachFollowRef.current?.();
       detachFitRef.current?.();
 
-      detachFitRef.current = applySplineViewportFit(app, isMobile);
+      detachFitRef.current = applySplineViewportFit(app);
 
       app.play();
       for (let i = 0; i < 6; i += 1) {
@@ -47,6 +50,7 @@ export function SplineBackground() {
   const handleLoad = useCallback(
     (app: Application) => {
       appRef.current = app;
+      resetSplineCameraBaselines();
       syncScene(app);
     },
     [syncScene],
@@ -82,9 +86,9 @@ export function SplineBackground() {
       ) : (
         <SplineFallback />
       )}
-      {/* Covers the "Built with Spline" badge (desktop only — on mobile it sat over the bot) */}
+      {/* Tiny cover on the badge only — avoids zooming the whole scene */}
       <div
-        className="pointer-events-none absolute right-3 bottom-6 z-10 hidden h-9 w-[9.75rem] rounded-md bg-void md:block lg:bottom-7 lg:right-4"
+        className="pointer-events-none absolute right-2 bottom-[max(0.5rem,env(safe-area-inset-bottom))] z-10 h-5 w-[5.5rem] rounded-sm bg-void max-md:h-[1.125rem] max-md:w-[4.75rem] md:right-3 md:bottom-6 md:h-9 md:w-[9.75rem] md:rounded-md lg:bottom-7 lg:right-4"
         aria-hidden
       />
     </div>

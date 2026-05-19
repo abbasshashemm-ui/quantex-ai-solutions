@@ -6,9 +6,14 @@ import { sceneScrollStore } from "@/lib/scene/scene-scroll-store";
 import { useEffect } from "react";
 import { HomeScene } from "./HomeScene";
 
-export function ViewportScene() {
+type ViewportSceneProps = {
+  alwaysActive?: boolean;
+};
+
+export function ViewportScene({ alwaysActive = false }: ViewportSceneProps) {
   const mounted = useMounted();
-  const active = useViewportSceneActive();
+  const scrollActive = useViewportSceneActive();
+  const active = alwaysActive || scrollActive;
 
   useEffect(() => {
     if (!active) {

@@ -27,10 +27,8 @@ export const CONTACT_LINKS = [
 ] as const;
 
 export const SITE_NAV = [
-  { label: "Home", href: "#home" },
-  { label: "Solutions", href: "#solutions" },
+  { label: "Home", href: "/" },
+  { label: "Solutions", href: "/#solutions" },
 ] as const;
 
-export const FOOTER_NAV = SITE_NAV.filter(
-  (item) => item.href !== "#home",
-);
+export const FOOTER_NAV = SITE_NAV.filter((item) => item.href !== "/");
