@@ -74,11 +74,33 @@ body {
   pointer-events: auto;
 }
 
-/* Spline full-viewport — avoid clipping the bot on portrait phones */
+/* Spline full-viewport */
 .spline-viewport {
   overflow: hidden;
 }
 
+@media (max-width: 767px) {
+  .spline-viewport {
+    width: 100%;
+    height: 100dvh;
+    height: 100svh;
+  }
+
+  .spline-viewport > div {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    min-height: 100dvh;
+    min-height: 100svh;
+  }
+
+  .spline-viewport canvas {
+    display: block;
+    width: 100% !important;
+    height: 100% !important;
+  }
+}
 
 ::selection {
   background-color: color-mix(in srgb, var(--accent) 20%, transparent);

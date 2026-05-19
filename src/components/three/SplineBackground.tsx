@@ -69,13 +69,13 @@ export function SplineBackground() {
 
   return (
     <div
-      className="spline-viewport fixed inset-0 z-0 h-[100dvh] w-full"
+      className="spline-viewport fixed inset-0 z-0 h-[100dvh] h-[100svh] w-full"
       aria-label="Interactive 3D assistant"
     >
       {mounted ? (
         <Spline
           scene={SPLINE_BOT_SCENE}
-          className="h-full min-h-[100dvh] w-full touch-auto"
+          className="h-full min-h-[100dvh] min-h-[100svh] w-full touch-auto"
           onLoad={handleLoad}
           renderOnDemand={false}
         />

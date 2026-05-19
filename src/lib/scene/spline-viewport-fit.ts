@@ -6,10 +6,30 @@ function clamp(value: number, min: number, max: number) {
 
 const CAMERA_BASELINE = new Map<string, { x: number; y: number; z: number }>();
 
+function getViewportSize() {
+  const vv = window.visualViewport;
+  return {
+    width: vv?.width ?? window.innerWidth,
+    height: vv?.height ?? window.innerHeight,
+  };
+}
+
 function findCameras(app: Application): SPEObject[] {
   return app
     .getAllObjects()
     .filter((obj) => obj.visible && /camera/i.test(obj.name));
+}
+
+function ensureCameraBaselines(app: Application) {
+  for (const camera of findCameras(app)) {
+    if (!CAMERA_BASELINE.has(camera.uuid)) {
+      CAMERA_BASELINE.set(camera.uuid, {
+        x: camera.position.x,
+        y: camera.position.y,
+        z: camera.position.z,
+      });
+    }
+  }
 }
 
 function resetCamerasToBaseline(app: Application) {
@@ -22,7 +42,7 @@ function resetCamerasToBaseline(app: Application) {
   }
 }
 
-/** Pull camera back on portrait so the full bot stays in frame. */
+/** Lower values zoom the camera out (wider framing) in Spline runtime. */
 export function getSplineZoomForViewport(
   width: number,
   height: number,
@@ -37,38 +57,41 @@ export function getSplineZoomForViewport(
   const narrowness = 1 - aspect;
 
   if (isMobile) {
-    return 1;
+    return clamp(0.42, 0.28 + aspect * 0.52, 0.72);
   }
 
   return clamp(0.55, 0.42 + aspect * 0.5, 1);
 }
 
-function applyCameraPortraitNudge(
-  app: Application,
-  width: number,
-  height: number,
-): void {
-  const aspect = width / height;
-  if (aspect >= 1) {
-    resetCamerasToBaseline(app);
-    return;
-  }
+function applyMobilePortraitFit(app: Application, width: number, height: number) {
+  ensureCameraBaselines(app);
 
-  const cameras = findCameras(app);
+  const aspect = width / height;
   const narrowness = 1 - aspect;
 
-  for (const camera of cameras) {
-    const key = camera.uuid;
+  app.setZoom(getSplineZoomForViewport(width, height, true));
 
-    if (!CAMERA_BASELINE.has(key)) {
-      CAMERA_BASELINE.set(key, {
-        x: camera.position.x,
-        y: camera.position.y,
-        z: camera.position.z,
-      });
-    }
+  for (const camera of findCameras(app)) {
+    const base = CAMERA_BASELINE.get(camera.uuid);
+    if (!base) continue;
 
-    const base = CAMERA_BASELINE.get(key)!;
+    camera.position.x = base.x;
+    camera.position.z = base.z + 220 + narrowness * 100;
+    camera.position.y = base.y - narrowness * 28;
+  }
+}
+
+function applyDesktopPortraitNudge(app: Application, width: number, height: number) {
+  ensureCameraBaselines(app);
+
+  const aspect = width / height;
+  const narrowness = 1 - aspect;
+
+  app.setZoom(getSplineZoomForViewport(width, height, false));
+
+  for (const camera of findCameras(app)) {
+    const base = CAMERA_BASELINE.get(camera.uuid)!;
+    camera.position.x = base.x;
     camera.position.z = base.z + narrowness * 100;
     camera.position.y = base.y - narrowness * 18;
   }
@@ -79,17 +102,21 @@ export function applySplineViewportFit(
   isMobile = false,
 ): () => void {
   const apply = () => {
-    const { innerWidth: w, innerHeight: h } = window;
+    const { width: w, height: h } = getViewportSize();
     const aspect = w / h;
 
-    app.setZoom(getSplineZoomForViewport(w, h, isMobile));
+    ensureCameraBaselines(app);
 
-    if (isMobile) {
+    if (isMobile && aspect < 1) {
+      applyMobilePortraitFit(app, w, h);
+    } else if (isMobile) {
       resetCamerasToBaseline(app);
+      app.setZoom(1);
     } else if (aspect < 1) {
-      applyCameraPortraitNudge(app, w, h);
+      applyDesktopPortraitNudge(app, w, h);
     } else {
       resetCamerasToBaseline(app);
+      app.setZoom(1);
     }
 
     app.requestRender();
@@ -98,15 +125,18 @@ export function applySplineViewportFit(
   apply();
   requestAnimationFrame(apply);
   const delayed = window.setTimeout(apply, 150);
-  const delayedAgain = window.setTimeout(apply, 500);
+  const delayedAgain = window.setTimeout(apply, 600);
 
-  window.addEventListener("resize", apply, { passive: true });
-  window.addEventListener("orientationchange", apply, { passive: true });
+  const onResize = () => apply();
+  window.addEventListener("resize", onResize, { passive: true });
+  window.addEventListener("orientationchange", onResize, { passive: true });
+  window.visualViewport?.addEventListener("resize", onResize, { passive: true });
 
   return () => {
     window.clearTimeout(delayed);
     window.clearTimeout(delayedAgain);
-    window.removeEventListener("resize", apply);
-    window.removeEventListener("orientationchange", apply);
+    window.removeEventListener("resize", onResize);
+    window.removeEventListener("orientationchange", onResize);
+    window.visualViewport?.removeEventListener("resize", onResize);
   };
 }
