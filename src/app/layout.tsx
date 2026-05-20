@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { Analytics } from "@vercel/analytics/next";
 import { Geist } from "next/font/google";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { MainLayout } from "@/components/layout/MainLayout";
@@ -52,6 +53,7 @@ export default function RootLayout({
         <AppProviders>
           <MainLayout>{children}</MainLayout>
         </AppProviders>
+        <Analytics />
       </body>
     </html>
   );
