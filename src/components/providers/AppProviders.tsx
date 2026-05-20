@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
+import { ScrollToTopOnNavigate } from "./ScrollToTopOnNavigate";
 import { SolutionsScrollHandler } from "./SolutionsScrollHandler";
 import { SmoothScrollProvider } from "./SmoothScrollProvider";
 
@@ -15,6 +16,7 @@ export function AppProviders({ children }: AppProvidersProps) {
 
   return (
     <SmoothScrollProvider>
+      <ScrollToTopOnNavigate />
       {isHome ? <SolutionsScrollHandler /> : null}
       {children}
     </SmoothScrollProvider>

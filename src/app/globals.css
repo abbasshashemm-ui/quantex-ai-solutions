@@ -42,7 +42,14 @@ html::-webkit-scrollbar {
   height: 0;
 }
 
+@media (max-width: 767px) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
+  html,
   html.lenis,
   html.lenis body {
     scroll-behavior: auto !important;
@@ -315,7 +322,6 @@ body::-webkit-scrollbar {
     min-height: 100vh;
     padding-top: 5rem;
     padding-bottom: 4rem;
-    will-change: transform;
   }
 }
 

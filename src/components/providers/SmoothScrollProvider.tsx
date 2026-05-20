@@ -56,12 +56,12 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
       root.classList.add("lenis", "lenis-smooth");
 
       const instance = new Lenis({
-        lerp: 0.1,
+        lerp: 0.06,
         smoothWheel: true,
         syncTouch: false,
         autoRaf: false,
-        wheelMultiplier: 0.9,
-        touchMultiplier: 1.25,
+        wheelMultiplier: 0.82,
+        touchMultiplier: 1.05,
       });
 
       if (disposed) {
@@ -71,12 +71,13 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
 
       setLenis(instance);
 
-      instance.on("scroll", ScrollTrigger.update);
+      const onScroll = () => ScrollTrigger.update();
+      instance.on("scroll", onScroll);
 
       ScrollTrigger.scrollerProxy(root, {
         scrollTop(value?: number) {
           if (value !== undefined) {
-            instance.scrollTo(value, { immediate: true });
+            instance.scrollTo(value, { immediate: true, force: true });
           }
           return instance.scroll;
         },

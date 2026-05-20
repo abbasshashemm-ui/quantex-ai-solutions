@@ -42,8 +42,8 @@ function scrollToY(targetY: number, lenis: Lenis | null) {
   return new Promise<void>((resolve) => {
     if (lenis) {
       lenis.scrollTo(y, {
-        duration: 1.1,
-        easing: (t) => Math.min(1, 1.001 - 2 ** (-10 * t)),
+        duration: 1.35,
+        easing: (t) => 1 - (1 - t) ** 4,
         onComplete: () => resolve(),
       });
       return;
