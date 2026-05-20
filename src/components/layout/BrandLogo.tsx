@@ -6,7 +6,7 @@ type BrandLogoProps = {
   variant?: "full" | "mark";
 };
 
-/** Full horizontal lockup (triangle + QUANTEX) — user-provided asset */
+/** Horizontal QUANTEX wordmark */
 const FULL_LOGO = "/quantex-logo.png";
 /** Triangle mark only — user-provided asset */
 const MARK_LOGO = "/quantex-mark-reference.png";
@@ -23,6 +23,7 @@ export function BrandLogo({
         alt="Quantex"
         width={40}
         height={46}
+        sizes="40px"
         priority={priority}
         className={className ?? "h-9 w-auto"}
       />
@@ -33,10 +34,11 @@ export function BrandLogo({
     <Image
       src={FULL_LOGO}
       alt="Quantex AI Solutions"
-      width={200}
-      height={48}
+      width={360}
+      height={72}
+      sizes="(max-width: 768px) 180px, 220px"
       priority={priority}
-      className={className ?? "h-8 w-auto max-w-[min(200px,42vw)]"}
+      className={className ?? "h-8 w-auto max-w-[min(220px,50vw)]"}
     />
   );
 }

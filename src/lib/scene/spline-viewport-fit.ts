@@ -123,7 +123,7 @@ export function applySplineViewportFit(app: Application): () => void {
   apply();
   requestAnimationFrame(apply);
 
-  const delays = [150, 500, 1000, 1800].map((ms) => window.setTimeout(apply, ms));
+  const delays = [150, 600].map((ms) => window.setTimeout(apply, ms));
 
   const onResize = () => apply();
   window.addEventListener("resize", onResize, { passive: true });

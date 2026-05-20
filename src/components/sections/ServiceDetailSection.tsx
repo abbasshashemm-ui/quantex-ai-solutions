@@ -17,7 +17,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
       id="service-page"
       className="relative min-h-[100dvh] px-4 pb-20 pt-[calc(6rem+env(safe-area-inset-top))] sm:px-6 sm:pt-32"
     >
-      <div className="mx-auto max-w-3xl">
+      <div className="mx-auto max-w-7xl">
         <Link
           href="/#solutions"
           data-interactive
@@ -38,16 +38,16 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
           {service.description}
         </p>
 
-        <div className="mt-10 space-y-5 sm:mt-12 sm:space-y-6">
-          {service.placeholders.map((section) => (
+        <div className="mt-10 grid grid-cols-3 gap-2 sm:mt-12 sm:gap-4 md:gap-5">
+          {service.sections.map((section) => (
             <section
               key={section.title}
-              className="rounded-xl border border-white/10 bg-surface/60 p-5 backdrop-blur-md sm:p-6"
+              className="flex flex-col rounded-lg border border-white/10 bg-surface/60 p-3 backdrop-blur-md sm:rounded-xl sm:p-5 md:p-6"
             >
-              <h2 className="text-sm font-semibold tracking-wide text-foreground uppercase sm:text-base">
+              <h2 className="text-[0.65rem] font-semibold tracking-wide text-foreground uppercase sm:text-sm md:text-base">
                 {section.title}
               </h2>
-              <p className="mt-3 text-sm leading-relaxed text-foreground/85 sm:text-base">
+              <p className="mt-2 flex-1 text-[0.7rem] leading-relaxed text-foreground/85 sm:mt-3 sm:text-sm md:text-base">
                 {section.body}
               </p>
             </section>

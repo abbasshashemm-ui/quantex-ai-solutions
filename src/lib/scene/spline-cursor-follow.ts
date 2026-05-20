@@ -22,6 +22,8 @@ const FOLLOW_NAME_HINTS = [
 /** Optional: set exact object name from Spline editor (Copy object name) */
 export const SPLINE_FOLLOW_OBJECT_NAME: string | undefined = undefined;
 
+const IDLE_MS = 220;
+
 function lerp(current: number, target: number, alpha: number) {
   return current + (target - current) * alpha;
 }
@@ -92,14 +94,11 @@ export function attachSplineCursorFollow(app: Application): () => void {
   const smoothed = { x: 0, y: 0 };
   const SMOOTH = 0.14;
 
-  const onPointerMove = (event: PointerEvent) => {
-    pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
-    pointer.y = -((event.clientY / window.innerHeight) * 2 - 1);
-  };
-
   let frameId = 0;
+  let lastActive = 0;
+  let running = false;
 
-  const tick = () => {
+  const tick = (time: number) => {
     smoothed.x = lerp(smoothed.x, pointer.x, SMOOTH);
     smoothed.y = lerp(smoothed.y, pointer.y, SMOOTH);
 
@@ -110,15 +109,36 @@ export function attachSplineCursorFollow(app: Application): () => void {
       applyRotationFollow(followObject, smoothed.x, smoothed.y, SMOOTH);
     }
 
-    app.requestRender();
+    const delta =
+      Math.abs(smoothed.x - pointer.x) + Math.abs(smoothed.y - pointer.y);
+
+    if (delta > 0.004 || time - lastActive < IDLE_MS) {
+      app.requestRender();
+      frameId = requestAnimationFrame(tick);
+      return;
+    }
+
+    running = false;
+  };
+
+  const start = () => {
+    if (running) return;
+    running = true;
     frameId = requestAnimationFrame(tick);
   };
 
+  const onPointerMove = (event: PointerEvent) => {
+    pointer.x = (event.clientX / window.innerWidth) * 2 - 1;
+    pointer.y = -((event.clientY / window.innerHeight) * 2 - 1);
+    lastActive = performance.now();
+    start();
+  };
+
   window.addEventListener("pointermove", onPointerMove, { passive: true });
-  frameId = requestAnimationFrame(tick);
 
   return () => {
     window.removeEventListener("pointermove", onPointerMove);
     cancelAnimationFrame(frameId);
+    running = false;
   };
 }

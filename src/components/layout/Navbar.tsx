@@ -3,8 +3,11 @@
 import { useEffect, useState } from "react";
 import { SITE_NAV, CONTACT } from "@/lib/site/contact";
 import { BrandLogo } from "./BrandLogo";
+import { ServicesNavDropdown } from "./ServicesNavDropdown";
 
-const NAV_LINKS = SITE_NAV.filter((item) => item.href !== "/");
+const NAV_LINKS = SITE_NAV.filter(
+  (item) => item.href !== "/" && item.label !== "Solutions",
+);
 
 export function Navbar() {
   const [open, setOpen] = useState(false);
@@ -35,15 +38,18 @@ export function Navbar() {
           className="inline-flex min-h-12 shrink-0 items-center sm:min-h-14"
           onClick={close}
         >
-          <BrandLogo priority className="h-10 w-auto max-w-[min(240px,52vw)] sm:h-12 md:h-[3.25rem]" />
+          <BrandLogo priority className="h-8 w-auto max-w-[min(200px,46vw)] sm:h-9 md:h-10" />
         </a>
 
-        <ul className="hidden items-center gap-6 lg:gap-8 md:flex">
+        <ul className="hidden items-center gap-2 md:flex lg:gap-4">
+          <li>
+            <ServicesNavDropdown />
+          </li>
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
               <a
                 href={link.href}
-                className="inline-flex min-h-12 items-center text-sm text-foreground transition-opacity hover:opacity-80 sm:text-base"
+                className="inline-flex min-h-12 items-center rounded-full px-3 text-sm text-foreground transition-opacity hover:opacity-80 sm:px-4 sm:text-base"
               >
                 {link.label}
               </a>
@@ -95,7 +101,17 @@ export function Navbar() {
           style={{ paddingTop: "calc(5.25rem + env(safe-area-inset-top))" }}
         >
           <ul className="flex flex-col px-4 pb-[env(safe-area-inset-bottom)]">
-            {SITE_NAV.map((link) => (
+            <li>
+              <a
+                href="/"
+                className="flex min-h-12 items-center border-b border-white/5 text-base text-foreground"
+                onClick={close}
+              >
+                Home
+              </a>
+            </li>
+            <ServicesNavDropdown variant="mobile" onNavigate={close} />
+            {NAV_LINKS.map((link) => (
               <li key={link.href}>
                 <a
                   href={link.href}
