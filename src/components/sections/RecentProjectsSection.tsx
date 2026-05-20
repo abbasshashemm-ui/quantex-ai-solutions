@@ -1,78 +1,72 @@
 "use client";
 
-import { useGSAP } from "@gsap/react";
-import { useRef } from "react";
-import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
+import { useEffect, useRef } from "react";
 import { useMounted } from "@/hooks/useMounted";
 import { PROJECTS } from "@/lib/projects/data";
+import { CONTACT } from "@/lib/site/contact";
+import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { ProjectCard } from "./ProjectCard";
 
 export function RecentProjectsSection() {
   const sectionRef = useRef<HTMLElement>(null);
   const mounted = useMounted();
 
-  useGSAP(
-    () => {
-      if (!mounted) return;
-      registerGsapPlugins();
+  useEffect(() => {
+    if (!mounted) return;
 
-      const section = sectionRef.current;
-      if (!section) return;
+    const section = sectionRef.current;
+    if (!section) return;
 
-      const cards = gsap.utils.toArray<HTMLElement>("[data-project-card]");
-      const reducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
+    const reducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
 
-      if (reducedMotion) return;
+    if (reducedMotion) return;
 
-      gsap.from(cards, {
-        opacity: 0,
-        y: 40,
-        duration: 0.6,
-        stagger: 0.1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: section,
-          start: "top 82%",
-          toggleActions: "play none none reverse",
-        },
-      });
-    },
-    { scope: sectionRef, dependencies: [mounted], revertOnUpdate: true },
-  );
+    const cards = section.querySelectorAll<HTMLElement>("[data-project-card]");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
+    );
+
+    cards.forEach((card) => observer.observe(card));
+    return () => observer.disconnect();
+  }, [mounted]);
 
   return (
     <section
       id="work"
       ref={sectionRef}
-      className="projects-section relative border-t border-white/5 py-16 sm:py-20 md:py-24"
+      className="projects-section relative border-t border-white/5 py-20 sm:py-24 md:py-28"
       aria-labelledby="projects-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <header className="projects-section__header flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
-            <p className="projects-section__eyebrow text-[0.65rem] font-medium tracking-[0.28em] text-foreground uppercase sm:text-xs sm:tracking-[0.35em]">
-              Our work
-            </p>
-            <h2
-              id="projects-heading"
-              className="mt-3 text-2xl font-semibold tracking-tight text-metallic-gradient sm:text-3xl md:text-4xl"
-            >
+            <PageEyebrow>Our work</PageEyebrow>
+            <h2 id="projects-heading" className="section-heading text-metallic-gradient">
               Recent projects
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-foreground/80 sm:text-base">
-              A sample of builds we ship for teams in Lebanon and abroad—web,
-              software, and automation with measurable outcomes.
+              Real client work—portfolios, custom operations software, and
+              industrial brands we have shipped end to end.
             </p>
           </div>
 
           <a
-            href="#work"
+            href={CONTACT.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
             data-interactive
-            className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 self-start rounded-full border border-white/25 bg-white/5 px-5 text-xs font-medium tracking-wide text-foreground uppercase transition-colors hover:border-white/45 hover:bg-white/10 md:self-auto"
+            className="btn-secondary shrink-0 gap-2 self-start px-5 md:self-auto"
           >
-            View all
+            Start a project
             <span aria-hidden className="text-foreground/70">
               →
             </span>
@@ -81,7 +75,7 @@ export function RecentProjectsSection() {
 
         <div className="projects-section__grid mt-10 sm:mt-12">
           {PROJECTS.map((project) => (
-            <div key={project.id} data-project-card>
+            <div key={project.id} data-project-card className="project-card-reveal">
               <ProjectCard project={project} />
             </div>
           ))}

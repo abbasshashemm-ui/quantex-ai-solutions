@@ -48,7 +48,7 @@ export function ServiceCard({ service, className = "" }: ServiceCardProps) {
     <Link
       href={`/services/${service.slug}`}
       data-interactive
-      className={`block ${className}`.trim()}
+      className={`service-card-link ${className}`.trim()}
     >
       <article
         ref={cardRef}
@@ -64,6 +64,23 @@ export function ServiceCard({ service, className = "" }: ServiceCardProps) {
           </span>
           <h3 className="service-card__title">{service.title}</h3>
           <p className="service-card__description">{service.description}</p>
+          <span className="service-card__more" aria-hidden>
+            <span className="service-card__more-label">Learn more</span>
+            <svg
+              className="service-card__more-arrow"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden
+            >
+              <path
+                d="M5 12h14M13 6l6 6-6 6"
+                stroke="currentColor"
+                strokeWidth="1.75"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          </span>
         </div>
       </article>
     </Link>

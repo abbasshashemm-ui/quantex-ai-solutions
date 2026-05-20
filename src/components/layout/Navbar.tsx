@@ -49,7 +49,7 @@ export function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="inline-flex min-h-12 items-center rounded-full px-3 text-sm text-foreground transition-opacity hover:opacity-80 sm:px-4 sm:text-base"
+                className="inline-flex min-h-12 items-center rounded-full px-3 text-sm text-foreground/90 transition-colors hover:bg-white/5 hover:text-foreground sm:px-4 sm:text-base"
               >
                 {link.label}
               </a>
@@ -62,14 +62,14 @@ export function Navbar() {
             href={CONTACT.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
-            className="hidden min-h-12 items-center rounded-full border border-white/20 bg-white/5 px-5 text-xs font-medium tracking-wide text-foreground uppercase transition-colors hover:border-white/40 hover:bg-white/10 sm:inline-flex sm:text-sm"
+            className="btn-secondary hidden px-5 sm:inline-flex"
           >
             Book Strategy Call
           </a>
 
           <button
             type="button"
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-white/15 text-foreground md:hidden"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-white/15 text-foreground transition-colors hover:border-white/30 hover:bg-white/5 md:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -104,7 +104,7 @@ export function Navbar() {
             <li>
               <a
                 href="/"
-                className="flex min-h-12 items-center border-b border-white/5 text-base text-foreground"
+                className="flex min-h-12 items-center border-b border-white/5 text-base text-foreground transition-colors hover:bg-white/5"
                 onClick={close}
               >
                 Home
@@ -115,7 +115,7 @@ export function Navbar() {
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className="flex min-h-12 items-center border-b border-white/5 text-base text-foreground"
+                  className="flex min-h-12 items-center border-b border-white/5 text-base text-foreground transition-colors hover:bg-white/5"
                   onClick={close}
                 >
                   {link.label}
@@ -127,7 +127,7 @@ export function Navbar() {
                 href={CONTACT.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex min-h-12 items-center justify-center rounded-full border border-white/20 bg-white/5 text-sm font-medium text-foreground"
+                className="btn-secondary flex w-full"
                 onClick={close}
               >
                 Chat on WhatsApp

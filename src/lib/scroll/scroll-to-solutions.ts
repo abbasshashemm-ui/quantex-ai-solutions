@@ -42,7 +42,8 @@ function scrollToY(targetY: number, lenis: Lenis | null) {
   return new Promise<void>((resolve) => {
     if (lenis) {
       lenis.scrollTo(y, {
-        duration: 1.35,
+        duration: 1.1,
+        easing: (t) => Math.min(1, 1.001 - 2 ** (-10 * t)),
         onComplete: () => resolve(),
       });
       return;
@@ -53,7 +54,7 @@ function scrollToY(targetY: number, lenis: Lenis | null) {
   });
 }
 
-/** Scroll so all five service cards are on screen (or revealed on desktop pin). */
+/** Scroll so all service cards are on screen (or revealed on desktop pin). */
 export async function scrollToSolutionsAllVisible(lenis: Lenis | null = null) {
   const section = document.getElementById("solutions");
   if (!section) return;

@@ -31,7 +31,7 @@ const inputClassName =
 
 const selectClassName = `${inputClassName} contact-form__select appearance-none`;
 
-export function buildWhatsAppBody(data: FormState) {
+function buildWhatsAppBody(data: FormState) {
   const serviceLabel =
     SERVICES.find((s) => s.slug === data.service)?.title ?? data.service;
   const budgetLabel =
@@ -81,7 +81,7 @@ export function ContactForm() {
   };
 
   return (
-    <div className="contact-form-card rounded-2xl border border-white/15 bg-surface/95 p-5 backdrop-blur-md sm:p-7 md:p-8">
+    <div className="contact-form-card glass-panel rounded-2xl p-5 sm:p-7 md:p-8">
       <h2 className="text-lg font-semibold tracking-tight text-foreground sm:text-xl">
         Send us a message
       </h2>
@@ -196,7 +196,7 @@ export function ContactForm() {
         <button
           type="submit"
           data-interactive
-          className="contact-form__submit inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full border border-white/25 bg-white px-6 text-sm font-semibold tracking-wide text-void uppercase transition-colors hover:bg-white/90"
+          className="contact-form__submit btn-primary w-full gap-2"
         >
           Send message
           <span aria-hidden>→</span>

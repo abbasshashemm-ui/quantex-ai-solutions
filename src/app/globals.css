@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "lenis/dist/lenis.css";
 
 :root {
   --void: #030303;
@@ -125,6 +124,151 @@ body::-webkit-scrollbar {
   color: var(--foreground);
 }
 
+/* ——— Shared page patterns ——— */
+.page-grid-bg {
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--foreground) 4%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--foreground) 4%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: linear-gradient(180deg, black 0%, transparent 85%);
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+.page-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.page-eyebrow::before {
+  content: "";
+  width: 2rem;
+  height: 1px;
+  background: linear-gradient(90deg, #c0c5ce, #ffffff);
+  flex-shrink: 0;
+}
+
+.page-eyebrow--center {
+  justify-content: center;
+}
+
+.page-eyebrow--center::before {
+  background: linear-gradient(90deg, transparent, #c0c5ce, #ffffff);
+}
+
+.page-eyebrow--center::after {
+  content: "";
+  width: 2rem;
+  height: 1px;
+  background: linear-gradient(90deg, #ffffff, #c0c5ce, transparent);
+  flex-shrink: 0;
+}
+
+.section-heading {
+  margin-top: 0.75rem;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+@media (min-width: 640px) {
+  .section-heading {
+    font-size: 1.875rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .section-heading {
+    font-size: 2.25rem;
+  }
+}
+
+.glass-panel {
+  border: 1px solid color-mix(in srgb, #ffffff 10%, transparent);
+  background: color-mix(in srgb, var(--surface) 55%, transparent);
+  backdrop-filter: blur(12px);
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, #ffffff 5%, transparent) inset,
+    0 20px 40px -28px color-mix(in srgb, #000000 65%, transparent);
+}
+
+.btn-primary {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in srgb, #ffffff 25%, transparent);
+  background-color: #ffffff;
+  padding-inline: 1.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--void);
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+@media (min-width: 640px) {
+  .btn-primary {
+    font-size: 0.875rem;
+  }
+}
+
+.btn-primary:hover {
+  background-color: color-mix(in srgb, #ffffff 90%, transparent);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  border: 1px solid color-mix(in srgb, #ffffff 20%, transparent);
+  background: color-mix(in srgb, #ffffff 5%, transparent);
+  padding-inline: 1.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--foreground);
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+@media (min-width: 640px) {
+  .btn-secondary {
+    font-size: 0.875rem;
+  }
+}
+
+.btn-secondary:hover {
+  border-color: color-mix(in srgb, #ffffff 40%, transparent);
+  background: color-mix(in srgb, #ffffff 10%, transparent);
+}
+
+[data-interactive]:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--foreground) 35%, transparent);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-primary,
+  .btn-secondary,
+  .service-card-link,
+  .project-card__browser {
+    transition: none;
+  }
+}
+
 @utility text-metallic-gradient {
   background-image: linear-gradient(
     135deg,
@@ -171,11 +315,16 @@ body::-webkit-scrollbar {
     min-height: 100vh;
     padding-top: 5rem;
     padding-bottom: 4rem;
+    will-change: transform;
   }
 }
 
 .services-section__header {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.services-section__header .section-heading {
+  margin-top: 0.75rem;
 }
 
 @media (min-width: 768px) {
@@ -215,22 +364,38 @@ body::-webkit-scrollbar {
 .services-section__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.25rem;
+  gap: 0.9rem;
   perspective: 1400px;
 }
 
 @media (min-width: 768px) {
   .services-section__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 1.5rem;
+    gap: 1rem;
   }
 
   .services-section__card--offset {
-    transform: translateY(2.5rem);
+    --card-offset-y: 0.4rem;
   }
 }
 
 /* ——— Service cards ——— */
+.service-card-link {
+  --card-offset-y: 0px;
+  display: block;
+  border-radius: 1rem;
+  transform: translateY(var(--card-offset-y));
+  transition: transform 0.25s ease;
+}
+
+.service-card-link:hover {
+  transform: translateY(calc(var(--card-offset-y) - 2px));
+}
+
+.service-card-link:active {
+  transform: translateY(var(--card-offset-y));
+}
+
 .service-card {
   --spot-x: 50%;
   --spot-y: 50%;
@@ -243,9 +408,15 @@ body::-webkit-scrollbar {
   overflow: hidden;
   cursor: default;
   transition:
-    border-color 0.35s ease,
-    box-shadow 0.35s ease;
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
   will-change: transform, opacity;
+}
+
+.service-card-link:hover .service-card,
+.service-card-link:focus-visible .service-card {
+  border-color: color-mix(in srgb, var(--accent) 28%, var(--border));
+  box-shadow: 0 16px 40px -24px color-mix(in srgb, var(--accent) 10%, transparent);
 }
 
 .service-card::before {
@@ -299,9 +470,12 @@ body::-webkit-scrollbar {
   }
 }
 
-.service-card:hover .service-card__inner,
-.service-card[data-active="true"] .service-card__inner {
+.service-card:hover .service-card__inner {
   transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translateZ(12px);
+}
+
+.service-card[data-active="true"] .service-card__inner {
+  transform: rotateX(var(--tilt-x)) rotateY(var(--tilt-y)) translateZ(4px);
 }
 
 @media (hover: none) {
@@ -338,7 +512,7 @@ body::-webkit-scrollbar {
   font-family: var(--font-geist-mono), monospace;
   font-size: 0.7rem;
   letter-spacing: 0.25em;
-  color: var(--muted);
+  color: color-mix(in srgb, var(--foreground) 45%, transparent);
 }
 
 .service-card__title {
@@ -359,14 +533,62 @@ body::-webkit-scrollbar {
 
 .service-card__description {
   margin-top: 0.65rem;
-  font-size: 0.8rem;
-  line-height: 1.6;
-  color: var(--muted);
+  font-size: 0.8125rem;
+  line-height: 1.65;
+  color: color-mix(in srgb, var(--foreground) 72%, transparent);
+}
+
+.service-card__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 1rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--metallic);
+  transition: color 0.25s ease;
+}
+
+.service-card__more-arrow {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.service-card-link:hover .service-card__more,
+.service-card-link:focus-visible .service-card__more {
+  color: var(--foreground);
+}
+
+.service-card-link:hover .service-card__more-arrow,
+.service-card-link:focus-visible .service-card__more-arrow {
+  transform: translateX(0.35rem);
+}
+
+.service-card[data-active="true"] .service-card__more {
+  color: var(--foreground);
+}
+
+.service-card[data-active="true"] .service-card__more-arrow {
+  transform: translateX(0.2rem);
 }
 
 @media (prefers-reduced-motion: reduce) {
   .service-card__inner {
     transition: none;
+  }
+
+  .service-card__more,
+  .service-card__more-arrow {
+    transition: none;
+  }
+
+  .service-card-link:hover .service-card__more-arrow,
+  .service-card-link:focus-visible .service-card__more-arrow,
+  .service-card[data-active="true"] .service-card__more-arrow {
+    transform: none;
   }
 }
 
@@ -375,136 +597,118 @@ body::-webkit-scrollbar {
   scroll-margin-top: 6rem;
 }
 
-.projects-section__eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
+.project-card-reveal {
+  opacity: 0;
+  transform: translateY(2.5rem);
+  transition:
+    opacity 0.55s ease,
+    transform 0.55s ease;
 }
 
-.projects-section__eyebrow::before {
-  content: "";
-  width: 2rem;
-  height: 1px;
-  background: linear-gradient(90deg, #c0c5ce, #ffffff);
-  flex-shrink: 0;
+.project-card-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }
 
 .projects-section__grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
+  gap: 1.75rem;
 }
 
 @media (min-width: 640px) {
   .projects-section__grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .projects-section__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 1.25rem;
   }
 }
 
-@media (min-width: 1280px) {
-  .projects-section__grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 1.25rem;
-  }
+.project-card__browser {
+  transition:
+    transform 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.project-card:hover .project-card__browser,
+.project-card:focus-within .project-card__browser {
+  border-color: color-mix(in srgb, #ffffff 22%, transparent);
+  box-shadow: 0 16px 48px -20px color-mix(in srgb, #000000 55%, transparent);
+}
+
+.project-card-link {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.25rem;
+  transition: opacity 0.2s ease;
+}
+
+.project-card-link:hover {
+  opacity: 0.95;
 }
 
 .project-card__preview {
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 2 / 1;
   width: 100%;
-  background-color: var(--surface);
-  background-image: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--surface-elevated) 80%, transparent) 0%,
-    var(--void) 100%
-  );
+  min-height: 10rem;
+  background-color: color-mix(in srgb, var(--surface-elevated) 90%, var(--void));
   position: relative;
   overflow: hidden;
 }
 
-.project-card__preview::after {
-  content: "";
-  position: absolute;
-  inset: 12% 10% 18%;
-  border-radius: 0.35rem;
-  border: 1px solid color-mix(in srgb, var(--foreground) 12%, transparent);
-  background: color-mix(in srgb, var(--surface-elevated) 60%, transparent);
+.project-card__preview--image img {
+  object-fit: contain;
+  object-position: center;
 }
 
-.project-card__preview--studio::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(
-    125deg,
-    transparent 40%,
-    color-mix(in srgb, #c0c5ce 25%, transparent) 55%,
-    transparent 70%
-  );
+.project-card__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--metallic);
+  transition: color 0.25s ease;
 }
 
-.project-card__preview--commerce::after {
-  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--foreground) 8%, transparent);
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--metallic) 12%, var(--surface)) 0%,
-    var(--surface-elevated) 100%
-  );
+.project-card__more-arrow {
+  width: 1.125rem;
+  height: 1.125rem;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
 }
 
-.project-card__preview--saas::after {
-  inset: 14% 8% 20%;
-  display: block;
-  background: repeating-linear-gradient(
-    0deg,
-    color-mix(in srgb, var(--foreground) 6%, transparent) 0,
-    color-mix(in srgb, var(--foreground) 6%, transparent) 1px,
-    transparent 1px,
-    transparent 12px
-  );
+.project-card-link:hover .project-card__more,
+.project-card-link:focus-visible .project-card__more {
+  color: var(--foreground);
 }
 
-.project-card__preview--portal::after {
-  inset: 16% 12% 22%;
-  border-radius: 0.5rem;
-  background: radial-gradient(
-    circle at 30% 20%,
-    color-mix(in srgb, #ffffff 18%, transparent),
-    transparent 55%
-  );
+.project-card-link:hover .project-card__more-arrow,
+.project-card-link:focus-visible .project-card__more-arrow {
+  transform: translateX(0.35rem);
 }
 
 /* ——— Contact page ——— */
-.contact-page__grid-bg {
-  background-image:
-    linear-gradient(color-mix(in srgb, var(--foreground) 4%, transparent) 1px, transparent 1px),
-    linear-gradient(90deg, color-mix(in srgb, var(--foreground) 4%, transparent) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: linear-gradient(180deg, black 0%, transparent 85%);
-  opacity: 0.65;
-}
-
-.contact-page__eyebrow {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-}
-
-.contact-page__eyebrow::before {
-  content: "";
-  width: 2rem;
-  height: 1px;
-  background: linear-gradient(90deg, transparent, #c0c5ce, #ffffff);
-  flex-shrink: 0;
-}
-
-.contact-page__eyebrow::after {
-  content: "";
-  width: 2rem;
-  height: 1px;
-  background: linear-gradient(90deg, #ffffff, #c0c5ce, transparent);
-  flex-shrink: 0;
+.contact-form-card {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, #ffffff 6%, transparent) inset,
+    0 24px 48px -28px color-mix(in srgb, #000000 60%, transparent);
 }
 
 .contact-form__label {
@@ -522,6 +726,16 @@ body::-webkit-scrollbar {
   width: 100%;
 }
 
+.contact-form__field input,
+.contact-form__field select,
+.contact-form__field textarea {
+  min-height: 2.75rem;
+}
+
+.contact-form__field textarea {
+  min-height: 8.5rem;
+}
+
 .contact-form__select {
   appearance: none;
   background-color: var(--surface-elevated) !important;
@@ -534,6 +748,49 @@ body::-webkit-scrollbar {
 .contact-form__select option {
   background-color: var(--void);
   color: var(--foreground);
+}
+
+/* ——— Service detail pages ——— */
+.service-page__glow {
+  background: radial-gradient(
+    ellipse 70% 45% at 75% 8%,
+    color-mix(in srgb, #ffffff 7%, transparent),
+    transparent 65%
+  );
+}
+
+.service-page__aside {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, #ffffff 6%, transparent) inset,
+    0 24px 48px -24px color-mix(in srgb, #000000 55%, transparent);
+}
+
+.service-page__icon-wrap {
+  box-shadow: 0 0 24px -8px color-mix(in srgb, #ffffff 25%, transparent);
+}
+
+.service-page__overview {
+  box-shadow: 0 20px 40px -28px color-mix(in srgb, #000000 70%, transparent);
+}
+
+.service-page__panel {
+  box-shadow: 0 16px 32px -24px color-mix(in srgb, #000000 65%, transparent);
+}
+
+.service-page__related {
+  transition:
+    border-color 0.2s ease,
+    background-color 0.2s ease;
+}
+
+.service-page__timeline-item:last-child .service-page__timeline-line {
+  display: none;
+}
+
+.service-page__cta {
+  box-shadow:
+    0 0 0 1px color-mix(in srgb, #ffffff 8%, transparent) inset,
+    0 20px 40px -20px color-mix(in srgb, #000000 50%, transparent);
 }
 
 /* ——— Services nav dropdown ——— */

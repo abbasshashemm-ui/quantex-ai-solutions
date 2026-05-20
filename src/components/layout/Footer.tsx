@@ -1,4 +1,4 @@
-﻿import { BrandLogo } from "./BrandLogo";
+import { BrandLogo } from "./BrandLogo";
 import {
   COMPANY,
   CONTACT_LINKS,
@@ -14,7 +14,7 @@ export function Footer() {
       id="contact"
       className="relative z-20 border-t border-white/5 bg-void/40 backdrop-blur-xl backdrop-saturate-150 supports-[backdrop-filter]:bg-void/30"
     >
-      <div className="mx-auto max-w-7xl px-4 py-6 pb-[calc(1.5rem+env(safe-area-inset-bottom))] sm:px-6 sm:py-8">
+      <div className="mx-auto max-w-7xl px-4 py-8 pb-[calc(2rem+env(safe-area-inset-bottom))] sm:px-6 sm:py-10">
         <div className="grid grid-cols-2 gap-4 sm:gap-5 md:gap-6 lg:grid-cols-3 lg:gap-8">
           <div className="col-span-2 lg:col-span-1">
             <BrandLogo className="h-5 w-auto max-w-[10rem] sm:h-6" />
@@ -35,7 +35,7 @@ export function Footer() {
                     {...(item.external
                       ? { target: "_blank", rel: "noopener noreferrer" }
                       : {})}
-                    className="inline-block py-0.5 text-foreground transition-opacity hover:opacity-80"
+                    className="inline-flex min-h-11 items-center py-1 text-foreground/90 transition-colors hover:text-foreground"
                   >
                     {item.label}
                   </a>
@@ -53,7 +53,7 @@ export function Footer() {
                 <li key={item.href}>
                   <a
                     href={item.href}
-                    className="inline-block py-0.5 text-foreground transition-opacity hover:opacity-80"
+                    className="inline-flex min-h-11 items-center py-1 text-foreground/90 transition-colors hover:text-foreground"
                   >
                     {item.label}
                   </a>
@@ -65,7 +65,7 @@ export function Footer() {
                     href={item.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-block py-0.5 text-foreground transition-opacity hover:opacity-80"
+                    className="inline-flex min-h-11 items-center py-1 text-foreground/90 transition-colors hover:text-foreground"
                   >
                     {item.label}
                   </a>

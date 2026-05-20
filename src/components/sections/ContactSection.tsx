@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { CONTACT, CONTACT_CHANNELS } from "@/lib/site/contact";
 import { ContactForm } from "./ContactForm";
 
@@ -66,22 +67,20 @@ export function ContactSection() {
       id="contact-page"
       className="contact-page relative min-h-[100dvh] px-4 pb-20 pt-[calc(6rem+env(safe-area-inset-top))] sm:px-6 sm:pt-32"
     >
-      <div className="contact-page__grid-bg pointer-events-none absolute inset-0" aria-hidden />
+      <div className="page-grid-bg absolute inset-0" aria-hidden />
 
       <div className="relative mx-auto max-w-7xl">
         <Link
           href="/"
           data-interactive
-          className="inline-flex min-h-11 items-center text-xs tracking-wide text-foreground/80 uppercase transition-opacity hover:opacity-80"
+          className="inline-flex min-h-11 items-center text-xs tracking-wide text-foreground/75 uppercase transition-colors hover:text-foreground"
         >
           ← Home
         </Link>
 
         <header className="contact-page__header mx-auto mt-8 max-w-3xl text-center sm:mt-10">
-          <p className="contact-page__eyebrow text-[0.65rem] font-medium tracking-[0.28em] text-foreground uppercase sm:text-xs sm:tracking-[0.35em]">
-            Contact
-          </p>
-          <h1 className="mt-4 text-2xl font-semibold tracking-tight text-foreground sm:text-3xl md:text-4xl lg:text-5xl">
+          <PageEyebrow align="center">Contact</PageEyebrow>
+          <h1 className="section-heading mt-4 text-foreground lg:text-5xl">
             Let&apos;s talk about your{" "}
             <span className="text-metallic-gradient">project.</span>
           </h1>
@@ -120,7 +119,7 @@ export function ContactSection() {
                           ? { target: "_blank", rel: "noopener noreferrer" }
                           : {})}
                         data-interactive
-                        className="contact-channel flex gap-4 transition-opacity hover:opacity-85"
+                        className="contact-channel flex min-h-11 gap-4 rounded-lg px-1 transition-colors hover:bg-white/5 sm:px-2"
                       >
                         {content}
                       </a>
@@ -132,7 +131,7 @@ export function ContactSection() {
               })}
             </ul>
 
-            <div className="rounded-xl border border-white/10 bg-surface/50 p-5 backdrop-blur-md">
+            <div className="glass-panel rounded-xl p-5">
               <div className="flex gap-3">
                 <span
                   className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/10 text-sm text-foreground"

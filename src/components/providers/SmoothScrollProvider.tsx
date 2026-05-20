@@ -8,7 +8,6 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { gsap, registerGsapPlugins, ScrollTrigger } from "@/lib/gsap/register";
 
 const LenisContext = createContext<Lenis | null>(null);
 
@@ -33,67 +32,96 @@ export function SmoothScrollProvider({ children }: SmoothScrollProviderProps) {
   const [lenis, setLenis] = useState<Lenis | null>(null);
 
   useEffect(() => {
-    registerGsapPlugins();
-
+    const useLenisScroll = shouldUseLenis();
     const root = document.documentElement;
 
-    if (!shouldUseLenis()) {
+    if (!useLenisScroll) {
       root.classList.remove("lenis", "lenis-smooth");
       return;
     }
 
-    root.classList.add("lenis", "lenis-smooth");
+    let disposed = false;
+    let teardown: (() => void) | undefined;
+    let resizeTimer: ReturnType<typeof setTimeout> | undefined;
 
-    const instance = new Lenis({
-      lerp: 0.08,
-      smoothWheel: true,
-      syncTouch: false,
-    });
+    void (async () => {
+      await import("lenis/dist/lenis.css");
+      if (disposed) return;
 
-    setLenis(instance);
+      const { gsap, registerGsapPlugins, ScrollTrigger } = await import(
+        "@/lib/gsap/register"
+      );
+      registerGsapPlugins();
 
-    instance.on("scroll", ScrollTrigger.update);
+      root.classList.add("lenis", "lenis-smooth");
 
-    ScrollTrigger.scrollerProxy(root, {
-      scrollTop(value?: number) {
-        if (value !== undefined) {
-          instance.scrollTo(value, { immediate: true });
-        }
-        return instance.scroll;
-      },
-      getBoundingClientRect() {
-        return {
-          top: 0,
-          left: 0,
-          width: window.innerWidth,
-          height: window.innerHeight,
-        };
-      },
-      pinType: root.style.transform ? "transform" : "fixed",
-    });
+      const instance = new Lenis({
+        lerp: 0.1,
+        smoothWheel: true,
+        syncTouch: false,
+        autoRaf: false,
+        wheelMultiplier: 0.9,
+        touchMultiplier: 1.25,
+      });
 
-    const onRefresh = () => instance.resize();
-    ScrollTrigger.addEventListener("refresh", onRefresh);
+      if (disposed) {
+        instance.destroy();
+        return;
+      }
 
-    const onResize = () => {
-      instance.resize();
+      setLenis(instance);
+
+      instance.on("scroll", ScrollTrigger.update);
+
+      ScrollTrigger.scrollerProxy(root, {
+        scrollTop(value?: number) {
+          if (value !== undefined) {
+            instance.scrollTo(value, { immediate: true });
+          }
+          return instance.scroll;
+        },
+        getBoundingClientRect() {
+          return {
+            top: 0,
+            left: 0,
+            width: window.innerWidth,
+            height: window.innerHeight,
+          };
+        },
+        pinType: "fixed",
+      });
+
+      const onResize = () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(() => {
+          instance.resize();
+          ScrollTrigger.refresh();
+        }, 200);
+      };
+      window.addEventListener("resize", onResize);
+
+      const ticker = (time: number) => {
+        instance.raf(time * 1000);
+      };
+      gsap.ticker.add(ticker);
+      gsap.ticker.lagSmoothing(0);
+
       ScrollTrigger.refresh();
-    };
-    window.addEventListener("resize", onResize);
 
-    const ticker = (time: number) => {
-      instance.raf(time * 1000);
-    };
-    gsap.ticker.add(ticker);
-    gsap.ticker.lagSmoothing(0);
+      teardown = () => {
+        clearTimeout(resizeTimer);
+        window.removeEventListener("resize", onResize);
+        gsap.ticker.remove(ticker);
+        ScrollTrigger.scrollerProxy(root, {});
+        instance.destroy();
+        root.classList.remove("lenis", "lenis-smooth");
+        setLenis(null);
+      };
+    })();
 
     return () => {
-      window.removeEventListener("resize", onResize);
-      ScrollTrigger.removeEventListener("refresh", onRefresh);
-      gsap.ticker.remove(ticker);
-      ScrollTrigger.scrollerProxy(root, {});
-      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-      instance.destroy();
+      disposed = true;
+      teardown?.();
       root.classList.remove("lenis", "lenis-smooth");
       setLenis(null);
     };

@@ -17,7 +17,4 @@ export function registerGsapPlugins() {
   registered = true;
 }
 
-// Register before any useGSAP/ScrollTrigger runs (avoids race with SmoothScrollProvider)
-registerGsapPlugins();
-
 export { gsap, ScrollTrigger };

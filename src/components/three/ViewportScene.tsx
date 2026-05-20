@@ -1,7 +1,7 @@
 "use client";
 
 import { useMounted } from "@/hooks/useMounted";
-import { HomeScene } from "./HomeScene";
+import { SplineBackground } from "./SplineBackground";
 
 export function ViewportScene() {
   const mounted = useMounted();
@@ -12,5 +12,5 @@ export function ViewportScene() {
     );
   }
 
-  return <HomeScene />;
+  return <SplineBackground />;
 }

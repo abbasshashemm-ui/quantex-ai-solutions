@@ -1,4 +1,4 @@
-import type { NavServiceIcon } from "@/lib/services/nav";
+import type { NavServiceIcon } from "@/lib/services/icons";
 
 type ServiceNavIconProps = {
   icon: NavServiceIcon;
@@ -44,6 +44,13 @@ export function ServiceNavIcon({ icon, className = "h-5 w-5" }: ServiceNavIconPr
         <svg {...props}>
           <rect x="3" y="5" width="18" height="12" rx="1.5" />
           <path d="M8 21h8M12 17v4" />
+        </svg>
+      );
+    case "search":
+      return (
+        <svg {...props}>
+          <circle cx="11" cy="11" r="6" />
+          <path d="M16 16l4 4" />
         </svg>
       );
     case "chat":

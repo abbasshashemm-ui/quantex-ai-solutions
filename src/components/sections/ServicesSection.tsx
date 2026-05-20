@@ -7,6 +7,7 @@ import { useMounted } from "@/hooks/useMounted";
 import { SERVICES } from "@/lib/services/data";
 import { sceneScrollStore } from "@/lib/scene/scene-scroll-store";
 import { SERVICES_SCROLL_TRIGGER_ID } from "@/lib/scroll/scroll-to-solutions";
+import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { ServiceCard } from "./ServiceCard";
 
 const SCROLL_PER_SERVICE = 0.85;
@@ -96,6 +97,8 @@ export function ServicesSection() {
         force3D: true,
       });
 
+      let lastActiveIndex = -1;
+
       const timeline = gsap.timeline({
         scrollTrigger: {
           id: SERVICES_SCROLL_TRIGGER_ID,
@@ -103,8 +106,9 @@ export function ServicesSection() {
           start: "top top",
           end: `+=${scrollLength}%`,
           pin: pin,
-          scrub: 1,
-          anticipatePin: 1,
+          scrub: 0.45,
+          anticipatePin: 0.4,
+          fastScrollEnd: true,
           invalidateOnRefresh: true,
           onEnter: () => setServicesActive(true),
           onLeave: () => setServicesActive(false),
@@ -112,20 +116,24 @@ export function ServicesSection() {
           onLeaveBack: () => setServicesActive(false),
           onUpdate: (self) => {
             const progress = self.progress;
+
+            if (progressBar) {
+              progressBar.style.width = `${progress * 100}%`;
+            }
+
             const activeIndex = Math.min(
               Math.floor(progress * SERVICES.length),
               SERVICES.length - 1,
             );
+
+            if (activeIndex === lastActiveIndex) return;
+            lastActiveIndex = activeIndex;
 
             sceneScrollStore.setState({
               servicesProgress: progress,
               activeServiceIndex: activeIndex,
               isInServices: true,
             });
-
-            if (progressBar) {
-              progressBar.style.width = `${progress * 100}%`;
-            }
 
             cards.forEach((card, index) => {
               card.dataset.active = index === activeIndex ? "true" : "false";
@@ -168,15 +176,17 @@ export function ServicesSection() {
       <div ref={pinRef} className="services-section__pin">
         <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
           <header className="services-section__header">
-            <p className="text-[0.65rem] font-medium tracking-[0.28em] text-foreground uppercase sm:text-xs sm:tracking-[0.35em]">
-              Expertise
-            </p>
+            <PageEyebrow>Expertise</PageEyebrow>
             <h2
               id="services-heading"
-              className="mt-3 max-w-2xl text-2xl font-semibold tracking-tight text-metallic-gradient sm:text-3xl md:text-4xl"
+              className="section-heading max-w-2xl text-metallic-gradient"
             >
               Core services engineered for impact
             </h2>
+            <p className="mt-3 max-w-xl text-sm leading-relaxed text-foreground/75 sm:text-base">
+              Strategy, build, and launch—each engagement scoped for measurable
+              outcomes.
+            </p>
             <div
               className="services-section__progress-track services-section__progress-track--desktop"
               aria-hidden

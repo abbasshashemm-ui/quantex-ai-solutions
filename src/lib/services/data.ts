@@ -1,4 +1,12 @@
+import type { NavServiceIcon } from "./icons";
+
 export type ServiceAccent = "white" | "grey" | "metallic";
+
+export type ServiceNav = {
+  label: string;
+  tagline: string;
+  icon: NavServiceIcon;
+};
 
 export type ServiceContentSection = {
   title: string;
@@ -12,6 +20,7 @@ export type Service = {
   description: string;
   accent: ServiceAccent;
   index: number;
+  nav: ServiceNav;
   sections: ServiceContentSection[];
 };
 
@@ -24,6 +33,11 @@ export const SERVICES: Service[] = [
       "Bespoke applications engineered for scale, security, and long-term maintainability.",
     accent: "white",
     index: 0,
+    nav: {
+      label: "Custom software",
+      tagline: "Dashboards, portals & bespoke apps",
+      icon: "code",
+    },
     sections: [
       {
         title: "Overview",
@@ -47,6 +61,11 @@ export const SERVICES: Service[] = [
       "Intelligent workflows that eliminate friction and accelerate operational throughput.",
     accent: "grey",
     index: 1,
+    nav: {
+      label: "Process automation",
+      tagline: "Workflows, integrations & throughput",
+      icon: "workflow",
+    },
     sections: [
       {
         title: "Overview",
@@ -70,6 +89,11 @@ export const SERVICES: Service[] = [
       "Resilient, cloud-native foundations designed around your data and growth trajectory.",
     accent: "white",
     index: 2,
+    nav: {
+      label: "System architecture",
+      tagline: "Cloud-native foundations & scale",
+      icon: "layers",
+    },
     sections: [
       {
         title: "Overview",
@@ -93,6 +117,11 @@ export const SERVICES: Service[] = [
       "Immersive, performance-first experiences that turn attention into measurable outcomes.",
     accent: "metallic",
     index: 3,
+    nav: {
+      label: "High-converting websites",
+      tagline: "Performance-first sites that convert",
+      icon: "monitor",
+    },
     sections: [
       {
         title: "Overview",
@@ -109,13 +138,46 @@ export const SERVICES: Service[] = [
     ],
   },
   {
+    id: "seo",
+    slug: "seo",
+    title: "SEO",
+    description:
+      "We fix the technical issues that hold your site back on Google—speed, structure, meta tags, and the works.",
+    accent: "metallic",
+    index: 4,
+    nav: {
+      label: "SEO",
+      tagline: "Technical SEO, speed & search visibility",
+      icon: "search",
+    },
+    sections: [
+      {
+        title: "Overview",
+        body: "Ranking is not just keywords—it is crawlability, page speed, structured data, and content that matches search intent. We audit what search engines and users actually see, then fix technical blockers and on-page gaps so your site earns visibility without risky shortcuts or filler content.",
+      },
+      {
+        title: "What you get",
+        body: "Technical SEO remediation, metadata and heading structure, sitemap and robots configuration, Core Web Vitals improvements, and a prioritized roadmap for content and internal linking. You receive before/after reports, Search Console setup, and clear ownership of what your team maintains versus what we implement.",
+      },
+      {
+        title: "How we work",
+        body: "We baseline rankings and site health, run crawl and speed diagnostics, then ship fixes in priority order—critical indexation issues first, then performance and on-page polish. Monthly check-ins track impressions, clicks, and key queries; we adjust the plan as competitors and algorithms shift.",
+      },
+    ],
+  },
+  {
     id: "chatbots",
     slug: "custom-intelligent-chatbots",
     title: "CUSTOM INTELLIGENT CHATBOTS",
     description:
       "Context-aware assistants that integrate with your stack and elevate customer touchpoints.",
     accent: "grey",
-    index: 4,
+    index: 5,
+    nav: {
+      label: "Intelligent chatbots",
+      tagline: "AI assistants wired to your stack",
+      icon: "chat",
+    },
     sections: [
       {
         title: "Overview",

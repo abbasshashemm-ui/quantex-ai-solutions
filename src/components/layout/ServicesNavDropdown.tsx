@@ -142,7 +142,7 @@ export function ServicesNavDropdown({
         <div
           id={menuId}
           role="menu"
-          className="services-nav-dropdown absolute top-[calc(100%+0.65rem)] left-1/2 z-50 w-[min(22rem,calc(100vw-2rem))] -translate-x-1/2 rounded-2xl border border-white/12 bg-surface-elevated/95 p-2 shadow-[0_24px_60px_rgba(0,0,0,0.55)] backdrop-blur-xl sm:left-0 sm:w-[20.5rem] sm:translate-x-0"
+          className="services-nav-dropdown absolute top-[calc(100%+0.65rem)] left-1/2 z-50 w-[min(22rem,calc(100vw-2rem))] -translate-x-1/2 rounded-2xl border border-white/12 bg-surface-elevated/95 p-2 shadow-[0_24px_60px_rgba(0,0,0,0.55)] backdrop-blur-xl transition-[opacity,transform] sm:left-0 sm:w-[20.5rem] sm:translate-x-0"
         >
           <ul className="space-y-0.5">
             {NAV_SERVICE_ITEMS.map((item) => (

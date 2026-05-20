@@ -5,47 +5,49 @@ export type Project = {
   slug: string;
   title: string;
   description: string;
+  /** Shown in the browser chrome bar on the card */
   url: string;
+  /** External link; omit for private / non-public builds */
+  href?: string;
   tags: ProjectTag[];
-  /** Placeholder preview variant for CSS-only mock UI */
-  previewVariant: "studio" | "commerce" | "saas" | "portal";
+  imageSrc: string;
+  imageAlt: string;
 };
 
 export const PROJECTS: Project[] = [
   {
-    id: "project-1",
-    slug: "brand-studio-site",
-    title: "Brand Studio Site",
-    description: "Marketing site with portfolio grid and lead capture flows.",
-    url: "brandstudio.example",
-    tags: ["NEXT.JS", "TAILWIND"],
-    previewVariant: "studio",
+    id: "hmayed",
+    slug: "hmayed",
+    title: "Hmayed",
+    description:
+      "Portfolio for a content creator—cinema, restaurant work, and brand presence in one immersive site.",
+    url: "hmayed.online",
+    href: "https://hmayed.online",
+    tags: ["PORTFOLIO", "WEB"],
+    imageSrc: "/projects/hmayed.png",
+    imageAlt: "Hmayed portfolio website preview",
   },
   {
-    id: "project-2",
-    slug: "commerce-relaunch",
-    title: "Commerce Relaunch",
-    description: "Storefront refresh with catalog, checkout, and analytics.",
-    url: "commerce.example",
-    tags: ["WOOCOMMERCE", "WORDPRESS"],
-    previewVariant: "commerce",
+    id: "shop-pro",
+    slug: "shop-pro",
+    title: "Shop Pro",
+    description:
+      "Custom sales and stock app built for Hachem Services—orders, inventory, dashboards, and day-to-day operations.",
+    url: "Hachem Services · internal",
+    tags: ["CUSTOM APP", "SALES & STOCK"],
+    imageSrc: "/projects/shop-pro.png",
+    imageAlt: "Shop Pro sales and stock dashboard preview",
   },
   {
-    id: "project-3",
-    slug: "operations-dashboard",
-    title: "Operations Dashboard",
-    description: "Internal SaaS for workflows, reporting, and role-based access.",
-    url: "opsdash.example",
-    tags: ["CUSTOM SOFTWARE", "API"],
-    previewVariant: "saas",
-  },
-  {
-    id: "project-4",
-    slug: "support-assistant",
-    title: "Support Assistant",
-    description: "Web chat assistant wired to knowledge base and handoff rules.",
-    url: "support.example",
-    tags: ["AI CHATBOT", "INTEGRATIONS"],
-    previewVariant: "portal",
+    id: "almanya",
+    slug: "almanya-lubricants",
+    title: "Almanya Lubricants Factory",
+    description:
+      "Website for an industrial lubricants manufacturer in Egypt—product line, certificates, and quote requests.",
+    url: "almanya-luboil.com",
+    href: "https://almanya-luboil.com",
+    tags: ["WEBSITE", "INDUSTRIAL"],
+    imageSrc: "/projects/almanya.png",
+    imageAlt: "Almanya Lubricants Factory website preview",
   },
 ];
