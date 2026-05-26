@@ -32,14 +32,16 @@ export const PRIVACY_POLICY = {
         "Project message and any details you choose to include",
         "Service interest and budget range (if selected on our contact form)",
         "Technical data such as browser type, device information, and pages visited (through analytics tools)",
+        "Messages you send through our on-site sales chat assistant",
       ],
     },
     {
       id: "how",
       title: "How we collect it",
       paragraphs: [
-        "We collect information when you submit our contact form, email us, message us on WhatsApp, or otherwise reach out. Our contact form prepares a message that you send through WhatsApp—we do not store form submissions on our own servers.",
-        "We also receive limited usage data through Vercel Analytics to understand how visitors use the site (for example, page views, referrers, and conversion events such as contact form submissions or WhatsApp button clicks). This helps us improve performance and content.",
+        "We collect information when you submit our contact form, email us, message us on WhatsApp, use our on-site chat assistant, or otherwise reach out. Our contact form prepares a message that you send through WhatsApp—we do not store form submissions on our own servers.",
+        "When you use the chat assistant, your messages are sent to our servers and processed by Google’s Gemini API to generate replies. We do not store full chat transcripts on our own servers in the current version of the site; conversation history exists only in your browser session unless we add logging later (this policy would be updated).",
+        "We also receive limited usage data through Vercel Analytics to understand how visitors use the site (for example, page views, referrers, and conversion events such as contact form submissions, chat opens, or WhatsApp button clicks). This helps us improve performance and content.",
       ],
     },
     {
@@ -67,7 +69,8 @@ export const PRIVACY_POLICY = {
         "We do not sell your personal information. We may share data only as needed to run our services:",
       ],
       list: [
-        "WhatsApp / Meta — when you choose to send us a message through WhatsApp after using our form",
+        "WhatsApp / Meta — when you choose to send us a message through WhatsApp after using our form or chat handoff",
+        "Google — processing on-site chat messages via the Gemini API (subject to Google’s terms and privacy practices)",
         "Vercel — website hosting and analytics",
         "Service providers who help us operate email, infrastructure, or professional tools, under confidentiality obligations",
         "Authorities — if required by law or to protect our legal rights",

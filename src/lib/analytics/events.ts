@@ -9,6 +9,9 @@ export const CONVERSION_EVENTS = {
   SOLUTIONS_CLICK: "solutions_click",
   CONTACT_PAGE_VIEW: "contact_page_view",
   CTA_CLICK: "cta_click",
+  CHAT_OPEN: "chat_open",
+  CHAT_MESSAGE_SENT: "chat_message_sent",
+  CHAT_WHATSAPP_HANDOFF: "chat_whatsapp_handoff",
 } as const;
 
 export type ConversionEvent =

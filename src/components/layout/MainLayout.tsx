@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { ChatWidget } from "@/components/chat/ChatWidget";
 import { Footer } from "./Footer";
 import { Navbar } from "./Navbar";
 
@@ -17,6 +18,7 @@ export function MainLayout({ children }: MainLayoutProps) {
         {children}
       </main>
       <Footer />
+      <ChatWidget />
     </>
   );
 }
