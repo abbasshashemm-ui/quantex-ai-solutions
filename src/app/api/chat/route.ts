@@ -5,12 +5,10 @@ import {
   type UIMessage,
 } from "ai";
 import { z } from "zod";
+import { prepareMessagesForModel } from "@/lib/chat/normalize-messages";
 import { buildSalesSystemPrompt } from "@/lib/chat/system-prompt";
 import { checkChatRateLimit, getClientIp } from "@/lib/chat/rate-limit";
-import {
-  CHAT_MESSAGE_LIMITS,
-  sanitizeChatMessage,
-} from "@/lib/sanitize/chat-message";
+import { CHAT_MESSAGE_LIMITS } from "@/lib/sanitize/chat-message";
 
 export const runtime = "nodejs";
 
@@ -26,7 +24,7 @@ const uiMessageSchema = z.object({
 });
 
 const requestSchema = z.object({
-  messages: z.array(uiMessageSchema).min(1).max(CHAT_MESSAGE_LIMITS.maxMessages),
+  messages: z.array(uiMessageSchema).min(1).max(24),
 });
 
 function getGeminiApiKey(): string | undefined {
@@ -34,23 +32,6 @@ function getGeminiApiKey(): string | undefined {
     process.env.GEMINI_API_KEY?.trim() ||
     process.env.GOOGLE_GENERATIVE_AI_API_KEY?.trim()
   );
-}
-
-function sanitizeMessages(messages: UIMessage[]): UIMessage[] {
-  return messages
-    .filter((message) => message.role === "user" || message.role === "assistant")
-    .slice(-CHAT_MESSAGE_LIMITS.maxMessages)
-    .map((message) => ({
-      ...message,
-      parts: message.parts
-        .filter((part): part is { type: "text"; text: string } => part.type === "text")
-        .map((part) => ({
-          type: "text" as const,
-          text: sanitizeChatMessage(part.text),
-        }))
-        .filter((part) => part.text.length > 0),
-    }))
-    .filter((message) => message.parts.length > 0);
 }
 
 export async function POST(request: Request) {
@@ -91,18 +72,37 @@ export async function POST(request: Request) {
     return Response.json({ error: "Invalid request." }, { status: 400 });
   }
 
-  const messages = sanitizeMessages(parsed.data.messages as UIMessage[]);
-  if (messages.length === 0) {
+  const uiMessages = parsed.data.messages as UIMessage[];
+  const modelMessages = prepareMessagesForModel(uiMessages);
+  if (modelMessages.length === 0) {
     return Response.json({ error: "Message is required." }, { status: 400 });
   }
 
   const google = createGoogleGenerativeAI({ apiKey });
 
-  const result = streamText({
-    model: google("gemini-2.0-flash"),
-    system: buildSalesSystemPrompt(),
-    messages: await convertToModelMessages(messages),
-  });
+  try {
+    const result = streamText({
+      model: google("gemini-2.5-flash"),
+      system: buildSalesSystemPrompt(),
+      messages: await convertToModelMessages(modelMessages),
+    });
 
-  return result.toUIMessageStreamResponse();
+    result.consumeStream();
+
+    return result.toUIMessageStreamResponse({
+      originalMessages: uiMessages,
+      onError: (error) => {
+        console.error("[chat] stream error:", error);
+        return error instanceof Error
+          ? error.message
+          : "Unable to generate a reply right now.";
+      },
+    });
+  } catch (error) {
+    console.error("[chat] request error:", error);
+    return Response.json(
+      { error: "Chat request failed. Please try WhatsApp instead." },
+      { status: 500 },
+    );
+  }
 }

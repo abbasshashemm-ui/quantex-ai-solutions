@@ -5,6 +5,7 @@ import {
   useEffect,
   useRef,
   useState,
+  useCallback,
   type FormEvent,
   type KeyboardEvent,
 } from "react";
@@ -30,9 +31,17 @@ type ChatPanelProps = {
 export function ChatPanel({ onClose }: ChatPanelProps) {
   const [input, setInput] = useState("");
   const listRef = useRef<HTMLDivElement>(null);
+  const sendingRef = useRef(false);
   const { messages, sendMessage, status, error, clearError } = useSalesChat();
 
-  const isBusy = status === "submitted" || status === "streaming";
+  const isBusy =
+    sendingRef.current || status === "submitted" || status === "streaming";
+
+  useEffect(() => {
+    if (status === "ready" || status === "error") {
+      sendingRef.current = false;
+    }
+  }, [status]);
 
   useEffect(() => {
     const node = listRef.current;
@@ -47,16 +56,24 @@ export function ChatPanel({ onClose }: ChatPanelProps) {
     window.open(buildWhatsAppQuoteUrl(topic), "_blank", "noopener,noreferrer");
   }
 
-  function submitMessage(text: string) {
-    const trimmed = text.trim();
-    if (!trimmed || isBusy) return;
-    clearError();
-    sendMessage({ text: trimmed });
-    setInput("");
-    trackConversion(CONVERSION_EVENTS.CHAT_MESSAGE_SENT, {
-      location: "chat_panel",
-    });
-  }
+  const submitMessage = useCallback(
+    (text: string) => {
+      const trimmed = text.trim();
+      if (!trimmed || sendingRef.current || status === "submitted" || status === "streaming") {
+        return;
+      }
+      sendingRef.current = true;
+      clearError();
+      void sendMessage({ text: trimmed }).finally(() => {
+        sendingRef.current = false;
+      });
+      setInput("");
+      trackConversion(CONVERSION_EVENTS.CHAT_MESSAGE_SENT, {
+        location: "chat_panel",
+      });
+    },
+    [clearError, sendMessage, status],
+  );
 
   function handleSubmit(event: FormEvent) {
     event.preventDefault();
