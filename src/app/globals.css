@@ -69,6 +69,8 @@ body::-webkit-scrollbar {
   input,
   select,
   textarea,
+  summary,
+  label,
   [role="button"],
   [data-interactive]
 ) {
