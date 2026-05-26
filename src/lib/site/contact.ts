@@ -1,3 +1,5 @@
+export const SITE_URL = "https://www.quantexai.solutions";
+export const SITE_HOST = "quantexai.solutions";
 export const LEGACY_SITE_URL = "https://www.quantexai.info";
 
 export const COMPANY = {
@@ -7,7 +9,7 @@ export const COMPANY = {
 } as const;
 
 export const CONTACT = {
-  email: "hello@quantexai.info",
+  email: "hello@quantexai.solutions",
   whatsapp: "https://wa.me/9613642102",
   phoneDisplay: "+961 36 421 02",
   phoneTel: "+9613642102",

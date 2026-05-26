@@ -1,4 +1,4 @@
-import { COMPANY, CONTACT, LEGACY_SITE_URL } from "@/lib/site/contact";
+import { COMPANY, CONTACT, SITE_URL } from "@/lib/site/contact";
 
 export function getSiteUrl(): string {
   const fromEnv = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
@@ -7,7 +7,7 @@ export function getSiteUrl(): string {
   const vercelHost = process.env.VERCEL_URL;
   if (vercelHost) return `https://${vercelHost}`;
 
-  return LEGACY_SITE_URL.replace(/\/$/, "");
+  return SITE_URL.replace(/\/$/, "");
 }
 
 export const SITE = {

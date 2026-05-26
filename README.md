@@ -7,7 +7,7 @@ Marketing site for Quantex AI Solutions — Next.js 16, React 19, Tailwind CSS 4
 Copy `.env.example` to `.env.local` and set your production URL for SEO (canonicals, Open Graph, sitemap):
 
 ```bash
-NEXT_PUBLIC_SITE_URL=https://www.quantexai.info
+NEXT_PUBLIC_SITE_URL=https://www.quantexai.solutions
 GEMINI_API_KEY=your_google_ai_studio_key
 ```
 

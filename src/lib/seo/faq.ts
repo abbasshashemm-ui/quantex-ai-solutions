@@ -27,7 +27,7 @@ export const SITE_FAQ: FaqItem[] = [
   {
     question: "How do I contact Quantex AI Solutions?",
     answer:
-      "Visit the contact page at quantexai.info/contact, email hello@quantexai.info, or message the team on WhatsApp. Typical first response is within 24 hours.",
+      "Visit the contact page at quantexai.solutions/contact, email hello@quantexai.solutions, or message the team on WhatsApp. Typical first response is within 24 hours.",
   },
   {
     question: "Where is Quantex AI Solutions based?",

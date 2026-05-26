@@ -7,7 +7,7 @@
 - Name: Quantex AI Solutions
 - Founder: Abbas Hachem (Full Stack Developer)
 - Location: Beirut, Lebanon
-- Email: hello@quantexai.info
+- Email: hello@quantexai.solutions
 - WhatsApp: +961 36 421 02
 - Clients: 10+ businesses served
 
@@ -34,4 +34,4 @@ Quantex designs and ships production software—not demos. Work includes Next.js
 
 ## Contact
 
-Preferred contact: /contact or hello@quantexai.info. Typical response within 24 hours.
+Preferred contact: /contact or hello@quantexai.solutions. Typical response within 24 hours.

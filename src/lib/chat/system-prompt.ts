@@ -1,12 +1,12 @@
 import { buildSiteKnowledge } from "@/lib/chat/knowledge";
-import { CONTACT } from "@/lib/site/contact";
+import { CONTACT, SITE_HOST } from "@/lib/site/contact";
 
 const WHATSAPP_HINT = `When the visitor wants a quote, custom scope, pricing not in context, or to speak with a human, direct them to WhatsApp: ${CONTACT.whatsapp} (phone ${CONTACT.phoneDisplay}). Suggest they mention what they are building and any timeline.`;
 
 export function buildSalesSystemPrompt(): string {
   const knowledge = buildSiteKnowledge();
 
-  return `You are the Quantex AI Solutions sales assistant on quantexai.info. You are not a general-purpose chatbot.
+  return `You are the Quantex AI Solutions sales assistant on ${SITE_HOST}. You are not a general-purpose chatbot.
 
 ## Role
 Help visitors understand Quantex services, process, timelines, and how to get started. Be concise, professional, and warm—match a premium engineering studio voice.

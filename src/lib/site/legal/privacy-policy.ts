@@ -16,7 +16,7 @@ export const PRIVACY_POLICY = {
       id: "controller",
       title: "Who we are",
       paragraphs: [
-        "Quantex AI Solutions is operated from Beirut, Lebanon. For privacy-related questions or requests, contact us at hello@quantexai.info or through the contact details on this website.",
+        "Quantex AI Solutions is operated from Beirut, Lebanon. For privacy-related questions or requests, contact us at hello@quantexai.solutions or through the contact details on this website.",
       ],
     },
     {
@@ -94,7 +94,7 @@ export const PRIVACY_POLICY = {
       id: "rights",
       title: "Your rights",
       paragraphs: [
-        "Depending on where you live, you may have rights to access, correct, delete, or restrict use of your personal information, or to withdraw consent where processing is based on consent. To exercise these rights, email hello@quantexai.info. We will respond within a reasonable time.",
+        "Depending on where you live, you may have rights to access, correct, delete, or restrict use of your personal information, or to withdraw consent where processing is based on consent. To exercise these rights, email hello@quantexai.solutions. We will respond within a reasonable time.",
       ],
     },
     {
@@ -122,7 +122,7 @@ export const PRIVACY_POLICY = {
       id: "contact",
       title: "Contact",
       paragraphs: [
-        "Questions about this Privacy Policy or your data: hello@quantexai.info",
+        "Questions about this Privacy Policy or your data: hello@quantexai.solutions",
       ],
     },
   ] satisfies readonly LegalSection[],
