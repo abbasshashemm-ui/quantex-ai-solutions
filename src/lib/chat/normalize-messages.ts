@@ -35,6 +35,20 @@ function mergeConsecutiveRoles(messages: UIMessage[]): UIMessage[] {
   return merged;
 }
 
+function textPartsFromMessage(message: UIMessage): { type: "text"; text: string }[] {
+  const chunks: string[] = [];
+
+  for (const part of message.parts) {
+    if (part.type === "text" && "text" in part && typeof part.text === "string") {
+      const cleaned = sanitizeChatMessage(part.text);
+      if (cleaned) chunks.push(cleaned);
+    }
+  }
+
+  if (chunks.length === 0) return [];
+  return [{ type: "text", text: chunks.join("\n") }];
+}
+
 export function prepareMessagesForModel(messages: UIMessage[]): UIMessage[] {
   const conversation = messages
     .filter(
@@ -44,13 +58,7 @@ export function prepareMessagesForModel(messages: UIMessage[]): UIMessage[] {
     )
     .map((message) => ({
       ...message,
-      parts: message.parts
-        .filter((part): part is { type: "text"; text: string } => part.type === "text")
-        .map((part) => ({
-          type: "text" as const,
-          text: sanitizeChatMessage(part.text),
-        }))
-        .filter((part) => part.text.length > 0),
+      parts: textPartsFromMessage(message),
     }))
     .filter((message) => message.parts.length > 0);
 

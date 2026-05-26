@@ -4,28 +4,12 @@ import {
   streamText,
   type UIMessage,
 } from "ai";
-import { z } from "zod";
 import { prepareMessagesForModel } from "@/lib/chat/normalize-messages";
+import { parseChatRequest, toUiMessages } from "@/lib/chat/parse-request";
 import { buildSalesSystemPrompt } from "@/lib/chat/system-prompt";
 import { checkChatRateLimit, getClientIp } from "@/lib/chat/rate-limit";
-import { CHAT_MESSAGE_LIMITS } from "@/lib/sanitize/chat-message";
 
 export const runtime = "nodejs";
-
-const textPartSchema = z.object({
-  type: z.literal("text"),
-  text: z.string(),
-});
-
-const uiMessageSchema = z.object({
-  id: z.string().optional(),
-  role: z.enum(["user", "assistant", "system"]),
-  parts: z.array(textPartSchema).min(1),
-});
-
-const requestSchema = z.object({
-  messages: z.array(uiMessageSchema).min(1).max(24),
-});
 
 function getGeminiApiKey(): string | undefined {
   return (
@@ -67,14 +51,15 @@ export async function POST(request: Request) {
     return Response.json({ error: "Invalid request." }, { status: 400 });
   }
 
-  const parsed = requestSchema.safeParse(body);
-  if (!parsed.success) {
+  const parsed = parseChatRequest(body);
+  if (!parsed.ok) {
+    console.error("[chat] invalid request body");
     return Response.json({ error: "Invalid request." }, { status: 400 });
   }
 
-  const uiMessages = parsed.data.messages as UIMessage[];
+  const uiMessages = toUiMessages(parsed.data.messages);
   const modelMessages = prepareMessagesForModel(uiMessages);
-  const originalMessages = uiMessages;
+  const originalMessages: UIMessage[] = uiMessages;
   if (modelMessages.length === 0) {
     return Response.json({ error: "Message is required." }, { status: 400 });
   }
