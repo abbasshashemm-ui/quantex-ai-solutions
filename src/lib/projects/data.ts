@@ -5,9 +5,7 @@ export type Project = {
   slug: string;
   title: string;
   description: string;
-  /** Shown in the browser chrome bar on the card */
   url: string;
-  /** External link; omit for private / non-public builds */
   href?: string;
   tags: ProjectTag[];
   imageSrc: string;

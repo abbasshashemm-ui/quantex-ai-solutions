@@ -3,8 +3,9 @@ import {
   COMPANY,
   CONTACT_LINKS,
   FOOTER_EXTRA,
+  FOOTER_LEGAL,
   FOOTER_NAV,
-} from "@/lib/site/footer";
+} from "@/lib/site/contact";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -75,9 +76,23 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-6 flex flex-col gap-2 border-t border-white/5 pt-4 text-[0.65rem] text-foreground/80 sm:mt-8 sm:flex-row sm:items-center sm:justify-between sm:pt-5 sm:text-xs">
+        <div className="mt-6 flex flex-col gap-3 border-t border-white/5 pt-4 text-[0.65rem] text-foreground/80 sm:mt-8 sm:flex-row sm:items-center sm:justify-between sm:pt-5 sm:text-xs">
           <p>&copy; {year} {COMPANY.name}</p>
-          <p className="tracking-wide">We don&apos;t sell code. We sell efficiency.</p>
+          <ul className="flex flex-wrap items-center gap-x-4 gap-y-1">
+            {FOOTER_LEGAL.map((item) => (
+              <li key={item.href}>
+                <a
+                  href={item.href}
+                  className="transition-colors hover:text-foreground"
+                >
+                  {item.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <p className="tracking-wide sm:text-right">
+            We don&apos;t sell code. We sell efficiency.
+          </p>
         </div>
       </div>
     </footer>

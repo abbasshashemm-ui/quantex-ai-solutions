@@ -19,7 +19,6 @@ const FOLLOW_NAME_HINTS = [
   "body",
 ];
 
-/** Optional: set exact object name from Spline editor (Copy object name) */
 export const SPLINE_FOLLOW_OBJECT_NAME: string | undefined = undefined;
 
 const IDLE_MS = 220;

@@ -1,5 +1,10 @@
-/** Sourced from https://www.quantexai.info (quantexai.info) */
 export const LEGACY_SITE_URL = "https://www.quantexai.info";
+
+export const COMPANY = {
+  name: "Quantex AI Solutions",
+  tagline:
+    "Web and app design engineered to convert — polished interfaces, thoughtful UX, and builds you can ship with confidence.",
+} as const;
 
 export const CONTACT = {
   email: "hello@quantexai.info",
@@ -72,7 +77,20 @@ export const CONTACT_LINKS = [
 export const SITE_NAV = [
   { label: "Home", href: "/" },
   { label: "Solutions", href: "/#solutions" },
+  { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ] as const;
 
 export const FOOTER_NAV = SITE_NAV.filter((item) => item.href !== "/");
+
+export const FOOTER_EXTRA = [
+  {
+    label: "quantexai.info",
+    href: LEGACY_SITE_URL,
+    external: true,
+  },
+] as const;
+
+export const FOOTER_LEGAL = [
+  { label: "Privacy Policy", href: "/privacy" },
+] as const;

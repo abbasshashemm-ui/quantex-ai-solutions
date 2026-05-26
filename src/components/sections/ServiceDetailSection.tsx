@@ -2,8 +2,7 @@ import Link from "next/link";
 import { ServiceNavIcon } from "@/components/layout/ServiceNavIcon";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import type { Service } from "@/lib/services/data";
-import { getServiceDetailContent } from "@/lib/services/detail-content";
-import { NAV_SERVICE_ITEMS, getNavMetaForService } from "@/lib/services/nav";
+import { NAV_SERVICE_ITEMS, SOLUTIONS_OVERVIEW_HREF } from "@/lib/services/nav";
 import { CONTACT } from "@/lib/site/contact";
 
 type ServiceDetailSectionProps = {
@@ -31,9 +30,7 @@ function CheckIcon() {
 
 export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
   const indexLabel = String(service.index + 1).padStart(2, "0");
-  const navMeta = getNavMetaForService(service.id);
-  const detail = getServiceDetailContent(service.id);
-  const overview = service.sections.find((s) => s.title === "Overview");
+  const { nav: navMeta, overview, detail } = service;
   const related = NAV_SERVICE_ITEMS.filter((item) => item.slug !== service.slug);
 
   return (
@@ -46,7 +43,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
 
       <div className="relative mx-auto max-w-7xl">
         <Link
-          href="/#solutions"
+          href={SOLUTIONS_OVERVIEW_HREF}
           data-interactive
           className="inline-flex min-h-11 items-center text-xs tracking-wide text-foreground/80 uppercase transition-opacity hover:opacity-80"
         >
@@ -141,16 +138,14 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
           </aside>
         </header>
 
-        {overview ? (
-          <section className="service-page__overview glass-panel mt-10 rounded-2xl p-5 sm:mt-12 sm:p-7 md:p-8">
-            <h2 className="text-[0.65rem] font-semibold tracking-[0.22em] text-foreground/70 uppercase sm:text-xs">
-              Overview
-            </h2>
-            <p className="mt-4 max-w-3xl text-sm leading-relaxed text-foreground/88 sm:text-base sm:leading-relaxed">
-              {overview.body}
-            </p>
-          </section>
-        ) : null}
+        <section className="service-page__overview glass-panel mt-10 rounded-2xl p-5 sm:mt-12 sm:p-7 md:p-8">
+          <h2 className="text-[0.65rem] font-semibold tracking-[0.22em] text-foreground/70 uppercase sm:text-xs">
+            Overview
+          </h2>
+          <p className="mt-4 max-w-3xl text-sm leading-relaxed text-foreground/88 sm:text-base sm:leading-relaxed">
+            {overview}
+          </p>
+        </section>
 
         <div className="service-page__panels mt-8 grid gap-6 lg:mt-10 lg:grid-cols-2 lg:gap-8">
           <section className="service-page__panel glass-panel rounded-2xl p-5 sm:p-6 md:p-7">

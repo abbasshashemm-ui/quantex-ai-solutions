@@ -1,4 +1,4 @@
-import type { NavServiceIcon } from "@/lib/services/icons";
+import type { NavServiceIcon } from "@/lib/services/data";
 
 type ServiceNavIconProps = {
   icon: NavServiceIcon;

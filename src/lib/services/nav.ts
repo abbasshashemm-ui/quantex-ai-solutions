@@ -1,7 +1,6 @@
-import { SERVICES } from "./data";
-import type { NavServiceIcon } from "./icons";
+import { SERVICES, type NavServiceIcon } from "./data";
 
-export type { NavServiceIcon } from "./icons";
+export type { NavServiceIcon };
 
 export type NavServiceItem = {
   slug: string;
@@ -10,10 +9,6 @@ export type NavServiceItem = {
   icon: NavServiceIcon;
   href: string;
 };
-
-export function getNavMetaForService(serviceId: string) {
-  return SERVICES.find((service) => service.id === serviceId)?.nav;
-}
 
 export const NAV_SERVICE_ITEMS: NavServiceItem[] = SERVICES.map((service) => ({
   slug: service.slug,

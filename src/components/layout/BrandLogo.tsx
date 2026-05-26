@@ -6,9 +6,7 @@ type BrandLogoProps = {
   variant?: "full" | "mark";
 };
 
-/** Horizontal QUANTEX wordmark */
 const FULL_LOGO = "/quantex-logo.png";
-/** Triangle mark only — user-provided asset */
 const MARK_LOGO = "/quantex-mark-reference.png";
 
 export function BrandLogo({

@@ -1,6 +1,5 @@
 import type { Application } from "@splinetool/runtime";
 
-/** Pause WebGL work when the tab is hidden or the page is backgrounded. */
 export function attachSplineVisibilityPause(app: Application): () => void {
   const onVisibility = () => {
     if (document.hidden) {

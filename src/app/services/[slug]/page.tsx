@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ServicePageShell } from "@/components/layout/ServicePageShell";
 import {
+  formatServiceTitle,
   getAllServiceSlugs,
   getServiceBySlug,
 } from "@/lib/services/data";
@@ -24,12 +25,8 @@ export async function generateMetadata({
     return { title: "Service not found" };
   }
 
-  const title = service.title
-    .toLowerCase()
-    .replace(/\b\w/g, (char) => char.toUpperCase());
-
   return {
-    title: `${title} | Quantex AI Solutions`,
+    title: `${formatServiceTitle(service.title)} | Quantex AI Solutions`,
     description: service.description,
   };
 }

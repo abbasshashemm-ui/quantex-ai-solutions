@@ -28,10 +28,10 @@ export function Navbar() {
   const close = () => setOpen(false);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)]">
+    <header className="site-header fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)]">
       <nav
         aria-label="Primary"
-        className="mx-auto flex max-w-7xl items-center justify-between gap-4 border-b border-white/5 bg-void/40 px-4 py-4 backdrop-blur-xl backdrop-saturate-150 supports-[backdrop-filter]:bg-void/30 sm:px-6 sm:py-5"
+        className="mx-auto flex max-w-7xl items-center justify-between gap-4 bg-void/40 px-4 py-4 backdrop-blur-xl backdrop-saturate-150 supports-[backdrop-filter]:bg-void/30 sm:px-6 sm:py-5"
       >
         <a
           href="/"
@@ -136,6 +136,7 @@ export function Navbar() {
           </ul>
         </div>
       )}
+      <div className="site-header__line" aria-hidden />
     </header>
   );
 }

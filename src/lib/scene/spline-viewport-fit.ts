@@ -52,7 +52,6 @@ function resetCamerasToBaseline(app: Application) {
 
 const MOBILE_ZOOM = 1.15;
 
-/** Mobile portrait: slight zoom-in so the bot reads larger on small screens. */
 function getMobilePortraitZoom() {
   return MOBILE_ZOOM;
 }

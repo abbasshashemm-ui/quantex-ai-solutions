@@ -1,23 +1,23 @@
 "use client";
 
+import Link from "next/link";
 import {
   useState,
   type ChangeEvent,
   type FormEvent,
 } from "react";
 import { BUDGET_RANGES, CONTACT } from "@/lib/site/contact";
-import { SERVICES } from "@/lib/services/data";
+import { PRIVACY_POLICY } from "@/lib/site/legal/privacy-policy";
+import { SERVICES, formatServiceTitle } from "@/lib/services/data";
+import {
+  CONTACT_FORM_LIMITS,
+  sanitizeContactField,
+  sanitizeContactForm,
+  validateContactForm,
+  type ContactFormFields,
+} from "@/lib/sanitize/contact-form";
 
-type FormState = {
-  name: string;
-  email: string;
-  phone: string;
-  service: string;
-  budget: string;
-  message: string;
-};
-
-const initialState: FormState = {
+const initialState: ContactFormFields = {
   name: "",
   email: "",
   phone: "",
@@ -26,16 +26,16 @@ const initialState: FormState = {
   message: "",
 };
 
+const MAX_WHATSAPP_URL_LENGTH = 2048;
+
 const inputClassName =
   "mt-1.5 block w-full rounded-lg border border-white/25 bg-surface-elevated px-3.5 py-2.5 text-sm text-foreground shadow-[0_0_0_1px_rgba(255,255,255,0.06),inset_0_1px_0_rgba(255,255,255,0.06)] outline-none transition placeholder:text-foreground/45 focus:border-white/45 focus:ring-2 focus:ring-white/15";
 
 const selectClassName = `${inputClassName} contact-form__select appearance-none`;
 
-function buildWhatsAppBody(data: FormState) {
-  const serviceLabel =
-    SERVICES.find((s) => s.slug === data.service)?.title ?? data.service;
-  const budgetLabel =
-    BUDGET_RANGES.find((b) => b.value === data.budget)?.label ?? data.budget;
+function buildWhatsAppBody(data: ContactFormFields) {
+  const service = SERVICES.find((item) => item.slug === data.service);
+  const budget = BUDGET_RANGES.find((item) => item.value === data.budget);
 
   return [
     "Hi Quantex AI Solutions,",
@@ -43,8 +43,8 @@ function buildWhatsAppBody(data: FormState) {
     `Name: ${data.name}`,
     `Email: ${data.email}`,
     data.phone ? `Phone: ${data.phone}` : null,
-    serviceLabel ? `Service: ${serviceLabel}` : null,
-    budgetLabel && data.budget ? `Budget: ${budgetLabel}` : null,
+    service ? `Service: ${formatServiceTitle(service.title)}` : null,
+    budget?.value ? `Budget: ${budget.label}` : null,
     "",
     data.message,
   ]
@@ -53,30 +53,41 @@ function buildWhatsAppBody(data: FormState) {
 }
 
 export function ContactForm() {
-  const [form, setForm] = useState<FormState>(initialState);
+  const [form, setForm] = useState<ContactFormFields>(initialState);
   const [error, setError] = useState<string | null>(null);
 
   const update =
-    (field: keyof FormState) =>
+    (field: keyof ContactFormFields) =>
     (
       e: ChangeEvent<
         HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
       >,
     ) => {
-      setForm((prev) => ({ ...prev, [field]: e.target.value }));
+      const sanitized = sanitizeContactField(field, e.target.value);
+      setForm((prev) => ({ ...prev, [field]: sanitized }));
       setError(null);
     };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    if (!form.name.trim() || !form.email.trim() || !form.message.trim()) {
-      setError("Please fill in name, email, and message.");
+    const sanitized = sanitizeContactForm(form);
+    setForm(sanitized);
+
+    const validationError = validateContactForm(sanitized);
+    if (validationError) {
+      setError(validationError);
       return;
     }
 
-    const text = encodeURIComponent(buildWhatsAppBody(form));
-    const url = `${CONTACT.whatsapp}?text=${text}`;
+    const body = buildWhatsAppBody(sanitized);
+    const url = `${CONTACT.whatsapp}?text=${encodeURIComponent(body)}`;
+
+    if (url.length > MAX_WHATSAPP_URL_LENGTH) {
+      setError("Message is too long. Please shorten it and try again.");
+      return;
+    }
+
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
@@ -97,6 +108,8 @@ export function ContactForm() {
               type="text"
               name="name"
               required
+              minLength={2}
+              maxLength={CONTACT_FORM_LIMITS.name}
               autoComplete="name"
               placeholder="Your full name"
               value={form.name}
@@ -111,6 +124,7 @@ export function ContactForm() {
               type="email"
               name="email"
               required
+              maxLength={CONTACT_FORM_LIMITS.email}
               autoComplete="email"
               placeholder="you@company.com"
               value={form.email}
@@ -127,7 +141,9 @@ export function ContactForm() {
             <input
               type="tel"
               name="phone"
+              maxLength={CONTACT_FORM_LIMITS.phone}
               autoComplete="tel"
+              inputMode="tel"
               placeholder="+961 XX XXX XXX"
               value={form.phone}
               onChange={update("phone")}
@@ -147,9 +163,7 @@ export function ContactForm() {
               <option value="">What do you need?</option>
               {SERVICES.map((service) => (
                 <option key={service.slug} value={service.slug}>
-                  {service.title
-                    .toLowerCase()
-                    .replace(/\b\w/g, (c) => c.toUpperCase())}
+                  {formatServiceTitle(service.title)}
                 </option>
               ))}
             </select>
@@ -178,6 +192,8 @@ export function ContactForm() {
           <textarea
             name="message"
             required
+            minLength={10}
+            maxLength={CONTACT_FORM_LIMITS.message}
             rows={5}
             placeholder="Tell us about your project, goals, and timeline..."
             value={form.message}
@@ -192,6 +208,20 @@ export function ContactForm() {
             {error}
           </p>
         ) : null}
+
+        <p className="text-xs leading-relaxed text-foreground/60">
+          By submitting, you agree we may use your name, email, phone number,
+          and message to respond to your inquiry. Sending opens WhatsApp, where
+          their privacy terms also apply. See our{" "}
+          <Link
+            href={PRIVACY_POLICY.path}
+            data-interactive
+            className="text-foreground/80 underline-offset-2 hover:text-foreground hover:underline"
+          >
+            Privacy Policy
+          </Link>
+          .
+        </p>
 
         <button
           type="submit"
