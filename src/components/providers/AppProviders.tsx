@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
+import { ConversionTracker } from "@/components/analytics/ConversionTracker";
 import { GsapProvider } from "./GsapProvider";
 import { ScrollToTopOnNavigate } from "./ScrollToTopOnNavigate";
 import { SolutionsScrollHandler } from "./SolutionsScrollHandler";
@@ -16,6 +17,7 @@ export function AppProviders({ children }: AppProvidersProps) {
 
   return (
     <GsapProvider>
+      <ConversionTracker />
       <ScrollToTopOnNavigate />
       {isHome ? <SolutionsScrollHandler /> : null}
       {children}

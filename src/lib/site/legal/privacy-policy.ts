@@ -39,7 +39,7 @@ export const PRIVACY_POLICY = {
       title: "How we collect it",
       paragraphs: [
         "We collect information when you submit our contact form, email us, message us on WhatsApp, or otherwise reach out. Our contact form prepares a message that you send through WhatsApp—we do not store form submissions on our own servers.",
-        "We also receive limited usage data through Vercel Analytics to understand how visitors use the site (for example, page views and referrers). This helps us improve performance and content.",
+        "We also receive limited usage data through Vercel Analytics to understand how visitors use the site (for example, page views, referrers, and conversion events such as contact form submissions or WhatsApp button clicks). This helps us improve performance and content.",
       ],
     },
     {

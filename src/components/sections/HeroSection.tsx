@@ -1,4 +1,5 @@
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
+import { CONVERSION_EVENTS } from "@/lib/analytics/events";
 import { CONTACT } from "@/lib/site/contact";
 import { SOLUTIONS_OVERVIEW_HREF } from "@/lib/services/nav";
 
@@ -29,6 +30,8 @@ export function HeroSection() {
             target="_blank"
             rel="noopener noreferrer"
             data-interactive
+            data-conversion={CONVERSION_EVENTS.WHATSAPP_CLICK}
+            data-conversion-location="hero"
             className="btn-primary w-full sm:w-auto"
           >
             Book strategy call
@@ -36,6 +39,8 @@ export function HeroSection() {
           <a
             href={SOLUTIONS_OVERVIEW_HREF}
             data-interactive
+            data-conversion={CONVERSION_EVENTS.SOLUTIONS_CLICK}
+            data-conversion-location="hero"
             className="btn-secondary w-full sm:w-auto"
           >
             View solutions

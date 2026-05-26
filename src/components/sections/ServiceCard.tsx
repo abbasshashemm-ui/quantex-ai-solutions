@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { ServiceNavIcon } from "@/components/layout/ServiceNavIcon";
+import { CONVERSION_EVENTS } from "@/lib/analytics/events";
 import type { Service } from "@/lib/services/data";
 
 type ServiceCardProps = {
@@ -13,6 +14,8 @@ export function ServiceCard({ service }: ServiceCardProps) {
     <Link
       href={`/services/${service.slug}`}
       data-interactive
+      data-conversion={CONVERSION_EVENTS.SERVICE_CLICK}
+      data-conversion-location="services_grid"
       className="service-card-link"
     >
       <article data-service-card className="service-card">

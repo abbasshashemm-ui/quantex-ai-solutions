@@ -10,6 +10,10 @@ import { BUDGET_RANGES, CONTACT } from "@/lib/site/contact";
 import { PRIVACY_POLICY } from "@/lib/site/legal/privacy-policy";
 import { SERVICES, formatServiceTitle } from "@/lib/services/data";
 import {
+  CONVERSION_EVENTS,
+  trackConversion,
+} from "@/lib/analytics/events";
+import {
   CONTACT_FORM_LIMITS,
   sanitizeContactField,
   sanitizeContactForm,
@@ -87,6 +91,10 @@ export function ContactForm() {
       setError("Message is too long. Please shorten it and try again.");
       return;
     }
+
+    trackConversion(CONVERSION_EVENTS.CONTACT_FORM_SUBMIT, {
+      location: "contact_form",
+    });
 
     window.open(url, "_blank", "noopener,noreferrer");
   };

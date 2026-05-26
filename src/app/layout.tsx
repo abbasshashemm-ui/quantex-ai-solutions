@@ -1,8 +1,12 @@
-import type { Metadata, Viewport } from "next";
+import type { Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Geist } from "next/font/google";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { MainLayout } from "@/components/layout/MainLayout";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { buildGlobalSchemas } from "@/lib/seo/json-ld";
+import { rootMetadata } from "@/lib/seo/metadata";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -18,14 +22,7 @@ export const viewport: Viewport = {
   themeColor: "#030303",
 };
 
-export const metadata: Metadata = {
-  title: "Quantex AI Solutions",
-  description:
-    "High-performance AI solutions with immersive 3D experiences and scroll-driven storytelling.",
-  icons: {
-    icon: "/quantex-mark-reference.png",
-  },
-};
+export const metadata = rootMetadata;
 
 export default function RootLayout({
   children,
@@ -45,15 +42,18 @@ export default function RootLayout({
           href="https://prod.spline.design"
           crossOrigin="anonymous"
         />
+        <link rel="llms-txt" href="/llms.txt" />
       </head>
       <body
         suppressHydrationWarning
         className="min-h-full flex flex-col bg-void text-foreground"
       >
+        <JsonLd data={buildGlobalSchemas()} />
         <AppProviders>
           <MainLayout>{children}</MainLayout>
         </AppProviders>
         <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );

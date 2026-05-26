@@ -1,6 +1,12 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ServicePageShell } from "@/components/layout/ServicePageShell";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { createPageMetadata } from "@/lib/seo/metadata";
+import {
+  buildBreadcrumbSchema,
+  buildServiceSchema,
+} from "@/lib/seo/json-ld";
 import {
   formatServiceTitle,
   getAllServiceSlugs,
@@ -25,10 +31,16 @@ export async function generateMetadata({
     return { title: "Service not found" };
   }
 
-  return {
-    title: `${formatServiceTitle(service.title)} | Quantex AI Solutions`,
-    description: service.description,
-  };
+  return createPageMetadata({
+    title: formatServiceTitle(service.title),
+    description: service.overview,
+    path: `/services/${service.slug}`,
+    keywords: [
+      service.nav.label,
+      service.nav.tagline,
+      "Quantex AI Solutions",
+    ],
+  });
 }
 
 export default async function ServicePage({ params }: ServicePageProps) {
@@ -39,5 +51,22 @@ export default async function ServicePage({ params }: ServicePageProps) {
     notFound();
   }
 
-  return <ServicePageShell service={service} />;
+  return (
+    <>
+      <JsonLd
+        data={[
+          buildServiceSchema(service),
+          buildBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "Solutions", path: "/#solutions" },
+            {
+              name: service.nav.label,
+              path: `/services/${service.slug}`,
+            },
+          ]),
+        ]}
+      />
+      <ServicePageShell service={service} />
+    </>
+  );
 }

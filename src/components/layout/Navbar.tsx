@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { CONVERSION_EVENTS } from "@/lib/analytics/events";
 import { SITE_NAV, CONTACT } from "@/lib/site/contact";
 import { BrandLogo } from "./BrandLogo";
 import { ServicesNavDropdown } from "./ServicesNavDropdown";
@@ -62,6 +63,8 @@ export function Navbar() {
             href={CONTACT.whatsapp}
             target="_blank"
             rel="noopener noreferrer"
+            data-conversion={CONVERSION_EVENTS.WHATSAPP_CLICK}
+            data-conversion-location="navbar"
             className="btn-secondary hidden px-5 sm:inline-flex"
           >
             Book Strategy Call

@@ -1,12 +1,27 @@
 import type { Metadata } from "next";
 import { ContactPageShell } from "@/components/layout/ContactPageShell";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { createPageMetadata } from "@/lib/seo/metadata";
+import { buildBreadcrumbSchema } from "@/lib/seo/json-ld";
 
-export const metadata: Metadata = {
-  title: "Contact | Quantex AI Solutions",
+export const metadata: Metadata = createPageMetadata({
+  title: "Contact",
   description:
-    "Get in touch about web design, custom software, automation, and AI solutions. We respond within 24 hours.",
-};
+    "Contact Quantex AI Solutions about web design, custom software, AI chatbots, and automation. Email hello@quantexai.info or message on WhatsApp—we respond within 24 hours.",
+  path: "/contact",
+  keywords: ["contact Quantex", "hire web developer Beirut", "AI agency Lebanon"],
+});
 
 export default function ContactPage() {
-  return <ContactPageShell />;
+  return (
+    <>
+      <JsonLd
+        data={buildBreadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "Contact", path: "/contact" },
+        ])}
+      />
+      <ContactPageShell />
+    </>
+  );
 }
