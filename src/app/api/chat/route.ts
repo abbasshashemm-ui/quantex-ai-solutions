@@ -74,6 +74,7 @@ export async function POST(request: Request) {
 
   const uiMessages = parsed.data.messages as UIMessage[];
   const modelMessages = prepareMessagesForModel(uiMessages);
+  const originalMessages = uiMessages;
   if (modelMessages.length === 0) {
     return Response.json({ error: "Message is required." }, { status: 400 });
   }
@@ -90,7 +91,7 @@ export async function POST(request: Request) {
     result.consumeStream();
 
     return result.toUIMessageStreamResponse({
-      originalMessages: uiMessages,
+      originalMessages,
       onError: (error) => {
         console.error("[chat] stream error:", error);
         return error instanceof Error

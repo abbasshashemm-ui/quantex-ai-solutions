@@ -31,17 +31,12 @@ type ChatPanelProps = {
 export function ChatPanel({ onClose }: ChatPanelProps) {
   const [input, setInput] = useState("");
   const listRef = useRef<HTMLDivElement>(null);
-  const sendingRef = useRef(false);
   const { messages, sendMessage, status, error, clearError } = useSalesChat();
 
-  const isBusy =
-    sendingRef.current || status === "submitted" || status === "streaming";
-
-  useEffect(() => {
-    if (status === "ready" || status === "error") {
-      sendingRef.current = false;
-    }
-  }, [status]);
+  const isBusy = status === "submitted" || status === "streaming";
+  const showTyping =
+    isBusy &&
+    (messages.length === 0 || messages[messages.length - 1]?.role === "user");
 
   useEffect(() => {
     const node = listRef.current;
@@ -59,14 +54,11 @@ export function ChatPanel({ onClose }: ChatPanelProps) {
   const submitMessage = useCallback(
     (text: string) => {
       const trimmed = text.trim();
-      if (!trimmed || sendingRef.current || status === "submitted" || status === "streaming") {
+      if (!trimmed || status === "submitted" || status === "streaming") {
         return;
       }
-      sendingRef.current = true;
       clearError();
-      void sendMessage({ text: trimmed }).finally(() => {
-        sendingRef.current = false;
-      });
+      void sendMessage({ text: trimmed });
       setInput("");
       trackConversion(CONVERSION_EVENTS.CHAT_MESSAGE_SENT, {
         location: "chat_panel",
@@ -133,7 +125,7 @@ export function ChatPanel({ onClose }: ChatPanelProps) {
         {messages.map((message) => (
           <ChatMessage key={message.id} message={message} />
         ))}
-        {isBusy ? (
+        {showTyping ? (
           <p className="chat-panel__typing" aria-live="polite">
             Typing…
           </p>
