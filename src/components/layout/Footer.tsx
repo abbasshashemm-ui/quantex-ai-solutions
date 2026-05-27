@@ -23,25 +23,39 @@ export function Footer() {
             <p className="mt-2 max-w-sm text-xs leading-snug text-foreground/90 sm:text-sm sm:leading-relaxed">
               {COMPANY.tagline}
             </p>
-            <ul className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-[0.7rem] text-foreground/80 sm:text-xs">
+            <ul className="mt-4 flex flex-wrap items-center gap-3">
               <li>
                 <a
                   href={CONTACT.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="underline underline-offset-2 transition-colors hover:text-foreground"
+                  aria-label="Instagram"
+                  className="footer-social glass-panel inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-surface-elevated/70 text-foreground/85 transition-colors hover:text-foreground"
                 >
-                  {CONTACT.instagramHandle}
-                </a>
-              </li>
-              <li>
-                <a
-                  href={CONTACT.whatsapp}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="underline underline-offset-2 transition-colors hover:text-foreground"
-                >
-                  WhatsApp {CONTACT.phoneDisplay}
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden
+                    className="h-5 w-5"
+                  >
+                    <rect
+                      x="4"
+                      y="4"
+                      width="16"
+                      height="16"
+                      rx="4"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                    />
+                    <circle
+                      cx="12"
+                      cy="12"
+                      r="3.5"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                    />
+                    <circle cx="17" cy="7" r="0.85" fill="currentColor" />
+                  </svg>
                 </a>
               </li>
               <li>
@@ -49,9 +63,51 @@ export function Footer() {
                   href={CONTACT.linkedin}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="underline underline-offset-2 transition-colors hover:text-foreground"
+                  aria-label="LinkedIn"
+                  className="footer-social glass-panel inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-surface-elevated/70 text-foreground/85 transition-colors hover:text-foreground"
                 >
-                  LinkedIn
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden
+                    className="h-5 w-5"
+                  >
+                    <path
+                      d="M7 10v10M7 7.3a1.3 1.3 0 10.01 0H7zM11 20v-5.6c0-1.6.8-2.6 2.2-2.6 1.3 0 2 1 2 2.6V20h4v-6.1c0-3.6-2-5.5-4.8-5.5-1.7 0-2.9.8-3.4 1.6V10H11z"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                </a>
+              </li>
+              <li>
+                <a
+                  href={CONTACT.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="WhatsApp"
+                  className="footer-social glass-panel inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-surface-elevated/70 text-foreground/85 transition-colors hover:text-foreground"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    aria-hidden
+                    className="h-5 w-5"
+                  >
+                    <path
+                      d="M20 11.6a8 8 0 11-3.2-6.4A7.9 7.9 0 0120 11.6z"
+                      stroke="currentColor"
+                      strokeWidth="1.6"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M9.3 8.7c.2-.5.4-.5.6-.5h.5c.2 0 .4.1.5.4l.7 1.7c.1.2.1.4 0 .6l-.3.6c-.1.2-.1.4 0 .6.4.8 1.4 1.8 2.2 2.2.2.1.4.1.6 0l.6-.3c.2-.1.4-.1.6 0l1.7.7c.3.1.4.3.4.5v.5c0 .2 0 .4-.5.6-.4.2-1.2.5-2.4.2-1.2-.3-2.8-1.4-3.8-2.4-1-1-2.1-2.6-2.4-3.8-.3-1.2 0-2 .2-2.4z"
+                      fill="currentColor"
+                      fillOpacity="0.9"
+                    />
+                  </svg>
                 </a>
               </li>
             </ul>
