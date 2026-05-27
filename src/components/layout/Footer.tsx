@@ -1,6 +1,7 @@
 import { BrandLogo } from "./BrandLogo";
 import {
   COMPANY,
+  CONTACT,
   CONTACT_LINKS,
   FOOTER_EXTRA,
   FOOTER_LEGAL,
@@ -22,6 +23,38 @@ export function Footer() {
             <p className="mt-2 max-w-sm text-xs leading-snug text-foreground/90 sm:text-sm sm:leading-relaxed">
               {COMPANY.tagline}
             </p>
+            <ul className="mt-3 flex flex-wrap items-center gap-x-3 gap-y-2 text-[0.7rem] text-foreground/80 sm:text-xs">
+              <li>
+                <a
+                  href={CONTACT.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-2 transition-colors hover:text-foreground"
+                >
+                  {CONTACT.instagramHandle}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={CONTACT.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-2 transition-colors hover:text-foreground"
+                >
+                  WhatsApp {CONTACT.phoneDisplay}
+                </a>
+              </li>
+              <li>
+                <a
+                  href={CONTACT.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-2 transition-colors hover:text-foreground"
+                >
+                  LinkedIn
+                </a>
+              </li>
+            </ul>
           </div>
 
           <div>

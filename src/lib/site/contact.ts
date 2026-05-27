@@ -11,11 +11,12 @@ export const COMPANY = {
 export const CONTACT = {
   email: "hello@quantexai.solutions",
   whatsapp: "https://wa.me/9613642102",
-  phoneDisplay: "+961 36 421 02",
+  phoneDisplay: "+961 3 642 102",
   phoneTel: "+9613642102",
   location: "Beirut, Lebanon",
-  instagram: "https://www.instagram.com/",
-  instagramHandle: "@quantexai",
+  instagram: "https://www.instagram.com/quantex.ai",
+  instagramHandle: "@Quantex.ai",
+  linkedin: "https://www.linkedin.com/company/quantex-ai-solution/",
 } as const;
 
 export const BUDGET_RANGES = [

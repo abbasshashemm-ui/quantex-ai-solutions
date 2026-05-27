@@ -65,7 +65,7 @@ export function Navbar() {
             rel="noopener noreferrer"
             data-conversion={CONVERSION_EVENTS.WHATSAPP_CLICK}
             data-conversion-location="navbar"
-            className="btn-secondary hidden px-5 sm:inline-flex"
+            className="btn-secondary hidden sm:inline-flex sm:px-4 md:px-5"
           >
             Book Strategy Call
           </a>
