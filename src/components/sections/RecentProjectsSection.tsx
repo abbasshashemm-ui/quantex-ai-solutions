@@ -1,7 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { useMounted } from "@/hooks/useMounted";
+import { useRef } from "react";
+import { useRevealOnScroll } from "@/hooks/useRevealOnScroll";
 import { PROJECTS } from "@/lib/projects/data";
 import { CONTACT } from "@/lib/site/contact";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
@@ -9,35 +9,8 @@ import { ProjectCard } from "./ProjectCard";
 
 export function RecentProjectsSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const mounted = useMounted();
 
-  useEffect(() => {
-    if (!mounted) return;
-
-    const section = sectionRef.current;
-    if (!section) return;
-
-    const reducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    if (reducedMotion) return;
-
-    const cards = section.querySelectorAll<HTMLElement>("[data-project-card]");
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add("is-visible");
-          }
-        });
-      },
-      { threshold: 0.12, rootMargin: "0px 0px -8% 0px" },
-    );
-
-    cards.forEach((card) => observer.observe(card));
-    return () => observer.disconnect();
-  }, [mounted]);
+  useRevealOnScroll(sectionRef, "[data-project-card]");
 
   return (
     <section
@@ -74,9 +47,9 @@ export function RecentProjectsSection() {
         </header>
 
         <div className="projects-section__grid mt-10 sm:mt-12">
-          {PROJECTS.map((project) => (
-            <div key={project.id} data-project-card className="project-card-reveal">
-              <ProjectCard project={project} />
+          {PROJECTS.map((project, index) => (
+            <div key={project.id} data-project-card>
+              <ProjectCard project={project} priority={index === 0} />
             </div>
           ))}
         </div>

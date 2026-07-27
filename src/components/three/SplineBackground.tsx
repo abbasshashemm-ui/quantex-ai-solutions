@@ -14,7 +14,10 @@ import { SPLINE_BOT_SCENE } from "@/lib/scene/spline";
 
 function SplineFallback() {
   return (
-    <div className="spline-viewport__stage h-full w-full bg-void" aria-hidden />
+    <div
+      className="scene-fallback spline-viewport__stage h-full w-full"
+      aria-hidden
+    />
   );
 }
 

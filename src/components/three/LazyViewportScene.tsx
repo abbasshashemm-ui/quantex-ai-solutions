@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 function ViewportSceneFallback() {
   return (
     <div
-      className="fixed inset-0 z-0 h-[100dvh] w-full bg-void"
+      className="scene-fallback fixed inset-0 z-0 h-[100dvh] w-full"
       aria-hidden
     />
   );

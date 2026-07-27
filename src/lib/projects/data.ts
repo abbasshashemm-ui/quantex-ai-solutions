@@ -22,7 +22,7 @@ export const PROJECTS: Project[] = [
     url: "hmayed.online",
     href: "https://hmayed.online",
     tags: ["PORTFOLIO", "WEB"],
-    imageSrc: "/projects/hmayed.png",
+    imageSrc: "/projects/hmayed.webp",
     imageAlt: "Hmayed portfolio website preview",
   },
   {
@@ -33,7 +33,7 @@ export const PROJECTS: Project[] = [
       "Custom sales and stock app built for Hachem Services—orders, inventory, dashboards, and day-to-day operations.",
     url: "Hachem Services · internal",
     tags: ["CUSTOM APP", "SALES & STOCK"],
-    imageSrc: "/projects/shop-pro.png",
+    imageSrc: "/projects/shop-pro.webp",
     imageAlt: "Shop Pro sales and stock dashboard preview",
   },
   {
@@ -45,7 +45,7 @@ export const PROJECTS: Project[] = [
     url: "almanya-luboil.com",
     href: "https://almanya-luboil.com",
     tags: ["WEBSITE", "INDUSTRIAL"],
-    imageSrc: "/projects/almanya.png",
+    imageSrc: "/projects/almanya.webp",
     imageAlt: "Almanya Lubricants Factory website preview",
   },
 ];
