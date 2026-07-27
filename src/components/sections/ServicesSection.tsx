@@ -1,51 +1,15 @@
 "use client";
 
-import { useGSAP } from "@gsap/react";
 import { useRef } from "react";
-import { gsap, registerGsapPlugins } from "@/lib/gsap/register";
-import { useMounted } from "@/hooks/useMounted";
+import { useRevealOnScroll } from "@/hooks/useRevealOnScroll";
 import { SERVICES } from "@/lib/services/data";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { ServiceCard } from "./ServiceCard";
 
 export function ServicesSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const mounted = useMounted();
 
-  useGSAP(
-    () => {
-      if (!mounted) return;
-
-      registerGsapPlugins();
-
-      const section = sectionRef.current;
-      if (!section) return;
-
-      const cards = gsap.utils.toArray<HTMLElement>("[data-service-card]");
-      const reducedMotion = window.matchMedia(
-        "(prefers-reduced-motion: reduce)",
-      ).matches;
-
-      if (reducedMotion) {
-        gsap.set(cards, { opacity: 1, y: 0 });
-        return;
-      }
-
-      gsap.from(cards, {
-        opacity: 0,
-        y: 32,
-        duration: 0.55,
-        stagger: 0.1,
-        ease: "power2.out",
-        scrollTrigger: {
-          trigger: section,
-          start: "top 82%",
-          toggleActions: "play none none none",
-        },
-      });
-    },
-    { scope: sectionRef, dependencies: [mounted], revertOnUpdate: true },
-  );
+  useRevealOnScroll(sectionRef, "[data-service-card]");
 
   return (
     <section

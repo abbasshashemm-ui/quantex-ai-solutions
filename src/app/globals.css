@@ -82,6 +82,19 @@ body::-webkit-scrollbar {
   overflow: hidden;
 }
 
+/* Placeholder shown before the Spline scene loads — subtle glow so the
+   scene fades in without a visual pop against a flat black frame. */
+.scene-fallback {
+  background:
+    radial-gradient(
+      110% 75% at 50% 12%,
+      color-mix(in srgb, var(--metallic) 9%, transparent) 0%,
+      color-mix(in srgb, var(--metallic) 3%, transparent) 42%,
+      transparent 72%
+    ),
+    var(--void);
+}
+
 @media (max-width: 767px) {
   .spline-viewport {
     width: 100%;
@@ -454,27 +467,6 @@ body::-webkit-scrollbar {
 /* ——— Recent projects ——— */
 .projects-section {
   scroll-margin-top: 6rem;
-}
-
-.project-card-reveal {
-  opacity: 0;
-  transform: translateY(2.5rem);
-  transition:
-    opacity 0.55s ease,
-    transform 0.55s ease;
-}
-
-.project-card-reveal.is-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .project-card-reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
 }
 
 .projects-section__grid {

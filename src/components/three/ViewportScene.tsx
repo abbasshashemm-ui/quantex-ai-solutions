@@ -8,7 +8,10 @@ export function ViewportScene() {
 
   if (!mounted) {
     return (
-      <div className="fixed inset-0 z-0 h-[100dvh] w-full bg-void" aria-hidden />
+      <div
+        className="scene-fallback fixed inset-0 z-0 h-[100dvh] w-full"
+        aria-hidden
+      />
     );
   }
 

@@ -3,9 +3,10 @@ import type { Project } from "@/lib/projects/data";
 
 type ProjectCardProps = {
   project: Project;
+  priority?: boolean;
 };
 
-function ProjectCardContent({ project }: ProjectCardProps) {
+function ProjectCardContent({ project, priority }: ProjectCardProps) {
   return (
     <>
       <div className="project-card__browser overflow-hidden rounded-xl border border-white/10 bg-surface-elevated/80 shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
@@ -24,6 +25,7 @@ function ProjectCardContent({ project }: ProjectCardProps) {
             src={project.imageSrc}
             alt={project.imageAlt}
             fill
+            priority={priority}
             sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
             className="object-contain object-center p-1"
           />
@@ -71,7 +73,7 @@ function ProjectCardContent({ project }: ProjectCardProps) {
   );
 }
 
-export function ProjectCard({ project }: ProjectCardProps) {
+export function ProjectCard({ project, priority }: ProjectCardProps) {
   if (project.href) {
     return (
       <a
@@ -81,14 +83,14 @@ export function ProjectCard({ project }: ProjectCardProps) {
         data-interactive
         className="project-card-link group flex flex-col"
       >
-        <ProjectCardContent project={project} />
+        <ProjectCardContent project={project} priority={priority} />
       </a>
     );
   }
 
   return (
     <article className="project-card group flex flex-col">
-      <ProjectCardContent project={project} />
+      <ProjectCardContent project={project} priority={priority} />
     </article>
   );
 }
