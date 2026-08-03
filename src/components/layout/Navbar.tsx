@@ -50,7 +50,7 @@ export function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="inline-flex min-h-12 items-center rounded-full px-3 text-sm text-foreground/90 transition-colors hover:bg-white/5 hover:text-foreground sm:px-4 sm:text-base"
+                className="inline-flex min-h-12 items-center rounded-lg px-3 text-sm text-foreground/90 transition-colors hover:bg-white/5 hover:text-foreground sm:px-4 sm:text-base"
               >
                 {link.label}
               </a>
