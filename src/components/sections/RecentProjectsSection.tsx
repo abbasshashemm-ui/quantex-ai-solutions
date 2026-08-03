@@ -19,14 +19,17 @@ export function RecentProjectsSection() {
       className="projects-section relative border-t border-white/5 py-20 sm:py-24 md:py-28"
       aria-labelledby="projects-heading"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+      <div className="relative z-[1] mx-auto max-w-7xl px-4 sm:px-6">
         <header className="projects-section__header flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
             <PageEyebrow>Our work</PageEyebrow>
-            <h2 id="projects-heading" className="section-heading text-metallic-gradient">
+            <h2
+              id="projects-heading"
+              className="section-heading text-aurora-text"
+            >
               Recent projects
             </h2>
-            <p className="mt-4 text-sm leading-relaxed text-foreground/80 sm:text-base">
+            <p className="mt-4 text-sm leading-relaxed text-muted sm:text-base">
               Real client work—portfolios, custom operations software, and
               industrial brands we have shipped end to end.
             </p>
@@ -40,7 +43,7 @@ export function RecentProjectsSection() {
             className="btn-secondary shrink-0 gap-2 self-start px-5 md:self-auto"
           >
             Start a project
-            <span aria-hidden className="text-foreground/70">
+            <span aria-hidden className="text-muted">
               →
             </span>
           </a>
