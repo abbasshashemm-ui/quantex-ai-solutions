@@ -14,6 +14,18 @@ export type Project = {
 
 export const PROJECTS: Project[] = [
   {
+    id: "chandelier-solderie",
+    slug: "chandelier-solderie",
+    title: "Chandelier Solderie",
+    description:
+      "Luxury lighting atelier site for a Lebanon-based brand—curated chandeliers, pendants, and sculptural lighting.",
+    url: "chandelier-solderie.vercel.app",
+    href: "https://chandelier-solderie.vercel.app/",
+    tags: ["WEBSITE", "LUXURY"],
+    imageSrc: "/projects/chandelier-solderie.png",
+    imageAlt: "Chandelier Solderie luxury lighting website preview",
+  },
+  {
     id: "hmayed",
     slug: "hmayed",
     title: "Hmayed",
