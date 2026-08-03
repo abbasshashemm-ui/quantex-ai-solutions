@@ -60,4 +60,15 @@ export const PROJECTS: Project[] = [
     imageSrc: "/projects/almanya.png",
     imageAlt: "Almanya Lubricants Factory website preview",
   },
+  {
+    id: "trago",
+    slug: "trago",
+    title: "TRAGO house",
+    description:
+      "Digital-to-physical fabrication site for DTF and plexiglass—upload a canvas and craft tangible pieces.",
+    url: "TRAGO house",
+    tags: ["WEBSITE", "FABRICATION"],
+    imageSrc: "/projects/trago.png",
+    imageAlt: "TRAGO house website preview",
+  },
 ];
