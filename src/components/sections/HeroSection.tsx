@@ -85,6 +85,11 @@ export function HeroSection() {
           </aside>
 
           <div className="hero-terminal__main">
+            <p className="hero-brand-mark" aria-hidden>
+              <span className="brand-logo-text__bracket">[</span>
+              QUANTEX
+              <span className="brand-logo-text__bracket">]</span>
+            </p>
             <pre className="hero-brand-ascii hero-brand-ascii--compact" aria-hidden>
               {QUANTEX_ASCII_COMPACT}
             </pre>
