@@ -5,7 +5,7 @@ export function FaqSection() {
   return (
     <section
       id="faq"
-      className="faq-section relative border-t border-white/5 px-4 py-16 sm:px-6 sm:py-20 md:py-24"
+      className="faq-section relative border-t border-accent/20 px-4 py-16 sm:px-6 sm:py-20 md:py-24"
       aria-labelledby="faq-heading"
     >
       <div className="mx-auto max-w-3xl">
@@ -24,7 +24,7 @@ export function FaqSection() {
         <ul className="mt-8 space-y-3">
           {SITE_FAQ.map((item) => (
             <li key={item.question}>
-              <details className="faq-item glass-panel group rounded-xl">
+              <details className="faq-item glass-panel group">
                 <summary className="cursor-pointer list-none px-4 py-4 text-sm font-semibold text-foreground marker:content-none sm:px-5 sm:text-base [&::-webkit-details-marker]:hidden">
                   <span className="flex items-center justify-between gap-4">
                     {item.question}
@@ -36,7 +36,7 @@ export function FaqSection() {
                     </span>
                   </span>
                 </summary>
-                <div className="border-t border-white/8 px-4 pb-4 pt-3 text-sm leading-relaxed text-foreground/78 sm:px-5 sm:pb-5">
+                <div className="border-t border-accent/20 px-4 pb-4 pt-3 text-sm leading-relaxed text-foreground/78 sm:px-5 sm:pb-5">
                   {item.answer}
                 </div>
               </details>

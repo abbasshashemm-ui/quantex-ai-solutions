@@ -12,7 +12,7 @@ type ServiceDetailSectionProps = {
 function CheckIcon() {
   return (
     <svg
-      className="service-page__check h-4 w-4 shrink-0 text-foreground/70"
+      className="service-page__check h-4 w-4 shrink-0 text-accent"
       viewBox="0 0 24 24"
       fill="none"
       aria-hidden
@@ -81,10 +81,10 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
             </div>
           </div>
 
-          <aside className="service-page__aside rounded-2xl border border-white/12 bg-surface/55 p-5 backdrop-blur-md sm:p-6">
+          <aside className="service-page__aside border border-accent/30 bg-surface p-5 sm:p-6">
             {navMeta ? (
               <div className="flex items-start gap-4">
-                <div className="service-page__icon-wrap flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/5 text-foreground/90">
+                <div className="service-page__icon-wrap flex h-12 w-12 shrink-0 items-center justify-center border border-accent/40 bg-void text-accent">
                   <ServiceNavIcon icon={navMeta.icon} className="h-6 w-6" />
                 </div>
                 <div className="min-w-0">
@@ -102,14 +102,14 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
                 {detail.highlights.map((item) => (
                   <li
                     key={item}
-                    className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[0.65rem] font-medium tracking-wide text-foreground/85 uppercase sm:text-xs"
+                    className="border border-accent/30 bg-void px-3 py-1.5 text-[0.65rem] font-medium tracking-wide text-accent uppercase sm:text-xs"
                   >
                     {item}
                   </li>
                 ))}
               </ul>
             ) : null}
-            <dl className="service-page__stats mt-6 grid grid-cols-1 gap-4 border-t border-white/10 pt-5 sm:grid-cols-3 sm:gap-3">
+            <dl className="service-page__stats mt-6 grid grid-cols-1 gap-4 border-t border-accent/20 pt-5 sm:grid-cols-3 sm:gap-3">
               <div>
                 <dt className="text-[0.6rem] tracking-[0.18em] text-foreground/50 uppercase">
                   Delivery
@@ -138,8 +138,8 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
           </aside>
         </header>
 
-        <section className="service-page__overview glass-panel mt-10 rounded-2xl p-5 sm:mt-12 sm:p-7 md:p-8">
-          <h2 className="text-[0.65rem] font-semibold tracking-[0.22em] text-foreground/70 uppercase sm:text-xs">
+        <section className="service-page__overview glass-panel mt-10 p-5 sm:mt-12 sm:p-7 md:p-8">
+          <h2 className="text-[0.65rem] font-semibold tracking-[0.22em] text-accent uppercase sm:text-xs">
             Overview
           </h2>
           <p className="mt-4 max-w-3xl text-sm leading-relaxed text-foreground/88 sm:text-base sm:leading-relaxed">
@@ -148,8 +148,8 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
         </section>
 
         <div className="service-page__panels mt-8 grid gap-6 lg:mt-10 lg:grid-cols-2 lg:gap-8">
-          <section className="service-page__panel glass-panel rounded-2xl p-5 sm:p-6 md:p-7">
-            <h2 className="text-[0.65rem] font-semibold tracking-[0.22em] text-foreground/70 uppercase sm:text-xs">
+          <section className="service-page__panel glass-panel p-5 sm:p-6 md:p-7">
+            <h2 className="text-[0.65rem] font-semibold tracking-[0.22em] text-accent uppercase sm:text-xs">
               What you get
             </h2>
             <p className="mt-3 text-sm text-foreground/75">
@@ -165,8 +165,8 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
             </ul>
           </section>
 
-          <section className="service-page__panel glass-panel rounded-2xl p-5 sm:p-6 md:p-7">
-            <h2 className="text-[0.65rem] font-semibold tracking-[0.22em] text-foreground/70 uppercase sm:text-xs">
+          <section className="service-page__panel glass-panel p-5 sm:p-6 md:p-7">
+            <h2 className="text-[0.65rem] font-semibold tracking-[0.22em] text-accent uppercase sm:text-xs">
               How we work
             </h2>
             <p className="mt-3 text-sm text-foreground/75">
@@ -176,11 +176,11 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
               {detail.processSteps.map((step, i) => (
                 <li key={step.label} className="service-page__timeline-item relative flex gap-4 pb-6 last:pb-0">
                   <div className="flex flex-col items-center">
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 text-[0.65rem] font-semibold tabular-nums text-foreground/90">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center border border-accent/35 bg-void text-[0.65rem] font-semibold tabular-nums text-accent">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     {i < detail.processSteps.length - 1 ? (
-                      <span className="service-page__timeline-line mt-2 w-px flex-1 min-h-[2rem] bg-gradient-to-b from-white/20 to-transparent" />
+                      <span className="service-page__timeline-line mt-2 w-px flex-1 min-h-[2rem] bg-gradient-to-b from-accent/40 to-transparent" />
                     ) : null}
                   </div>
                   <div className="min-w-0 pt-0.5">
@@ -196,7 +196,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
         </div>
 
         <section className="mt-10 sm:mt-12">
-          <h2 className="text-[0.65rem] font-semibold tracking-[0.22em] text-foreground/70 uppercase sm:text-xs">
+          <h2 className="text-[0.65rem] font-semibold tracking-[0.22em] text-accent uppercase sm:text-xs">
             Explore more solutions
           </h2>
           <ul className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
@@ -205,9 +205,9 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
                 <Link
                   href={item.href}
                   data-interactive
-                  className="service-page__related group inline-flex min-h-11 w-full items-center gap-3 rounded-xl border border-white/10 bg-surface/40 px-4 py-3 backdrop-blur-md transition-colors hover:border-white/22 hover:bg-surface/60 sm:w-auto"
+                  className="service-page__related group inline-flex min-h-11 w-full items-center gap-3 border border-accent/25 bg-surface px-4 py-3 transition-colors hover:border-accent/50 hover:bg-accent/5 sm:w-auto"
                 >
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-foreground/85 transition-colors group-hover:border-white/20">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center border border-accent/30 bg-void text-accent transition-colors group-hover:border-accent">
                     <ServiceNavIcon icon={item.icon} className="h-4 w-4" />
                   </span>
                   <span className="min-w-0 text-left">
@@ -224,8 +224,8 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
           </ul>
         </section>
 
-        <div className="service-page__cta mt-10 rounded-2xl border border-white/12 bg-[linear-gradient(135deg,color-mix(in_srgb,var(--surface)_90%,transparent),color-mix(in_srgb,#ffffff_6%,transparent))] px-5 py-8 text-center backdrop-blur-md sm:mt-12 sm:px-8 sm:py-10">
-          <p className="text-[0.65rem] font-medium tracking-[0.28em] text-foreground/70 uppercase sm:text-xs">
+        <div className="service-page__cta mt-10 border border-accent/35 bg-surface px-5 py-8 text-center sm:mt-12 sm:px-8 sm:py-10">
+          <p className="text-[0.65rem] font-medium tracking-[0.28em] text-accent uppercase sm:text-xs">
             Ready to start?
           </p>
           <p className="mx-auto mt-3 max-w-lg text-sm text-foreground/85 sm:text-base">

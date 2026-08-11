@@ -3,9 +3,9 @@ export const SITE_HOST = "quantexai.solutions";
 export const LEGACY_SITE_URL = "https://www.quantexai.info";
 
 export const COMPANY = {
-  name: "Quantex AI Solutions",
+  name: "QUANTEX",
   tagline:
-    "Web and app design engineered to convert — polished interfaces, thoughtful UX, and builds you can ship with confidence.",
+    "Technical SEO, Core Web Vitals, and search visibility—engineered at the source.",
 } as const;
 
 export const CONTACT = {
@@ -71,7 +71,7 @@ export const CONTACT_LINKS = [
     external: false,
   },
   {
-    label: "Book Strategy Call",
+    label: "Book strategy call",
     href: CONTACT.whatsapp,
     external: true,
   },

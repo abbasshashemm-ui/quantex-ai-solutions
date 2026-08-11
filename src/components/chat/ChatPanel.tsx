@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import {
   useEffect,
   useRef,
@@ -84,22 +83,17 @@ export function ChatPanel({ onClose }: ChatPanelProps) {
       id="quantex-chat-panel"
       className="chat-panel glass-panel"
       role="dialog"
-      aria-label="Quantex sales chat"
+      aria-label="QUANTEX sales chat"
       data-lenis-prevent
     >
       <header className="chat-panel__header">
         <div className="chat-panel__title-wrap">
-          <Image
-            src="/quantex-mark-reference.png"
-            alt=""
-            width={20}
-            height={20}
-            className="chat-panel__mark"
-            aria-hidden
-          />
+          <span className="brand-logo-text text-xs" aria-hidden>
+            [Q]
+          </span>
           <div>
-            <p className="chat-panel__title">Quantex Assistant</p>
-            <p className="chat-panel__subtitle">Services &amp; quotes</p>
+            <p className="chat-panel__title">QUANTEX Assistant</p>
+            <p className="chat-panel__subtitle">Audits &amp; quotes</p>
           </div>
         </div>
         <div className="chat-panel__header-actions">

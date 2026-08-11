@@ -38,7 +38,7 @@ export async function generateMetadata({
     keywords: [
       service.nav.label,
       service.nav.tagline,
-      "Quantex AI Solutions",
+      "QUANTEX",
     ],
   });
 }

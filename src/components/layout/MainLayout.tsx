@@ -10,6 +10,8 @@ type MainLayoutProps = {
 export function MainLayout({ children }: MainLayoutProps) {
   return (
     <>
+      <div className="terminal-scanlines" aria-hidden />
+      <div className="terminal-vignette" aria-hidden />
       <Navbar />
       <main
         id="main-content"

@@ -1,7 +1,6 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import Image from "next/image";
 import { useEffect, useState } from "react";
 import {
   CONVERSION_EVENTS,
@@ -100,14 +99,9 @@ export function ChatWidget() {
         aria-controls="quantex-chat-panel"
         aria-label={open ? "Close chat" : "Open chat assistant"}
       >
-        <Image
-          src="/quantex-mark-reference.png"
-          alt=""
-          width={33}
-          height={33}
-          className="chat-widget__mark"
-          aria-hidden
-        />
+        <span className="chat-widget__mark brand-logo-text text-xs" aria-hidden>
+          [Q]
+        </span>
         <span className="chat-widget__label">{open ? "Close" : "Chat"}</span>
       </button>
     </div>

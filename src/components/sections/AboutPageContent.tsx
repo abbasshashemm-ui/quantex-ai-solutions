@@ -70,8 +70,8 @@ export function AboutPageContent() {
             ))}
           </div>
 
-          <div className="about-page__founder glass-panel mt-8 flex flex-col gap-4 rounded-2xl p-5 sm:flex-row sm:items-center sm:gap-6 sm:p-6">
-            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-white/12 bg-white/5 font-mono text-lg font-semibold text-metallic">
+          <div className="about-page__founder glass-panel mt-8 flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:gap-6 sm:p-6">
+            <div className="flex h-14 w-14 shrink-0 items-center justify-center border border-accent/40 bg-void font-mono text-lg font-semibold text-accent">
               AH
             </div>
             <div>
@@ -93,7 +93,7 @@ export function AboutPageContent() {
           {ABOUT_STATS.map((stat) => (
             <div
               key={stat.label}
-              className="about-page__stat glass-panel rounded-2xl px-4 py-5 sm:px-5 sm:py-6"
+              className="about-page__stat glass-panel px-4 py-5 sm:px-5 sm:py-6"
             >
               <p className="text-2xl font-semibold tracking-tight text-metallic-gradient sm:text-3xl">
                 {stat.value}
@@ -120,9 +120,9 @@ export function AboutPageContent() {
             {ABOUT_VALUES.map((item) => (
               <li
                 key={item.index}
-                className="about-page__value glass-panel rounded-2xl p-5 sm:p-6"
+                className="about-page__value glass-panel p-5 sm:p-6"
               >
-                <span className="font-mono text-xs tracking-[0.2em] text-metallic">
+                <span className="font-mono text-xs tracking-[0.2em] text-accent">
                   {item.index}
                 </span>
                 <h3 className="mt-3 text-base font-semibold text-foreground sm:text-lg">
@@ -137,7 +137,7 @@ export function AboutPageContent() {
         </section>
 
         <section
-          className="about-page__services mt-16 border-t border-white/8 pt-16 sm:mt-20 sm:pt-20"
+          className="about-page__services mt-16 border-t border-accent/20 pt-16 sm:mt-20 sm:pt-20"
           aria-labelledby="about-services-heading"
         >
           <PageEyebrow>{ABOUT_CAPABILITIES.eyebrow}</PageEyebrow>
@@ -156,9 +156,9 @@ export function AboutPageContent() {
                 <Link
                   href={`/services/${service.slug}`}
                   data-interactive
-                  className="about-page__service-link group flex h-full gap-4 rounded-2xl border border-white/10 bg-surface/40 p-4 backdrop-blur-md transition-colors hover:border-white/22 hover:bg-surface/60 sm:p-5"
+                  className="about-page__service-link group flex h-full gap-4 border border-accent/25 bg-surface p-4 transition-colors hover:border-accent/50 hover:bg-accent/5 sm:p-5"
                 >
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-foreground/90 transition-colors group-hover:border-white/20">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center border border-accent/30 bg-void text-accent transition-colors group-hover:border-accent">
                     <ServiceNavIcon icon={service.nav.icon} className="h-5 w-5" />
                   </span>
                   <span className="min-w-0">
@@ -175,7 +175,7 @@ export function AboutPageContent() {
           </ul>
         </section>
 
-        <section className="about-page__cta mt-16 rounded-2xl border border-white/12 bg-[linear-gradient(135deg,color-mix(in_srgb,var(--surface)_90%,transparent),color-mix(in_srgb,#ffffff_6%,transparent))] px-5 py-10 text-center backdrop-blur-md sm:mt-20 sm:px-10 sm:py-12">
+        <section className="about-page__cta mt-16 border border-accent/35 bg-surface px-5 py-10 text-center sm:mt-20 sm:px-10 sm:py-12">
           <p className="text-[0.65rem] font-medium tracking-[0.28em] text-foreground/70 uppercase sm:text-xs">
             {ABOUT_CTA.eyebrow}
           </p>

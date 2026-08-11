@@ -5,17 +5,17 @@ export const FOUNDER = {
 } as const;
 
 export const ABOUT_HERO = {
-  eyebrow: "About Quantex",
-  title: "AI, apps, and web—built by engineers who ship.",
-  lead: "Quantex AI Solutions launched in 2024 in Beirut. We help teams turn ideas into live products: custom software, conversion-focused sites, intelligent chatbots, and the automation that ties it all together.",
+  eyebrow: "About QUANTEX",
+  title: "Crawl. Index. Rank.—built by engineers who ship.",
+  lead: "QUANTEX launched in 2024 in Beirut. We engineer technical SEO and search visibility at the source—alongside custom software, conversion-focused sites, intelligent chatbots, and the automation that ties it all together.",
 } as const;
 
 export const ABOUT_STORY = {
   eyebrow: "Background",
   title: "A studio born from building, not pitching.",
   paragraphs: [
-    "Abbas Hachem started Quantex after years of full-stack work across startups and client projects. The pattern was always the same—lots of talk about AI and digital transformation, but brittle chatbots, slow sites, and codebases that were painful to extend after launch.",
-    "Quantex is the opposite of that cycle. We scope in plain language, prototype the risky parts early, and deliver systems your team can run: assistants trained on your content, Next.js sites tuned for speed, internal tools shaped around real workflows, and integrations that remove manual steps instead of adding dashboards nobody opens.",
+    "Abbas Hachem started QUANTEX after years of full-stack work across startups and client projects. The pattern was always the same—lots of talk about growth and visibility, but slow sites, weak crawlability, brittle chatbots, and codebases that were painful to extend after launch.",
+    "QUANTEX is the opposite of that cycle. We scope in plain language, prototype the risky parts early, and deliver systems your team can run: technical SEO engineered at the source, Next.js sites tuned for Core Web Vitals, assistants trained on your content, internal tools shaped around real workflows, and integrations that remove manual steps instead of adding dashboards nobody opens.",
     {
       before:
         "Since 2024 we have partnered with ",

@@ -8,7 +8,7 @@ import { PRIVACY_POLICY } from "@/lib/site/legal/privacy-policy";
 export const metadata: Metadata = createPageMetadata({
   title: "Privacy Policy",
   description:
-    "How Quantex AI Solutions collects and uses personal information from contact forms, email, WhatsApp, and website analytics.",
+    "How QUANTEX collects and uses personal information from contact forms, email, WhatsApp, and website analytics.",
   path: "/privacy",
   noIndex: false,
 });

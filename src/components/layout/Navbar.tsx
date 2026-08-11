@@ -32,17 +32,17 @@ export function Navbar() {
     <header className="site-header fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)]">
       <nav
         aria-label="Primary"
-        className="mx-auto flex max-w-7xl items-center justify-between gap-4 bg-void/40 px-4 py-4 backdrop-blur-xl backdrop-saturate-150 supports-[backdrop-filter]:bg-void/30 sm:px-6 sm:py-5"
+        className="mx-auto flex max-w-7xl items-center justify-between gap-4 border-b border-accent/25 bg-void/95 px-4 py-3 sm:px-6 sm:py-3.5"
       >
         <a
           href="/"
-          className="inline-flex min-h-12 shrink-0 items-center sm:min-h-14"
+          className="inline-flex min-h-11 shrink-0 items-center sm:min-h-12"
           onClick={close}
         >
-          <BrandLogo priority className="h-8 w-auto max-w-[min(200px,46vw)] sm:h-9 md:h-10" />
+          <BrandLogo priority />
         </a>
 
-        <ul className="hidden items-center gap-2 md:flex lg:gap-4">
+        <ul className="hidden items-center gap-1 md:flex lg:gap-2">
           <li>
             <ServicesNavDropdown />
           </li>
@@ -50,7 +50,7 @@ export function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="inline-flex min-h-12 items-center rounded-full px-3 text-sm text-foreground/90 transition-colors hover:bg-white/5 hover:text-foreground sm:px-4 sm:text-base"
+                className="inline-flex min-h-11 items-center px-3 text-xs tracking-[0.12em] text-foreground/85 uppercase transition-colors hover:bg-accent/10 hover:text-accent sm:px-4 sm:text-sm"
               >
                 {link.label}
               </a>
@@ -67,12 +67,12 @@ export function Navbar() {
             data-conversion-location="navbar"
             className="btn-secondary hidden sm:inline-flex sm:px-4 md:px-5"
           >
-            Book Strategy Call
+            Book strategy call
           </a>
 
           <button
             type="button"
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-white/15 text-foreground transition-colors hover:border-white/30 hover:bg-white/5 md:hidden"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center border border-accent/40 text-accent transition-colors hover:border-accent hover:bg-accent/10 md:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -100,14 +100,14 @@ export function Navbar() {
       {open && (
         <div
           id="mobile-nav"
-          className="fixed inset-0 z-40 bg-void/95 backdrop-blur-lg md:hidden"
-          style={{ paddingTop: "calc(5.25rem + env(safe-area-inset-top))" }}
+          className="fixed inset-0 z-40 border-t border-accent/25 bg-void md:hidden"
+          style={{ paddingTop: "calc(4.5rem + env(safe-area-inset-top))" }}
         >
           <ul className="flex flex-col px-4 pb-[env(safe-area-inset-bottom)]">
             <li>
               <a
                 href="/"
-                className="flex min-h-12 items-center border-b border-white/5 text-base text-foreground transition-colors hover:bg-white/5"
+                className="flex min-h-12 items-center border-b border-accent/15 text-sm tracking-[0.1em] text-foreground uppercase transition-colors hover:bg-accent/10 hover:text-accent"
                 onClick={close}
               >
                 Home
@@ -118,7 +118,7 @@ export function Navbar() {
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className="flex min-h-12 items-center border-b border-white/5 text-base text-foreground transition-colors hover:bg-white/5"
+                  className="flex min-h-12 items-center border-b border-accent/15 text-sm tracking-[0.1em] text-foreground uppercase transition-colors hover:bg-accent/10 hover:text-accent"
                   onClick={close}
                 >
                   {link.label}
