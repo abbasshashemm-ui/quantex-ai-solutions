@@ -294,22 +294,26 @@ body {
 
 .hero-crt__frame {
   position: relative;
-  width: min(100%, 80rem);
-  margin-inline: auto;
+  width: 100%;
+  /* Full-bleed width; height follows the 3:2 art, capped to the viewport */
+  height: min(
+    calc(100vw * 2048 / 3072),
+    calc(100dvh - 4.25rem - env(safe-area-inset-top) - 0.35rem)
+  );
+  border-block: 1px solid color-mix(in srgb, var(--accent) 32%, transparent);
+  background: #000;
 }
 
 .hero-crt__media {
-  position: relative;
+  position: absolute;
+  inset: 0;
   z-index: 0;
-  width: 100%;
-  line-height: 0;
   background: #000;
 }
 
 .hero-crt__bg {
-  display: block;
-  width: 100%;
-  height: auto;
+  object-fit: contain !important;
+  object-position: center top;
 }
 
 .hero-crt__veil {
@@ -319,9 +323,9 @@ body {
   background: linear-gradient(
     180deg,
     transparent 0%,
-    transparent 62%,
-    color-mix(in srgb, #000 35%, transparent) 82%,
-    color-mix(in srgb, #000 72%, transparent) 100%
+    transparent 68%,
+    color-mix(in srgb, #000 28%, transparent) 86%,
+    color-mix(in srgb, #000 62%, transparent) 100%
   );
 }
 
@@ -334,8 +338,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  max-width: 36rem;
-  padding: 1rem 1rem calc(1.1rem + env(safe-area-inset-bottom));
+  max-width: 34rem;
+  padding: 0.85rem 1rem calc(0.95rem + env(safe-area-inset-bottom));
   pointer-events: none;
 }
 
@@ -345,21 +349,21 @@ body {
 
 @media (min-width: 640px) {
   .hero-crt__content {
-    padding: 1.25rem 1.35rem 1.5rem;
+    padding: 1rem 1.25rem 1.25rem;
   }
 }
 
 @media (min-width: 960px) {
   .hero-crt__content {
-    padding-left: 1.75rem;
-    padding-bottom: 1.75rem;
+    padding-left: 1.5rem;
+    padding-bottom: 1.35rem;
   }
 }
 
 .hero-crt__content h1 {
   margin: 0;
   color: #fff;
-  font-size: clamp(1.35rem, 3.8vw, 2.35rem);
+  font-size: clamp(1.25rem, 3.4vw, 2.15rem);
   font-weight: 700;
   letter-spacing: 0.02em;
   line-height: 1.05;
@@ -368,24 +372,24 @@ body {
 }
 
 .hero-crt__support {
-  margin: 0.45rem 0 0;
-  max-width: 30rem;
+  margin: 0.4rem 0 0;
+  max-width: 28rem;
   color: color-mix(in srgb, #ffffff 78%, transparent);
-  font-size: 0.78rem;
-  line-height: 1.5;
+  font-size: 0.74rem;
+  line-height: 1.45;
 }
 
 @media (min-width: 640px) {
   .hero-crt__support {
-    font-size: 0.88rem;
+    font-size: 0.84rem;
   }
 }
 
 .hero-crt__ctas {
-  margin-top: 0.85rem;
+  margin-top: 0.75rem;
   display: flex;
   flex-direction: column;
-  gap: 0.45rem;
+  gap: 0.4rem;
 }
 
 @media (min-width: 520px) {
@@ -399,10 +403,10 @@ body {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 2.4rem;
-  padding: 0.4rem 0.75rem;
+  min-height: 2.25rem;
+  padding: 0.35rem 0.7rem;
   border: 1px solid color-mix(in srgb, var(--accent) 55%, transparent);
-  font-size: 0.66rem;
+  font-size: 0.64rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;

@@ -2,9 +2,6 @@ import Image from "next/image";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
 import { CONTACT } from "@/lib/site/contact";
 
-const HERO_WIDTH = 3072;
-const HERO_HEIGHT = 2048;
-
 export function HeroSection() {
   return (
     <section id="home" className="hero-crt" aria-labelledby="hero-heading">
@@ -13,8 +10,7 @@ export function HeroSection() {
           <Image
             src="/hero-quantex-dashboard.png"
             alt=""
-            width={HERO_WIDTH}
-            height={HERO_HEIGHT}
+            fill
             priority
             quality={100}
             unoptimized
