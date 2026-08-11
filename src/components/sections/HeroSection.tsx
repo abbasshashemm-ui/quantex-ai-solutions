@@ -1,8 +1,31 @@
+"use client";
+
 import Image from "next/image";
+import { useEffect, useState } from "react";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
 import { CONTACT } from "@/lib/site/contact";
 
+const LIVE_STATUS = [
+  { stage: "06 GRAPH", status: "RUNNING" },
+  { stage: "05 INDEX", status: "OK" },
+  { stage: "07 ANALYZE", status: "QUEUED" },
+] as const;
+
 export function HeroSection() {
+  const [statusIndex, setStatusIndex] = useState(0);
+  const live = LIVE_STATUS[statusIndex] ?? LIVE_STATUS[0];
+
+  useEffect(() => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduce) return;
+
+    const id = window.setInterval(() => {
+      setStatusIndex((i) => (i + 1) % LIVE_STATUS.length);
+    }, 3200);
+
+    return () => window.clearInterval(id);
+  }, []);
+
   return (
     <section id="home" className="hero-crt" aria-labelledby="hero-heading">
       <div className="hero-crt__frame">
@@ -18,9 +41,21 @@ export function HeroSection() {
             className="hero-crt__bg"
           />
           <div className="hero-crt__veil" />
+          <div className="hero-crt__scan" />
+          <span className="hero-crt__reticle hero-crt__reticle--a" />
+          <span className="hero-crt__reticle hero-crt__reticle--b" />
         </div>
 
         <div className="hero-crt__content">
+          <p className="hero-crt__live" aria-live="polite">
+            <span className="hero-crt__live-dot" />
+            <span className="hero-crt__live-label">LIVE</span>
+            <span className="hero-crt__live-stage">{live.stage}</span>
+            <span className="hero-crt__live-sep">▸</span>
+            <span className="hero-crt__live-status">{live.status}</span>
+            <span className="hero-crt__cursor" />
+          </p>
+
           <h1 id="hero-heading">Crawl. Index. Rank.</h1>
           <p className="hero-crt__support">
             Technical SEO, Core Web Vitals, and search visibility—engineered at
