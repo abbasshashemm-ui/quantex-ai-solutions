@@ -1,6 +1,6 @@
 # Quantex AI Solutions
 
-Marketing site for Quantex AI Solutions — Next.js 16, React 19, Tailwind CSS 4, GSAP, Spline.
+Marketing site for QUANTEX — Next.js 16, React 19, Tailwind CSS 4, GSAP.
 
 ## Environment
 
