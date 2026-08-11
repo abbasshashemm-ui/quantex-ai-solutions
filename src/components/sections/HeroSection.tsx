@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { BrandLogo } from "@/components/layout/BrandLogo";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
 import { CONTACT } from "@/lib/site/contact";
 
@@ -8,21 +7,16 @@ export function HeroSection() {
     <section id="home" className="hero-crt" aria-labelledby="hero-heading">
       <div className="hero-crt__media" aria-hidden>
         <Image
-          src="/hero-crt-dashboard.png"
+          src="/hero-terminal-waves.png"
           alt=""
           fill
           priority
           sizes="100vw"
           className="hero-crt__bg"
         />
-        <div className="hero-crt__veil" />
       </div>
 
       <div className="hero-crt__content">
-        <BrandLogo
-          priority
-          className="hero-crt__logo h-11 w-auto max-w-[min(300px,78vw)] sm:h-14 md:h-16"
-        />
         <h1 id="hero-heading">Crawl. Index. Rank.</h1>
         <p className="hero-crt__support">
           Technical SEO, Core Web Vitals, and search visibility—engineered at
