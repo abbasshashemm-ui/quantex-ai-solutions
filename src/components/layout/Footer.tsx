@@ -15,6 +15,7 @@ export function Footer() {
     <footer
       id="contact"
       className="relative z-20 border-t border-accent/25 bg-void"
+      data-reveal
     >
       <div className="mx-auto max-w-7xl px-4 py-8 pb-[calc(2rem+env(safe-area-inset-bottom))] sm:px-6 sm:py-10">
         <div className="grid grid-cols-2 gap-4 sm:gap-5 md:gap-6 lg:grid-cols-3 lg:gap-8">

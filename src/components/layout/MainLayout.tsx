@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { ChatWidget } from "@/components/chat/ChatWidget";
+import { SiteMotion } from "@/components/providers/SiteMotion";
 import { Footer } from "./Footer";
 import { Navbar } from "./Navbar";
 
@@ -12,13 +13,15 @@ export function MainLayout({ children }: MainLayoutProps) {
     <>
       <div className="terminal-scanlines" aria-hidden />
       <Navbar />
-      <main
-        id="main-content"
-        className="layer-pass-through relative z-10 w-full flex-1"
-      >
-        {children}
-      </main>
-      <Footer />
+      <SiteMotion>
+        <main
+          id="main-content"
+          className="layer-pass-through relative z-10 w-full flex-1"
+        >
+          {children}
+        </main>
+        <Footer />
+      </SiteMotion>
       <ChatWidget />
     </>
   );

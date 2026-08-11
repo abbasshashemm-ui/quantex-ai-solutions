@@ -47,7 +47,10 @@ export function RecentProjectsSection() {
       aria-labelledby="projects-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <header className="projects-section__header flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <header
+          className="projects-section__header flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
+          data-reveal
+        >
           <div className="max-w-2xl">
             <PageEyebrow>Our work</PageEyebrow>
             <h2 id="projects-heading" className="section-heading text-metallic-gradient">

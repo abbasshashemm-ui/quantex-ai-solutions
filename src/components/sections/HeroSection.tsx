@@ -21,7 +21,7 @@ export function HeroSection() {
 
     const id = window.setInterval(() => {
       setStatusIndex((i) => (i + 1) % LIVE_STATUS.length);
-    }, 3200);
+    }, 3600);
 
     return () => window.clearInterval(id);
   }, []);
@@ -42,8 +42,6 @@ export function HeroSection() {
           />
           <div className="hero-crt__veil" />
           <div className="hero-crt__scan" />
-          <span className="hero-crt__reticle hero-crt__reticle--a" />
-          <span className="hero-crt__reticle hero-crt__reticle--b" />
         </div>
 
         <div className="hero-crt__content">

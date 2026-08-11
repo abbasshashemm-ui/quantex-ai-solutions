@@ -55,7 +55,7 @@ export function ServicesSection() {
       aria-labelledby="services-heading"
     >
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
-        <header className="services-section__header mb-8 sm:mb-10">
+        <header className="services-section__header mb-8 sm:mb-10" data-reveal>
           <PageEyebrow>Expertise</PageEyebrow>
           <h2
             id="services-heading"
