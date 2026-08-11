@@ -39,7 +39,10 @@ export function Navbar() {
           className="inline-flex min-h-11 shrink-0 items-center sm:min-h-12"
           onClick={close}
         >
-          <BrandLogo priority />
+          <BrandLogo
+            priority
+            className="h-8 w-auto max-w-[min(200px,46vw)] sm:h-9 md:h-10"
+          />
         </a>
 
         <ul className="hidden items-center gap-1 md:flex lg:gap-2">

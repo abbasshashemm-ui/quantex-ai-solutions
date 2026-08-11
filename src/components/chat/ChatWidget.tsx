@@ -2,6 +2,7 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
+import { BrandLogo } from "@/components/layout/BrandLogo";
 import {
   CONVERSION_EVENTS,
   trackConversion,
@@ -99,9 +100,10 @@ export function ChatWidget() {
         aria-controls="quantex-chat-panel"
         aria-label={open ? "Close chat" : "Open chat assistant"}
       >
-        <span className="chat-widget__mark brand-logo-text text-xs" aria-hidden>
-          [Q]
-        </span>
+        <BrandLogo
+          variant="mark"
+          className="chat-widget__mark h-7 w-auto"
+        />
         <span className="chat-widget__label">{open ? "Close" : "Chat"}</span>
       </button>
     </div>

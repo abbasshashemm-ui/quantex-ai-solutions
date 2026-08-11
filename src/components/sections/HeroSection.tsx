@@ -1,3 +1,4 @@
+import { BrandLogo } from "@/components/layout/BrandLogo";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
 import { CONTACT } from "@/lib/site/contact";
 import {
@@ -108,7 +109,10 @@ export function HeroSection() {
               <span className="hero-crt__reticle hero-crt__reticle--c" aria-hidden />
 
               <div className="hero-crt__copy">
-                <p className="hero-crt__brand">QUANTEX</p>
+                <BrandLogo
+                  priority
+                  className="hero-crt__logo h-10 w-auto max-w-[min(280px,72vw)] sm:h-12 md:h-14"
+                />
                 <h1 id="hero-heading">Crawl. Index. Rank.</h1>
                 <p className="hero-crt__support">
                   Technical SEO, Core Web Vitals, and search visibility—engineered

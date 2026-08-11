@@ -660,13 +660,10 @@ body {
   pointer-events: auto;
 }
 
-.hero-crt__brand {
-  margin: 0;
-  color: var(--accent);
-  font-size: clamp(1.35rem, 4.5vw, 2.35rem);
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-shadow: 0 0 16px var(--terminal-glow);
+.hero-crt__logo {
+  display: block;
+  width: auto;
+  filter: drop-shadow(0 0 14px color-mix(in srgb, #ffffff 22%, transparent));
 }
 
 .hero-crt__copy h1 {

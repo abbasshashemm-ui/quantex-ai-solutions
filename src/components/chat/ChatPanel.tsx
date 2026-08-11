@@ -8,6 +8,7 @@ import {
   type FormEvent,
   type KeyboardEvent,
 } from "react";
+import { BrandLogo } from "@/components/layout/BrandLogo";
 import {
   CONVERSION_EVENTS,
   trackConversion,
@@ -88,9 +89,7 @@ export function ChatPanel({ onClose }: ChatPanelProps) {
     >
       <header className="chat-panel__header">
         <div className="chat-panel__title-wrap">
-          <span className="brand-logo-text text-xs" aria-hidden>
-            [Q]
-          </span>
+          <BrandLogo variant="mark" className="h-5 w-auto" />
           <div>
             <p className="chat-panel__title">QUANTEX Assistant</p>
             <p className="chat-panel__subtitle">Audits &amp; quotes</p>

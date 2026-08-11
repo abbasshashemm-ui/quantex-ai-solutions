@@ -19,7 +19,7 @@ export function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-8 pb-[calc(2rem+env(safe-area-inset-bottom))] sm:px-6 sm:py-10">
         <div className="grid grid-cols-2 gap-4 sm:gap-5 md:gap-6 lg:grid-cols-3 lg:gap-8">
           <div className="col-span-2 lg:col-span-1">
-            <BrandLogo className="text-sm" />
+          <BrandLogo className="h-5 w-auto max-w-[10rem] sm:h-6" />
             <p className="mt-3 max-w-sm text-xs leading-relaxed text-foreground/75 sm:text-sm">
               {COMPANY.tagline}
             </p>
