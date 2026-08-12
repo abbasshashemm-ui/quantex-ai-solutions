@@ -8,13 +8,13 @@ import { SITE } from "@/lib/seo/site";
 export const metadata = createPageMetadata({
   title: SITE.name,
   description:
-    "Crawl. Index. Rank. QUANTEX engineers technical SEO, Core Web Vitals, and search visibility—plus software, sites, and automation built at the source.",
+    "Crawl. Index. Rank. Quantex AI Solutions engineers technical SEO, Core Web Vitals, and search visibility—plus software, sites, and automation built at the source.",
   path: "/",
   keywords: [
     "technical SEO Lebanon",
     "Core Web Vitals",
     "search visibility audit",
-    "QUANTEX",
+    "Quantex AI Solutions",
   ],
 });
 

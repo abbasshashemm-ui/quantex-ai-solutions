@@ -1,3 +1,5 @@
+import { CONTACT } from "@/lib/site/contact";
+
 export type FaqItem = {
   question: string;
   answer: string;
@@ -5,12 +7,12 @@ export type FaqItem = {
 
 export const SITE_FAQ: FaqItem[] = [
   {
-    question: "What does QUANTEX do?",
+    question: "What does Quantex AI Solutions do?",
     answer:
-      "QUANTEX is a Beirut-based studio founded in 2024. We engineer technical SEO, Core Web Vitals, and search visibility at the source—alongside custom software, high-converting websites, AI chatbots, business process automation, and system architecture for teams in Lebanon and internationally.",
+      "Quantex AI Solutions is a Beirut-based studio founded in 2024. We engineer technical SEO, Core Web Vitals, and search visibility at the source—alongside custom software, high-converting websites, AI chatbots, business process automation, and system architecture for teams in Lebanon and internationally.",
   },
   {
-    question: "Who founded QUANTEX?",
+    question: "Who founded Quantex?",
     answer:
       "The company was founded in 2024 by Abbas Hachem, a full-stack developer. Clients work directly with engineering throughout discovery, build, and launch.",
   },
@@ -25,14 +27,14 @@ export const SITE_FAQ: FaqItem[] = [
       "Quantex has partnered with more than ten businesses on projects ranging from AI assistants and marketing sites to bespoke operational applications.",
   },
   {
-    question: "How do I contact QUANTEX?",
+    question: "How do I contact Quantex AI Solutions?",
     answer:
-      "Visit the contact page at quantexai.solutions/contact, email hello@quantexai.solutions, or message the team on WhatsApp. Typical first response is within 24 hours.",
+      `Visit the contact page at quantexai.solutions/contact, email ${CONTACT.email}, or message the team on WhatsApp. Typical first response is within 24 hours.`,
   },
   {
-    question: "Where is QUANTEX based?",
+    question: "Where is Quantex based?",
     answer:
-      "QUANTEX is based in Beirut, Lebanon, and works with clients locally and remotely across the Middle East and worldwide.",
+      "Quantex AI Solutions is based in Beirut, Lebanon, and works with clients locally and remotely across the Middle East and worldwide.",
   },
   {
     question: "Does Quantex build AI chatbots for WhatsApp?",

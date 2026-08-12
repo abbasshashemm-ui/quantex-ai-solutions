@@ -11,6 +11,14 @@ const ServicesSection = dynamic(
   { ssr: false },
 );
 
+const ProcessSection = dynamic(
+  () =>
+    import("@/components/sections/ProcessSection").then((module) => ({
+      default: module.ProcessSection,
+    })),
+  { ssr: false },
+);
+
 const RecentProjectsSection = dynamic(
   () =>
     import("@/components/sections/RecentProjectsSection").then((module) => ({
@@ -24,6 +32,7 @@ export function HomePage() {
     <>
       <HeroSection />
       <ServicesSection />
+      <ProcessSection />
       <RecentProjectsSection />
     </>
   );

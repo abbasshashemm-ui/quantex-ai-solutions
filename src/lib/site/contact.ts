@@ -3,13 +3,13 @@ export const SITE_HOST = "quantexai.solutions";
 export const LEGACY_SITE_URL = "https://www.quantexai.info";
 
 export const COMPANY = {
-  name: "QUANTEX",
+  name: "Quantex AI Solutions",
   tagline:
     "Technical SEO, Core Web Vitals, and search visibility—engineered at the source.",
 } as const;
 
 export const CONTACT = {
-  email: "hello@quantexai.solutions",
+  email: "abbas@quantexai.solutions",
   whatsapp: "https://wa.me/9613642102",
   phoneDisplay: "+961 3 642 102",
   phoneTel: "+9613642102",
@@ -60,6 +60,11 @@ export const CONTACT_CHANNELS = [
 ] as const;
 
 export const CONTACT_LINKS = [
+  {
+    label: CONTACT.email,
+    href: `mailto:${CONTACT.email}`,
+    external: false,
+  },
   {
     label: "Chat on WhatsApp",
     href: CONTACT.whatsapp,

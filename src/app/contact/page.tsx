@@ -8,9 +8,9 @@ import { CONTACT } from "@/lib/site/contact";
 export const metadata: Metadata = createPageMetadata({
   title: "Contact",
   description:
-    `Contact QUANTEX about visibility audits, technical SEO, sites, software, and automation. Email ${CONTACT.email} or message on WhatsApp—we respond within 24 hours.`,
+    `Contact Quantex AI Solutions about visibility audits, technical SEO, sites, software, and automation. Email ${CONTACT.email} or message on WhatsApp—we respond within 24 hours.`,
   path: "/contact",
-  keywords: ["contact QUANTEX", "visibility audit", "technical SEO Beirut"],
+  keywords: ["contact Quantex", "visibility audit", "technical SEO Beirut"],
 });
 
 export default function ContactPage() {

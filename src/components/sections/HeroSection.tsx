@@ -31,12 +31,11 @@ export function HeroSection() {
       <div className="hero-crt__frame">
         <div className="hero-crt__media" aria-hidden>
           <Image
-            src="/hero-quantex-dashboard.png"
+            src="/hero-quantex-dashboard.webp"
             alt=""
             fill
             priority
-            quality={100}
-            unoptimized
+            quality={80}
             sizes="100vw"
             className="hero-crt__bg"
           />

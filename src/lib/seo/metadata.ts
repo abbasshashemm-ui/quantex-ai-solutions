@@ -32,7 +32,8 @@ export function createPageMetadata({
     ...(path === "/" ? {} : { title }),
     description,
     keywords: [
-      "QUANTEX",
+      "Quantex",
+      "Quantex AI Solutions",
       "technical SEO",
       "Core Web Vitals",
       "search visibility",
@@ -86,7 +87,8 @@ export const rootMetadata: Metadata = {
   },
   description: SITE.description,
   keywords: [
-    "QUANTEX",
+    "Quantex",
+    "Quantex AI Solutions",
     "technical SEO",
     "Core Web Vitals",
     "search visibility",
