@@ -757,6 +757,7 @@ body {
 @media (min-width: 960px) {
   .hero-chat {
     min-height: 0;
+    height: 100%;
     border-top: 0;
     border-left: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
     box-shadow: inset 1px 0 0 color-mix(in srgb, var(--accent) 12%, transparent);
@@ -775,7 +776,7 @@ body {
 
 @media (min-width: 960px) {
   .hero-chat .chat-panel {
-    min-height: 0;
+    min-height: 100%;
   }
 }
 
@@ -1163,6 +1164,10 @@ body {
   gap: 0.75rem;
   pointer-events: none;
   touch-action: manipulation;
+}
+
+body:has(#home) .chat-widget {
+  display: none !important;
 }
 
 .chat-widget > * {
