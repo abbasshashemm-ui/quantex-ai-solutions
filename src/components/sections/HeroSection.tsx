@@ -2,7 +2,7 @@ import { HeroChat } from "@/components/chat/HeroChat";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
 import { CONTACT } from "@/lib/site/contact";
 import {
-  ASCII_LANDSCAPE,
+  ASCII_GRAPH,
   CRAWL_FRONTIER,
   CRAWL_STATS,
   HEX_DUMP,
@@ -125,7 +125,7 @@ export function HeroSection() {
             </div>
 
             <div className="ascii-landscape-wrap" aria-hidden>
-              <pre className="ascii-landscape">{ASCII_LANDSCAPE}</pre>
+              <pre className="ascii-landscape">{ASCII_GRAPH}</pre>
               <span className="ascii-reticle ascii-reticle--a" />
               <span className="ascii-reticle ascii-reticle--b" />
             </div>

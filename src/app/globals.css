@@ -632,14 +632,14 @@ body {
 
 .ascii-landscape {
   margin: 0;
-  padding: 0.5rem;
-  color: color-mix(in srgb, var(--foreground) 72%, transparent);
-  font-size: clamp(0.38rem, 1.1vw, 0.62rem);
-  line-height: 1.1;
+  padding: 0.55rem 0.65rem;
+  color: color-mix(in srgb, var(--accent) 78%, var(--foreground));
+  font-size: clamp(0.48rem, 1.15vw, 0.72rem);
+  line-height: 1.2;
   white-space: pre;
   overflow: hidden;
   animation: landscape-drift 18s linear infinite;
-  text-shadow: 0 0 6px color-mix(in srgb, #ffffff 12%, transparent);
+  text-shadow: 0 0 8px var(--terminal-glow);
 }
 
 @keyframes landscape-drift {
@@ -688,13 +688,13 @@ body {
 }
 
 .ascii-reticle--a {
-  top: 28%;
-  left: 42%;
+  top: 22%;
+  left: 18%;
 }
 
 .ascii-reticle--b {
-  top: 52%;
-  left: 68%;
+  top: 62%;
+  left: 48%;
   animation-delay: 0.8s;
 }
 
