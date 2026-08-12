@@ -1,7 +1,7 @@
 import type { Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Geist } from "next/font/google";
+import { IBM_Plex_Mono } from "next/font/google";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -9,9 +9,10 @@ import { buildGlobalSchemas } from "@/lib/seo/json-ld";
 import { rootMetadata } from "@/lib/seo/metadata";
 import "./globals.css";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
+const terminalMono = IBM_Plex_Mono({
+  variable: "--font-terminal",
   subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
@@ -19,7 +20,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#030303",
+  themeColor: "#000000",
 };
 
 export const metadata = rootMetadata;
@@ -33,15 +34,9 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${geistSans.variable} dark h-full antialiased`}
+      className={`${terminalMono.variable} dark h-full antialiased`}
     >
       <head>
-        <link rel="dns-prefetch" href="https://prod.spline.design" />
-        <link
-          rel="preconnect"
-          href="https://prod.spline.design"
-          crossOrigin="anonymous"
-        />
         <link rel="llms-txt" href="/llms.txt" />
       </head>
       <body

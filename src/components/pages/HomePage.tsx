@@ -2,12 +2,19 @@
 
 import dynamic from "next/dynamic";
 import { HeroSection } from "@/components/sections/HeroSection";
-import { LazyViewportScene } from "@/components/three/LazyViewportScene";
 
 const ServicesSection = dynamic(
   () =>
     import("@/components/sections/ServicesSection").then((module) => ({
       default: module.ServicesSection,
+    })),
+  { ssr: false },
+);
+
+const ProcessSection = dynamic(
+  () =>
+    import("@/components/sections/ProcessSection").then((module) => ({
+      default: module.ProcessSection,
     })),
   { ssr: false },
 );
@@ -23,9 +30,9 @@ const RecentProjectsSection = dynamic(
 export function HomePage() {
   return (
     <>
-      <LazyViewportScene />
       <HeroSection />
       <ServicesSection />
+      <ProcessSection />
       <RecentProjectsSection />
     </>
   );

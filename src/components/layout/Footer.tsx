@@ -3,7 +3,6 @@ import {
   COMPANY,
   CONTACT,
   CONTACT_LINKS,
-  FOOTER_EXTRA,
   FOOTER_LEGAL,
   FOOTER_NAV,
 } from "@/lib/site/contact";
@@ -14,23 +13,24 @@ export function Footer() {
   return (
     <footer
       id="contact"
-      className="relative z-20 border-t border-white/5 bg-void/40 backdrop-blur-xl backdrop-saturate-150 supports-[backdrop-filter]:bg-void/30"
+      className="relative z-20 border-t border-accent/25 bg-void"
+      data-reveal
     >
       <div className="mx-auto max-w-7xl px-4 py-8 pb-[calc(2rem+env(safe-area-inset-bottom))] sm:px-6 sm:py-10">
         <div className="grid grid-cols-2 gap-4 sm:gap-5 md:gap-6 lg:grid-cols-3 lg:gap-8">
           <div className="col-span-2 lg:col-span-1">
-            <BrandLogo className="h-5 w-auto max-w-[10rem] sm:h-6" />
-            <p className="mt-2 max-w-sm text-xs leading-snug text-foreground/90 sm:text-sm sm:leading-relaxed">
+          <BrandLogo className="h-5 w-auto max-w-[10rem] sm:h-6" />
+            <p className="mt-3 max-w-sm text-xs leading-relaxed text-foreground/75 sm:text-sm">
               {COMPANY.tagline}
             </p>
-            <ul className="mt-4 flex flex-wrap items-center gap-3">
+            <ul className="mt-4 flex flex-wrap items-center gap-2">
               <li>
                 <a
                   href={CONTACT.instagram}
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram"
-                  className="footer-social glass-panel inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-surface-elevated/70 text-foreground/85 transition-colors hover:text-foreground"
+                  className="footer-social inline-flex h-11 w-11 items-center justify-center border border-accent/30 text-accent transition-colors hover:bg-accent/10"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -43,7 +43,7 @@ export function Footer() {
                       y="4"
                       width="16"
                       height="16"
-                      rx="4"
+                      rx="0"
                       stroke="currentColor"
                       strokeWidth="1.6"
                     />
@@ -64,7 +64,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
-                  className="footer-social glass-panel inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-surface-elevated/70 text-foreground/85 transition-colors hover:text-foreground"
+                  className="footer-social inline-flex h-11 w-11 items-center justify-center border border-accent/30 text-accent transition-colors hover:bg-accent/10"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -88,7 +88,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="WhatsApp"
-                  className="footer-social glass-panel inline-flex h-11 w-11 items-center justify-center rounded-xl border border-white/10 bg-surface-elevated/70 text-foreground/85 transition-colors hover:text-foreground"
+                  className="footer-social inline-flex h-11 w-11 items-center justify-center border border-accent/30 text-accent transition-colors hover:bg-accent/10"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -114,8 +114,8 @@ export function Footer() {
           </div>
 
           <div>
-            <h2 className="text-[0.65rem] font-medium tracking-[0.2em] text-foreground uppercase sm:text-xs sm:tracking-[0.25em]">
-              Contact
+            <h2 className="text-[0.65rem] font-semibold tracking-[0.2em] text-accent uppercase sm:text-xs sm:tracking-[0.25em]">
+              :: Contact
             </h2>
             <ul className="mt-2 space-y-0.5 text-xs sm:text-sm">
               {CONTACT_LINKS.map((item) => (
@@ -125,7 +125,7 @@ export function Footer() {
                     {...(item.external
                       ? { target: "_blank", rel: "noopener noreferrer" }
                       : {})}
-                    className="inline-flex min-h-11 items-center py-1 text-foreground/90 transition-colors hover:text-foreground"
+                    className="inline-flex min-h-11 items-center py-1 text-foreground/85 transition-colors hover:text-accent"
                   >
                     {item.label}
                   </a>
@@ -135,27 +135,15 @@ export function Footer() {
           </div>
 
           <div>
-            <h2 className="text-[0.65rem] font-medium tracking-[0.2em] text-foreground uppercase sm:text-xs sm:tracking-[0.25em]">
-              Navigate
+            <h2 className="text-[0.65rem] font-semibold tracking-[0.2em] text-accent uppercase sm:text-xs sm:tracking-[0.25em]">
+              :: Navigate
             </h2>
             <ul className="mt-2 space-y-0.5 text-xs sm:text-sm">
               {FOOTER_NAV.map((item) => (
                 <li key={item.href}>
                   <a
                     href={item.href}
-                    className="inline-flex min-h-11 items-center py-1 text-foreground/90 transition-colors hover:text-foreground"
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-              {FOOTER_EXTRA.map((item) => (
-                <li key={item.href}>
-                  <a
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex min-h-11 items-center py-1 text-foreground/90 transition-colors hover:text-foreground"
+                    className="inline-flex min-h-11 items-center py-1 text-foreground/85 transition-colors hover:text-accent"
                   >
                     {item.label}
                   </a>
@@ -165,14 +153,16 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-6 flex flex-col gap-3 border-t border-white/5 pt-4 text-[0.65rem] text-foreground/80 sm:mt-8 sm:flex-row sm:items-center sm:justify-between sm:pt-5 sm:text-xs">
-          <p>&copy; {year} {COMPANY.name}</p>
+        <div className="mt-6 flex flex-col gap-3 border-t border-accent/20 pt-4 text-[0.65rem] text-foreground/70 sm:mt-8 sm:flex-row sm:items-center sm:justify-between sm:pt-5 sm:text-xs">
+          <p>
+            &copy; {year} {COMPANY.name} // ALL SYSTEMS NOMINAL
+          </p>
           <ul className="flex flex-wrap items-center gap-x-4 gap-y-1">
             {FOOTER_LEGAL.map((item) => (
               <li key={item.href}>
                 <a
                   href={item.href}
-                  className="transition-colors hover:text-foreground"
+                  className="transition-colors hover:text-accent"
                 >
                   {item.label}
                 </a>
@@ -180,7 +170,7 @@ export function Footer() {
             ))}
           </ul>
           <p className="tracking-wide sm:text-right">
-            We don&apos;t sell code. We sell efficiency.
+            Web. Chatbots. Ship.
           </p>
         </div>
       </div>

@@ -81,12 +81,12 @@ export function ContactSection() {
         <header className="contact-page__header mx-auto mt-8 max-w-3xl text-center sm:mt-10">
           <PageEyebrow align="center">Contact</PageEyebrow>
           <h1 className="section-heading mt-4 text-foreground lg:text-5xl">
-            Let&apos;s talk about your{" "}
-            <span className="text-metallic-gradient">project.</span>
+            Open a channel.{" "}
+            <span className="text-metallic-gradient">Audit. Build. Rank.</span>
           </h1>
           <p className="mt-4 text-sm leading-relaxed text-foreground/80 sm:text-base">
-            Whether you need a brand, a website, custom software, or all
-            three—we&apos;d love to hear what you&apos;re working on.
+            Visibility audits, technical SEO, sites, software, or
+            automation—send the brief and we&apos;ll route it.
           </p>
         </header>
 
@@ -96,7 +96,7 @@ export function ContactSection() {
               {CONTACT_CHANNELS.map((channel) => {
                 const content = (
                   <>
-                    <span className="contact-channel__icon flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-white/12 bg-void/80">
+                    <span className="contact-channel__icon flex h-10 w-10 shrink-0 items-center justify-center border border-accent/35 bg-void text-accent">
                       <ContactIcon id={channel.id} />
                     </span>
                     <span className="min-w-0">
@@ -119,7 +119,7 @@ export function ContactSection() {
                           ? { target: "_blank", rel: "noopener noreferrer" }
                           : {})}
                         data-interactive
-                        className="contact-channel flex min-h-11 gap-4 rounded-lg px-1 transition-colors hover:bg-white/5 sm:px-2"
+                        className="contact-channel flex min-h-11 gap-4 px-1 transition-colors hover:bg-accent/10 sm:px-2"
                       >
                         {content}
                       </a>
@@ -131,10 +131,10 @@ export function ContactSection() {
               })}
             </ul>
 
-            <div className="glass-panel rounded-xl p-5">
+            <div className="glass-panel p-5">
               <div className="flex gap-3">
                 <span
-                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/10 text-sm text-foreground"
+                  className="flex h-8 w-8 shrink-0 items-center justify-center border border-accent/40 bg-void text-sm text-accent"
                   aria-hidden
                 >
                   ✓

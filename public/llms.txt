@@ -1,13 +1,13 @@
 # Quantex AI Solutions
 
-> Beirut-based studio (founded 2024) building custom software, AI chatbots, high-converting websites, automation, and technical SEO.
+> Beirut-based studio (founded 2024). Crawl. Index. Rank.—technical SEO, Core Web Vitals, and search visibility engineered at the source, plus software, sites, and automation.
 
 ## Company
 
 - Name: Quantex AI Solutions
 - Founder: Abbas Hachem (Full Stack Developer)
 - Location: Beirut, Lebanon
-- Email: hello@quantexai.solutions
+- Email: abbas@quantexai.solutions
 - WhatsApp: +961 3 642 102
 - Clients: 10+ businesses served
 
@@ -30,8 +30,8 @@
 
 ## What we do
 
-Quantex designs and ships production software—not demos. Work includes Next.js marketing sites, bespoke internal apps, AI assistants trained on client docs (WhatsApp and web), workflow automation, cloud architecture, and technical SEO.
+Quantex AI Solutions engineers technical SEO and search visibility at the source, and ships production software—Next.js marketing sites, bespoke internal apps, AI assistants trained on client docs (WhatsApp and web), workflow automation, and cloud architecture.
 
 ## Contact
 
-Preferred contact: /contact or hello@quantexai.solutions. Typical response within 24 hours.
+Preferred contact: /contact or abbas@quantexai.solutions. Typical response within 24 hours.

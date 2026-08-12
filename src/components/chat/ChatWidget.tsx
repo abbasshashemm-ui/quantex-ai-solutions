@@ -1,8 +1,9 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import Image from "next/image";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
+import { BrandLogo } from "@/components/layout/BrandLogo";
 import {
   CONVERSION_EVENTS,
   trackConversion,
@@ -14,8 +15,10 @@ const ChatPanel = dynamic(
 );
 
 export function ChatWidget() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const hideOnHome = pathname === "/";
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -86,6 +89,8 @@ export function ChatWidget() {
     });
   }
 
+  if (hideOnHome) return null;
+
   return (
     <div
       className={`chat-widget ${open ? "chat-widget--open" : ""} ${reducedMotion ? "chat-widget--reduced-motion" : ""}`}
@@ -100,13 +105,9 @@ export function ChatWidget() {
         aria-controls="quantex-chat-panel"
         aria-label={open ? "Close chat" : "Open chat assistant"}
       >
-        <Image
-          src="/quantex-mark-reference.png"
-          alt=""
-          width={33}
-          height={33}
-          className="chat-widget__mark"
-          aria-hidden
+        <BrandLogo
+          variant="mark"
+          className="chat-widget__mark h-7 w-auto"
         />
         <span className="chat-widget__label">{open ? "Close" : "Chat"}</span>
       </button>

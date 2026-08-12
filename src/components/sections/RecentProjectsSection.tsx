@@ -43,19 +43,22 @@ export function RecentProjectsSection() {
     <section
       id="work"
       ref={sectionRef}
-      className="projects-section relative border-t border-white/5 py-20 sm:py-24 md:py-28"
+      className="projects-section relative border-t border-accent/20 py-20 sm:py-24 md:py-28"
       aria-labelledby="projects-heading"
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <header className="projects-section__header flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <header
+          className="projects-section__header flex flex-col gap-6 md:flex-row md:items-end md:justify-between"
+          data-reveal
+        >
           <div className="max-w-2xl">
             <PageEyebrow>Our work</PageEyebrow>
             <h2 id="projects-heading" className="section-heading text-metallic-gradient">
-              Recent projects
+              Deployed nodes
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-foreground/80 sm:text-base">
-              Real client work—portfolios, custom operations software, and
-              industrial brands we have shipped end to end.
+              Live client systems—sites, operations software, and brands shipped
+              end to end.
             </p>
           </div>
 

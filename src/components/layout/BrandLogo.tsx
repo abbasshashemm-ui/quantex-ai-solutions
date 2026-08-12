@@ -31,10 +31,10 @@ export function BrandLogo({
   return (
     <Image
       src={FULL_LOGO}
-      alt="Quantex AI Solutions"
+      alt="QUANTEX"
       width={360}
       height={72}
-      sizes="(max-width: 768px) 180px, 220px"
+      sizes="(max-width: 768px) 180px, 240px"
       priority={priority}
       className={className ?? "h-8 w-auto max-w-[min(220px,50vw)]"}
     />

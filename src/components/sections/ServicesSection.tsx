@@ -55,17 +55,17 @@ export function ServicesSection() {
       aria-labelledby="services-heading"
     >
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
-        <header className="services-section__header mb-8 sm:mb-10">
+        <header className="services-section__header mb-8 sm:mb-10" data-reveal>
           <PageEyebrow>Expertise</PageEyebrow>
           <h2
             id="services-heading"
             className="section-heading mt-3 max-w-2xl text-metallic-gradient"
           >
-            Core services engineered for impact
+            Modules engineered at the source
           </h2>
           <p className="mt-3 max-w-xl text-sm leading-relaxed text-foreground/75 sm:text-base">
-            Strategy, build, and launch—each engagement scoped for measurable
-            outcomes.
+            Crawl, index, ship—each engagement scoped for measurable search and
+            product outcomes.
           </p>
         </header>
 
