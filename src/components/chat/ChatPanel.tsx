@@ -19,7 +19,7 @@ import { ChatMessage } from "./ChatMessage";
 import { useSalesChat } from "./useSalesChat";
 
 const QUICK_REPLIES = [
-  { label: "What services do you offer?", send: true },
+  { label: "Build a website", send: true },
   { label: "AI chatbots", send: true },
   { label: "Get a quote", send: false },
 ] as const;
@@ -110,7 +110,7 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
               {isTerminal ? "AI ASSISTANT" : "QUANTEX Assistant"}
             </p>
             <p className="chat-panel__subtitle">
-              {isTerminal ? "Ask about audits, SEO & quotes" : "Audits & quotes"}
+              {isTerminal ? "Websites, AI chatbots & quotes" : "Audits & quotes"}
             </p>
           </div>
         </div>
@@ -137,8 +137,8 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
 
       {isTerminal ? (
         <p className="chat-panel__purpose">
-          Talk to our AI sales bot—get clarity on crawl/index issues, services,
-          timelines, and how to start.
+          Talk to our AI sales bot—ask about websites, AI chatbots, timelines,
+          and how we ship.
         </p>
       ) : null}
 
@@ -196,7 +196,7 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
           onKeyDown={handleKeyDown}
           placeholder={
             isTerminal
-              ? "Ask the AI about audits, SEO, or pricing…"
+              ? "Ask about websites, chatbots, or pricing…"
               : "Ask about services or timelines…"
           }
           rows={isTerminal ? 1 : 2}

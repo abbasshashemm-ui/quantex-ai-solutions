@@ -3,8 +3,8 @@ import { CONVERSION_EVENTS } from "@/lib/analytics/events";
 import { CONTACT } from "@/lib/site/contact";
 import {
   ASCII_GRAPH,
-  CRAWL_FRONTIER,
-  CRAWL_STATS,
+  BUILD_FRONTIER,
+  BUILD_STATS,
   HEX_DUMP,
   NODE_ROWS,
   PIPELINE_STAGES,
@@ -30,9 +30,9 @@ export function HeroSection() {
       <div className="hero-terminal__frame">
         <div className="hero-terminal__chrome">
           <p className="hero-terminal__prompt hero-blink">
-            root@quantex:/crawl#{" "}
+            root@quantex:/build#{" "}
             <span className="hero-terminal__prompt-args">
-              ./index --depth=∞ --threads=256 --no-redirects --raw
+              ./ship --stack=next --bot=live --handoff=human
             </span>
           </p>
           <p className="hero-terminal__ruler" aria-hidden>
@@ -43,8 +43,8 @@ export function HeroSection() {
         <div className="hero-terminal__body">
           <aside className="hero-terminal__sidebar" aria-hidden>
             <div>
-              <p className="hero-panel__title">CRAWL::FRONTIER</p>
-              {CRAWL_FRONTIER.map((row) => (
+              <p className="hero-panel__title">BUILD::STACK</p>
+              {BUILD_FRONTIER.map((row) => (
                 <div key={row.label} className="hero-panel__row">
                   <span>{row.label}</span>
                   <strong>{row.value}</strong>
@@ -53,8 +53,8 @@ export function HeroSection() {
             </div>
 
             <div>
-              <p className="hero-panel__title">CRAWL::STATS</p>
-              {CRAWL_STATS.map((stat) => (
+              <p className="hero-panel__title">SHIP::HEALTH</p>
+              {BUILD_STATS.map((stat) => (
                 <ProgressBar
                   key={stat.label}
                   label={stat.label}
@@ -95,10 +95,10 @@ export function HeroSection() {
             <p className="sr-only">QUANTEX</p>
 
             <div className="hero-copy">
-              <h1 id="hero-heading">Crawl. Index. Rank.</h1>
+              <h1 id="hero-heading">Web. Chatbots. Ship.</h1>
               <p>
-                Technical SEO, Core Web Vitals, and search visibility—engineered
-                at the source.
+                High-converting websites and on-brand AI chatbots—built to
+                perform, convert, and hand off to humans when it matters.
               </p>
               <div className="hero-ctas">
                 <a
@@ -108,7 +108,7 @@ export function HeroSection() {
                   data-conversion-location="hero"
                   className="btn-primary"
                 >
-                  Run a visibility audit
+                  Start a web or bot project
                 </a>
                 <a
                   href={CONTACT.whatsapp}
@@ -138,10 +138,10 @@ export function HeroSection() {
           <table>
             <thead>
               <tr>
-                <th>NODE</th>
-                <th>DEGREE</th>
-                <th>INLINKS</th>
-                <th>FIRST_SEEN</th>
+                <th>MODULE</th>
+                <th>STACK</th>
+                <th>FOCUS</th>
+                <th>SURFACE</th>
                 <th>STATUS</th>
               </tr>
             </thead>

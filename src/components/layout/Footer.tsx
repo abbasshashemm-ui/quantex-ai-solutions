@@ -170,7 +170,7 @@ export function Footer() {
             ))}
           </ul>
           <p className="tracking-wide sm:text-right">
-            Crawl. Index. Rank.
+            Web. Chatbots. Ship.
           </p>
         </div>
       </div>
