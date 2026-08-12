@@ -408,8 +408,14 @@ body {
 
 @media (min-width: 960px) {
   .hero-terminal__body {
-    grid-template-columns: minmax(13rem, 16rem) minmax(0, 1fr) minmax(18rem, 23rem);
+    grid-template-columns: minmax(11rem, 14rem) minmax(0, 1fr) minmax(24rem, 32rem);
     grid-template-areas: "sidebar main chat";
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-terminal__body {
+    grid-template-columns: minmax(12rem, 15rem) minmax(0, 1fr) minmax(28rem, 36rem);
   }
 }
 
@@ -749,9 +755,9 @@ body {
 .hero-chat {
   grid-area: chat;
   display: flex;
-  min-height: 22rem;
-  border-top: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
-  background: var(--void);
+  min-height: 26rem;
+  border-top: 1px solid color-mix(in srgb, var(--accent) 35%, transparent);
+  background: color-mix(in srgb, var(--surface-elevated) 92%, transparent);
 }
 
 @media (min-width: 960px) {
@@ -759,8 +765,10 @@ body {
     min-height: 0;
     height: 100%;
     border-top: 0;
-    border-left: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
-    box-shadow: inset 1px 0 0 color-mix(in srgb, var(--accent) 12%, transparent);
+    border-left: 2px solid var(--accent);
+    box-shadow:
+      inset 1px 0 0 color-mix(in srgb, var(--accent) 18%, transparent),
+      -10px 0 28px color-mix(in srgb, #000 35%, transparent);
   }
 }
 
@@ -768,10 +776,10 @@ body {
   width: 100%;
   max-height: none;
   height: 100%;
-  min-height: 22rem;
+  min-height: 26rem;
   border: 0;
   animation: none;
-  background: var(--void);
+  background: transparent;
 }
 
 @media (min-width: 960px) {
@@ -1507,49 +1515,61 @@ body:has(#home) .chat-widget {
 }
 
 .chat-panel--terminal {
-  background: var(--void);
+  background: transparent;
 }
 
 .chat-panel--terminal .chat-panel__header {
-  padding: 0.55rem 0.7rem 0.5rem;
-  padding-top: 0.55rem;
+  padding: 0.75rem 0.85rem 0.65rem;
+  padding-top: 0.75rem;
+  background: color-mix(in srgb, var(--accent) 8%, transparent);
 }
 
 .chat-panel--terminal .chat-panel__title {
-  font-size: 0.68rem;
-  letter-spacing: 0.14em;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
 }
 
 .chat-panel--terminal .chat-panel__subtitle {
-  margin-top: 0.1rem;
-  font-size: 0.6rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--accent);
+  margin-top: 0.2rem;
+  font-size: 0.68rem;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  color: color-mix(in srgb, var(--foreground) 78%, transparent);
 }
 
 .chat-panel__tty {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 1.7rem;
-  height: 1.35rem;
-  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+  min-width: 2.1rem;
+  height: 1.7rem;
+  border: 1px solid var(--accent);
+  background: color-mix(in srgb, var(--accent) 14%, transparent);
   color: var(--accent);
-  font-size: 0.62rem;
+  font-size: 0.68rem;
   font-weight: 700;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
+  box-shadow: 0 0 12px var(--terminal-glow);
 }
 
 .chat-panel--terminal .chat-panel__whatsapp {
-  min-height: 2rem;
-  padding: 0.25rem 0.45rem;
-  font-size: 0.58rem;
+  min-height: 2.25rem;
+  padding: 0.35rem 0.65rem;
+  font-size: 0.62rem;
+}
+
+.chat-panel__purpose {
+  margin: 0;
+  padding: 0.55rem 0.85rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
+  color: color-mix(in srgb, var(--foreground) 80%, transparent);
+  font-size: 0.72rem;
+  line-height: 1.45;
 }
 
 .chat-panel--terminal .chat-panel__messages {
-  padding: 0.55rem 0.7rem;
-  gap: 0.45rem;
+  padding: 0.75rem 0.85rem;
+  gap: 0.55rem;
 }
 
 .chat-panel--terminal .chat-message {
@@ -1557,8 +1577,8 @@ body:has(#home) .chat-widget {
   padding: 0;
   border: 0;
   background: transparent;
-  font-size: 0.72rem;
-  line-height: 1.45;
+  font-size: 0.8rem;
+  line-height: 1.5;
 }
 
 .chat-panel--terminal .chat-message--user,
@@ -1584,55 +1604,55 @@ body:has(#home) .chat-widget {
 }
 
 .chat-panel--terminal .chat-panel__quick-replies {
-  padding: 0 0.7rem 0.5rem;
-  gap: 0.3rem;
+  padding: 0 0.85rem 0.65rem;
+  gap: 0.4rem;
 }
 
 .chat-panel--terminal .chat-panel__chip {
-  min-height: 1.85rem;
-  padding: 0.2rem 0.45rem;
-  font-size: 0.58rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+  min-height: 2.1rem;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.64rem;
+  letter-spacing: 0.05em;
+  text-transform: none;
 }
 
 .chat-panel--terminal .chat-panel__form {
   grid-template-columns: auto 1fr auto;
-  gap: 0.35rem;
-  padding: 0.45rem 0.7rem 0.55rem;
+  gap: 0.4rem;
+  padding: 0.55rem 0.85rem 0.65rem;
   align-items: center;
   border-top: 1px solid color-mix(in srgb, var(--accent) 22%, transparent);
 }
 
 .chat-panel__prompt {
   color: var(--accent);
-  font-size: 0.62rem;
+  font-size: 0.68rem;
   letter-spacing: 0.02em;
   white-space: nowrap;
 }
 
 .chat-panel--terminal .chat-panel__input {
-  min-height: 2rem;
-  padding: 0.35rem 0.45rem;
+  min-height: 2.35rem;
+  padding: 0.45rem 0.55rem;
   font-size: 16px;
-  background: transparent;
-  border-color: color-mix(in srgb, var(--accent) 28%, transparent);
+  background: color-mix(in srgb, var(--void) 70%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 35%, transparent);
 }
 
 .chat-panel--terminal .chat-panel__send {
-  min-height: 2rem;
-  min-width: 3.25rem;
-  padding-inline: 0.55rem;
-  font-size: 0.58rem;
+  min-height: 2.35rem;
+  min-width: 3.75rem;
+  padding-inline: 0.75rem;
+  font-size: 0.65rem;
 }
 
 .chat-panel--terminal .chat-panel__footer {
-  padding: 0.35rem 0.7rem 0.5rem;
+  padding: 0.45rem 0.85rem 0.65rem;
 }
 
 .chat-panel--terminal .chat-panel__footer-whatsapp {
-  min-height: 1.75rem;
-  font-size: 0.62rem;
+  min-height: 2rem;
+  font-size: 0.7rem;
 }
 
 /* Brand mark */

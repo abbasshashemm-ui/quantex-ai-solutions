@@ -33,8 +33,9 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
   const [input, setInput] = useState("");
   const [openedTracked, setOpenedTracked] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
-  const { messages, sendMessage, status, error, clearError } = useSalesChat();
   const isTerminal = variant === "terminal";
+  const { messages, sendMessage, status, error, clearError } =
+    useSalesChat(variant);
   const location = isTerminal ? "hero_terminal" : "chat_panel";
 
   const isBusy = status === "submitted" || status === "streaming";
@@ -92,24 +93,24 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
       id={isTerminal ? "quantex-hero-chat" : "quantex-chat-panel"}
       className={`chat-panel ${isTerminal ? "chat-panel--terminal" : "glass-panel"}`}
       role={isTerminal ? "region" : "dialog"}
-      aria-label="QUANTEX sales chat"
+      aria-label="Quantex AI assistant chat"
       data-lenis-prevent
     >
       <header className="chat-panel__header">
         <div className="chat-panel__title-wrap">
           {isTerminal ? (
             <span className="chat-panel__tty" aria-hidden>
-              [Q]
+              [AI]
             </span>
           ) : (
             <BrandLogo variant="mark" className="h-5 w-auto" />
           )}
           <div>
             <p className="chat-panel__title">
-              {isTerminal ? "CHAT::SESSION" : "QUANTEX Assistant"}
+              {isTerminal ? "AI ASSISTANT" : "QUANTEX Assistant"}
             </p>
             <p className="chat-panel__subtitle">
-              {isTerminal ? "tty1 · LIVE" : "Audits & quotes"}
+              {isTerminal ? "Ask about audits, SEO & quotes" : "Audits & quotes"}
             </p>
           </div>
         </div>
@@ -119,7 +120,7 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
             className="chat-panel__whatsapp"
             onClick={() => openWhatsApp()}
           >
-            {isTerminal ? "[ WA ]" : "Chat on WhatsApp"}
+            {isTerminal ? "WhatsApp" : "Chat on WhatsApp"}
           </button>
           {onClose ? (
             <button
@@ -133,6 +134,13 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
           ) : null}
         </div>
       </header>
+
+      {isTerminal ? (
+        <p className="chat-panel__purpose">
+          Talk to our AI sales bot—get clarity on crawl/index issues, services,
+          timelines, and how to start.
+        </p>
+      ) : null}
 
       <div ref={listRef} className="chat-panel__messages">
         {messages.map((message) => (
@@ -187,7 +195,9 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
           onFocus={isTerminal ? markOpened : undefined}
           onKeyDown={handleKeyDown}
           placeholder={
-            isTerminal ? "ask about crawl, index, rank…" : "Ask about services or timelines…"
+            isTerminal
+              ? "Ask the AI about audits, SEO, or pricing…"
+              : "Ask about services or timelines…"
           }
           rows={isTerminal ? 1 : 2}
           maxLength={CHAT_MESSAGE_LIMITS.maxLength}
