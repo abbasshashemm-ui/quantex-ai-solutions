@@ -91,14 +91,6 @@ export const SITE_NAV = [
 
 export const FOOTER_NAV = SITE_NAV.filter((item) => item.href !== "/");
 
-export const FOOTER_EXTRA = [
-  {
-    label: "quantexai.info",
-    href: LEGACY_SITE_URL,
-    external: true,
-  },
-] as const;
-
 export const FOOTER_LEGAL = [
   { label: "Privacy Policy", href: "/privacy" },
 ] as const;

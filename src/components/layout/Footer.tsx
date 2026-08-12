@@ -3,7 +3,6 @@ import {
   COMPANY,
   CONTACT,
   CONTACT_LINKS,
-  FOOTER_EXTRA,
   FOOTER_LEGAL,
   FOOTER_NAV,
 } from "@/lib/site/contact";
@@ -144,18 +143,6 @@ export function Footer() {
                 <li key={item.href}>
                   <a
                     href={item.href}
-                    className="inline-flex min-h-11 items-center py-1 text-foreground/85 transition-colors hover:text-accent"
-                  >
-                    {item.label}
-                  </a>
-                </li>
-              ))}
-              {FOOTER_EXTRA.map((item) => (
-                <li key={item.href}>
-                  <a
-                    href={item.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="inline-flex min-h-11 items-center py-1 text-foreground/85 transition-colors hover:text-accent"
                   >
                     {item.label}
