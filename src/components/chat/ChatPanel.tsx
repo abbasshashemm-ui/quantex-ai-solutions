@@ -25,13 +25,17 @@ const QUICK_REPLIES = [
 ] as const;
 
 type ChatPanelProps = {
-  onClose: () => void;
+  variant?: "float" | "terminal";
+  onClose?: () => void;
 };
 
-export function ChatPanel({ onClose }: ChatPanelProps) {
+export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
   const [input, setInput] = useState("");
+  const [openedTracked, setOpenedTracked] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
   const { messages, sendMessage, status, error, clearError } = useSalesChat();
+  const isTerminal = variant === "terminal";
+  const location = isTerminal ? "hero_terminal" : "chat_panel";
 
   const isBusy = status === "submitted" || status === "streaming";
   const showTyping =
@@ -44,10 +48,15 @@ export function ChatPanel({ onClose }: ChatPanelProps) {
     node.scrollTop = node.scrollHeight;
   }, [messages, status]);
 
+  const markOpened = useCallback(() => {
+    if (!isTerminal || openedTracked) return;
+    setOpenedTracked(true);
+    trackConversion(CONVERSION_EVENTS.CHAT_OPEN, { location });
+  }, [isTerminal, location, openedTracked]);
+
   function openWhatsApp(topic?: string) {
-    trackConversion(CONVERSION_EVENTS.CHAT_WHATSAPP_HANDOFF, {
-      location: "chat_panel",
-    });
+    markOpened();
+    trackConversion(CONVERSION_EVENTS.CHAT_WHATSAPP_HANDOFF, { location });
     window.open(buildWhatsAppQuoteUrl(topic), "_blank", "noopener,noreferrer");
   }
 
@@ -57,14 +66,13 @@ export function ChatPanel({ onClose }: ChatPanelProps) {
       if (!trimmed || status === "submitted" || status === "streaming") {
         return;
       }
+      markOpened();
       clearError();
       void sendMessage({ text: trimmed });
       setInput("");
-      trackConversion(CONVERSION_EVENTS.CHAT_MESSAGE_SENT, {
-        location: "chat_panel",
-      });
+      trackConversion(CONVERSION_EVENTS.CHAT_MESSAGE_SENT, { location });
     },
-    [clearError, sendMessage, status],
+    [clearError, location, markOpened, sendMessage, status],
   );
 
   function handleSubmit(event: FormEvent) {
@@ -81,18 +89,28 @@ export function ChatPanel({ onClose }: ChatPanelProps) {
 
   return (
     <div
-      id="quantex-chat-panel"
-      className="chat-panel glass-panel"
-      role="dialog"
+      id={isTerminal ? "quantex-hero-chat" : "quantex-chat-panel"}
+      className={`chat-panel ${isTerminal ? "chat-panel--terminal" : "glass-panel"}`}
+      role={isTerminal ? "region" : "dialog"}
       aria-label="QUANTEX sales chat"
       data-lenis-prevent
     >
       <header className="chat-panel__header">
         <div className="chat-panel__title-wrap">
-          <BrandLogo variant="mark" className="h-5 w-auto" />
+          {isTerminal ? (
+            <span className="chat-panel__tty" aria-hidden>
+              [Q]
+            </span>
+          ) : (
+            <BrandLogo variant="mark" className="h-5 w-auto" />
+          )}
           <div>
-            <p className="chat-panel__title">QUANTEX Assistant</p>
-            <p className="chat-panel__subtitle">Audits &amp; quotes</p>
+            <p className="chat-panel__title">
+              {isTerminal ? "CHAT::SESSION" : "QUANTEX Assistant"}
+            </p>
+            <p className="chat-panel__subtitle">
+              {isTerminal ? "tty1 · LIVE" : "Audits & quotes"}
+            </p>
           </div>
         </div>
         <div className="chat-panel__header-actions">
@@ -101,16 +119,18 @@ export function ChatPanel({ onClose }: ChatPanelProps) {
             className="chat-panel__whatsapp"
             onClick={() => openWhatsApp()}
           >
-            Chat on WhatsApp
+            {isTerminal ? "[ WA ]" : "Chat on WhatsApp"}
           </button>
-          <button
-            type="button"
-            className="chat-panel__close"
-            onClick={onClose}
-            aria-label="Close chat"
-          >
-            ×
-          </button>
+          {onClose ? (
+            <button
+              type="button"
+              className="chat-panel__close"
+              onClick={onClose}
+              aria-label="Close chat"
+            >
+              ×
+            </button>
+          ) : null}
         </div>
       </header>
 
@@ -120,7 +140,7 @@ export function ChatPanel({ onClose }: ChatPanelProps) {
         ))}
         {showTyping ? (
           <p className="chat-panel__typing" aria-live="polite">
-            Typing…
+            {isTerminal ? "quantex> ▌" : "Typing…"}
           </p>
         ) : null}
         {error ? (
@@ -151,17 +171,25 @@ export function ChatPanel({ onClose }: ChatPanelProps) {
       </div>
 
       <form className="chat-panel__form" onSubmit={handleSubmit}>
-        <label className="sr-only" htmlFor="chat-input">
+        {isTerminal ? (
+          <span className="chat-panel__prompt" aria-hidden>
+            guest@quantex:~$
+          </span>
+        ) : null}
+        <label className="sr-only" htmlFor={isTerminal ? "hero-chat-input" : "chat-input"}>
           Message
         </label>
         <textarea
-          id="chat-input"
+          id={isTerminal ? "hero-chat-input" : "chat-input"}
           className="chat-panel__input"
           value={input}
           onChange={(event) => setInput(event.target.value)}
+          onFocus={isTerminal ? markOpened : undefined}
           onKeyDown={handleKeyDown}
-          placeholder="Ask about services or timelines…"
-          rows={2}
+          placeholder={
+            isTerminal ? "ask about crawl, index, rank…" : "Ask about services or timelines…"
+          }
+          rows={isTerminal ? 1 : 2}
           maxLength={CHAT_MESSAGE_LIMITS.maxLength}
           disabled={isBusy}
         />
@@ -170,7 +198,7 @@ export function ChatPanel({ onClose }: ChatPanelProps) {
           className="chat-panel__send btn-primary"
           disabled={isBusy || !input.trim()}
         >
-          Send
+          {isTerminal ? "RUN" : "Send"}
         </button>
       </form>
 

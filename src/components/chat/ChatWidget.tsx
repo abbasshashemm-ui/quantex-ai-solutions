@@ -1,6 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
 import { BrandLogo } from "@/components/layout/BrandLogo";
 import {
@@ -14,8 +15,10 @@ const ChatPanel = dynamic(
 );
 
 export function ChatWidget() {
+  const pathname = usePathname();
   const [open, setOpen] = useState(false);
   const [reducedMotion, setReducedMotion] = useState(false);
+  const hideOnHome = pathname === "/";
 
   useEffect(() => {
     const media = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -85,6 +88,8 @@ export function ChatWidget() {
       return next;
     });
   }
+
+  if (hideOnHome) return null;
 
   return (
     <div

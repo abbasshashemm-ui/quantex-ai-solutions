@@ -1,3 +1,4 @@
+import { HeroChat } from "@/components/chat/HeroChat";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
 import { CONTACT } from "@/lib/site/contact";
 import {
@@ -129,6 +130,8 @@ export function HeroSection() {
               <span className="ascii-reticle ascii-reticle--b" />
             </div>
           </div>
+
+          <HeroChat />
         </div>
 
         <div className="hero-terminal__table" aria-hidden>
