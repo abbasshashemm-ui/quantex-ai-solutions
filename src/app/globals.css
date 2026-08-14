@@ -512,11 +512,19 @@ a.hero-meta__chip:hover {
     inset 0 1px 0 color-mix(in srgb, #fff 8%, transparent);
 }
 
+@media (min-width: 640px) and (max-width: 1023px) {
+  .hero-chat {
+    max-width: 28rem;
+    margin-inline: auto;
+  }
+}
+
 @media (min-width: 1024px) {
   .hero-chat {
     min-height: 34rem;
     max-height: min(38rem, calc(100dvh - 10rem));
     height: min(38rem, calc(100dvh - 10rem));
+    min-width: 22rem;
   }
 }
 
@@ -768,9 +776,17 @@ a.capability-marquee__item:hover {
   height: 2.75rem;
   flex-shrink: 0;
   border-radius: 0.75rem;
-  border: 1px solid color-mix(in srgb, var(--foreground) 14%, transparent);
-  background: color-mix(in srgb, var(--void) 70%, transparent);
+  border: 1px solid color-mix(in srgb, var(--metallic) 28%, transparent);
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--metallic) 10%, var(--void)),
+      color-mix(in srgb, var(--void) 88%, transparent)
+    );
   color: var(--metallic);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #fff 10%, transparent),
+    0 10px 24px color-mix(in srgb, #000 22%, transparent);
 }
 
 .service-card__title {
