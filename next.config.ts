@@ -25,7 +25,7 @@ const nextConfig: NextConfig = {
     const immutableSources = [
       "/projects/:path*",
       "/quantex-logo.png",
-      "/quantex-mark-reference.png",
+      "/quantex-mark.png",
       "/favicon-16x16.png",
       "/favicon-32x32.png",
       "/apple-touch-icon.png",

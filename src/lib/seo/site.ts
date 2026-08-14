@@ -22,7 +22,7 @@ export const SITE = {
   foundingDate: "2024",
   founder: "Abbas Hachem",
   logoPath: "/quantex-logo.png",
-  markPath: "/quantex-mark-reference.png",
+  markPath: "/quantex-mark.png",
   social: {
     instagram: CONTACT.instagram,
     linkedin: CONTACT.linkedin,

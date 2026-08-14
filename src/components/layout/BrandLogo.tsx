@@ -7,7 +7,7 @@ type BrandLogoProps = {
 };
 
 const FULL_LOGO = "/quantex-logo.png";
-const MARK_LOGO = "/quantex-mark-reference.png";
+const MARK_LOGO = "/quantex-mark.png";
 
 export function BrandLogo({
   className,
@@ -20,7 +20,7 @@ export function BrandLogo({
         src={MARK_LOGO}
         alt="Quantex"
         width={40}
-        height={46}
+        height={40}
         sizes="40px"
         quality={70}
         priority={priority}
