@@ -26,7 +26,7 @@ export function AboutPageContent() {
         <Link
           href="/"
           data-interactive
-          className="inline-flex min-h-11 items-center text-xs tracking-wide text-foreground/75 uppercase transition-colors hover:text-foreground"
+          className="inline-flex min-h-11 items-center text-xs tracking-wide text-foreground/65 transition-colors hover:text-foreground"
         >
           ← Home
         </Link>
@@ -71,7 +71,7 @@ export function AboutPageContent() {
           </div>
 
           <div className="about-page__founder glass-panel mt-8 flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:gap-6 sm:p-6">
-            <div className="flex h-14 w-14 shrink-0 items-center justify-center border border-accent/40 bg-void font-mono text-lg font-semibold text-accent">
+            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border border-white/12 bg-void font-display text-lg font-semibold text-metallic">
               AH
             </div>
             <div>
@@ -122,7 +122,7 @@ export function AboutPageContent() {
                 key={item.index}
                 className="about-page__value glass-panel p-5 sm:p-6"
               >
-                <span className="font-mono text-xs tracking-[0.2em] text-accent">
+                <span className="font-display text-xs tracking-[0.16em] text-metallic">
                   {item.index}
                 </span>
                 <h3 className="mt-3 text-base font-semibold text-foreground sm:text-lg">
@@ -137,7 +137,7 @@ export function AboutPageContent() {
         </section>
 
         <section
-          className="about-page__services mt-16 border-t border-accent/20 pt-16 sm:mt-20 sm:pt-20"
+          className="about-page__services mt-16 border-t border-white/8 pt-16 sm:mt-20 sm:pt-20"
           aria-labelledby="about-services-heading"
         >
           <PageEyebrow>{ABOUT_CAPABILITIES.eyebrow}</PageEyebrow>
@@ -156,9 +156,9 @@ export function AboutPageContent() {
                 <Link
                   href={`/services/${service.slug}`}
                   data-interactive
-                  className="about-page__service-link group flex h-full gap-4 border border-accent/25 bg-surface p-4 transition-colors hover:border-accent/50 hover:bg-accent/5 sm:p-5"
+                  className="about-page__service-link group flex h-full gap-4 rounded-2xl border border-white/10 bg-surface p-4 transition-colors hover:border-white/25 hover:bg-white/5 sm:p-5"
                 >
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center border border-accent/30 bg-void text-accent transition-colors group-hover:border-accent">
+                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/12 bg-void text-metallic transition-colors group-hover:border-white/30">
                     <ServiceNavIcon icon={service.nav.icon} className="h-5 w-5" />
                   </span>
                   <span className="min-w-0">
@@ -175,7 +175,7 @@ export function AboutPageContent() {
           </ul>
         </section>
 
-        <section className="about-page__cta mt-16 border border-accent/35 bg-surface px-5 py-10 text-center sm:mt-20 sm:px-10 sm:py-12">
+        <section className="about-page__cta mt-16 rounded-3xl border border-white/12 bg-surface px-5 py-10 text-center sm:mt-20 sm:px-10 sm:py-12">
           <p className="text-[0.65rem] font-medium tracking-[0.28em] text-foreground/70 uppercase sm:text-xs">
             {ABOUT_CTA.eyebrow}
           </p>

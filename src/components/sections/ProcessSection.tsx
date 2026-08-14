@@ -5,7 +5,7 @@ export function ProcessSection() {
   return (
     <section
       id="process"
-      className="process-section relative scroll-mt-24 border-t border-accent/20 py-16 sm:py-20 md:py-24"
+      className="process-section relative scroll-mt-24 border-t border-white/8 py-20 sm:py-24 md:py-28"
       aria-labelledby="process-heading"
     >
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
@@ -17,7 +17,7 @@ export function ProcessSection() {
           >
             {PROCESS.heading}
           </h2>
-          <p className="mt-3 max-w-xl text-sm leading-relaxed text-foreground/75 sm:text-base">
+          <p className="mt-4 max-w-xl text-sm leading-relaxed text-foreground/65 sm:text-base">
             {PROCESS.support}
           </p>
         </header>

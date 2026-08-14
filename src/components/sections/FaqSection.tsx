@@ -5,7 +5,7 @@ export function FaqSection() {
   return (
     <section
       id="faq"
-      className="faq-section relative border-t border-accent/20 px-4 py-16 sm:px-6 sm:py-20 md:py-24"
+      className="faq-section relative border-t border-white/8 px-4 py-20 sm:px-6 sm:py-24 md:py-28"
       aria-labelledby="faq-heading"
     >
       <div className="mx-auto max-w-3xl">
@@ -16,7 +16,7 @@ export function FaqSection() {
         >
           Common questions
         </h2>
-        <p className="mt-3 text-sm leading-relaxed text-foreground/75 sm:text-base">
+        <p className="mt-4 text-sm leading-relaxed text-foreground/65 sm:text-base">
           Straight answers about who we are, what we build, and how to get
           started.
         </p>
@@ -36,7 +36,7 @@ export function FaqSection() {
                     </span>
                   </span>
                 </summary>
-                <div className="border-t border-accent/20 px-4 pb-4 pt-3 text-sm leading-relaxed text-foreground/78 sm:px-5 sm:pb-5">
+                <div className="border-t border-white/8 px-4 pb-4 pt-3 text-sm leading-relaxed text-foreground/70 sm:px-5 sm:pb-5">
                   {item.answer}
                 </div>
               </details>

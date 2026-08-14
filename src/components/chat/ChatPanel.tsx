@@ -100,17 +100,17 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
         <div className="chat-panel__title-wrap">
           {isTerminal ? (
             <span className="chat-panel__tty" aria-hidden>
-              [AI]
+              ●
             </span>
           ) : (
             <BrandLogo variant="mark" className="h-5 w-auto" />
           )}
           <div>
             <p className="chat-panel__title">
-              {isTerminal ? "AI ASSISTANT" : "QUANTEX Assistant"}
+              {isTerminal ? "Ask Quantex" : "QUANTEX Assistant"}
             </p>
             <p className="chat-panel__subtitle">
-              {isTerminal ? "Websites, AI chatbots & quotes" : "Audits & quotes"}
+              {isTerminal ? "Websites, chatbots & quotes" : "Audits & quotes"}
             </p>
           </div>
         </div>
@@ -148,7 +148,7 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
         ))}
         {showTyping ? (
           <p className="chat-panel__typing" aria-live="polite">
-            {isTerminal ? "quantex> ▌" : "Typing…"}
+            {isTerminal ? "Typing…" : "Typing…"}
           </p>
         ) : null}
         {error ? (
@@ -179,11 +179,6 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
       </div>
 
       <form className="chat-panel__form" onSubmit={handleSubmit}>
-        {isTerminal ? (
-          <span className="chat-panel__prompt" aria-hidden>
-            guest@quantex:~$
-          </span>
-        ) : null}
         <label className="sr-only" htmlFor={isTerminal ? "hero-chat-input" : "chat-input"}>
           Message
         </label>
@@ -208,7 +203,7 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
           className="chat-panel__send btn-primary"
           disabled={isBusy || !input.trim()}
         >
-          {isTerminal ? "RUN" : "Send"}
+          Send
         </button>
       </form>
 

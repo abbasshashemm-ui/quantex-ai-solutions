@@ -11,7 +11,8 @@ type MainLayoutProps = {
 export function MainLayout({ children }: MainLayoutProps) {
   return (
     <>
-      <div className="terminal-scanlines" aria-hidden />
+      <div className="site-grain" aria-hidden />
+      <div className="site-ambient" aria-hidden />
       <Navbar />
       <SiteMotion>
         <main

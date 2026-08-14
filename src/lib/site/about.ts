@@ -6,7 +6,7 @@ export const FOUNDER = {
 
 export const ABOUT_HERO = {
   eyebrow: "About Quantex AI Solutions",
-  title: "Crawl. Index. Rank.—built by engineers who ship.",
+  title: "A studio that ships products, not decks.",
   lead: "Quantex AI Solutions launched in 2024 in Beirut. We engineer technical SEO and search visibility at the source—alongside custom software, conversion-focused sites, intelligent chatbots, and the automation that ties it all together.",
 } as const;
 

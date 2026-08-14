@@ -1,6 +1,8 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { CapabilityMarquee } from "@/components/sections/CapabilityMarquee";
+import { HomeCta } from "@/components/sections/HomeCta";
 import { HeroSection } from "@/components/sections/HeroSection";
 
 const ServicesSection = dynamic(
@@ -31,9 +33,11 @@ export function HomePage() {
   return (
     <>
       <HeroSection />
+      <CapabilityMarquee />
       <ServicesSection />
       <ProcessSection />
       <RecentProjectsSection />
+      <HomeCta />
     </>
   );
 }

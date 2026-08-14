@@ -1,8 +1,8 @@
 export const PROCESS = {
-  eyebrow: "PROCESS",
-  heading: "Four stages. Full telemetry.",
+  eyebrow: "Process",
+  heading: "Brief to live, without the fog.",
   support:
-    "You always know the crawl state, what ships next, and what you owe.",
+    "You always know what we are building, what ships next, and what you owe.",
   stages: [
     {
       n: "01",

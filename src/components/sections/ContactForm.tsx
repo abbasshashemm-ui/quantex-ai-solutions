@@ -33,7 +33,7 @@ const initialState: ContactFormFields = {
 const MAX_WHATSAPP_URL_LENGTH = 2048;
 
 const inputClassName =
-  "mt-1.5 block w-full border border-accent/35 bg-surface-elevated px-3.5 py-2.5 text-sm text-foreground outline-none transition placeholder:text-foreground/45 focus:border-accent focus:shadow-[0_0_12px_color-mix(in_srgb,var(--accent)_35%,transparent)]";
+  "mt-1.5 block w-full rounded-xl border border-white/12 bg-surface-elevated px-3.5 py-2.5 text-sm text-foreground outline-none transition placeholder:text-foreground/45 focus:border-white/35 focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--metallic)_16%,transparent)]";
 
 const selectClassName = `${inputClassName} contact-form__select appearance-none`;
 

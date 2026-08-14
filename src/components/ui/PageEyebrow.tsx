@@ -1,21 +1,22 @@
-import type { ReactNode } from "react";
+import type { HTMLAttributes, ReactNode } from "react";
 
-type PageEyebrowProps = {
+type PageEyebrowProps = HTMLAttributes<HTMLParagraphElement> & {
   children: ReactNode;
   align?: "left" | "center";
-  className?: string;
 };
 
 export function PageEyebrow({
   children,
   align = "left",
   className = "",
+  ...props
 }: PageEyebrowProps) {
   const alignClass = align === "center" ? "page-eyebrow--center" : "";
 
   return (
     <p
-      className={`page-eyebrow text-[0.65rem] font-medium tracking-[0.28em] text-foreground uppercase sm:text-xs sm:tracking-[0.35em] ${alignClass} ${className}`.trim()}
+      {...props}
+      className={`page-eyebrow text-[0.7rem] font-medium tracking-[0.22em] text-metallic uppercase sm:text-xs sm:tracking-[0.28em] ${alignClass} ${className}`.trim()}
     >
       {children}
     </p>

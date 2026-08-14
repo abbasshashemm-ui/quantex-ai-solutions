@@ -32,7 +32,7 @@ export function Navbar() {
     <header className="site-header fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)]">
       <nav
         aria-label="Primary"
-        className="mx-auto flex max-w-7xl items-center justify-between gap-4 border-b border-accent/25 bg-void/95 px-4 py-3 sm:px-6 sm:py-3.5"
+        className="mx-auto flex max-w-7xl items-center justify-between gap-4 border-b border-white/8 bg-void/70 px-4 py-3 backdrop-blur-xl sm:px-6 sm:py-3.5"
       >
         <a
           href="/"
@@ -53,7 +53,7 @@ export function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="inline-flex min-h-11 items-center px-3 text-xs tracking-[0.12em] text-foreground/85 uppercase transition-colors hover:bg-accent/10 hover:text-accent sm:px-4 sm:text-sm"
+                className="inline-flex min-h-11 items-center rounded-full px-3 text-sm text-foreground/80 transition-colors hover:bg-white/6 hover:text-foreground sm:px-4"
               >
                 {link.label}
               </a>
@@ -75,7 +75,7 @@ export function Navbar() {
 
           <button
             type="button"
-            className="inline-flex min-h-11 min-w-11 items-center justify-center border border-accent/40 text-accent transition-colors hover:border-accent hover:bg-accent/10 md:hidden"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-white/15 text-foreground transition-colors hover:border-white/35 hover:bg-white/6 md:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -103,14 +103,14 @@ export function Navbar() {
       {open && (
         <div
           id="mobile-nav"
-          className="fixed inset-0 z-40 border-t border-accent/25 bg-void md:hidden"
+          className="fixed inset-0 z-40 border-t border-white/10 bg-void/95 backdrop-blur-xl md:hidden"
           style={{ paddingTop: "calc(4.5rem + env(safe-area-inset-top))" }}
         >
           <ul className="flex flex-col px-4 pb-[env(safe-area-inset-bottom)]">
             <li>
               <a
                 href="/"
-                className="flex min-h-12 items-center border-b border-accent/15 text-sm tracking-[0.1em] text-foreground uppercase transition-colors hover:bg-accent/10 hover:text-accent"
+                className="flex min-h-12 items-center border-b border-white/8 text-sm text-foreground transition-colors hover:bg-white/6 hover:text-foreground"
                 onClick={close}
               >
                 Home
@@ -121,7 +121,7 @@ export function Navbar() {
               <li key={link.href}>
                 <a
                   href={link.href}
-                  className="flex min-h-12 items-center border-b border-accent/15 text-sm tracking-[0.1em] text-foreground uppercase transition-colors hover:bg-accent/10 hover:text-accent"
+                  className="flex min-h-12 items-center border-b border-white/8 text-sm text-foreground transition-colors hover:bg-white/6 hover:text-foreground"
                   onClick={close}
                 >
                   {link.label}

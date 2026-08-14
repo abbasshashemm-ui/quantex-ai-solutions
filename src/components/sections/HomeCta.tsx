@@ -1,0 +1,39 @@
+import { CONTACT } from "@/lib/site/contact";
+import { PageEyebrow } from "@/components/ui/PageEyebrow";
+
+export function HomeCta() {
+  return (
+    <section className="home-cta relative px-4 py-16 sm:px-6 sm:py-20 md:py-24">
+      <div className="mx-auto max-w-5xl">
+        <div className="home-cta__panel" data-reveal>
+          <PageEyebrow align="center">Next step</PageEyebrow>
+          <h2 className="section-heading mx-auto mt-4 max-w-2xl text-metallic-gradient">
+            Have a brief? We reply within 24 hours.
+          </h2>
+          <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-foreground/70 sm:text-base">
+            Share the product, the goal, and the timeline. We&apos;ll come back
+            with a scoped first milestone—not a generic pitch.
+          </p>
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <a
+              href={CONTACT.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-interactive
+              className="btn-primary w-full max-w-xs sm:w-auto"
+            >
+              Message on WhatsApp
+            </a>
+            <a
+              href="/contact"
+              data-interactive
+              className="btn-secondary w-full max-w-xs sm:w-auto"
+            >
+              Send a brief
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}

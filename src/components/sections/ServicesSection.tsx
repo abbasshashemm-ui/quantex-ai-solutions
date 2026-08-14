@@ -51,21 +51,21 @@ export function ServicesSection() {
     <section
       id="solutions"
       ref={sectionRef}
-      className="services-section relative scroll-mt-24 py-16 sm:py-20 md:py-24"
+      className="services-section relative scroll-mt-24 py-20 sm:py-24 md:py-28"
       aria-labelledby="services-heading"
     >
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
         <header className="services-section__header mb-8 sm:mb-10" data-reveal>
-          <PageEyebrow>Expertise</PageEyebrow>
+            <PageEyebrow>Solutions</PageEyebrow>
           <h2
             id="services-heading"
             className="section-heading mt-3 max-w-2xl text-metallic-gradient"
           >
-            Modules engineered at the source
+            What we design and ship
           </h2>
-          <p className="mt-3 max-w-xl text-sm leading-relaxed text-foreground/75 sm:text-base">
-            Crawl, index, ship—each engagement scoped for measurable search and
-            product outcomes.
+          <p className="mt-4 max-w-xl text-sm leading-relaxed text-foreground/65 sm:text-base">
+            Websites, chatbots, software, and the systems around them—each
+            engagement scoped for a measurable outcome.
           </p>
         </header>
 
