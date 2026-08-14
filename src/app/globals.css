@@ -706,23 +706,183 @@ a.capability-marquee__item:hover {
   color: var(--metallic);
 }
 
-/* ——— Services ——— */
-.services-section__grid {
+/* ——— Stacked decks ——— */
+.stacked-section {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.9rem;
-}
-
-@media (min-width: 640px) {
-  .services-section__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+  gap: 2rem;
+  align-items: center;
 }
 
 @media (min-width: 1024px) {
-  .services-section__grid {
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+  .stacked-section {
+    grid-template-columns: minmax(0, 1fr) minmax(22rem, 34rem);
+    gap: 3rem;
   }
+}
+
+.stacked-section__follow {
+  margin-top: 1.5rem;
+}
+
+.stacked-deck {
+  width: 100%;
+  max-width: 34rem;
+  outline: none;
+}
+
+.stacked-deck:focus-visible {
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--metallic) 45%, transparent);
+  border-radius: calc(var(--radius) + 0.4rem);
+}
+
+.stacked-deck__toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.85rem;
+}
+
+.stacked-deck__status {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.stacked-deck__ring {
+  width: 1.7rem;
+  height: 1.7rem;
+  transform: rotate(-90deg);
+}
+
+.stacked-deck__ring circle:first-child {
+  fill: none;
+  stroke: color-mix(in srgb, var(--foreground) 14%, transparent);
+  stroke-width: 1.7;
+}
+
+.stacked-deck__ring circle:last-child {
+  fill: none;
+  stroke: var(--metallic);
+  stroke-width: 1.7;
+  stroke-linecap: round;
+  transition: stroke-dasharray 0.4s ease;
+}
+
+.stacked-deck__count {
+  margin: 0;
+  font-family: var(--font-syne), sans-serif;
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: color-mix(in srgb, var(--foreground) 78%, transparent);
+}
+
+.stacked-deck__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.stacked-deck__nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--foreground) 16%, transparent);
+  background: color-mix(in srgb, var(--void) 70%, transparent);
+  color: color-mix(in srgb, var(--foreground) 78%, transparent);
+  transition:
+    border-color 0.18s ease,
+    background 0.18s ease,
+    color 0.18s ease;
+}
+
+.stacked-deck__nav svg {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.stacked-deck__nav:hover,
+.stacked-deck__nav:focus-visible {
+  border-color: color-mix(in srgb, var(--metallic) 55%, transparent);
+  color: var(--foreground);
+}
+
+.stacked-deck__nav--next {
+  border-color: color-mix(in srgb, var(--metallic) 42%, transparent);
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--metallic) 16%, var(--void)),
+      var(--void)
+    );
+  color: var(--metallic);
+  box-shadow: inset 0 1px 0 color-mix(in srgb, #fff 12%, transparent);
+}
+
+.stacked-deck__stage {
+  position: relative;
+  min-height: 19.5rem;
+  padding: 1.55rem 1.65rem 0.35rem 0;
+  touch-action: pan-y;
+}
+
+.stacked-deck__layer {
+  position: absolute;
+  inset: 1.55rem 1.65rem 0.35rem 0;
+  transform-origin: 50% 100%;
+  transition:
+    transform 0.48s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.4s ease,
+    filter 0.4s ease;
+}
+
+.stacked-deck__layer[data-depth="0"] {
+  z-index: 3;
+  transform: translate(0, 0) rotate(0deg);
+  opacity: 1;
+  filter: none;
+}
+
+.stacked-deck__layer[data-depth="1"] {
+  z-index: 2;
+  transform: translate(0.85rem, -0.7rem) rotate(1.6deg);
+  opacity: 0.58;
+  filter: saturate(0.7);
+  pointer-events: none;
+}
+
+.stacked-deck__layer[data-depth="2"] {
+  z-index: 1;
+  transform: translate(1.7rem, -1.4rem) rotate(3.2deg);
+  opacity: 0.32;
+  filter: saturate(0.45);
+  pointer-events: none;
+}
+
+.stacked-deck__layer[data-depth="hidden"] {
+  z-index: 0;
+  transform: translate(2rem, -1.6rem) rotate(3.6deg) scale(0.97);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.stacked-deck .service-card-link,
+.stacked-deck .service-card,
+.stacked-deck .process-card {
+  height: 100%;
+}
+
+.stacked-deck .service-card-link:hover .service-card,
+.stacked-deck .service-card-link:focus-visible .service-card {
+  transform: none;
+}
+
+.stacked-deck .process-card {
+  min-height: 0;
 }
 
 .service-card-link {
@@ -807,53 +967,21 @@ a.capability-marquee__item:hover {
   color: color-mix(in srgb, var(--foreground) 64%, transparent);
 }
 
-.service-card__more {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  margin-top: 1.2rem;
-  font-size: 0.8rem;
-  font-weight: 600;
+.service-card__prompt,
+.process-card__prompt {
+  margin-top: auto;
+  padding-top: 1.15rem;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
   color: var(--metallic);
-  transition: gap 0.15s ease;
-}
-
-.service-card__more-arrow {
-  width: 1.125rem;
-  height: 1.125rem;
-  flex-shrink: 0;
-  transition: transform 0.18s ease;
-}
-
-.service-card-link:hover .service-card__more-arrow,
-.service-card-link:focus-visible .service-card__more-arrow {
-  transform: translateX(0.3rem);
 }
 
 /* ——— Process ——— */
 .process-section {
   scroll-margin-top: 5rem;
-}
-
-.process-section__grid {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 0.9rem;
-}
-
-@media (min-width: 640px) {
-  .process-section__grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 1024px) {
-  .process-section__grid {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
 }
 
 .process-card {
@@ -1172,6 +1300,16 @@ a.capability-marquee__item:hover {
 
 .service-page__icon-wrap {
   border-radius: 0.8rem !important;
+  border-color: color-mix(in srgb, var(--metallic) 28%, transparent) !important;
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--metallic) 10%, var(--void)),
+      color-mix(in srgb, var(--void) 88%, transparent)
+    ) !important;
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, #fff 10%, transparent),
+    0 10px 24px color-mix(in srgb, #000 22%, transparent);
 }
 
 .service-page__related {
@@ -1710,7 +1848,9 @@ span.chat-panel__input {
   .project-card__browser,
   .hero-veil::after,
   .capability-marquee__track,
-  .chat-widget__launcher {
+  .chat-widget__launcher,
+  .stacked-deck__layer,
+  .stacked-deck__ring circle:last-child {
     animation: none !important;
     transition: none;
   }
