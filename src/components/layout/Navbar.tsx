@@ -30,10 +30,10 @@ export function Navbar() {
   const close = () => setOpen(false);
 
   return (
-    <header className="site-header fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)]">
+    <header className="site-header fixed inset-x-0 top-0 z-50 border-b border-white/8 bg-void/80 pt-[env(safe-area-inset-top)] backdrop-blur-xl">
       <nav
         aria-label="Primary"
-        className="mx-auto flex max-w-7xl items-center justify-between gap-4 border-b border-white/8 bg-void/70 px-4 py-3 backdrop-blur-xl sm:px-6 sm:py-3.5"
+        className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 sm:py-3.5"
       >
         <Link
           href="/"
