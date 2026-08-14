@@ -1,9 +1,15 @@
 import Link from "next/link";
-import { PROJECTS } from "@/lib/projects/data";
+import {
+  getAdditionalProjects,
+  getFeaturedProjects,
+} from "@/lib/projects/data";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { ProjectCard } from "./ProjectCard";
 
 export function RecentProjectsSection() {
+  const featured = getFeaturedProjects();
+  const more = getAdditionalProjects();
+
   return (
     <section
       id="work"
@@ -36,12 +42,28 @@ export function RecentProjectsSection() {
         </header>
 
         <div className="projects-section__grid mt-10 sm:mt-12">
-          {PROJECTS.map((project) => (
+          {featured.map((project) => (
             <div key={project.id} className="project-card-reveal">
               <ProjectCard project={project} />
             </div>
           ))}
         </div>
+
+        {more.length > 0 ? (
+          <details className="projects-more mt-8">
+            <summary className="projects-more__tab" data-interactive>
+              <span className="projects-more__open">Show more</span>
+              <span className="projects-more__close">Show less</span>
+            </summary>
+            <div className="projects-section__grid mt-8">
+              {more.map((project) => (
+                <div key={project.id} className="project-card-reveal">
+                  <ProjectCard project={project} />
+                </div>
+              ))}
+            </div>
+          </details>
+        ) : null}
       </div>
     </section>
   );

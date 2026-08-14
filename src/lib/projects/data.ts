@@ -10,7 +10,15 @@ export type Project = {
   tags: ProjectTag[];
   imageSrc: string;
   imageAlt: string;
+  imageWidth: number;
+  imageHeight: number;
 };
+
+export const FEATURED_PROJECT_IDS = [
+  "almanya",
+  "chandelier-solderie",
+  "shop-pro",
+] as const;
 
 export const PROJECTS: Project[] = [
   {
@@ -24,6 +32,8 @@ export const PROJECTS: Project[] = [
     tags: ["WEBSITE", "LUXURY"],
     imageSrc: "/projects/chandelier-solderie.png",
     imageAlt: "Chandelier Solderie luxury lighting website preview",
+    imageWidth: 1024,
+    imageHeight: 487,
   },
   {
     id: "hmayed",
@@ -36,6 +46,8 @@ export const PROJECTS: Project[] = [
     tags: ["PORTFOLIO", "WEB"],
     imageSrc: "/projects/hmayed.png",
     imageAlt: "Hmayed portfolio website preview",
+    imageWidth: 1024,
+    imageHeight: 487,
   },
   {
     id: "shop-pro",
@@ -47,6 +59,8 @@ export const PROJECTS: Project[] = [
     tags: ["CUSTOM APP", "SALES & STOCK"],
     imageSrc: "/projects/shop-pro.png",
     imageAlt: "Shop Pro sales and stock dashboard preview",
+    imageWidth: 1024,
+    imageHeight: 524,
   },
   {
     id: "almanya",
@@ -59,6 +73,8 @@ export const PROJECTS: Project[] = [
     tags: ["WEBSITE", "INDUSTRIAL"],
     imageSrc: "/projects/almanya.png",
     imageAlt: "Almanya Lubricants Factory website preview",
+    imageWidth: 1024,
+    imageHeight: 482,
   },
   {
     id: "trago",
@@ -70,5 +86,18 @@ export const PROJECTS: Project[] = [
     tags: ["WEBSITE", "FABRICATION"],
     imageSrc: "/projects/trago.png",
     imageAlt: "TRAGO house website preview",
+    imageWidth: 1024,
+    imageHeight: 475,
   },
 ];
+
+export function getFeaturedProjects(): Project[] {
+  return FEATURED_PROJECT_IDS.flatMap((id) =>
+    PROJECTS.filter((project) => project.id === id),
+  );
+}
+
+export function getAdditionalProjects(): Project[] {
+  const featured = new Set<string>(FEATURED_PROJECT_IDS);
+  return PROJECTS.filter((project) => !featured.has(project.id));
+}

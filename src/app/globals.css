@@ -908,20 +908,92 @@ a.capability-marquee__item:hover {
 }
 
 .project-card__preview {
-  aspect-ratio: 16 / 10;
   width: 100%;
-  min-height: 11rem;
+  line-height: 0;
   background-color: #08080a;
-  position: relative;
-  overflow: hidden;
 }
 
 .project-card__preview img {
-  transition: transform 0.45s ease;
+  display: block;
+  width: 100%;
+  height: auto;
 }
 
-.project-card-link:hover .project-card__preview img {
-  transform: scale(1.04);
+.project-card__lights {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.project-card__light {
+  width: 0.55rem;
+  height: 0.55rem;
+  border-radius: 999px;
+  box-shadow: inset 0 1px 1px color-mix(in srgb, #fff 45%, transparent);
+}
+
+.project-card__light--close {
+  background: #ff5f57;
+  box-shadow:
+    0 0 6px color-mix(in srgb, #ff5f57 75%, transparent),
+    inset 0 1px 1px color-mix(in srgb, #fff 45%, transparent);
+}
+
+.project-card__light--min {
+  background: #febc2e;
+  box-shadow:
+    0 0 6px color-mix(in srgb, #febc2e 75%, transparent),
+    inset 0 1px 1px color-mix(in srgb, #fff 45%, transparent);
+}
+
+.project-card__light--max {
+  background: #28c840;
+  box-shadow:
+    0 0 6px color-mix(in srgb, #28c840 75%, transparent),
+    inset 0 1px 1px color-mix(in srgb, #fff 45%, transparent);
+}
+
+.projects-more__tab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0 1.25rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--foreground) 14%, transparent);
+  background: color-mix(in srgb, var(--surface-elevated) 90%, transparent);
+  color: var(--foreground);
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  list-style: none;
+}
+
+.projects-more__tab::-webkit-details-marker {
+  display: none;
+}
+
+.projects-more__tab::marker {
+  content: "";
+}
+
+.projects-more {
+  text-align: center;
+}
+
+.projects-more[open] .projects-more__open,
+.projects-more:not([open]) .projects-more__close {
+  display: none;
+}
+
+.projects-more__tab:hover {
+  border-color: color-mix(in srgb, var(--foreground) 28%, transparent);
+}
+
+.projects-more .projects-section__grid {
+  width: 100%;
+  text-align: left;
 }
 
 .project-card__more {

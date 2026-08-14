@@ -10,22 +10,22 @@ function ProjectCardContent({ project }: ProjectCardProps) {
     <>
       <div className="project-card__browser overflow-hidden border border-white/10 bg-surface-elevated">
         <div className="flex items-center gap-2 border-b border-white/8 bg-void/80 px-3 py-2.5 sm:px-4">
-          <div className="flex shrink-0 gap-1.5" aria-hidden>
-            <span className="h-2 w-2 rounded-full bg-white/20" />
-            <span className="h-2 w-2 rounded-full bg-white/20" />
-            <span className="h-2 w-2 rounded-full bg-white/20" />
+          <div className="project-card__lights" aria-hidden>
+            <span className="project-card__light project-card__light--close" />
+            <span className="project-card__light project-card__light--min" />
+            <span className="project-card__light project-card__light--max" />
           </div>
           <p className="min-w-0 flex-1 truncate text-center text-xs text-foreground/70">
             {project.url}
           </p>
         </div>
-        <div className="project-card__preview project-card__preview--image relative">
+        <div className="project-card__preview">
           <Image
             src={project.imageSrc}
             alt={project.imageAlt}
-            fill
+            width={project.imageWidth}
+            height={project.imageHeight}
             sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
-            className="object-cover object-top"
           />
         </div>
       </div>
