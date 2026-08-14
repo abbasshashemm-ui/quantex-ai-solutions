@@ -15,7 +15,7 @@ function ProjectCardContent({ project }: ProjectCardProps) {
             <span className="h-2 w-2 rounded-full bg-white/20" />
             <span className="h-2 w-2 rounded-full bg-white/20" />
           </div>
-          <p className="min-w-0 flex-1 truncate text-center text-xs text-foreground/55">
+          <p className="min-w-0 flex-1 truncate text-center text-xs text-foreground/70">
             {project.url}
           </p>
         </div>

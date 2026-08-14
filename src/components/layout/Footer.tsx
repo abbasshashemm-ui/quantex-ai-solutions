@@ -30,7 +30,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram"
-                  className="footer-social inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/12 text-metallic transition-colors hover:border-white/30 hover:bg-white/6 hover:text-foreground"
+                  className="footer-social inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/18 text-foreground/85 transition-colors hover:border-white/40 hover:bg-white/8 hover:text-foreground"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -64,7 +64,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
-                  className="footer-social inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/12 text-metallic transition-colors hover:border-white/30 hover:bg-white/6 hover:text-foreground"
+                  className="footer-social inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/18 text-foreground/85 transition-colors hover:border-white/40 hover:bg-white/8 hover:text-foreground"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -88,7 +88,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="WhatsApp"
-                  className="footer-social inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/12 text-metallic transition-colors hover:border-white/30 hover:bg-white/6 hover:text-foreground"
+                  className="footer-social inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/18 text-foreground/85 transition-colors hover:border-white/40 hover:bg-white/8 hover:text-foreground"
                 >
                   <svg
                     viewBox="0 0 24 24"
