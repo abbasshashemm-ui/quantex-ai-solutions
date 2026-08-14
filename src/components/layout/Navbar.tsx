@@ -22,7 +22,7 @@ export function Navbar() {
         >
           <BrandLogo
             priority
-            className="h-8 w-auto max-w-[min(200px,46vw)] sm:h-9 md:h-10"
+            className="h-8 w-auto max-w-[min(240px,52vw)] sm:h-9 md:h-10"
           />
         </Link>
 

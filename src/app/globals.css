@@ -354,16 +354,36 @@ body {
   }
 }
 
-.hero-studio__copy h1 {
+.hero-studio__copy {
+  overflow: visible;
+}
+
+.hero-studio__copy h1,
+.hero-heading {
   margin-top: 1rem;
-  padding-block: 0.12em 0.08em;
   overflow: visible;
   font-family: var(--font-syne), var(--font-outfit), system-ui, sans-serif;
   font-size: clamp(2.6rem, 8vw, 5.4rem);
   font-weight: 800;
-  letter-spacing: -0.045em;
-  line-height: 1.08;
-  text-wrap: balance;
+  letter-spacing: -0.04em;
+  line-height: 1.2;
+}
+
+.hero-heading__line {
+  display: block;
+  padding-block: 0.06em;
+  background-image: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #d7dbe3 42%,
+    #9aa1ad 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 .hero-studio__copy p {
