@@ -1,7 +1,7 @@
 import type { Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { IBM_Plex_Mono } from "next/font/google";
+import { Outfit, Syne } from "next/font/google";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -9,18 +9,25 @@ import { buildGlobalSchemas } from "@/lib/seo/json-ld";
 import { rootMetadata } from "@/lib/seo/metadata";
 import "./globals.css";
 
-const terminalMono = IBM_Plex_Mono({
-  variable: "--font-terminal",
+const outfit = Outfit({
+  variable: "--font-outfit",
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
   display: "swap",
+  weight: ["400", "500", "600"],
+});
+
+const syne = Syne({
+  variable: "--font-syne",
+  subsets: ["latin"],
+  display: "swap",
+  weight: ["700", "800"],
 });
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#000000",
+  themeColor: "#050506",
 };
 
 export const metadata = rootMetadata;
@@ -34,7 +41,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${terminalMono.variable} dark h-full antialiased`}
+      className={`${outfit.variable} ${syne.variable} dark h-full antialiased`}
     >
       <head>
         <link rel="llms-txt" href="/llms.txt" />

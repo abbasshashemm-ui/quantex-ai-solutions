@@ -50,7 +50,7 @@ export function ServicesNavDropdown({
 
   if (variant === "mobile") {
     return (
-      <li className="border-b border-accent/15">
+      <li className="border-b border-white/8">
         <button
           type="button"
           data-interactive
@@ -77,10 +77,10 @@ export function ServicesNavDropdown({
                 <Link
                   href={item.href}
                   data-interactive
-                  className="flex min-h-11 items-start gap-3 px-2 py-2 transition-colors hover:bg-accent/10"
+                  className="flex min-h-11 items-start gap-3 rounded-xl px-2 py-2 transition-colors hover:bg-white/6"
                   onClick={close}
                 >
-                  <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center border border-accent/30 bg-void text-accent">
+                  <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-white/12 bg-void text-metallic">
                     <ServiceNavIcon icon={item.icon} className="h-4 w-4" />
                   </span>
                   <span>
@@ -94,7 +94,7 @@ export function ServicesNavDropdown({
                 </Link>
               </li>
             ))}
-            <li className="mt-2 border-t border-accent/20 pt-2">
+            <li className="mt-2 border-t border-white/10 pt-2">
               <Link
                 href={SOLUTIONS_OVERVIEW_HREF}
                 data-interactive
@@ -115,10 +115,10 @@ export function ServicesNavDropdown({
       <button
         type="button"
         data-interactive
-        className={`inline-flex min-h-12 items-center gap-1.5 border px-4 text-xs tracking-[0.12em] uppercase transition-colors sm:text-sm ${
+        className={`inline-flex min-h-12 items-center gap-1.5 rounded-full border px-4 text-sm transition-colors ${
           open
-            ? "border-accent/50 bg-accent/10 text-accent"
-            : "border-transparent text-foreground/85 hover:border-accent/30 hover:bg-accent/10 hover:text-accent"
+            ? "border-white/20 bg-white/8 text-foreground"
+            : "border-transparent text-foreground/80 hover:border-white/12 hover:bg-white/6 hover:text-foreground"
         }`}
         aria-expanded={open}
         aria-haspopup="true"
@@ -142,7 +142,7 @@ export function ServicesNavDropdown({
         <div
           id={menuId}
           role="menu"
-          className="services-nav-dropdown absolute top-[calc(100%+0.65rem)] left-1/2 z-50 w-[min(22rem,calc(100vw-2rem))] -translate-x-1/2 border border-accent/35 bg-void p-2 transition-[opacity,transform] sm:left-0 sm:w-[20.5rem] sm:translate-x-0"
+          className="services-nav-dropdown absolute top-[calc(100%+0.65rem)] left-1/2 z-50 w-[min(22rem,calc(100vw-2rem))] -translate-x-1/2 rounded-2xl border border-white/12 bg-surface/95 p-2 shadow-[0_24px_60px_rgba(0,0,0,0.45)] backdrop-blur-xl sm:left-0 sm:w-[20.5rem] sm:translate-x-0"
         >
           <ul className="space-y-0.5">
             {NAV_SERVICE_ITEMS.map((item) => (
@@ -151,10 +151,10 @@ export function ServicesNavDropdown({
                   href={item.href}
                   role="menuitem"
                   data-interactive
-                  className="services-nav-dropdown__item group flex gap-3 px-3 py-2.5 transition-colors hover:bg-accent/10"
+                  className="services-nav-dropdown__item group flex gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-white/6"
                   onClick={close}
                 >
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-accent/30 bg-void text-accent transition-colors group-hover:border-accent group-hover:text-accent">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/12 bg-void text-metallic transition-colors group-hover:border-white/30 group-hover:text-foreground">
                     <ServiceNavIcon icon={item.icon} className="h-[1.125rem] w-[1.125rem]" />
                   </span>
                   <span className="min-w-0 pt-0.5">
@@ -170,15 +170,15 @@ export function ServicesNavDropdown({
             ))}
           </ul>
 
-          <div className="mt-1 border-t border-accent/20 pt-1">
+          <div className="mt-1 border-t border-white/10 pt-1">
             <Link
               href={SOLUTIONS_OVERVIEW_HREF}
               role="menuitem"
               data-interactive
-              className="services-nav-dropdown__item group flex gap-3 px-3 py-2.5 transition-colors hover:bg-accent/10"
+              className="services-nav-dropdown__item group flex gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-white/6"
               onClick={close}
             >
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-accent/30 bg-void text-accent">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/12 bg-void text-metallic">
                 <svg
                   className="h-[1.125rem] w-[1.125rem]"
                   viewBox="0 0 24 24"
@@ -206,10 +206,10 @@ export function ServicesNavDropdown({
               rel="noopener noreferrer"
               role="menuitem"
               data-interactive
-              className="services-nav-dropdown__item group flex gap-3 px-3 py-2.5 transition-colors hover:bg-accent/10"
+              className="services-nav-dropdown__item group flex gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-white/6"
               onClick={close}
             >
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-accent/30 bg-void text-accent">
+              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/12 bg-void text-metallic">
                 <svg
                   className="h-[1.125rem] w-[1.125rem]"
                   viewBox="0 0 24 24"

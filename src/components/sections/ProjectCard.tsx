@@ -8,22 +8,25 @@ type ProjectCardProps = {
 function ProjectCardContent({ project }: ProjectCardProps) {
   return (
     <>
-      <div className="project-card__browser overflow-hidden border border-accent/30 bg-surface-elevated">
-        <div className="flex items-center gap-2 border-b border-accent/20 bg-void px-3 py-2 sm:px-4 sm:py-2.5">
-          <div className="flex shrink-0 gap-1.5 text-accent" aria-hidden>
-            <span>[*]</span>
+      <div className="project-card__browser overflow-hidden border border-white/10 bg-surface-elevated">
+        <div className="flex items-center gap-2 border-b border-white/8 bg-void/80 px-3 py-2.5 sm:px-4">
+          <div className="project-card__lights" aria-hidden>
+            <span className="project-card__light project-card__light--close" />
+            <span className="project-card__light project-card__light--min" />
+            <span className="project-card__light project-card__light--max" />
           </div>
-          <p className="min-w-0 flex-1 truncate text-center text-xs text-foreground/55">
+          <p className="min-w-0 flex-1 truncate text-center text-xs text-foreground/70">
             {project.url}
           </p>
         </div>
-        <div className="project-card__preview project-card__preview--image relative">
+        <div className="project-card__preview">
           <Image
             src={project.imageSrc}
             alt={project.imageAlt}
-            fill
+            width={project.imageWidth}
+            height={project.imageHeight}
             sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
-            className="object-contain object-center p-1"
+            quality={70}
           />
         </div>
       </div>
@@ -32,14 +35,14 @@ function ProjectCardContent({ project }: ProjectCardProps) {
         {project.tags.map((tag) => (
           <span
             key={tag}
-            className="border border-accent/30 bg-void px-2 py-0.5 text-[0.65rem] font-medium tracking-wide text-accent uppercase"
+            className="rounded-full border border-white/12 bg-void px-2.5 py-0.5 text-[0.65rem] font-medium tracking-wide text-metallic uppercase"
           >
             {tag}
           </span>
         ))}
       </div>
 
-      <h3 className="mt-3 text-base font-semibold tracking-tight text-foreground sm:text-lg">
+      <h3 className="font-display mt-3 text-base font-semibold tracking-tight text-foreground sm:text-lg">
         {project.title}
       </h3>
       <p className="mt-1.5 text-sm leading-relaxed text-foreground/75">

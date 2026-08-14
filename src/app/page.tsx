@@ -2,8 +2,10 @@ import { HomePage } from "@/components/pages/HomePage";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { createPageMetadata } from "@/lib/seo/metadata";
-import { buildFaqPageSchema } from "@/lib/seo/json-ld";
+import { buildHomePageSchemas } from "@/lib/seo/json-ld";
 import { SITE } from "@/lib/seo/site";
+
+export const dynamic = "force-static";
 
 export const metadata = createPageMetadata({
   title: SITE.name,
@@ -21,7 +23,7 @@ export const metadata = createPageMetadata({
 export default function Home() {
   return (
     <>
-      <JsonLd data={buildFaqPageSchema()} />
+      <JsonLd data={buildHomePageSchemas()} />
       <HomePage />
       <FaqSection />
     </>

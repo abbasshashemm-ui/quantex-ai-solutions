@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { PROCESS } from "@/lib/site/process";
 
@@ -5,7 +6,7 @@ export function ProcessSection() {
   return (
     <section
       id="process"
-      className="process-section relative scroll-mt-24 border-t border-accent/20 py-16 sm:py-20 md:py-24"
+      className="process-section relative scroll-mt-24 border-t border-white/8 py-20 sm:py-24 md:py-28"
       aria-labelledby="process-heading"
     >
       <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
@@ -17,20 +18,25 @@ export function ProcessSection() {
           >
             {PROCESS.heading}
           </h2>
-          <p className="mt-3 max-w-xl text-sm leading-relaxed text-foreground/75 sm:text-base">
-            {PROCESS.support}
+          <p className="mt-4 text-sm leading-relaxed text-foreground/65 sm:text-base">
+            {PROCESS.support}{" "}
+            <Link href="#work" data-interactive className="text-foreground/85 underline-offset-2 hover:underline">
+              Then see it live.
+            </Link>
           </p>
         </header>
 
         <ol className="process-section__grid">
           {PROCESS.stages.map((stage) => (
-            <li key={stage.n} className="process-card" data-reveal>
-              <p className="process-card__meta">
-                <span className="process-card__n">{stage.n}</span>
-                <span className="process-card__code">{stage.code}</span>
-              </p>
-              <h3 className="process-card__title">{stage.title}</h3>
-              <p className="process-card__body">{stage.body}</p>
+            <li key={stage.n} className="card-stack" data-reveal>
+              <article className="process-card">
+                <p className="process-card__meta">
+                  <span className="process-card__n">{stage.n}</span>
+                  <span className="process-card__code">{stage.code}</span>
+                </p>
+                <h3 className="process-card__title">{stage.title}</h3>
+                <p className="process-card__body">{stage.body}</p>
+              </article>
             </li>
           ))}
         </ol>

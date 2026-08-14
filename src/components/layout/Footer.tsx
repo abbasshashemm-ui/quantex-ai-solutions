@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { BrandLogo } from "./BrandLogo";
 import {
   COMPANY,
@@ -13,7 +14,7 @@ export function Footer() {
   return (
     <footer
       id="contact"
-      className="relative z-20 border-t border-accent/25 bg-void"
+      className="relative z-20 border-t border-white/8 bg-void"
       data-reveal
     >
       <div className="mx-auto max-w-7xl px-4 py-8 pb-[calc(2rem+env(safe-area-inset-bottom))] sm:px-6 sm:py-10">
@@ -30,7 +31,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram"
-                  className="footer-social inline-flex h-11 w-11 items-center justify-center border border-accent/30 text-accent transition-colors hover:bg-accent/10"
+                  className="footer-social inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/18 text-foreground/85 transition-colors hover:border-white/40 hover:bg-white/8 hover:text-foreground"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -64,7 +65,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
-                  className="footer-social inline-flex h-11 w-11 items-center justify-center border border-accent/30 text-accent transition-colors hover:bg-accent/10"
+                  className="footer-social inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/18 text-foreground/85 transition-colors hover:border-white/40 hover:bg-white/8 hover:text-foreground"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -88,7 +89,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="WhatsApp"
-                  className="footer-social inline-flex h-11 w-11 items-center justify-center border border-accent/30 text-accent transition-colors hover:bg-accent/10"
+                  className="footer-social inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/18 text-foreground/85 transition-colors hover:border-white/40 hover:bg-white/8 hover:text-foreground"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -114,8 +115,8 @@ export function Footer() {
           </div>
 
           <div>
-            <h2 className="text-[0.65rem] font-semibold tracking-[0.2em] text-accent uppercase sm:text-xs sm:tracking-[0.25em]">
-              :: Contact
+            <h2 className="text-[0.7rem] font-semibold tracking-[0.18em] text-metallic uppercase sm:text-xs">
+              Contact
             </h2>
             <ul className="mt-2 space-y-0.5 text-xs sm:text-sm">
               {CONTACT_LINKS.map((item) => (
@@ -125,7 +126,7 @@ export function Footer() {
                     {...(item.external
                       ? { target: "_blank", rel: "noopener noreferrer" }
                       : {})}
-                    className="inline-flex min-h-11 items-center py-1 text-foreground/85 transition-colors hover:text-accent"
+                    className="inline-flex min-h-11 items-center py-1 text-foreground/80 transition-colors hover:text-foreground"
                   >
                     {item.label}
                   </a>
@@ -135,37 +136,37 @@ export function Footer() {
           </div>
 
           <div>
-            <h2 className="text-[0.65rem] font-semibold tracking-[0.2em] text-accent uppercase sm:text-xs sm:tracking-[0.25em]">
-              :: Navigate
+            <h2 className="text-[0.7rem] font-semibold tracking-[0.18em] text-metallic uppercase sm:text-xs">
+              Navigate
             </h2>
             <ul className="mt-2 space-y-0.5 text-xs sm:text-sm">
               {FOOTER_NAV.map((item) => (
                 <li key={item.href}>
-                  <a
+                  <Link
                     href={item.href}
-                    className="inline-flex min-h-11 items-center py-1 text-foreground/85 transition-colors hover:text-accent"
+                    className="inline-flex min-h-11 items-center py-1 text-foreground/80 transition-colors hover:text-foreground"
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
         </div>
 
-        <div className="mt-6 flex flex-col gap-3 border-t border-accent/20 pt-4 text-[0.65rem] text-foreground/70 sm:mt-8 sm:flex-row sm:items-center sm:justify-between sm:pt-5 sm:text-xs">
+        <div className="mt-6 flex flex-col gap-3 border-t border-white/8 pt-4 text-[0.7rem] text-foreground/55 sm:mt-8 sm:flex-row sm:items-center sm:justify-between sm:pt-5 sm:text-xs">
           <p>
-            &copy; {year} {COMPANY.name} // ALL SYSTEMS NOMINAL
+            &copy; {year} {COMPANY.name}
           </p>
           <ul className="flex flex-wrap items-center gap-x-4 gap-y-1">
             {FOOTER_LEGAL.map((item) => (
               <li key={item.href}>
-                <a
+                <Link
                   href={item.href}
-                  className="transition-colors hover:text-accent"
+                  className="transition-colors hover:text-foreground"
                 >
                   {item.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

@@ -5,6 +5,8 @@ import { createPageMetadata } from "@/lib/seo/metadata";
 import { buildBreadcrumbSchema } from "@/lib/seo/json-ld";
 import { PRIVACY_POLICY } from "@/lib/site/legal/privacy-policy";
 
+export const dynamic = "force-static";
+
 export const metadata: Metadata = createPageMetadata({
   title: "Privacy Policy",
   description:

@@ -1,9 +1,12 @@
 import type { Metadata } from "next";
-import { ContactPageShell } from "@/components/layout/ContactPageShell";
+import { ContactPageTracker } from "@/components/analytics/ContactPageTracker";
+import { ContactSection } from "@/components/sections/ContactSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import { buildBreadcrumbSchema } from "@/lib/seo/json-ld";
 import { CONTACT } from "@/lib/site/contact";
+
+export const dynamic = "force-static";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Contact",
@@ -22,7 +25,8 @@ export default function ContactPage() {
           { name: "Contact", path: "/contact" },
         ])}
       />
-      <ContactPageShell />
+      <ContactPageTracker />
+      <ContactSection />
     </>
   );
 }
