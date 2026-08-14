@@ -5,6 +5,8 @@ import { createPageMetadata } from "@/lib/seo/metadata";
 import { buildFaqPageSchema } from "@/lib/seo/json-ld";
 import { SITE } from "@/lib/seo/site";
 
+export const dynamic = "force-static";
+
 export const metadata = createPageMetadata({
   title: SITE.name,
   description:

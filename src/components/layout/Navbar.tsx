@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
 import { SITE_NAV, CONTACT } from "@/lib/site/contact";
@@ -34,7 +35,7 @@ export function Navbar() {
         aria-label="Primary"
         className="mx-auto flex max-w-7xl items-center justify-between gap-4 border-b border-white/8 bg-void/70 px-4 py-3 backdrop-blur-xl sm:px-6 sm:py-3.5"
       >
-        <a
+        <Link
           href="/"
           className="inline-flex min-h-11 shrink-0 items-center sm:min-h-12"
           onClick={close}
@@ -43,7 +44,7 @@ export function Navbar() {
             priority
             className="h-8 w-auto max-w-[min(200px,46vw)] sm:h-9 md:h-10"
           />
-        </a>
+        </Link>
 
         <ul className="hidden items-center gap-1 md:flex lg:gap-2">
           <li>
@@ -51,12 +52,12 @@ export function Navbar() {
           </li>
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
-              <a
+              <Link
                 href={link.href}
                 className="inline-flex min-h-11 items-center rounded-full px-3 text-sm text-foreground/80 transition-colors hover:bg-white/6 hover:text-foreground sm:px-4"
               >
                 {link.label}
-              </a>
+              </Link>
             </li>
           ))}
         </ul>
@@ -108,24 +109,24 @@ export function Navbar() {
         >
           <ul className="flex flex-col px-4 pb-[env(safe-area-inset-bottom)]">
             <li>
-              <a
+              <Link
                 href="/"
                 className="flex min-h-12 items-center border-b border-white/8 text-sm text-foreground transition-colors hover:bg-white/6 hover:text-foreground"
                 onClick={close}
               >
                 Home
-              </a>
+              </Link>
             </li>
             <ServicesNavDropdown variant="mobile" onNavigate={close} />
             {NAV_LINKS.map((link) => (
               <li key={link.href}>
-                <a
+                <Link
                   href={link.href}
                   className="flex min-h-12 items-center border-b border-white/8 text-sm text-foreground transition-colors hover:bg-white/6 hover:text-foreground"
                   onClick={close}
                 >
                   {link.label}
-                </a>
+                </Link>
               </li>
             ))}
             <li className="pt-4">

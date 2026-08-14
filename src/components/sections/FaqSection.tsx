@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { SITE_FAQ } from "@/lib/seo/faq";
 
@@ -18,7 +19,11 @@ export function FaqSection() {
         </h2>
         <p className="mt-4 text-sm leading-relaxed text-foreground/65 sm:text-base">
           Straight answers about who we are, what we build, and how to get
-          started.
+          started. Want the longer version?{" "}
+          <Link href="/about" className="text-foreground/85 underline-offset-2 hover:underline">
+            Read about the studio
+          </Link>
+          .
         </p>
 
         <ul className="mt-8 space-y-3">

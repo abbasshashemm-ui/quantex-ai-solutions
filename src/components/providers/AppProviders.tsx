@@ -3,9 +3,8 @@
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 import { ConversionTracker } from "@/components/analytics/ConversionTracker";
-import { GsapProvider } from "./GsapProvider";
+import { HashScrollHandler } from "./HashScrollHandler";
 import { ScrollToTopOnNavigate } from "./ScrollToTopOnNavigate";
-import { SolutionsScrollHandler } from "./SolutionsScrollHandler";
 
 type AppProvidersProps = {
   children: ReactNode;
@@ -16,11 +15,11 @@ export function AppProviders({ children }: AppProvidersProps) {
   const isHome = pathname === "/";
 
   return (
-    <GsapProvider>
+    <>
       <ConversionTracker />
       <ScrollToTopOnNavigate />
-      {isHome ? <SolutionsScrollHandler /> : null}
+      {isHome ? <HashScrollHandler /> : null}
       {children}
-    </GsapProvider>
+    </>
   );
 }

@@ -88,6 +88,16 @@ export function ContactSection() {
             Visibility audits, technical SEO, sites, software, or
             automation—send the brief and we&apos;ll route it.
           </p>
+          <p className="mt-4 text-sm text-foreground/55">
+            Still browsing?{" "}
+            <Link href="/#work" className="text-foreground/80 underline-offset-2 hover:underline">
+              See the work
+            </Link>
+            {" · "}
+            <Link href="/about" className="text-foreground/80 underline-offset-2 hover:underline">
+              About the studio
+            </Link>
+          </p>
         </header>
 
         <div className="contact-page__layout mt-10 grid gap-8 lg:mt-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] lg:gap-10 xl:gap-14">

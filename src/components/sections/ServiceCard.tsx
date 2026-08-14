@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { ServiceNavIcon } from "@/components/layout/ServiceNavIcon";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";

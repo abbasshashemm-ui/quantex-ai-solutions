@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { BrandLogo } from "./BrandLogo";
 import {
   COMPANY,
@@ -141,12 +142,12 @@ export function Footer() {
             <ul className="mt-2 space-y-0.5 text-xs sm:text-sm">
               {FOOTER_NAV.map((item) => (
                 <li key={item.href}>
-                  <a
+                  <Link
                     href={item.href}
                     className="inline-flex min-h-11 items-center py-1 text-foreground/80 transition-colors hover:text-foreground"
                   >
                     {item.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -160,12 +161,12 @@ export function Footer() {
           <ul className="flex flex-wrap items-center gap-x-4 gap-y-1">
             {FOOTER_LEGAL.map((item) => (
               <li key={item.href}>
-                <a
+                <Link
                   href={item.href}
                   className="transition-colors hover:text-foreground"
                 >
                   {item.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

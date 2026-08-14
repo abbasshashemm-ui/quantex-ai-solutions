@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { PROCESS } from "@/lib/site/process";
 
@@ -17,8 +18,11 @@ export function ProcessSection() {
           >
             {PROCESS.heading}
           </h2>
-          <p className="mt-4 max-w-xl text-sm leading-relaxed text-foreground/65 sm:text-base">
-            {PROCESS.support}
+          <p className="mt-4 text-sm leading-relaxed text-foreground/65 sm:text-base">
+            {PROCESS.support}{" "}
+            <Link href="#work" data-interactive className="text-foreground/85 underline-offset-2 hover:underline">
+              Then see it live.
+            </Link>
           </p>
         </header>
 
