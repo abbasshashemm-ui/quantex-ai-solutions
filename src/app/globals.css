@@ -349,8 +349,15 @@ body {
 
 @media (min-width: 1024px) {
   .hero-studio__inner {
-    grid-template-columns: 1fr minmax(18rem, 22rem);
+    grid-template-columns: 1fr minmax(22rem, 28rem);
     gap: 2.75rem;
+  }
+}
+
+@media (min-width: 1280px) {
+  .hero-studio__inner {
+    grid-template-columns: 1fr minmax(24rem, 32rem);
+    gap: 3rem;
   }
 }
 
@@ -1598,9 +1605,9 @@ span.chat-panel__input {
 .chat-panel--terminal .chat-message--user {
   align-self: flex-end;
   width: fit-content;
-  max-width: 85%;
+  max-width: 93%;
   border-radius: 9999px;
-  padding: 0.7rem 1.1rem;
+  padding: 0.7rem 1.3rem;
   background: #f8f9fb;
   border: 1px solid color-mix(in srgb, var(--foreground) 16%, #c8ccd4);
   color: #171a21;
