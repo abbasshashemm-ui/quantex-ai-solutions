@@ -98,13 +98,9 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
     >
       <header className="chat-panel__header">
         <div className="chat-panel__title-wrap">
-          {isTerminal ? (
-            <span className="chat-panel__tty" aria-hidden>
-              ●
-            </span>
-          ) : (
+          <span className="chat-panel__mark" aria-hidden>
             <BrandLogo variant="mark" className="h-5 w-auto" />
-          )}
+          </span>
           <div>
             <p className="chat-panel__title">
               {isTerminal ? "Ask Quantex" : "QUANTEX Assistant"}

@@ -1,13 +1,16 @@
 "use client";
 
 import dynamic from "next/dynamic";
+import { BrandLogo } from "@/components/layout/BrandLogo";
 
 function HeroChatFallback() {
   return (
     <div className="chat-panel chat-panel--terminal" aria-hidden>
       <header className="chat-panel__header">
         <div className="chat-panel__title-wrap">
-          <span className="chat-panel__tty">●</span>
+          <span className="chat-panel__mark">
+            <BrandLogo variant="mark" className="h-5 w-auto" />
+          </span>
           <div>
             <p className="chat-panel__title">Ask Quantex</p>
             <p className="chat-panel__subtitle">Websites, chatbots & quotes</p>
