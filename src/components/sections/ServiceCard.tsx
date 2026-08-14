@@ -14,7 +14,7 @@ export function ServiceCard({ service }: ServiceCardProps) {
       data-interactive
       data-conversion={CONVERSION_EVENTS.SERVICE_CLICK}
       data-conversion-location="services_grid"
-      className="service-card-link"
+      className="service-card-link card-stack"
     >
       <article data-service-card className="service-card">
         <div className="service-card__inner">
@@ -23,8 +23,22 @@ export function ServiceCard({ service }: ServiceCardProps) {
           </span>
           <h3 className="service-card__title">{service.nav.label}</h3>
           <p className="service-card__description">{service.description}</p>
-          <span className="service-card__prompt" aria-hidden>
-            &gt; LEARN MORE _
+          <span className="service-card__more">
+            <span className="service-card__more-label">Learn more</span>
+            <svg
+              className="service-card__more-arrow"
+              viewBox="0 0 24 24"
+              fill="none"
+              aria-hidden
+            >
+              <path
+                d="M5 12h14M13 6l6 6-6 6"
+                stroke="currentColor"
+                strokeWidth="1.75"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
           </span>
         </div>
       </article>
