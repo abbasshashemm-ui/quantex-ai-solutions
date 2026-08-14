@@ -16,11 +16,11 @@ export function HeroSection() {
         <div className="hero-studio__copy">
           <PageEyebrow>Beirut · AI studio</PageEyebrow>
           <h1 id="hero-heading" className="text-metallic-gradient">
-            Websites.
+            Automate.
             <br />
-            Chatbots.
+            Scale.
             <br />
-            Shipped.
+            Dominate.
           </h1>
           <p>
             High-converting websites and on-brand AI assistants—built to
