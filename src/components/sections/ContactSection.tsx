@@ -81,8 +81,8 @@ export function ContactSection() {
         <header className="contact-page__header mx-auto mt-8 max-w-3xl text-center sm:mt-10">
           <PageEyebrow align="center">Contact</PageEyebrow>
           <h1 className="section-heading mt-4 text-foreground lg:text-5xl">
-            Open a channel.{" "}
-            <span className="text-metallic-gradient">We&apos;ll take it from there.</span>
+            How do I contact Quantex?{" "}
+            <span className="text-metallic-gradient">We reply within 24 hours.</span>
           </h1>
           <p className="mt-4 text-sm leading-relaxed text-foreground/80 sm:text-base">
             Visibility audits, technical SEO, sites, software, or

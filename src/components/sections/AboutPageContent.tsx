@@ -114,7 +114,7 @@ export function AboutPageContent() {
             id="about-values-heading"
             className="section-heading mt-3 max-w-2xl text-foreground"
           >
-            How we show up on every project.
+            How does Quantex work with clients?
           </h2>
           <ol className="about-page__values-grid mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:gap-6">
             {ABOUT_VALUES.map((item) => (
@@ -186,15 +186,13 @@ export function AboutPageContent() {
             {ABOUT_CTA.lead}
           </p>
           <div className="mt-7 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <a
-              href={CONTACT.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href={ABOUT_CTA.primaryHref}
               data-interactive
               className="btn-primary w-full max-w-xs sm:w-auto"
             >
               {ABOUT_CTA.primaryLabel}
-            </a>
+            </Link>
             <Link
               href={SOLUTIONS_OVERVIEW_HREF}
               data-interactive
@@ -203,6 +201,18 @@ export function AboutPageContent() {
               {ABOUT_CTA.secondaryLabel}
             </Link>
           </div>
+          <p className="mt-5 text-sm text-foreground/55">
+            Prefer chat?{" "}
+            <a
+              href={CONTACT.whatsapp}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-interactive
+              className="text-foreground/80 underline-offset-2 hover:text-foreground hover:underline"
+            >
+              Continue on WhatsApp
+            </a>
+          </p>
         </section>
       </div>
     </article>

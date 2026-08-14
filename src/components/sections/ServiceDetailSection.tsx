@@ -2,7 +2,7 @@ import Link from "next/link";
 import { ServiceNavIcon } from "@/components/layout/ServiceNavIcon";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import type { Service } from "@/lib/services/data";
-import { NAV_SERVICE_ITEMS, SOLUTIONS_OVERVIEW_HREF } from "@/lib/services/nav";
+import { SOLUTIONS_OVERVIEW_HREF, getRelatedNavServices } from "@/lib/services/nav";
 import { CONTACT } from "@/lib/site/contact";
 
 type ServiceDetailSectionProps = {
@@ -31,7 +31,11 @@ function CheckIcon() {
 export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
   const indexLabel = String(service.index + 1).padStart(2, "0");
   const { nav: navMeta, overview, detail } = service;
-  const related = NAV_SERVICE_ITEMS.filter((item) => item.slug !== service.slug);
+  const related = getRelatedNavServices(service.slug);
+  const spokePages = [
+    { href: "/about", label: "About the studio", tagline: "Who builds this" },
+    { href: "/contact", label: "Start a project", tagline: "Send a brief" },
+  ] as const;
 
   return (
     <article
@@ -62,22 +66,22 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
               {service.description}
             </p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+              <Link
+                href="/contact"
+                data-interactive
+                className="btn-primary"
+              >
+                Send a brief
+              </Link>
               <a
                 href={CONTACT.whatsapp}
                 target="_blank"
                 rel="noopener noreferrer"
                 data-interactive
-                className="btn-primary"
-              >
-                Book strategy call
-              </a>
-              <Link
-                href="/contact"
-                data-interactive
                 className="btn-secondary"
               >
-                Send a brief
-              </Link>
+                Continue on WhatsApp
+              </a>
             </div>
           </div>
 
@@ -140,7 +144,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
 
         <section className="service-page__overview glass-panel mt-10 p-5 sm:mt-12 sm:p-7 md:p-8">
           <h2 className="text-[0.7rem] font-semibold tracking-[0.16em] text-metallic uppercase sm:text-xs">
-            Overview
+            What is {service.nav.label} at Quantex?
           </h2>
           <p className="mt-4 max-w-3xl text-sm leading-relaxed text-foreground/88 sm:text-base sm:leading-relaxed">
             {overview}
@@ -150,7 +154,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
         <div className="service-page__panels mt-8 grid gap-6 lg:mt-10 lg:grid-cols-2 lg:gap-8">
           <section className="service-page__panel glass-panel p-5 sm:p-6 md:p-7">
             <h2 className="text-[0.7rem] font-semibold tracking-[0.16em] text-metallic uppercase sm:text-xs">
-              What you get
+              What do you get?
             </h2>
             <p className="mt-3 text-sm text-foreground/75">
               Tangible outcomes from engagement through handover.
@@ -167,7 +171,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
 
           <section className="service-page__panel glass-panel p-5 sm:p-6 md:p-7">
             <h2 className="text-[0.7rem] font-semibold tracking-[0.16em] text-metallic uppercase sm:text-xs">
-              How we work
+              How does Quantex deliver this?
             </h2>
             <p className="mt-3 text-sm text-foreground/75">
               A clear sequence so you always know what happens next.
@@ -197,7 +201,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
 
         <section className="mt-10 sm:mt-12">
           <h2 className="text-[0.7rem] font-semibold tracking-[0.16em] text-metallic uppercase sm:text-xs">
-            Explore more solutions
+            What else does Quantex offer?
           </h2>
           <ul className="mt-4 flex flex-col gap-2 sm:flex-row sm:flex-wrap">
             {related.map((item) => (
@@ -221,18 +225,43 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
                 </Link>
               </li>
             ))}
+            {spokePages.map((item) => (
+              <li key={item.href}>
+                <Link
+                  href={item.href}
+                  data-interactive
+                  className="service-page__related group inline-flex min-h-11 w-full items-center gap-3 rounded-xl border border-white/10 bg-surface px-4 py-3 transition-colors hover:border-white/25 hover:bg-white/5 sm:w-auto"
+                >
+                  <span className="min-w-0 text-left">
+                    <span className="block text-xs font-medium text-foreground sm:text-sm">
+                      {item.label}
+                    </span>
+                    <span className="block truncate text-[0.65rem] text-foreground/60 sm:max-w-[12rem]">
+                      {item.tagline}
+                    </span>
+                  </span>
+                </Link>
+              </li>
+            ))}
           </ul>
         </section>
 
         <div className="service-page__cta mt-10 rounded-3xl border border-white/12 bg-surface px-5 py-8 text-center sm:mt-12 sm:px-8 sm:py-10">
-          <p className="text-[0.7rem] font-medium tracking-[0.22em] text-metallic uppercase sm:text-xs">
-            Ready to start?
-          </p>
+          <h2 className="mx-auto max-w-lg text-xl font-semibold tracking-tight text-foreground sm:text-2xl">
+            How do I start this with Quantex?
+          </h2>
           <p className="mx-auto mt-3 max-w-lg text-sm text-foreground/85 sm:text-base">
             Tell us what you are building. We will scope the first milestone and reply with a
             practical plan—not a generic pitch deck.
           </p>
           <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Link
+              href="/contact"
+              data-interactive
+              className="btn-primary w-full max-w-xs sm:w-auto"
+            >
+              Send a brief
+            </Link>
             <a
               href={CONTACT.whatsapp}
               target="_blank"
@@ -240,16 +269,18 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
               data-interactive
               className="btn-secondary w-full max-w-xs sm:w-auto"
             >
-              WhatsApp us
+              Continue on WhatsApp
             </a>
+          </div>
+          <p className="mt-5 text-sm text-foreground/55">
             <Link
               href="/"
               data-interactive
-              className="inline-flex min-h-11 items-center justify-center text-sm text-foreground/75 transition-opacity hover:text-foreground"
+              className="underline-offset-2 hover:text-foreground hover:underline"
             >
               Back to home
             </Link>
-          </div>
+          </p>
         </div>
       </div>
     </article>

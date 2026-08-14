@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { ServicePageShell } from "@/components/layout/ServicePageShell";
+import { ServiceDetailSection } from "@/components/sections/ServiceDetailSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import {
@@ -16,6 +16,8 @@ import {
 type ServicePageProps = {
   params: Promise<{ slug: string }>;
 };
+
+export const dynamic = "force-static";
 
 export function generateStaticParams() {
   return getAllServiceSlugs().map((slug) => ({ slug }));
@@ -66,7 +68,7 @@ export default async function ServicePage({ params }: ServicePageProps) {
           ]),
         ]}
       />
-      <ServicePageShell service={service} />
+      <ServiceDetailSection service={service} />
     </>
   );
 }

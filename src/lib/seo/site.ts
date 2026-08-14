@@ -25,6 +25,7 @@ export const SITE = {
   markPath: "/quantex-mark-reference.png",
   social: {
     instagram: CONTACT.instagram,
+    linkedin: CONTACT.linkedin,
   },
 } as const;
 

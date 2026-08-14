@@ -7,12 +7,12 @@ export const FOUNDER = {
 export const ABOUT_HERO = {
   eyebrow: "About Quantex AI Solutions",
   title: "A studio that ships products, not decks.",
-  lead: "Quantex AI Solutions launched in 2024 in Beirut. We engineer technical SEO and search visibility at the source—alongside custom software, conversion-focused sites, intelligent chatbots, and the automation that ties it all together.",
+  lead: "Quantex AI Solutions launched in 2024 in Beirut. We ship Next.js sites on Vercel, tuned for Core Web Vitals and Google Search Console, plus Gemini-powered chatbots on WhatsApp and the web—alongside custom software, technical SEO, and automation.",
 } as const;
 
 export const ABOUT_STORY = {
   eyebrow: "Background",
-  title: "A studio born from building, not pitching.",
+  title: "Who is behind Quantex AI Solutions?",
   paragraphs: [
     "Abbas Hachem started Quantex AI Solutions after years of full-stack work across startups and client projects. The pattern was always the same—lots of talk about growth and visibility, but slow sites, weak crawlability, brittle chatbots, and codebases that were painful to extend after launch.",
     "Quantex is the opposite of that cycle. We scope in plain language, prototype the risky parts early, and deliver systems your team can run: technical SEO engineered at the source, Next.js sites tuned for Core Web Vitals, assistants trained on your content, internal tools shaped around real workflows, and integrations that remove manual steps instead of adding dashboards nobody opens.",
@@ -58,14 +58,15 @@ export const ABOUT_VALUES = [
 
 export const ABOUT_CAPABILITIES = {
   eyebrow: "Capabilities",
-  title: "Where we spend our time.",
+  title: "What can Quantex build?",
   lead: "Pick one lane or combine several—we design, build, and launch across the stack so your brand, product, and AI touchpoints stay aligned.",
 } as const;
 
 export const ABOUT_CTA = {
   eyebrow: "Next step",
-  title: "Tell us what you are building.",
-  lead: "Share a short brief on WhatsApp or through the contact form. We will respond with scope options and a realistic first milestone—no generic retainer pitch.",
-  primaryLabel: "Message on WhatsApp",
+  title: "How do I start a project with Quantex?",
+  lead: "Share a short brief. We will respond with scope options and a realistic first milestone—no generic retainer pitch.",
+  primaryLabel: "Send a brief",
+  primaryHref: "/contact",
   secondaryLabel: "Explore services",
 } as const;

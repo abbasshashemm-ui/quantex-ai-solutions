@@ -15,7 +15,7 @@ export function FaqSection() {
           id="faq-heading"
           className="section-heading mt-3 text-metallic-gradient"
         >
-          Common questions
+          What do people ask Quantex?
         </h2>
         <p className="mt-4 text-sm leading-relaxed text-foreground/65 sm:text-base">
           Straight answers about who we are, what we build, and how to get
@@ -30,15 +30,15 @@ export function FaqSection() {
           {SITE_FAQ.map((item) => (
             <li key={item.question}>
               <details className="faq-item glass-panel group">
-                <summary className="cursor-pointer list-none px-4 py-4 text-sm font-semibold text-foreground marker:content-none sm:px-5 sm:text-base [&::-webkit-details-marker]:hidden">
-                  <span className="flex items-center justify-between gap-4">
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-4 marker:content-none sm:px-5 [&::-webkit-details-marker]:hidden">
+                  <h3 className="text-sm font-semibold text-foreground sm:text-base">
                     {item.question}
-                    <span
-                      className="text-foreground/50 transition-transform group-open:rotate-45"
-                      aria-hidden
-                    >
-                      +
-                    </span>
+                  </h3>
+                  <span
+                    className="text-foreground/50 transition-transform group-open:rotate-45"
+                    aria-hidden
+                  >
+                    +
                   </span>
                 </summary>
                 <div className="border-t border-white/8 px-4 pb-4 pt-3 text-sm leading-relaxed text-foreground/70 sm:px-5 sm:pb-5">

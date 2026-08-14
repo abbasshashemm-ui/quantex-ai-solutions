@@ -17,7 +17,7 @@ export function ServicesSection() {
             id="services-heading"
             className="section-heading mt-3 max-w-2xl text-metallic-gradient"
           >
-            What we design and ship
+            What services does Quantex offer?
           </h2>
           <p className="mt-4 max-w-xl text-sm leading-relaxed text-foreground/65 sm:text-base">
             Websites, chatbots, software, and the systems around them—each

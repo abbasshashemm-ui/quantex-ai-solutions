@@ -1,8 +1,13 @@
 import type { Metadata } from "next";
-import { AboutPageShell } from "@/components/layout/AboutPageShell";
+import { AboutPageContent } from "@/components/sections/AboutPageContent";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { createPageMetadata } from "@/lib/seo/metadata";
-import { buildBreadcrumbSchema } from "@/lib/seo/json-ld";
+import {
+  buildBreadcrumbSchema,
+  buildPersonSchema,
+} from "@/lib/seo/json-ld";
+
+export const dynamic = "force-static";
 
 export const metadata: Metadata = createPageMetadata({
   title: "About",
@@ -16,12 +21,15 @@ export default function AboutPage() {
   return (
     <>
       <JsonLd
-        data={buildBreadcrumbSchema([
-          { name: "Home", path: "/" },
-          { name: "About", path: "/about" },
-        ])}
+        data={[
+          buildPersonSchema(),
+          buildBreadcrumbSchema([
+            { name: "Home", path: "/" },
+            { name: "About", path: "/about" },
+          ]),
+        ]}
       />
-      <AboutPageShell />
+      <AboutPageContent />
     </>
   );
 }

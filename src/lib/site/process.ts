@@ -1,6 +1,6 @@
 export const PROCESS = {
   eyebrow: "Process",
-  heading: "Brief to live, without the fog.",
+  heading: "How does a Quantex project run?",
   support:
     "You always know what we are building, what ships next, and what you owe.",
   stages: [

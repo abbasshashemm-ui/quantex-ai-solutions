@@ -1,4 +1,5 @@
 import { CapabilityMarquee } from "@/components/sections/CapabilityMarquee";
+import { DirectAnswer } from "@/components/sections/DirectAnswer";
 import { ExploreBand } from "@/components/sections/ExploreBand";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { HomeCta } from "@/components/sections/HomeCta";
@@ -10,6 +11,7 @@ export function HomePage() {
   return (
     <>
       <HeroSection />
+      <DirectAnswer />
       <CapabilityMarquee />
       <ServicesSection />
       <ProcessSection />

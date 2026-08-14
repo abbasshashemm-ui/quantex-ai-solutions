@@ -15,7 +15,7 @@ export function RecentProjectsSection() {
           <div className="max-w-2xl">
             <PageEyebrow>Work</PageEyebrow>
             <h2 id="projects-heading" className="section-heading text-metallic-gradient">
-              Live systems we shipped
+              What has Quantex shipped?
             </h2>
             <p className="mt-4 text-sm leading-relaxed text-foreground/65 sm:text-base">
               Live client systems—sites, operations software, and brands shipped

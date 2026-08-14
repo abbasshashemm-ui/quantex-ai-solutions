@@ -1,6 +1,6 @@
 # Quantex AI Solutions
 
-> Beirut-based studio (founded 2024). Crawl. Index. Rank.—technical SEO, Core Web Vitals, and search visibility engineered at the source, plus software, sites, and automation.
+> Beirut studio (founded 2024). High-converting websites and on-brand AI chatbots—plus custom software, automation, and technical SEO. Stack: Next.js, Vercel, Gemini, WhatsApp, Core Web Vitals, Google Search Console.
 
 ## Company
 
@@ -9,6 +9,7 @@
 - Location: Beirut, Lebanon
 - Email: abbas@quantexai.solutions
 - WhatsApp: +961 3 642 102
+- LinkedIn: https://www.linkedin.com/company/quantex-ai-solution/
 - Clients: 10+ businesses served
 
 ## Primary pages
@@ -30,7 +31,7 @@
 
 ## What we do
 
-Quantex AI Solutions engineers technical SEO and search visibility at the source, and ships production software—Next.js marketing sites, bespoke internal apps, AI assistants trained on client docs (WhatsApp and web), workflow automation, and cloud architecture.
+Quantex AI Solutions ships production software from Beirut: Next.js marketing sites on Vercel tuned for Core Web Vitals and Google Search Console, Gemini-powered assistants on WhatsApp and the web, bespoke internal apps, workflow automation, and cloud architecture.
 
 ## Contact
 

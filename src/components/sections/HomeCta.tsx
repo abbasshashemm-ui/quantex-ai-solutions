@@ -9,7 +9,7 @@ export function HomeCta() {
         <div className="home-cta__panel">
           <PageEyebrow align="center">Next step</PageEyebrow>
           <h2 className="section-heading mx-auto mt-4 max-w-2xl text-metallic-gradient">
-            Have a brief? We reply within 24 hours.
+            How do I start a project with Quantex?
           </h2>
           <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-foreground/70 sm:text-base">
             Share the product, the goal, and the timeline. We&apos;ll come back

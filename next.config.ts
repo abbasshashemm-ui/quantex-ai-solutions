@@ -1,6 +1,14 @@
 import type { NextConfig } from "next";
 
+const immutableAssetHeaders = [
+  {
+    key: "Cache-Control",
+    value: "public, max-age=31536000, immutable",
+  },
+];
+
 const nextConfig: NextConfig = {
+  compress: true,
   experimental: {
     optimizePackageImports: ["gsap", "@gsap/react", "ai", "@ai-sdk/react"],
   },
@@ -8,31 +16,30 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
   },
   async headers() {
+    const immutableSources = [
+      "/projects/:path*",
+      "/quantex-logo.png",
+      "/quantex-mark-reference.png",
+      "/favicon-16x16.png",
+      "/favicon-32x32.png",
+      "/apple-touch-icon.png",
+      "/icon-192.png",
+      "/icon-512.png",
+      "/globe.svg",
+      "/next.svg",
+    ];
+
     return [
+      ...immutableSources.map((source) => ({
+        source,
+        headers: immutableAssetHeaders,
+      })),
       {
-        source: "/projects/:path*",
+        source: "/llms.txt",
         headers: [
           {
             key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-      {
-        source: "/quantex-logo.png",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
-          },
-        ],
-      },
-      {
-        source: "/quantex-mark-reference.png",
-        headers: [
-          {
-            key: "Cache-Control",
-            value: "public, max-age=31536000, immutable",
+            value: "public, max-age=86400",
           },
         ],
       },

@@ -483,6 +483,20 @@ a.hero-meta__chip:hover {
   overflow: hidden;
 }
 
+.aeo-block {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 22rem;
+}
+
+.aeo-answer p {
+  text-wrap: pretty;
+}
+
+.faq-item summary h3 {
+  margin: 0;
+  font: inherit;
+}
+
 .chat-panel--terminal {
   display: flex;
   flex-direction: column;
