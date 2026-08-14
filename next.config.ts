@@ -10,10 +10,16 @@ const immutableAssetHeaders = [
 const nextConfig: NextConfig = {
   compress: true,
   experimental: {
-    optimizePackageImports: ["gsap", "@gsap/react", "ai", "@ai-sdk/react"],
+    optimizePackageImports: ["ai", "@ai-sdk/react"],
+    staleTimes: {
+      dynamic: 30,
+      static: 1800,
+    },
   },
   images: {
     formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 2678400,
+    qualities: [70],
   },
   async headers() {
     const immutableSources = [

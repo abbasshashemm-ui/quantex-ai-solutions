@@ -1393,6 +1393,8 @@ body:has(#home) .chat-widget {
 }
 
 .chat-panel__chip {
+  display: inline-flex;
+  align-items: center;
   border-radius: 999px;
   border: 1px solid color-mix(in srgb, var(--foreground) 14%, transparent);
   background: transparent;
@@ -1435,6 +1437,12 @@ body:has(#home) .chat-widget {
 }
 
 .chat-panel__input::placeholder {
+  color: color-mix(in srgb, var(--foreground) 48%, transparent);
+}
+
+span.chat-panel__input {
+  display: flex;
+  align-items: center;
   color: color-mix(in srgb, var(--foreground) 48%, transparent);
 }
 

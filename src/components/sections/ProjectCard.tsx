@@ -26,6 +26,7 @@ function ProjectCardContent({ project }: ProjectCardProps) {
             width={project.imageWidth}
             height={project.imageHeight}
             sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
+            quality={70}
           />
         </div>
       </div>

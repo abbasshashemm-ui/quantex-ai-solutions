@@ -1,10 +1,18 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
-import { ConversionTracker } from "@/components/analytics/ConversionTracker";
 import { HashScrollHandler } from "./HashScrollHandler";
 import { ScrollToTopOnNavigate } from "./ScrollToTopOnNavigate";
+
+const ConversionTracker = dynamic(
+  () =>
+    import("@/components/analytics/ConversionTracker").then((module) => ({
+      default: module.ConversionTracker,
+    })),
+  { ssr: false },
+);
 
 type AppProvidersProps = {
   children: ReactNode;
