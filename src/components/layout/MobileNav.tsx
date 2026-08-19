@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { CONTACT, SITE_NAV } from "@/lib/site/contact";
+import { CONTACT, SITE_NAV, WHATSAPP_CTA_LABEL } from "@/lib/site/contact";
 import { ServicesNavDropdown } from "./ServicesNavDropdown";
 
 const NAV_LINKS = SITE_NAV.filter(
@@ -90,7 +90,7 @@ export function MobileNav() {
                 className="btn-secondary flex w-full"
                 onClick={close}
               >
-                Chat on WhatsApp
+                {WHATSAPP_CTA_LABEL}
               </a>
             </li>
           </ul>

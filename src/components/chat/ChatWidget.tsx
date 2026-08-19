@@ -8,6 +8,7 @@ import {
   CONVERSION_EVENTS,
   trackConversion,
 } from "@/lib/analytics/events";
+import { PRODUCT } from "@/lib/site/product";
 
 const ChatPanel = dynamic(
   () => import("./ChatPanel").then((mod) => mod.ChatPanel),
@@ -103,13 +104,13 @@ export function ChatWidget() {
         onClick={toggleOpen}
         aria-expanded={open}
         aria-controls="quantex-chat-panel"
-        aria-label={open ? "Close chat" : "Open chat assistant"}
+        aria-label={open ? "Close chat" : `Try ${PRODUCT.name}`}
       >
         <BrandLogo
           variant="mark"
           className="chat-widget__mark h-7 w-auto"
         />
-        <span className="chat-widget__label">{open ? "Close" : "Chat"}</span>
+        <span className="chat-widget__label">{open ? "Close" : "Try it"}</span>
       </button>
     </div>
   );

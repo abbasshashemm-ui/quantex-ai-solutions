@@ -1,7 +1,8 @@
 import { SERVICES } from "@/lib/services/data";
 import { SITE_FAQ } from "@/lib/seo/faq";
 import { ABOUT_HERO, ABOUT_STORY, FOUNDER } from "@/lib/site/about";
-import { BUDGET_RANGES, CONTACT, COMPANY } from "@/lib/site/contact";
+import { BUDGET_RANGES, CONTACT, COMPANY, WHATSAPP_CTA_LABEL } from "@/lib/site/contact";
+import { PRODUCT } from "@/lib/site/product";
 
 const MAX_OVERVIEW_CHARS = 420;
 const MAX_CONTEXT_CHARS = 48_000;
@@ -51,6 +52,12 @@ export function buildSiteKnowledge(): string {
     `# ${COMPANY.name}`,
     COMPANY.tagline,
     "",
+    "## Product",
+    `${PRODUCT.name} is ${PRODUCT.priceLabel} (${PRODUCT.currency} ${PRODUCT.priceUsd} per ${PRODUCT.interval}).`,
+    PRODUCT.tagline,
+    `Start: ${PRODUCT.href}`,
+    `The on-site chat (including the home hero) is a live demo of ${PRODUCT.name}.`,
+    "",
     "## About",
     ABOUT_HERO.lead,
     formatStory(),
@@ -64,13 +71,13 @@ export function buildSiteKnowledge(): string {
     "",
     "## Contact",
     `Email: ${CONTACT.email}`,
-    `Phone / WhatsApp: ${CONTACT.phoneDisplay}`,
+    `${WHATSAPP_CTA_LABEL}: ${CONTACT.phoneDisplay} (${CONTACT.whatsapp})`,
     `Location: ${CONTACT.location}`,
     `Typical first response: within 24 hours.`,
     "",
-    "## Budget ranges (indicative — confirm on WhatsApp)",
+    "## Plans",
     formatBudgetRanges(),
-    "Exact pricing depends on scope; the assistant must not invent fixed prices.",
+    `${PRODUCT.name} is ${PRODUCT.priceLabel}. Custom builds have no published price; do not invent one.`,
   ];
 
   const context = sections.join("\n");

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
-import { SITE_NAV, CONTACT } from "@/lib/site/contact";
+import { SITE_NAV, CONTACT, WHATSAPP_CTA_LABEL } from "@/lib/site/contact";
 import { BrandLogo } from "./BrandLogo";
 import { MobileNav } from "./MobileNav";
 import { ServicesNavDropdown } from "./ServicesNavDropdown";
@@ -51,7 +51,7 @@ export function Navbar() {
             data-conversion-location="navbar"
             className="btn-secondary hidden sm:inline-flex sm:px-4 md:px-5"
           >
-            Book strategy call
+            {WHATSAPP_CTA_LABEL}
           </a>
           <MobileNav />
         </div>

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
-import { CONTACT, CONTACT_CHANNELS } from "@/lib/site/contact";
+import { CONTACT, CONTACT_CHANNELS, WHATSAPP_CTA_LABEL } from "@/lib/site/contact";
 import { ContactForm } from "./ContactForm";
 
 function ContactIcon({ id }: { id: string }) {
@@ -155,7 +155,7 @@ export function ContactSection() {
                   </p>
                   <p className="mt-1.5 text-sm leading-relaxed text-foreground/75">
                     Share as much context as you can—we&apos;ll reply with next
-                    steps or a link to book a strategy call on{" "}
+                    steps, or{" "}
                     <a
                       href={CONTACT.whatsapp}
                       target="_blank"
@@ -163,7 +163,7 @@ export function ContactSection() {
                       data-interactive
                       className="text-foreground underline-offset-2 hover:underline"
                     >
-                      WhatsApp
+                      {WHATSAPP_CTA_LABEL}
                     </a>
                     .
                   </p>

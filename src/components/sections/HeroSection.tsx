@@ -2,6 +2,7 @@ import Link from "next/link";
 import { HeroChat } from "@/components/chat/HeroChat";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
+import { PRODUCT } from "@/lib/site/product";
 
 export function HeroSection() {
   return (
@@ -24,22 +25,25 @@ export function HeroSection() {
             High-converting websites and on-brand AI assistants—built to
             perform, convert, and hand off to humans when it matters.
           </p>
+          <p>
+            {PRODUCT.name} is {PRODUCT.priceLabel}. {PRODUCT.tagline}
+          </p>
           <div className="hero-ctas">
             <a
-              href="#work"
+              href={PRODUCT.href}
               data-interactive
               data-conversion={CONVERSION_EVENTS.SOLUTIONS_CLICK}
               data-conversion-location="hero"
               className="btn-primary"
             >
-              See the work
+              {PRODUCT.ctaLabel}
             </a>
             <a
-              href="#solutions"
+              href="#work"
               data-interactive
               className="btn-secondary"
             >
-              Explore solutions
+              See the work
             </a>
           </div>
           <div className="hero-follow">

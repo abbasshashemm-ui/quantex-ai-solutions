@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { CONTACT } from "@/lib/site/contact";
+import { CONTACT, WHATSAPP_CTA_LABEL } from "@/lib/site/contact";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 
 export function HomeCta() {
@@ -40,7 +40,7 @@ export function HomeCta() {
               data-interactive
               className="text-foreground/80 underline-offset-2 hover:text-foreground hover:underline"
             >
-              Continue on WhatsApp
+              {WHATSAPP_CTA_LABEL}
             </a>
           </p>
         </div>

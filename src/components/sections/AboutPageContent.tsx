@@ -10,7 +10,7 @@ import {
   ABOUT_VALUES,
   FOUNDER,
 } from "@/lib/site/about";
-import { CONTACT } from "@/lib/site/contact";
+import { CONTACT, WHATSAPP_CTA_LABEL } from "@/lib/site/contact";
 import { SERVICES } from "@/lib/services/data";
 import { SOLUTIONS_OVERVIEW_HREF } from "@/lib/services/nav";
 
@@ -210,7 +210,7 @@ export function AboutPageContent() {
               data-interactive
               className="text-foreground/80 underline-offset-2 hover:text-foreground hover:underline"
             >
-              Continue on WhatsApp
+              {WHATSAPP_CTA_LABEL}
             </a>
           </p>
         </section>

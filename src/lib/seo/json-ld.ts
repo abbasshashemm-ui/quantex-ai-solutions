@@ -2,6 +2,7 @@ import { SERVICES, type Service } from "@/lib/services/data";
 import { SITE_FAQ, type FaqItem } from "./faq";
 import { absoluteUrl } from "./metadata";
 import { SITE, getSiteUrl } from "./site";
+import { PRODUCT } from "@/lib/site/product";
 
 type JsonLd = Record<string, unknown>;
 
@@ -56,14 +57,6 @@ export function buildWebSiteSchema(): JsonLd {
     description: SITE.description,
     publisher: { "@id": `${getSiteUrl()}/#organization` },
     inLanguage: "en",
-    potentialAction: {
-      "@type": "SearchAction",
-      target: {
-        "@type": "EntryPoint",
-        urlTemplate: `${getSiteUrl()}/contact?q={search_term_string}`,
-      },
-      "query-input": "required name=search_term_string",
-    },
   };
 }
 
@@ -86,6 +79,27 @@ export function buildOfferCatalogSchema(): JsonLd {
   };
 }
 
+export function buildProductSchema(): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "@id": `${getSiteUrl()}/#${PRODUCT.id}`,
+    name: PRODUCT.name,
+    applicationCategory: "BusinessApplication",
+    operatingSystem: "Web",
+    description: PRODUCT.tagline,
+    url: absoluteUrl(PRODUCT.href),
+    offers: {
+      "@type": "Offer",
+      price: String(PRODUCT.priceUsd),
+      priceCurrency: PRODUCT.currency,
+      url: absoluteUrl(PRODUCT.href),
+      availability: "https://schema.org/InStock",
+    },
+    provider: { "@id": `${getSiteUrl()}/#organization` },
+  };
+}
+
 export function buildProfessionalServiceSchema(): JsonLd {
   return {
     "@context": "https://schema.org",
@@ -97,7 +111,7 @@ export function buildProfessionalServiceSchema(): JsonLd {
     description: SITE.description,
     email: SITE.email,
     telephone: SITE.phone,
-    priceRange: "$$",
+    priceRange: PRODUCT.priceLabel,
     address: {
       "@type": "PostalAddress",
       addressLocality: "Beirut",
@@ -105,6 +119,14 @@ export function buildProfessionalServiceSchema(): JsonLd {
     },
     parentOrganization: { "@id": `${getSiteUrl()}/#organization` },
     hasOfferCatalog: { "@id": `${getSiteUrl()}/#offer-catalog` },
+    makesOffer: {
+      "@type": "Offer",
+      name: PRODUCT.name,
+      price: String(PRODUCT.priceUsd),
+      priceCurrency: PRODUCT.currency,
+      url: absoluteUrl(PRODUCT.href),
+      availability: "https://schema.org/InStock",
+    },
     areaServed: ["Beirut", "Lebanon", "Middle East"],
     knowsAbout: [
       "Custom software development",
@@ -172,6 +194,8 @@ export function buildBreadcrumbSchema(
 }
 
 export function buildServiceSchema(service: Service): JsonLd {
+  const isProduct = service.slug === PRODUCT.serviceSlug;
+
   return {
     "@context": "https://schema.org",
     "@type": "Service",
@@ -182,11 +206,20 @@ export function buildServiceSchema(service: Service): JsonLd {
     provider: { "@id": `${getSiteUrl()}/#organization` },
     areaServed: ["LB", "Middle East", "Worldwide"],
     serviceType: service.title,
-    offers: {
-      "@type": "Offer",
-      availability: "https://schema.org/InStock",
-      url: absoluteUrl("/contact"),
-    },
+    offers: isProduct
+      ? {
+          "@type": "Offer",
+          name: PRODUCT.name,
+          price: String(PRODUCT.priceUsd),
+          priceCurrency: PRODUCT.currency,
+          availability: "https://schema.org/InStock",
+          url: absoluteUrl(PRODUCT.href),
+        }
+      : {
+          "@type": "Offer",
+          availability: "https://schema.org/InStock",
+          url: absoluteUrl("/contact"),
+        },
   };
 }
 
@@ -195,6 +228,7 @@ export function buildGlobalSchemas(): JsonLd[] {
     buildPersonSchema(),
     buildOrganizationSchema(),
     buildWebSiteSchema(),
+    buildProductSchema(),
     buildOfferCatalogSchema(),
     buildProfessionalServiceSchema(),
   ];

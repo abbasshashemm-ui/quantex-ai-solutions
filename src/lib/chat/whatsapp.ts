@@ -1,4 +1,5 @@
 import { CONTACT } from "@/lib/site/contact";
+import { PRODUCT } from "@/lib/site/product";
 
 const MAX_WHATSAPP_TEXT = 800;
 
@@ -7,7 +8,7 @@ export function buildWhatsAppQuoteUrl(topic?: string): string {
   const text = truncateWhatsAppText(
     topic?.trim()
       ? `Hi Quantex — I'd like a quote. ${topic}`
-      : "Hi Quantex — I'd like to discuss a project and get a quote.",
+      : `Hi Quantex — I want to start ${PRODUCT.name} at ${PRODUCT.priceLabel}.`,
   );
   const url = new URL(base);
   url.searchParams.set("text", text);

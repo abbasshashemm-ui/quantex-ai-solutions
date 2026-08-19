@@ -6,7 +6,7 @@ import {
   type ChangeEvent,
   type FormEvent,
 } from "react";
-import { CONTACT } from "@/lib/site/contact";
+import { CONTACT, BUDGET_RANGES, WHATSAPP_CTA_LABEL } from "@/lib/site/contact";
 import { PRIVACY_POLICY } from "@/lib/site/legal/privacy-policy";
 import {
   CONVERSION_EVENTS,
@@ -35,12 +35,15 @@ const inputClassName =
   "mt-1.5 block w-full rounded-xl border border-white/12 bg-surface-elevated px-3.5 py-2.5 text-sm text-foreground outline-none transition placeholder:text-foreground/45 focus:border-white/35 focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--metallic)_16%,transparent)]";
 
 function buildWhatsAppBody(data: ContactFormFields) {
+  const plan = BUDGET_RANGES.find((item) => item.value === data.budget);
+
   return [
     "Hi QUANTEX,",
     "",
     `Name: ${data.name}`,
     `Email: ${data.email}`,
     data.phone ? `Phone: ${data.phone}` : null,
+    plan?.value ? `Plan: ${plan.label}` : null,
     "",
     data.message,
   ]
@@ -54,7 +57,7 @@ export function ContactForm() {
 
   const update =
     (field: keyof ContactFormFields) =>
-    (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
       const sanitized = sanitizeContactField(field, e.target.value);
       setForm((prev) => ({ ...prev, [field]: sanitized }));
       setError(null);
@@ -148,6 +151,23 @@ export function ContactForm() {
         </label>
 
         <label className="contact-form__field block">
+          <span className="contact-form__label">Plan</span>
+          <select
+            name="budget"
+            value={form.budget}
+            onChange={update("budget")}
+            data-interactive
+            className={`${inputClassName} appearance-none`}
+          >
+            {BUDGET_RANGES.map((range) => (
+              <option key={range.value || "empty"} value={range.value}>
+                {range.label}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <label className="contact-form__field block">
           <span className="contact-form__label">Message *</span>
           <textarea
             name="message"
@@ -171,7 +191,7 @@ export function ContactForm() {
 
         <p className="text-xs leading-relaxed text-foreground/60">
           By submitting, you agree we may use your name, email, phone number,
-          and message to respond to your inquiry. Sending opens WhatsApp, where
+          and message to respond to your inquiry. Sending opens {WHATSAPP_CTA_LABEL}, where
           their privacy terms also apply. See our{" "}
           <Link
             href={PRIVACY_POLICY.path}

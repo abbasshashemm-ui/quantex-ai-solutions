@@ -15,13 +15,15 @@ import {
 } from "@/lib/analytics/events";
 import { buildWhatsAppQuoteUrl } from "@/lib/chat/whatsapp";
 import { CHAT_MESSAGE_LIMITS } from "@/lib/sanitize/chat-message";
+import { WHATSAPP_CTA_LABEL } from "@/lib/site/contact";
+import { PRODUCT } from "@/lib/site/product";
 import { ChatMessage } from "./ChatMessage";
 import { useSalesChat } from "./useSalesChat";
 
 const QUICK_REPLIES = [
-  { label: "Build a website", send: true },
-  { label: "AI chatbots", send: true },
-  { label: "Get a quote", send: false },
+  { label: "What is this?", send: true },
+  { label: `What's included in ${PRODUCT.priceLabel}?`, send: true },
+  { label: PRODUCT.ctaLabel, send: false },
 ] as const;
 
 type ChatPanelProps = {
@@ -102,11 +104,9 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
             <BrandLogo variant="mark" className="h-5 w-auto" />
           </span>
           <div>
-            <p className="chat-panel__title">
-              {isTerminal ? "Ask Quantex" : "QUANTEX Assistant"}
-            </p>
+            <p className="chat-panel__title">{PRODUCT.name}</p>
             <p className="chat-panel__subtitle">
-              {isTerminal ? "Websites, chatbots & quotes" : "Audits & quotes"}
+              Live demo · {PRODUCT.priceLabel}
             </p>
           </div>
         </div>
@@ -116,7 +116,7 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
             className="chat-panel__whatsapp"
             onClick={() => openWhatsApp()}
           >
-            {isTerminal ? "WhatsApp" : "Chat on WhatsApp"}
+            {WHATSAPP_CTA_LABEL}
           </button>
           {onClose ? (
             <button
@@ -133,8 +133,8 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
 
       {isTerminal ? (
         <p className="chat-panel__purpose">
-          Talk to our AI sales bot—ask about websites, AI chatbots, timelines,
-          and how we ship.
+          Live demo of {PRODUCT.name} at {PRODUCT.priceLabel}. Ask how it works
+          on your docs, site, or WhatsApp.
         </p>
       ) : null}
 
@@ -185,11 +185,7 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
           onChange={(event) => setInput(event.target.value)}
           onFocus={isTerminal ? markOpened : undefined}
           onKeyDown={handleKeyDown}
-          placeholder={
-            isTerminal
-              ? "Ask about websites, chatbots, or pricing…"
-              : "Ask about services or timelines…"
-          }
+          placeholder={`Ask how ${PRODUCT.name} works…`}
           rows={isTerminal ? 1 : 2}
           maxLength={CHAT_MESSAGE_LIMITS.maxLength}
           disabled={isBusy}
@@ -209,7 +205,7 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
           className="chat-panel__footer-whatsapp"
           onClick={() => openWhatsApp()}
         >
-          Prefer WhatsApp? Continue there →
+          {WHATSAPP_CTA_LABEL} →
         </button>
       </footer>
     </div>

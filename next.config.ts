@@ -51,6 +51,21 @@ const nextConfig: NextConfig = {
       },
     ];
   },
+  async redirects() {
+    const origin = "https://quantexai.solutions";
+    const hosts = [
+      "www.quantexai.solutions",
+      "quantexai.info",
+      "www.quantexai.info",
+    ];
+
+    return hosts.map((host) => ({
+      source: "/:path*",
+      has: [{ type: "host" as const, value: host }],
+      destination: `${origin}/:path*`,
+      permanent: true,
+    }));
+  },
 };
 
 export default nextConfig;

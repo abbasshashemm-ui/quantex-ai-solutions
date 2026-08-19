@@ -10,7 +10,7 @@ export const dynamic = "force-static";
 export const metadata = createPageMetadata({
   title: SITE.name,
   description:
-    "Web. Chatbots. Ship. Quantex AI Solutions builds high-converting websites and on-brand AI chatbots—plus software and automation that ship.",
+    "Web. Chatbots. Ship. Quantex Assistant is $29/mo. Quantex AI Solutions also builds high-converting websites and on-brand AI chatbots—plus software and automation that ship.",
   path: "/",
   keywords: [
     "web development Lebanon",

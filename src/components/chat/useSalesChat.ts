@@ -4,11 +4,11 @@ import { useChat } from "@ai-sdk/react";
 import { DefaultChatTransport, type UIMessage } from "ai";
 import { useMemo } from "react";
 
-const WELCOME_TEXT =
-  "Hi—ask about our services, timelines, or how to get started.";
+import { PRODUCT } from "@/lib/site/product";
 
-const TERMINAL_WELCOME_TEXT =
-  "I’m the Quantex AI assistant. Ask about websites, AI chatbots, timelines, or pricing—I’ll help you pick the right build.";
+const WELCOME_TEXT = `You're talking to ${PRODUCT.name} — ${PRODUCT.priceLabel}. Ask how it works on your docs, site, or WhatsApp.`;
+
+const TERMINAL_WELCOME_TEXT = `This is ${PRODUCT.name} at ${PRODUCT.priceLabel}. Ask how it works on your docs, website, or WhatsApp.`;
 
 const baseWelcome: UIMessage = {
   id: "welcome",

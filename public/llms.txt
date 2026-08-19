@@ -1,6 +1,6 @@
 # Quantex AI Solutions
 
-> Beirut studio (founded 2024). High-converting websites and on-brand AI chatbots—plus custom software, automation, and technical SEO. Stack: Next.js, Vercel, Gemini, WhatsApp, Core Web Vitals, Google Search Console.
+> Beirut studio (founded 2024). Flagship product: Quantex Assistant at $29/mo. Also high-converting websites, custom software, automation, and technical SEO. Stack: Next.js, Vercel, Gemini, WhatsApp, Core Web Vitals, Google Search Console.
 
 ## Company
 
@@ -9,8 +9,16 @@
 - Location: Beirut, Lebanon
 - Email: abbas@quantexai.solutions
 - WhatsApp: +961 3 642 102
+- Canonical: https://quantexai.solutions
 - LinkedIn: https://www.linkedin.com/company/quantex-ai-solution/
 - Clients: 10+ businesses served
+
+## Product
+
+- Quantex Assistant: $29/mo
+- On-brand AI assistant trained on your docs. Live on your website or WhatsApp.
+- Page: /services/custom-intelligent-chatbots
+- The on-site chat (including the home hero) is a live demo of this product.
 
 ## Primary pages
 
@@ -31,7 +39,7 @@
 
 ## What we do
 
-Quantex AI Solutions ships production software from Beirut: Next.js marketing sites on Vercel tuned for Core Web Vitals and Google Search Console, Gemini-powered assistants on WhatsApp and the web, bespoke internal apps, workflow automation, and cloud architecture.
+Quantex Assistant is the self-serve SKU. Custom work includes Next.js marketing sites on Vercel, Gemini-powered assistants, bespoke internal apps, workflow automation, and cloud architecture.
 
 ## Contact
 
