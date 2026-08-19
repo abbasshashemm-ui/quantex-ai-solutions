@@ -1,4 +1,5 @@
-import { CONTACT } from "@/lib/site/contact";
+import { CONTACT, WHATSAPP_CTA_LABEL } from "@/lib/site/contact";
+import { PRODUCT } from "@/lib/site/product";
 
 export type FaqItem = {
   question: string;
@@ -29,7 +30,11 @@ export const SITE_FAQ: FaqItem[] = [
   {
     question: "How do I contact Quantex AI Solutions?",
     answer:
-      `Visit the contact page at quantexai.solutions/contact, email ${CONTACT.email}, or message the team on WhatsApp. Typical first response is within 24 hours.`,
+      `Visit the contact page at https://quantexai.solutions/contact, email ${CONTACT.email}, or ${WHATSAPP_CTA_LABEL}. Typical first response is within 24 hours.`,
+  },
+  {
+    question: `How much does ${PRODUCT.name} cost?`,
+    answer: `${PRODUCT.name} is ${PRODUCT.priceLabel}. ${PRODUCT.tagline} Custom software and sites are scoped separately.`,
   },
   {
     question: "Where is Quantex based?",

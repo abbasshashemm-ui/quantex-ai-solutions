@@ -4,14 +4,15 @@ import { ContactSection } from "@/components/sections/ContactSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import { buildBreadcrumbSchema } from "@/lib/seo/json-ld";
-import { CONTACT } from "@/lib/site/contact";
+import { CONTACT, WHATSAPP_CTA_LABEL } from "@/lib/site/contact";
+import { PRODUCT } from "@/lib/site/product";
 
 export const dynamic = "force-static";
 
 export const metadata: Metadata = createPageMetadata({
   title: "Contact",
   description:
-    `Contact Quantex AI Solutions about visibility audits, technical SEO, sites, software, and automation. Email ${CONTACT.email} or message on WhatsApp—we respond within 24 hours.`,
+    `Start ${PRODUCT.name} at ${PRODUCT.priceLabel}, or contact Quantex about a custom build. Email ${CONTACT.email} or ${WHATSAPP_CTA_LABEL}—we respond within 24 hours.`,
   path: "/contact",
   keywords: ["contact Quantex", "visibility audit", "technical SEO Beirut"],
 });

@@ -4,10 +4,9 @@ Marketing site for QUANTEX — Next.js 16, React 19, Tailwind CSS 4, GSAP.
 
 ## Environment
 
-Copy `.env.example` to `.env.local` and set your production URL for SEO (canonicals, Open Graph, sitemap):
+Copy `.env.local` if you need a Gemini key. Canonical URLs, Open Graph, JSON-LD, robots.txt, and the sitemap always use `https://quantexai.solutions` — preview hosts are ignored so they cannot leak into production metadata.
 
 ```bash
-NEXT_PUBLIC_SITE_URL=https://www.quantexai.solutions
 GEMINI_API_KEY=your_google_ai_studio_key
 ```
 

@@ -1,6 +1,5 @@
-export const SITE_URL = "https://www.quantexai.solutions";
+export const SITE_URL = "https://quantexai.solutions";
 export const SITE_HOST = "quantexai.solutions";
-export const LEGACY_SITE_URL = "https://www.quantexai.info";
 
 export const COMPANY = {
   name: "Quantex AI Solutions",
@@ -19,12 +18,12 @@ export const CONTACT = {
   linkedin: "https://www.linkedin.com/company/quantex-ai-solution/",
 } as const;
 
+export const WHATSAPP_CTA_LABEL = "Chat on WhatsApp";
+
 export const BUDGET_RANGES = [
-  { value: "", label: "Select a range" },
-  { value: "under-5k", label: "Under $5,000" },
-  { value: "5k-15k", label: "$5,000 – $15,000" },
-  { value: "15k-50k", label: "$15,000 – $50,000" },
-  { value: "50k-plus", label: "$50,000+" },
+  { value: "", label: "Select a plan" },
+  { value: "assistant-29", label: "Quantex Assistant — $29/mo" },
+  { value: "custom", label: "Custom build" },
   { value: "not-sure", label: "Not sure yet" },
 ] as const;
 
@@ -66,7 +65,7 @@ export const CONTACT_LINKS = [
     external: false,
   },
   {
-    label: "Chat on WhatsApp",
+    label: WHATSAPP_CTA_LABEL,
     href: CONTACT.whatsapp,
     external: true,
   },
@@ -74,11 +73,6 @@ export const CONTACT_LINKS = [
     label: CONTACT.phoneDisplay,
     href: `tel:${CONTACT.phoneTel}`,
     external: false,
-  },
-  {
-    label: "Book strategy call",
-    href: CONTACT.whatsapp,
-    external: true,
   },
 ] as const;
 

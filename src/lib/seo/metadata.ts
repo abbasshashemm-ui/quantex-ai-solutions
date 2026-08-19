@@ -12,6 +12,7 @@ type PageMetadataOptions = {
 
 export function absoluteUrl(path: string): string {
   const base = getSiteUrl();
+  if (path === "/" || path === "") return base;
   const normalized = path.startsWith("/") ? path : `/${path}`;
   return `${base}${normalized}`;
 }

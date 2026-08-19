@@ -272,9 +272,9 @@ export const SERVICES: Service[] = [
       icon: "chat",
     },
     overview:
-      "Generic chat widgets frustrate users when answers are wrong or off-brand. We build assistants trained on your docs, products, and policies—wired into WhatsApp, web chat, or internal tools—so responses stay accurate, on-tone, and escalated to humans when the situation requires it.",
+      "Generic chat widgets frustrate users when answers are wrong or off-brand. Quantex Assistant is $29/mo: trained on your docs, products, and policies—wired into WhatsApp, web chat, or internal tools—so responses stay accurate, on-tone, and escalated to humans when the situation requires it.",
     detail: {
-      highlights: ["On-brand answers", "Human handoff", "Admin controls"],
+      highlights: ["$29/mo", "On-brand answers", "Human handoff"],
       deliverables: [
         "Assistant trained on your docs, products, and policies",
         "Guardrails, logging, and escalation to your team",

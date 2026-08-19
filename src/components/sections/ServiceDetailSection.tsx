@@ -3,7 +3,8 @@ import { ServiceNavIcon } from "@/components/layout/ServiceNavIcon";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import type { Service } from "@/lib/services/data";
 import { SOLUTIONS_OVERVIEW_HREF, getRelatedNavServices } from "@/lib/services/nav";
-import { CONTACT } from "@/lib/site/contact";
+import { CONTACT, WHATSAPP_CTA_LABEL } from "@/lib/site/contact";
+import { PRODUCT } from "@/lib/site/product";
 
 type ServiceDetailSectionProps = {
   service: Service;
@@ -71,7 +72,9 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
                 data-interactive
                 className="btn-primary"
               >
-                Send a brief
+                {service.slug === PRODUCT.serviceSlug
+                  ? PRODUCT.ctaLabel
+                  : "Send a brief"}
               </Link>
               <a
                 href={CONTACT.whatsapp}
@@ -80,7 +83,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
                 data-interactive
                 className="btn-secondary"
               >
-                Continue on WhatsApp
+                {WHATSAPP_CTA_LABEL}
               </a>
             </div>
           </div>
@@ -119,7 +122,9 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
                   Delivery
                 </dt>
                 <dd className="mt-1 text-xs font-medium text-foreground sm:text-sm">
-                  Phased
+                  {service.slug === PRODUCT.serviceSlug
+                    ? PRODUCT.priceLabel
+                    : "Phased"}
                 </dd>
               </div>
               <div>
@@ -269,7 +274,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
               data-interactive
               className="btn-secondary w-full max-w-xs sm:w-auto"
             >
-              Continue on WhatsApp
+              {WHATSAPP_CTA_LABEL}
             </a>
           </div>
           <p className="mt-5 text-sm text-foreground/55">

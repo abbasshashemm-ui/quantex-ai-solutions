@@ -6,6 +6,7 @@ import {
   CONTACT_LINKS,
   FOOTER_LEGAL,
   FOOTER_NAV,
+  WHATSAPP_CTA_LABEL,
 } from "@/lib/site/contact";
 
 export function Footer() {
@@ -88,7 +89,7 @@ export function Footer() {
                   href={CONTACT.whatsapp}
                   target="_blank"
                   rel="noopener noreferrer"
-                  aria-label="WhatsApp"
+                  aria-label={WHATSAPP_CTA_LABEL}
                   className="footer-social inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/18 text-foreground/85 transition-colors hover:border-white/40 hover:bg-white/8 hover:text-foreground"
                 >
                   <svg
