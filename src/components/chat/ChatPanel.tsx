@@ -98,16 +98,18 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
     >
       <header className="chat-panel__header">
         <div className="chat-panel__title-wrap">
-          <span className="chat-panel__mark" aria-hidden>
-            <BrandLogo variant="mark" className="h-5 w-auto" />
-          </span>
+          {isTerminal ? null : (
+            <span className="chat-panel__mark" aria-hidden>
+              <BrandLogo variant="mark" className="h-5 w-auto" />
+            </span>
+          )}
           <div>
             <p className="chat-panel__title">
-              {isTerminal ? "Ask Quantex" : "QUANTEX Assistant"}
+              {isTerminal ? "Ask" : "QUANTEX Assistant"}
             </p>
-            <p className="chat-panel__subtitle">
-              {isTerminal ? "Websites, chatbots & quotes" : "Audits & quotes"}
-            </p>
+            {isTerminal ? null : (
+              <p className="chat-panel__subtitle">Audits & quotes</p>
+            )}
           </div>
         </div>
         <div className="chat-panel__header-actions">
@@ -130,13 +132,6 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
           ) : null}
         </div>
       </header>
-
-      {isTerminal ? (
-        <p className="chat-panel__purpose">
-          Talk to our AI sales bot—ask about websites, AI chatbots, timelines,
-          and how we ship.
-        </p>
-      ) : null}
 
       <div ref={listRef} className="chat-panel__messages">
         {messages.map((message) => (
@@ -185,11 +180,7 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
           onChange={(event) => setInput(event.target.value)}
           onFocus={isTerminal ? markOpened : undefined}
           onKeyDown={handleKeyDown}
-          placeholder={
-            isTerminal
-              ? "Ask about websites, chatbots, or pricing…"
-              : "Ask about services or timelines…"
-          }
+          placeholder={isTerminal ? "Message" : "Ask about services or timelines…"}
           rows={isTerminal ? 1 : 2}
           maxLength={CHAT_MESSAGE_LIMITS.maxLength}
           disabled={isBusy}
@@ -209,7 +200,7 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
           className="chat-panel__footer-whatsapp"
           onClick={() => openWhatsApp()}
         >
-          Prefer WhatsApp? Continue there →
+          {isTerminal ? "WhatsApp" : "Prefer WhatsApp? Continue there →"}
         </button>
       </footer>
     </div>

@@ -18,10 +18,6 @@ export function HomePage() {
           <h2 id="ask-heading" className="ask-bay__title">
             Ask the machine.
           </h2>
-          <p>
-            Websites, chatbots, timelines, and pricing. When the answer needs
-            a person, it hands off.
-          </p>
         </div>
         <HeroChat />
       </section>

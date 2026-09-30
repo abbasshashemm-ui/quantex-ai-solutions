@@ -2111,11 +2111,11 @@ span.chat-panel__input {
 
 .ask-bay {
   display: grid;
-  gap: 1.75rem;
+  gap: 1.5rem;
   align-items: center;
-  padding: 3rem 1.25rem;
-  background: #12141a;
-  border-top: 3px solid #c5cad2;
+  padding: 2.5rem 1.25rem;
+  background: #0c0d10;
+  border-top: 1px solid #c5cad2;
 }
 
 @media (min-width: 960px) {
@@ -2136,24 +2136,106 @@ span.chat-panel__input {
   text-transform: uppercase;
 }
 
-.ask-bay__copy p:last-child {
-  max-width: 28rem;
-  margin-top: 1rem;
-  color: color-mix(in srgb, var(--paper) 72%, transparent);
-  line-height: 1.55;
-}
-
 .ask-bay .hero-chat {
   width: 100%;
   max-width: none;
   height: auto;
-  min-height: 28rem;
+  min-height: 0;
   margin-inline: 0;
   justify-self: stretch;
-  border-radius: 2px;
-  border-top: 3px solid #c5cad2;
+  border-radius: 0;
+  border: 1px solid #c5cad2;
   box-shadow: none;
-  background: #101114;
+  background: #0c0d10;
+  background-image: var(--screw), var(--screw), var(--screw), var(--screw);
+  background-repeat: no-repeat;
+  background-size: 11px 11px;
+  background-position:
+    6px 6px,
+    calc(100% - 6px) 6px,
+    6px calc(100% - 6px),
+    calc(100% - 6px) calc(100% - 6px);
+}
+
+.ask-bay .chat-panel--terminal .chat-panel__header,
+.ask-bay .chat-panel--terminal .chat-panel__messages,
+.ask-bay .chat-panel--terminal .chat-panel__quick-replies,
+.ask-bay .chat-panel--terminal .chat-panel__form,
+.ask-bay .chat-panel--terminal .chat-panel__footer {
+  background: transparent;
+}
+
+.ask-bay .chat-panel__title {
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+.ask-bay .chat-panel__whatsapp,
+.ask-bay .chat-panel__chip,
+.ask-bay .chat-panel__input,
+.ask-bay .chat-message,
+.ask-bay .chat-message--user,
+.ask-bay .chat-panel--terminal .chat-message,
+.ask-bay .chat-panel--terminal .chat-message--user,
+.ask-bay .chat-panel--terminal .chat-message--assistant {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.ask-bay .chat-message,
+.ask-bay .chat-panel--terminal .chat-message,
+.ask-bay .chat-panel--terminal .chat-message--assistant,
+.ask-bay .chat-panel--terminal .chat-message--user {
+  align-self: stretch;
+  width: auto;
+  max-width: none;
+  padding: 0.7rem 0;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid color-mix(in srgb, var(--paper) 16%, transparent);
+  color: var(--paper);
+}
+
+.ask-bay .chat-message--user .chat-message__text,
+.ask-bay .chat-panel--terminal .chat-message--user .chat-message__text {
+  color: var(--paper);
+}
+
+.ask-bay .chat-panel__chip {
+  min-height: 2rem;
+  border-radius: 0;
+  padding: 0.25rem 0.6rem;
+  font-family: var(--font-plex-mono), ui-monospace, monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.ask-bay .chat-panel__input,
+.ask-bay .chat-panel--terminal .chat-panel__input {
+  border-radius: 0;
+  border-width: 0 0 1px;
+  background: transparent;
+  box-shadow: none;
+  min-height: 2.4rem;
+  padding-inline: 0;
+}
+
+.ask-bay .chat-panel__send.btn-primary {
+  min-height: 2.4rem;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.ask-bay .chat-panel__send.btn-primary::before {
+  display: none;
+}
+
+.ask-bay .chat-panel__footer {
+  display: none;
 }
 
 .instrument-frame img {
@@ -2324,3 +2406,4 @@ span.chat-panel__input {
     8px calc(100% - 8px),
     calc(100% - 8px) calc(100% - 8px);
 }
+
