@@ -19,7 +19,7 @@ const nextConfig: NextConfig = {
   images: {
     formats: ["image/avif", "image/webp"],
     minimumCacheTTL: 2678400,
-    qualities: [70],
+    qualities: [70, 90],
   },
   async headers() {
     const immutableSources = [

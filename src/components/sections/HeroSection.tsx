@@ -14,7 +14,7 @@ export function HeroSection() {
           alt={chassis.alt}
           fill
           priority
-          quality={70}
+          quality={90}
           sizes="100vw"
           className="poster__photo"
           style={{ ["--plate-position" as string]: chassis.position }}

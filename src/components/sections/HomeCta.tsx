@@ -12,7 +12,7 @@ export function HomeCta() {
           src={MACHINES.knob.src}
           alt=""
           fill
-          quality={70}
+          quality={90}
           sizes="100vw"
           className="poster__photo"
           style={{ objectPosition: "right center" }}

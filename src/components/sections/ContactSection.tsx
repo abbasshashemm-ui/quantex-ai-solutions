@@ -107,7 +107,7 @@ export function ContactSection() {
             src={MACHINES.switches.src}
             alt={MACHINES.switches.alt}
             fill
-            quality={70}
+            quality={90}
             sizes="100vw"
             className="poster__photo"
           />

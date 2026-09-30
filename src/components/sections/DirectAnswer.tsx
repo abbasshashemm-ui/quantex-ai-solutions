@@ -69,7 +69,7 @@ export function DirectAnswer() {
           src={readout.src}
           alt={readout.alt}
           fill
-          quality={70}
+          quality={90}
           sizes="(max-width: 900px) 100vw, 40vw"
           className="poster__photo"
         />

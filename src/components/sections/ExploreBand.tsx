@@ -45,7 +45,7 @@ export function ExploreBand() {
                 src={path.image.src}
                 alt=""
                 fill
-                quality={70}
+                quality={90}
                 sizes="(max-width: 640px) 100vw, 30vw"
                 className="poster__photo"
               />

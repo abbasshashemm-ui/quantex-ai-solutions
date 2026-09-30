@@ -16,7 +16,7 @@ export function ProcessSection() {
           src={MACHINES.toggles.src}
           alt={MACHINES.toggles.alt}
           fill
-          quality={70}
+          quality={90}
           sizes="100vw"
           className="poster__photo"
         />

@@ -42,7 +42,7 @@ export function MachinePlate({
             alt={machine.alt}
             fill
             priority={priority}
-            quality={70}
+            quality={90}
             sizes="100vw"
             className="poster__photo"
             style={{ ["--plate-position" as string]: machine.position }}

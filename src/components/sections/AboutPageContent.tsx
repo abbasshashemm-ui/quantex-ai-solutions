@@ -47,7 +47,7 @@ export function AboutPageContent() {
               src={MACHINES.bots.src}
               alt={MACHINES.bots.alt}
               fill
-              quality={70}
+              quality={90}
               sizes="(max-width: 900px) 100vw, 40vw"
               className="poster__photo"
               priority
@@ -181,7 +181,7 @@ export function AboutPageContent() {
                         src={machine.src}
                         alt=""
                         fill
-                        quality={70}
+                        quality={90}
                         sizes="104px"
                         className="poster__photo"
                       />
