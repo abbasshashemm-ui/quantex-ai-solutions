@@ -40,8 +40,8 @@ export function HeroSection() {
           >
             Send a brief
           </Link>
-          <a href="#work" data-interactive className="btn-secondary">
-            See the work
+          <a href="#solutions" data-interactive className="btn-secondary">
+            Explore solutions
           </a>
         </div>
       </div>

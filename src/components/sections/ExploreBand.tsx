@@ -4,10 +4,10 @@ import { MACHINES } from "@/lib/site/machines";
 
 const PATHS = [
   {
-    href: "#work",
-    eyebrow: "Work",
-    title: "See what shipped",
-    body: "Live sites and internal tools. Open a build, then keep going.",
+    href: "/#solutions",
+    eyebrow: "Machines",
+    title: "Open a plate",
+    body: "Six builds. Pick the one that matches the job.",
     image: MACHINES.vents,
   },
   {

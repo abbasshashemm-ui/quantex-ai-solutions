@@ -92,8 +92,8 @@ export function ContactSection() {
           </p>
           <p className="mt-4 text-sm text-foreground/55">
             Still browsing?{" "}
-            <Link href="/#work" className="text-foreground/80 underline-offset-2 hover:underline">
-              See the work
+            <Link href="/#solutions" className="text-foreground/80 underline-offset-2 hover:underline">
+              See the machines
             </Link>
             {" · "}
             <Link href="/about" className="text-foreground/80 underline-offset-2 hover:underline">
