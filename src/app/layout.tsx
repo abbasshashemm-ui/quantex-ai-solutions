@@ -1,20 +1,13 @@
 import type { Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Barlow_Condensed, IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
+import { IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildGlobalSchemas } from "@/lib/seo/json-ld";
 import { rootMetadata } from "@/lib/seo/metadata";
 import "./globals.css";
-
-const display = Barlow_Condensed({
-  variable: "--font-display-face",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["600", "700", "800"],
-});
 
 const plex = IBM_Plex_Sans({
   variable: "--font-plex",
@@ -34,7 +27,7 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#050506",
+  themeColor: "#0a0a0a",
 };
 
 export const metadata = rootMetadata;
@@ -48,7 +41,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${display.variable} ${plex.variable} ${mono.variable} dark h-full antialiased`}
+      className={`${plex.variable} ${mono.variable} dark h-full antialiased`}
     >
       <head>
         <link rel="llms-txt" href="/llms.txt" />

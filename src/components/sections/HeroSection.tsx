@@ -1,49 +1,31 @@
-import Image from "next/image";
 import Link from "next/link";
+import { HeroChat } from "@/components/chat/HeroChat";
+import { Figure } from "@/components/sections/Figure";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
-import { MACHINES } from "@/lib/site/machines";
-
-const chassis = MACHINES.chassis;
+import { FIGURES } from "@/lib/site/machines";
 
 export function HeroSection() {
   return (
-    <section id="home" className="poster poster--studio" aria-labelledby="hero-heading">
-      <div className="poster__media">
-        <Image
-          src={chassis.src}
-          alt={chassis.alt}
-          fill
-          priority
-          quality={90}
-          sizes="100vw"
-          className="poster__photo"
-          style={{ ["--plate-position" as string]: chassis.position }}
-        />
-      </div>
-      <div className="poster__scrim" aria-hidden />
-      <div className="poster__copy">
-        <p className="poster__index">Beirut · AI studio</p>
-        <h1 id="hero-heading" className="poster__title">
-          We build digital machines.
-        </h1>
-        <p className="poster__body">
-          High-converting websites and on-brand AI assistants—built to perform,
-          convert, and hand off to humans when it matters.
+    <section id="home" className="spec-mast" aria-labelledby="hero-heading">
+      <Figure figure={FIGURES.chassis} size={148} priority />
+      <div className="spec-mast__copy">
+        <p className="spec-kicker">Beirut</p>
+        <h1 id="hero-heading">Quantex</h1>
+        <p>
+          Websites and on-brand assistants, built in Beirut and handed to you.
         </p>
-        <div className="mt-7 flex flex-col gap-3 sm:flex-row">
-          <Link
-            href="/contact"
-            data-interactive
-            data-conversion={CONVERSION_EVENTS.CTA_CLICK}
-            data-conversion-location="hero"
-            className="btn-primary"
-          >
-            Send a brief
-          </Link>
-          <a href="#solutions" data-interactive className="btn-secondary">
-            Explore solutions
-          </a>
-        </div>
+        <Link
+          href="/contact"
+          data-interactive
+          data-conversion={CONVERSION_EVENTS.CTA_CLICK}
+          data-conversion-location="mast"
+          className="btn-primary"
+        >
+          Send a brief
+        </Link>
+      </div>
+      <div className="ask-bay spec-mast__chat">
+        <HeroChat />
       </div>
     </section>
   );

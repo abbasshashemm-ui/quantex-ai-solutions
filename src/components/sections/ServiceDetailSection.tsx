@@ -1,11 +1,10 @@
 import Link from "next/link";
-import { MachinePlate } from "@/components/sections/MachinePlate";
+import { Figure } from "@/components/sections/Figure";
 import { ServiceNavIcon } from "@/components/layout/ServiceNavIcon";
-import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import type { Service } from "@/lib/services/data";
 import { SOLUTIONS_OVERVIEW_HREF, getRelatedNavServices } from "@/lib/services/nav";
 import { CONTACT } from "@/lib/site/contact";
-import { HOME_SERVICE_ORDER, MACHINES, SERVICE_PLATES } from "@/lib/site/machines";
+import { FIGURES, SERVICE_FIGURE } from "@/lib/site/machines";
 
 type ServiceDetailSectionProps = {
   service: Service;
@@ -31,10 +30,7 @@ function CheckIcon() {
 }
 
 export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
-  const orderIndex = HOME_SERVICE_ORDER.indexOf(
-    service.id as (typeof HOME_SERVICE_ORDER)[number],
-  );
-  const indexLabel = String((orderIndex === -1 ? service.index : orderIndex) + 1).padStart(2, "0");
+  const indexLabel = String(service.index + 1).padStart(2, "0");
   const { nav: navMeta, overview, detail } = service;
   const related = getRelatedNavServices(service.slug);
   const spokePages = [
@@ -42,22 +38,13 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
     { href: "/contact", label: "Start a project", tagline: "Send a brief" },
   ] as const;
 
-  const plate = SERVICE_PLATES[service.id];
-  const machine = plate?.machine ? MACHINES[plate.machine] : null;
+  const figureId = SERVICE_FIGURE[service.id];
+  const figure = figureId ? FIGURES[figureId] : null;
 
   return (
-    <>
-    <MachinePlate
-      machine={machine}
-      index={`${indexLabel} / Service`}
-      title={plate?.slogan ?? navMeta.label}
-      body={service.description}
-      titleAs="h1"
-      priority
-    />
     <article
       id="service-page"
-      className="service-page relative min-h-[100dvh] px-4 pb-24 pt-12 sm:px-6"
+      className="service-page relative min-h-[100dvh] px-4 pb-24 pt-[calc(6rem+env(safe-area-inset-top))] sm:px-6"
     >
       <div className="page-grid-bg absolute inset-0" aria-hidden />
       <div className="service-page__glow pointer-events-none absolute inset-0" aria-hidden />
@@ -73,9 +60,12 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
 
         <header className="service-page__hero mt-8 grid gap-8 lg:mt-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-start lg:gap-10 xl:gap-14">
           <div>
-            <PageEyebrow className="text-foreground/80">
-              {indexLabel} · {navMeta?.label ?? "Services"}
-            </PageEyebrow>
+            <p className="spec-kicker">{indexLabel} / Service</p>
+            <div className="spec-service__title">
+              <h1>{navMeta?.label ?? service.title}</h1>
+              {figure ? <Figure figure={figure} size={160} priority /> : null}
+            </div>
+            <p className="spec-support">{service.description}</p>
             <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <Link
                 href="/contact"
@@ -295,6 +285,5 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
         </div>
       </div>
     </article>
-    </>
   );
 }

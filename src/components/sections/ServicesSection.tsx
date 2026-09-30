@@ -1,43 +1,39 @@
-import { MachinePlate } from "@/components/sections/MachinePlate";
-import { CONVERSION_EVENTS } from "@/lib/analytics/events";
+import Link from "next/link";
+import { Figure } from "@/components/sections/Figure";
 import { SERVICES } from "@/lib/services/data";
-import {
-  HOME_SERVICE_ORDER,
-  MACHINES,
-  SERVICE_PLATES,
-} from "@/lib/site/machines";
+import { FIGURES, SERVICE_FIGURE } from "@/lib/site/machines";
 
 export function ServicesSection() {
-  const ordered = HOME_SERVICE_ORDER.flatMap((id) => {
-    const service = SERVICES.find((item) => item.id === id);
-    return service ? [service] : [];
-  });
-
   return (
-    <section id="solutions" className="solutions-stack" aria-labelledby="services-heading">
-      <header className="stack-index">
-        <p className="poster__index">Solutions</p>
-        <h2 id="services-heading" className="stack-index__title">
-          What services does Quantex offer?
+    <section id="solutions" className="spec-band" aria-labelledby="services-heading">
+      <div className="spec-band__inner">
+        <h2 id="services-heading" className="spec-kicker">
+          Solutions
         </h2>
-      </header>
-      {ordered.map((service, index) => {
-        const plate = SERVICE_PLATES[service.id];
-        const machine = plate?.machine ? MACHINES[plate.machine] : null;
-        return (
-          <MachinePlate
-            key={service.id}
-            machine={machine}
-            index={String(index + 1).padStart(2, "0")}
-            title={plate?.slogan ?? service.nav.label}
-            body={service.description}
-            href={`/services/${service.slug}`}
-            cta="Open"
-            conversion={CONVERSION_EVENTS.SERVICE_CLICK}
-            conversionLocation="services_plate"
-          />
-        );
-      })}
+        <ol className="spec-list">
+          {SERVICES.map((service) => {
+            const figureId = SERVICE_FIGURE[service.id];
+            const figure = figureId ? FIGURES[figureId] : null;
+            const index = String(service.index + 1).padStart(2, "0");
+            return (
+              <li key={service.id}>
+                <Link href={`/services/${service.slug}`} data-interactive className="spec-row">
+                  <span className="spec-n">{index}</span>
+                  {figure ? (
+                    <Figure figure={figure} size={72} />
+                  ) : (
+                    <span className="spec-figure spec-figure--empty" aria-hidden />
+                  )}
+                  <span className="spec-row__text">
+                    <span className="spec-row__title">{service.nav.label}</span>
+                    <span className="spec-row__body">{service.description}</span>
+                  </span>
+                </Link>
+              </li>
+            );
+          })}
+        </ol>
+      </div>
     </section>
   );
 }

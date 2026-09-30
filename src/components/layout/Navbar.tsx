@@ -1,7 +1,6 @@
 import Link from "next/link";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
 import { SITE_NAV, CONTACT } from "@/lib/site/contact";
-import { BrandLogo } from "./BrandLogo";
 import { MobileNav } from "./MobileNav";
 import { ServicesNavDropdown } from "./ServicesNavDropdown";
 
@@ -20,10 +19,7 @@ export function Navbar() {
           href="/"
           className="inline-flex min-h-11 shrink-0 items-center sm:min-h-12"
         >
-          <BrandLogo
-            priority
-            className="h-8 w-auto max-w-[min(240px,52vw)] sm:h-9 md:h-10"
-          />
+          <span className="wordmark">Quantex</span>
         </Link>
 
         <ul className="hidden items-center gap-1 md:flex lg:gap-2">
@@ -34,7 +30,7 @@ export function Navbar() {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="inline-flex min-h-11 items-center rounded-full px-3 text-sm text-foreground/80 transition-colors hover:bg-white/6 hover:text-foreground sm:px-4"
+                className="inline-flex min-h-11 items-center px-3 font-mono text-sm text-foreground/80 transition-colors hover:text-foreground sm:px-4"
               >
                 {link.label}
               </Link>

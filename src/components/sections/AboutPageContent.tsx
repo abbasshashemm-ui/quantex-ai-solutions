@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { Figure } from "@/components/sections/Figure";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import {
   ABOUT_CAPABILITIES,
@@ -12,7 +12,7 @@ import {
 } from "@/lib/site/about";
 import { CONTACT } from "@/lib/site/contact";
 import { SERVICES } from "@/lib/services/data";
-import { MACHINES, SERVICE_PLATES } from "@/lib/site/machines";
+import { FIGURES } from "@/lib/site/machines";
 import { SOLUTIONS_OVERVIEW_HREF } from "@/lib/services/nav";
 
 export function AboutPageContent() {
@@ -32,27 +32,15 @@ export function AboutPageContent() {
           ← Home
         </Link>
 
-        <header className="about-hero-grid mt-8 sm:mt-10">
+        <header className="spec-service mt-8 sm:mt-10">
           <div>
             <PageEyebrow>{ABOUT_HERO.eyebrow}</PageEyebrow>
-            <h1 className="section-heading mt-4 text-metallic-gradient lg:text-[2.35rem]">
-              {ABOUT_HERO.title}
-            </h1>
+            <h1 className="section-heading mt-4">{ABOUT_HERO.title}</h1>
             <p className="mt-5 max-w-xl text-sm leading-relaxed text-foreground/85 sm:text-base">
               {ABOUT_HERO.lead}
             </p>
           </div>
-          <div className="instrument-frame min-h-64">
-            <Image
-              src={MACHINES.bots.src}
-              alt={MACHINES.bots.alt}
-              fill
-              quality={90}
-              sizes="(max-width: 900px) 100vw, 40vw"
-              className="poster__photo"
-              priority
-            />
-          </div>
+          <Figure figure={FIGURES.bots} size={180} priority />
         </header>
 
         <section
@@ -165,32 +153,18 @@ export function AboutPageContent() {
             {ABOUT_CAPABILITIES.lead}
           </p>
           <ul className="mt-8 grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
-            {SERVICES.map((service) => {
-              const machineId = SERVICE_PLATES[service.id]?.machine;
-              const machine = machineId ? MACHINES[machineId] : null;
-              return (
+            {SERVICES.map((service) => (
               <li key={service.id}>
                 <Link
                   href={`/services/${service.slug}`}
                   data-interactive
-                  className="about-page__service-link group flex h-full gap-4 border border-white/10 bg-surface transition-colors hover:border-white/25"
+                  className="spec-textlink"
                 >
-                  <span className="instrument-frame instrument-frame--thumb">
-                    {machine ? (
-                      <Image
-                        src={machine.src}
-                        alt=""
-                        fill
-                        quality={90}
-                        sizes="104px"
-                        className="poster__photo"
-                      />
-                    ) : (
-                      <span className="instrument-mark" aria-hidden />
-                    )}
+                  <span className="spec-n">
+                    {String(service.index + 1).padStart(2, "0")}
                   </span>
-                  <span className="min-w-0">
-                    <span className="block text-sm font-semibold text-foreground">
+                  <span>
+                    <span className="block text-sm text-foreground">
                       {service.nav.label}
                     </span>
                     <span className="mt-1 block text-xs leading-relaxed text-foreground/65">
@@ -199,8 +173,7 @@ export function AboutPageContent() {
                   </span>
                 </Link>
               </li>
-              );
-            })}
+            ))}
           </ul>
         </section>
 
