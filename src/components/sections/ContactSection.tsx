@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { HeroMedia } from "@/components/ui/HeroMedia";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
+import { PAGE_STILLS } from "@/lib/brand/stills";
 import { CONTACT, CONTACT_CHANNELS } from "@/lib/site/contact";
 import { ContactForm } from "./ContactForm";
 
@@ -63,13 +65,19 @@ function ContactIcon({ id }: { id: string }) {
 
 export function ContactSection() {
   return (
+    <>
+    <HeroMedia
+      src={PAGE_STILLS.contact.src}
+      alt={PAGE_STILLS.contact.alt}
+      priority
+    />
     <article
       id="contact-page"
-      className="contact-page relative min-h-[100dvh] px-4 pb-20 pt-[calc(6rem+env(safe-area-inset-top))] sm:px-6 sm:pt-32"
+      className="contact-page relative px-4 pb-20 sm:px-6"
     >
       <div className="page-grid-bg absolute inset-0" aria-hidden />
 
-      <div className="relative mx-auto max-w-7xl">
+      <div className="relative mx-auto max-w-7xl pt-8 sm:pt-10">
         <Link
           href="/"
           data-interactive
@@ -78,12 +86,12 @@ export function ContactSection() {
           ← Home
         </Link>
 
-        <header className="contact-page__header mx-auto mt-8 max-w-3xl text-center sm:mt-10">
-          <PageEyebrow align="center">Contact</PageEyebrow>
-          <h1 className="section-heading mt-4 text-foreground lg:text-5xl">
-            Let&apos;s talk about your{" "}
-            <span className="text-metallic-gradient">project.</span>
+        <header className="contact-page__header mt-8 max-w-3xl sm:mt-10">
+          <PageEyebrow>Contact</PageEyebrow>
+          <h1 className="display-title mt-4 max-w-4xl">
+            Let&apos;s talk about your project.
           </h1>
+          <span className="signal-rule" aria-hidden />
           <p className="mt-4 text-sm leading-relaxed text-foreground/80 sm:text-base">
             Whether you need a brand, a website, custom software, or all
             three—we&apos;d love to hear what you&apos;re working on.
@@ -96,7 +104,7 @@ export function ContactSection() {
               {CONTACT_CHANNELS.map((channel) => {
                 const content = (
                   <>
-                    <span className="contact-channel__icon flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-white/12 bg-void/80">
+                    <span className="contact-channel__icon flex h-10 w-10 shrink-0 items-center justify-center border border-white/16">
                       <ContactIcon id={channel.id} />
                     </span>
                     <span className="min-w-0">
@@ -119,7 +127,7 @@ export function ContactSection() {
                           ? { target: "_blank", rel: "noopener noreferrer" }
                           : {})}
                         data-interactive
-                        className="contact-channel flex min-h-11 gap-4 rounded-lg px-1 transition-colors hover:bg-white/5 sm:px-2"
+                        className="contact-channel flex min-h-11 gap-4 px-1 transition-colors sm:px-2"
                       >
                         {content}
                       </a>
@@ -131,10 +139,10 @@ export function ContactSection() {
               })}
             </ul>
 
-            <div className="glass-panel rounded-xl p-5">
+            <div className="glass-panel p-5">
               <div className="flex gap-3">
                 <span
-                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/10 text-sm text-foreground"
+                  className="flex h-8 w-8 shrink-0 items-center justify-center border border-white/20 text-sm text-foreground"
                   aria-hidden
                 >
                   ✓
@@ -166,5 +174,6 @@ export function ContactSection() {
         </div>
       </div>
     </article>
+    </>
   );
 }

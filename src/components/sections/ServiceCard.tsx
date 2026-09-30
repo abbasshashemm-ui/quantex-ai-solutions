@@ -1,7 +1,7 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
-import { ServiceNavIcon } from "@/components/layout/ServiceNavIcon";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
 import type { Service } from "@/lib/services/data";
 
@@ -10,6 +10,8 @@ type ServiceCardProps = {
 };
 
 export function ServiceCard({ service }: ServiceCardProps) {
+  const indexLabel = String(service.index + 1).padStart(2, "0");
+
   return (
     <Link
       href={`/services/${service.slug}`}
@@ -19,11 +21,18 @@ export function ServiceCard({ service }: ServiceCardProps) {
       className="service-card-link"
     >
       <article data-service-card className="service-card">
+        <div className="service-card__media">
+          <Image
+            src={service.imageSrc}
+            alt=""
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+            className="object-contain object-center"
+          />
+        </div>
         <div className="service-card__inner">
-          <span className="service-card__icon" aria-hidden>
-            <ServiceNavIcon icon={service.nav.icon} className="h-5 w-5" />
-          </span>
-          <h3 className="service-card__title">{service.nav.label}</h3>
+          <p className="service-card__index">{indexLabel}</p>
+          <h3 className="service-card__title">{service.displayTitle}</h3>
           <p className="service-card__description">{service.description}</p>
           <span className="service-card__more">
             <span className="service-card__more-label">Learn more</span>

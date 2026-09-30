@@ -13,7 +13,7 @@ export function MainLayout({ children }: MainLayoutProps) {
       <Navbar />
       <main
         id="main-content"
-        className="layer-pass-through relative z-10 w-full flex-1"
+        className="relative z-10 w-full flex-1"
       >
         {children}
       </main>

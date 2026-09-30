@@ -12,7 +12,7 @@ export function FaqSection() {
         <PageEyebrow>FAQ</PageEyebrow>
         <h2
           id="faq-heading"
-          className="section-heading mt-3 text-metallic-gradient"
+          className="section-heading mt-3"
         >
           Common questions
         </h2>
@@ -24,7 +24,7 @@ export function FaqSection() {
         <ul className="mt-8 space-y-3">
           {SITE_FAQ.map((item) => (
             <li key={item.question}>
-              <details className="faq-item glass-panel group rounded-xl">
+              <details className="faq-item glass-panel group">
                 <summary className="cursor-pointer list-none px-4 py-4 text-sm font-semibold text-foreground marker:content-none sm:px-5 sm:text-base [&::-webkit-details-marker]:hidden">
                   <span className="flex items-center justify-between gap-4">
                     {item.question}

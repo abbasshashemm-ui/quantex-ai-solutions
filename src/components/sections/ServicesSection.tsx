@@ -59,7 +59,7 @@ export function ServicesSection() {
           <PageEyebrow>Expertise</PageEyebrow>
           <h2
             id="services-heading"
-            className="section-heading mt-3 max-w-2xl text-metallic-gradient"
+            className="section-heading mt-3 max-w-3xl"
           >
             Core services engineered for impact
           </h2>

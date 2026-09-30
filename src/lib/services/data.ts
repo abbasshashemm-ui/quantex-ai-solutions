@@ -29,6 +29,9 @@ export type Service = {
   id: string;
   slug: string;
   title: string;
+  displayTitle: string;
+  imageSrc: string;
+  imageAlt: string;
   description: string;
   accent: ServiceAccent;
   index: number;
@@ -42,6 +45,9 @@ export const SERVICES: Service[] = [
     id: "software",
     slug: "custom-software-development",
     title: "CUSTOM SOFTWARE DEVELOPMENT",
+    displayTitle: "TAILORED CODE. ZERO LIMITATIONS.",
+    imageSrc: "/brand/service-software.jpg",
+    imageAlt: "Low aluminum terminal with a dark screen and an amber status lamp.",
     description:
       "Bespoke applications engineered for scale, security, and long-term maintainability.",
     accent: "white",
@@ -86,6 +92,9 @@ export const SERVICES: Service[] = [
     id: "automation",
     slug: "business-process-automation",
     title: "BUSINESS PROCESS AUTOMATION",
+    displayTitle: "AUTOMATE EVERYTHING.",
+    imageSrc: "/brand/service-automation.jpg",
+    imageAlt: "Aluminum patch bay with orange levers, ports, and black cables.",
     description:
       "Intelligent workflows that eliminate friction and accelerate operational throughput.",
     accent: "grey",
@@ -130,6 +139,9 @@ export const SERVICES: Service[] = [
     id: "architecture",
     slug: "custom-system-architectures",
     title: "CUSTOM SYSTEM ARCHITECTURES",
+    displayTitle: "UNSHAKABLE CLOUD FOUNDATIONS.",
+    imageSrc: "/brand/service-architecture.jpg",
+    imageAlt: "Shallow aluminum rack chassis with vents and an amber lamp.",
     description:
       "Resilient, cloud-native foundations designed around your data and growth trajectory.",
     accent: "white",
@@ -174,6 +186,9 @@ export const SERVICES: Service[] = [
     id: "websites",
     slug: "high-converting-websites",
     title: "HIGH-CONVERTING WEBSITES",
+    displayTitle: "WEBSITES DESIGNED TO CONVERT.",
+    imageSrc: "/brand/service-websites.jpg",
+    imageAlt: "Slim aluminum display slab with an abstract waveform.",
     description:
       "Immersive, performance-first experiences that turn attention into measurable outcomes.",
     accent: "metallic",
@@ -218,6 +233,9 @@ export const SERVICES: Service[] = [
     id: "seo",
     slug: "seo",
     title: "SEO",
+    displayTitle: "SEO.",
+    imageSrc: "/brand/service-seo.jpg",
+    imageAlt: "Aluminum tuner with a signal meter and an amber lamp.",
     description:
       "We fix the technical issues that hold your site back on Google—speed, structure, meta tags, and the works.",
     accent: "metallic",
@@ -262,6 +280,9 @@ export const SERVICES: Service[] = [
     id: "chatbots",
     slug: "custom-intelligent-chatbots",
     title: "CUSTOM INTELLIGENT CHATBOTS",
+    displayTitle: "INTELLIGENT BOTS. WIRED TO YOUR STACK.",
+    imageSrc: "/brand/service-chatbots.jpg",
+    imageAlt: "Compact silver node with a small amber readout.",
     description:
       "Context-aware assistants that integrate with your stack and elevate customer touchpoints.",
     accent: "grey",

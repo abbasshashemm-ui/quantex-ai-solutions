@@ -33,7 +33,7 @@ const initialState: ContactFormFields = {
 const MAX_WHATSAPP_URL_LENGTH = 2048;
 
 const inputClassName =
-  "mt-1.5 block w-full rounded-lg border border-white/25 bg-surface-elevated px-3.5 py-2.5 text-sm text-foreground shadow-[0_0_0_1px_rgba(255,255,255,0.06),inset_0_1px_0_rgba(255,255,255,0.06)] outline-none transition placeholder:text-foreground/45 focus:border-white/45 focus:ring-2 focus:ring-white/15";
+  "mt-1.5 block w-full border border-white/25 bg-surface-elevated px-3.5 py-2.5 text-sm text-foreground outline-none transition placeholder:text-foreground/45 focus:border-white/70";
 
 const selectClassName = `${inputClassName} contact-form__select appearance-none`;
 
@@ -100,7 +100,7 @@ export function ContactForm() {
   };
 
   return (
-    <div className="contact-form-card glass-panel rounded-2xl p-5 sm:p-7 md:p-8">
+    <div className="contact-form-card glass-panel p-5 sm:p-7 md:p-8">
       <h2 className="text-lg font-semibold tracking-tight text-foreground sm:text-xl">
         Send us a message
       </h2>

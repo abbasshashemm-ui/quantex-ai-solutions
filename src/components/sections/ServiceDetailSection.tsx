@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { ServiceNavIcon } from "@/components/layout/ServiceNavIcon";
+import { HeroMedia } from "@/components/ui/HeroMedia";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import type { Service } from "@/lib/services/data";
 import { NAV_SERVICE_ITEMS, SOLUTIONS_OVERVIEW_HREF } from "@/lib/services/nav";
@@ -34,14 +35,15 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
   const related = NAV_SERVICE_ITEMS.filter((item) => item.slug !== service.slug);
 
   return (
+    <>
+    <HeroMedia src={service.imageSrc} alt={service.imageAlt} priority />
     <article
       id="service-page"
-      className="service-page relative min-h-[100dvh] px-4 pb-24 pt-[calc(6rem+env(safe-area-inset-top))] sm:px-6 sm:pt-32"
+      className="service-page relative px-4 pb-24 sm:px-6"
     >
       <div className="page-grid-bg absolute inset-0" aria-hidden />
-      <div className="service-page__glow pointer-events-none absolute inset-0" aria-hidden />
 
-      <div className="relative mx-auto max-w-7xl">
+      <div className="relative mx-auto max-w-7xl pt-8 sm:pt-10">
         <Link
           href={SOLUTIONS_OVERVIEW_HREF}
           data-interactive
@@ -55,9 +57,10 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
             <PageEyebrow className="text-foreground/80">
               {indexLabel} · Services
             </PageEyebrow>
-            <h1 className="section-heading mt-4 text-metallic-gradient lg:text-[2.35rem]">
-              {navMeta?.label ?? service.title}
+            <h1 className="display-title mt-4 max-w-3xl">
+              {service.displayTitle}
             </h1>
+            <span className="signal-rule" aria-hidden />
             <p className="mt-4 max-w-xl text-sm leading-relaxed text-foreground/90 sm:text-base">
               {service.description}
             </p>
@@ -81,10 +84,10 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
             </div>
           </div>
 
-          <aside className="service-page__aside rounded-2xl border border-white/12 bg-surface/55 p-5 backdrop-blur-md sm:p-6">
+          <aside className="service-page__aside border border-white/16 bg-surface p-5 sm:p-6">
             {navMeta ? (
               <div className="flex items-start gap-4">
-                <div className="service-page__icon-wrap flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-white/15 bg-white/5 text-foreground/90">
+                <div className="service-page__icon-wrap flex h-12 w-12 shrink-0 items-center justify-center border border-white/15 text-foreground/90">
                   <ServiceNavIcon icon={navMeta.icon} className="h-6 w-6" />
                 </div>
                 <div className="min-w-0">
@@ -102,7 +105,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
                 {detail.highlights.map((item) => (
                   <li
                     key={item}
-                    className="rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[0.65rem] font-medium tracking-wide text-foreground/85 uppercase sm:text-xs"
+                    className="border border-white/16 px-3 py-1.5 text-[0.65rem] font-medium tracking-wide text-foreground/85 uppercase sm:text-xs"
                   >
                     {item}
                   </li>
@@ -138,7 +141,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
           </aside>
         </header>
 
-        <section className="service-page__overview glass-panel mt-10 rounded-2xl p-5 sm:mt-12 sm:p-7 md:p-8">
+        <section className="service-page__overview glass-panel mt-10 p-5 sm:mt-12 sm:p-7 md:p-8">
           <h2 className="text-[0.65rem] font-semibold tracking-[0.22em] text-foreground/70 uppercase sm:text-xs">
             Overview
           </h2>
@@ -148,7 +151,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
         </section>
 
         <div className="service-page__panels mt-8 grid gap-6 lg:mt-10 lg:grid-cols-2 lg:gap-8">
-          <section className="service-page__panel glass-panel rounded-2xl p-5 sm:p-6 md:p-7">
+          <section className="service-page__panel glass-panel p-5 sm:p-6 md:p-7">
             <h2 className="text-[0.65rem] font-semibold tracking-[0.22em] text-foreground/70 uppercase sm:text-xs">
               What you get
             </h2>
@@ -165,7 +168,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
             </ul>
           </section>
 
-          <section className="service-page__panel glass-panel rounded-2xl p-5 sm:p-6 md:p-7">
+          <section className="service-page__panel glass-panel p-5 sm:p-6 md:p-7">
             <h2 className="text-[0.65rem] font-semibold tracking-[0.22em] text-foreground/70 uppercase sm:text-xs">
               How we work
             </h2>
@@ -176,11 +179,11 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
               {detail.processSteps.map((step, i) => (
                 <li key={step.label} className="service-page__timeline-item relative flex gap-4 pb-6 last:pb-0">
                   <div className="flex flex-col items-center">
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-white/15 bg-white/5 text-[0.65rem] font-semibold tabular-nums text-foreground/90">
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center border border-white/15 text-[0.65rem] font-semibold tabular-nums text-foreground/90">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     {i < detail.processSteps.length - 1 ? (
-                      <span className="service-page__timeline-line mt-2 w-px flex-1 min-h-[2rem] bg-gradient-to-b from-white/20 to-transparent" />
+                      <span className="service-page__timeline-line mt-2 w-px flex-1 min-h-[2rem] bg-white/20" />
                     ) : null}
                   </div>
                   <div className="min-w-0 pt-0.5">
@@ -205,9 +208,9 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
                 <Link
                   href={item.href}
                   data-interactive
-                  className="service-page__related group inline-flex min-h-11 w-full items-center gap-3 rounded-xl border border-white/10 bg-surface/40 px-4 py-3 backdrop-blur-md transition-colors hover:border-white/22 hover:bg-surface/60 sm:w-auto"
+                  className="service-page__related group inline-flex min-h-11 w-full items-center gap-3 border border-white/16 bg-surface px-4 py-3 transition-colors hover:border-white/40 sm:w-auto"
                 >
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-foreground/85 transition-colors group-hover:border-white/20">
+                  <span className="flex h-9 w-9 shrink-0 items-center justify-center border border-white/16 text-foreground/85">
                     <ServiceNavIcon icon={item.icon} className="h-4 w-4" />
                   </span>
                   <span className="min-w-0 text-left">
@@ -224,7 +227,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
           </ul>
         </section>
 
-        <div className="service-page__cta mt-10 rounded-2xl border border-white/12 bg-[linear-gradient(135deg,color-mix(in_srgb,var(--surface)_90%,transparent),color-mix(in_srgb,#ffffff_6%,transparent))] px-5 py-8 text-center backdrop-blur-md sm:mt-12 sm:px-8 sm:py-10">
+        <div className="service-page__cta mt-10 border border-white/16 bg-surface px-5 py-8 sm:mt-12 sm:px-8 sm:py-10">
           <p className="text-[0.65rem] font-medium tracking-[0.28em] text-foreground/70 uppercase sm:text-xs">
             Ready to start?
           </p>
@@ -253,5 +256,6 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
         </div>
       </div>
     </article>
+    </>
   );
 }

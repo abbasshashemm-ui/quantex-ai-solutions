@@ -1,30 +1,30 @@
+import { HeroMedia } from "@/components/ui/HeroMedia";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
+import { PAGE_STILLS } from "@/lib/brand/stills";
 import { CONTACT } from "@/lib/site/contact";
 import { SOLUTIONS_OVERVIEW_HREF } from "@/lib/services/nav";
 
 export function HeroSection() {
   return (
-    <section
-      id="home"
-      className="relative grid min-h-[100dvh] grid-rows-[minmax(0,1.1fr)_auto_minmax(4.5rem,0.72fr)] px-4 pt-[calc(6rem+env(safe-area-inset-top))] sm:px-6 sm:pt-32 md:grid-rows-[minmax(0,1fr)_auto_minmax(5rem,0.85fr)]"
-    >
-      <div aria-hidden className="min-h-0" />
+    <section id="home" className="relative pb-16 sm:pb-20 md:pb-24">
+      <HeroMedia
+        src={PAGE_STILLS.home.src}
+        alt={PAGE_STILLS.home.alt}
+        priority
+      />
 
-      <div className="mx-auto w-full max-w-3xl px-1 text-center sm:px-2">
-        <PageEyebrow align="center" className="text-metallic-gradient">
-          Quantex AI Solutions
-        </PageEyebrow>
-        <h1 className="mt-3 text-balance text-[2.15rem] font-semibold leading-[1.08] tracking-tight text-metallic-gradient sm:text-4xl md:text-5xl lg:text-6xl">
-          Digital products built to perform—and convert
-        </h1>
-        <p className="mx-auto mt-4 max-w-xl text-pretty text-sm leading-relaxed text-foreground/78 sm:mt-5 sm:text-base sm:leading-relaxed">
+      <div className="mx-auto w-full max-w-7xl px-4 pt-10 sm:px-6 sm:pt-14">
+        <PageEyebrow>Quantex AI Solutions</PageEyebrow>
+        <h1 className="display-title max-w-4xl">We build digital machines.</h1>
+        <span className="signal-rule" aria-hidden />
+        <p className="mt-6 max-w-xl text-sm leading-relaxed text-foreground/78 sm:text-base">
           Custom software, high-converting websites, automation, and AI
           assistants—designed, built, and shipped with clarity from first call
           to launch.
         </p>
 
-        <div className="mt-7 flex flex-col items-stretch justify-center gap-3 sm:mt-8 sm:flex-row sm:items-center sm:gap-4">
+        <div className="mt-8 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:gap-4">
           <a
             href={CONTACT.whatsapp}
             target="_blank"
@@ -47,8 +47,6 @@ export function HeroSection() {
           </a>
         </div>
       </div>
-
-      <div aria-hidden className="min-h-0" />
     </section>
   );
 }

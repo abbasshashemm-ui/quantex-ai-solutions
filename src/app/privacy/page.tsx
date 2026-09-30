@@ -3,6 +3,7 @@ import { LegalDocument } from "@/components/sections/LegalDocument";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import { buildBreadcrumbSchema } from "@/lib/seo/json-ld";
+import { PAGE_STILLS } from "@/lib/brand/stills";
 import { PRIVACY_POLICY } from "@/lib/site/legal/privacy-policy";
 
 export const metadata: Metadata = createPageMetadata({
@@ -28,6 +29,7 @@ export default function PrivacyPage() {
         lastUpdated={PRIVACY_POLICY.lastUpdated}
         intro={PRIVACY_POLICY.intro}
         sections={PRIVACY_POLICY.sections}
+        image={PAGE_STILLS.privacy}
       />
     </>
   );

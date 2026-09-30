@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { HeroMedia } from "@/components/ui/HeroMedia";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import type { LegalSection } from "@/lib/site/legal/privacy-policy";
 
@@ -8,6 +9,7 @@ type LegalDocumentProps = {
   lastUpdated: string;
   intro: string;
   sections: readonly LegalSection[];
+  image: { src: string; alt: string };
 };
 
 export function LegalDocument({
@@ -16,14 +18,15 @@ export function LegalDocument({
   lastUpdated,
   intro,
   sections,
+  image,
 }: LegalDocumentProps) {
   return (
-    <article
-      className="legal-page relative px-4 pb-24 pt-[calc(6rem+env(safe-area-inset-top))] sm:px-6 sm:pt-32"
-    >
+    <>
+    <HeroMedia src={image.src} alt={image.alt} priority />
+    <article className="legal-page relative px-4 pb-24 sm:px-6">
       <div className="page-grid-bg absolute inset-0" aria-hidden />
 
-      <div className="relative mx-auto max-w-3xl">
+      <div className="relative mx-auto max-w-3xl pt-8 sm:pt-10">
         <Link
           href="/"
           data-interactive
@@ -34,7 +37,8 @@ export function LegalDocument({
 
         <header className="mt-8 sm:mt-10">
           <PageEyebrow>{eyebrow}</PageEyebrow>
-          <h1 className="section-heading mt-4 text-foreground">{title}</h1>
+          <h1 className="display-title mt-4">{title}</h1>
+          <span className="signal-rule" aria-hidden />
           <p className="mt-3 text-sm text-foreground/60">
             Last updated: {lastUpdated}
           </p>
@@ -69,5 +73,6 @@ export function LegalDocument({
         </div>
       </div>
     </article>
+    </>
   );
 }

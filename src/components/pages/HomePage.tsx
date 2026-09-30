@@ -2,7 +2,6 @@
 
 import dynamic from "next/dynamic";
 import { HeroSection } from "@/components/sections/HeroSection";
-import { LazyViewportScene } from "@/components/three/LazyViewportScene";
 
 const ServicesSection = dynamic(
   () =>
@@ -23,7 +22,6 @@ const RecentProjectsSection = dynamic(
 export function HomePage() {
   return (
     <>
-      <LazyViewportScene />
       <HeroSection />
       <ServicesSection />
       <RecentProjectsSection />

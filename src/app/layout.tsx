@@ -36,12 +36,6 @@ export default function RootLayout({
       className={`${geistSans.variable} dark h-full antialiased`}
     >
       <head>
-        <link rel="dns-prefetch" href="https://prod.spline.design" />
-        <link
-          rel="preconnect"
-          href="https://prod.spline.design"
-          crossOrigin="anonymous"
-        />
         <link rel="llms-txt" href="/llms.txt" />
       </head>
       <body

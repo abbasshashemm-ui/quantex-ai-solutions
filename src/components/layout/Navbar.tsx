@@ -32,7 +32,7 @@ export function Navbar() {
     <header className="site-header fixed inset-x-0 top-0 z-50 pt-[env(safe-area-inset-top)]">
       <nav
         aria-label="Primary"
-        className="mx-auto flex max-w-7xl items-center justify-between gap-4 bg-void/40 px-4 py-4 backdrop-blur-xl backdrop-saturate-150 supports-[backdrop-filter]:bg-void/30 sm:px-6 sm:py-5"
+        className="mx-auto flex max-w-7xl items-center justify-between gap-4 bg-void px-4 py-4 sm:px-6 sm:py-5"
       >
         <a
           href="/"
@@ -50,7 +50,7 @@ export function Navbar() {
             <li key={link.href}>
               <a
                 href={link.href}
-                className="inline-flex min-h-12 items-center rounded-full px-3 text-sm text-foreground/90 transition-colors hover:bg-white/5 hover:text-foreground sm:px-4 sm:text-base"
+                className="inline-flex min-h-12 items-center px-3 text-sm text-foreground/90 transition-colors hover:text-foreground sm:px-4 sm:text-base"
               >
                 {link.label}
               </a>
@@ -72,7 +72,7 @@ export function Navbar() {
 
           <button
             type="button"
-            className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-lg border border-white/15 text-foreground transition-colors hover:border-white/30 hover:bg-white/5 md:hidden"
+            className="inline-flex min-h-11 min-w-11 items-center justify-center border border-white/20 text-foreground transition-colors hover:border-white/50 md:hidden"
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? "Close menu" : "Open menu"}
@@ -100,7 +100,7 @@ export function Navbar() {
       {open && (
         <div
           id="mobile-nav"
-          className="fixed inset-0 z-40 bg-void/95 backdrop-blur-lg md:hidden"
+          className="fixed inset-0 z-40 bg-void md:hidden"
           style={{ paddingTop: "calc(5.25rem + env(safe-area-inset-top))" }}
         >
           <ul className="flex flex-col px-4 pb-[env(safe-area-inset-bottom)]">

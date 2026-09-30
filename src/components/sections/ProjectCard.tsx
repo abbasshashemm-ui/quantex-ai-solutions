@@ -8,14 +8,9 @@ type ProjectCardProps = {
 function ProjectCardContent({ project }: ProjectCardProps) {
   return (
     <>
-      <div className="project-card__browser overflow-hidden rounded-xl border border-white/10 bg-surface-elevated/80 shadow-[0_12px_40px_rgba(0,0,0,0.45)]">
-        <div className="flex items-center gap-2 border-b border-white/8 bg-void/90 px-3 py-2 sm:px-4 sm:py-2.5">
-          <div className="flex shrink-0 gap-1.5" aria-hidden>
-            <span className="h-2.5 w-2.5 rounded-full bg-[#ff5f57]" />
-            <span className="h-2.5 w-2.5 rounded-full bg-[#febc2e]" />
-            <span className="h-2.5 w-2.5 rounded-full bg-[#28c840]" />
-          </div>
-          <p className="min-w-0 flex-1 truncate text-center text-xs text-foreground/50">
+      <div className="project-card__browser overflow-hidden border border-white/16 bg-surface">
+        <div className="flex items-center gap-2 border-b border-white/10 bg-void px-3 py-2 sm:px-4 sm:py-2.5">
+          <p className="min-w-0 flex-1 truncate text-xs text-foreground/50">
             {project.url}
           </p>
         </div>
@@ -34,7 +29,7 @@ function ProjectCardContent({ project }: ProjectCardProps) {
         {project.tags.map((tag) => (
           <span
             key={tag}
-            className="rounded border border-white/15 bg-white/5 px-2 py-0.5 text-[0.65rem] font-medium tracking-wide text-foreground/85 uppercase"
+            className="border border-white/16 px-2 py-0.5 text-[0.65rem] font-medium tracking-wide text-foreground/85 uppercase"
           >
             {tag}
           </span>

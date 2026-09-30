@@ -1,6 +1,8 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ServiceNavIcon } from "@/components/layout/ServiceNavIcon";
+import { HeroMedia } from "@/components/ui/HeroMedia";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
+import { PAGE_STILLS } from "@/lib/brand/stills";
 import {
   ABOUT_CAPABILITIES,
   ABOUT_CTA,
@@ -16,13 +18,15 @@ import { SOLUTIONS_OVERVIEW_HREF } from "@/lib/services/nav";
 
 export function AboutPageContent() {
   return (
+    <>
+    <HeroMedia src={PAGE_STILLS.about.src} alt={PAGE_STILLS.about.alt} priority />
     <article
       id="about-page"
-      className="about-page relative px-4 pb-24 pt-[calc(6rem+env(safe-area-inset-top))] sm:px-6 sm:pt-32"
+      className="about-page relative px-4 pb-24 sm:px-6"
     >
       <div className="page-grid-bg absolute inset-0" aria-hidden />
 
-      <div className="relative mx-auto max-w-7xl">
+      <div className="relative mx-auto max-w-7xl pt-8 sm:pt-10">
         <Link
           href="/"
           data-interactive
@@ -33,9 +37,10 @@ export function AboutPageContent() {
 
         <header className="about-page__hero mt-8 max-w-3xl sm:mt-10">
           <PageEyebrow>{ABOUT_HERO.eyebrow}</PageEyebrow>
-          <h1 className="section-heading mt-4 text-metallic-gradient lg:text-[2.35rem]">
+          <h1 className="display-title mt-4 max-w-4xl">
             {ABOUT_HERO.title}
           </h1>
+          <span className="signal-rule" aria-hidden />
           <p className="mt-5 text-sm leading-relaxed text-foreground/85 sm:text-base">
             {ABOUT_HERO.lead}
           </p>
@@ -70,8 +75,8 @@ export function AboutPageContent() {
             ))}
           </div>
 
-          <div className="about-page__founder glass-panel mt-8 flex flex-col gap-4 rounded-2xl p-5 sm:flex-row sm:items-center sm:gap-6 sm:p-6">
-            <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-xl border border-white/12 bg-white/5 font-mono text-lg font-semibold text-metallic">
+          <div className="about-page__founder glass-panel mt-8 flex flex-col gap-4 p-5 sm:flex-row sm:items-center sm:gap-6 sm:p-6">
+            <div className="flex h-14 w-14 shrink-0 items-center justify-center border border-white/16 font-mono text-lg font-semibold text-metallic">
               AH
             </div>
             <div>
@@ -93,9 +98,9 @@ export function AboutPageContent() {
           {ABOUT_STATS.map((stat) => (
             <div
               key={stat.label}
-              className="about-page__stat glass-panel rounded-2xl px-4 py-5 sm:px-5 sm:py-6"
+              className="about-page__stat glass-panel px-4 py-5 sm:px-5 sm:py-6"
             >
-              <p className="text-2xl font-semibold tracking-tight text-metallic-gradient sm:text-3xl">
+              <p className="text-2xl font-semibold tracking-tight text-foreground sm:text-3xl">
                 {stat.value}
               </p>
               <p className="mt-2 text-xs leading-snug text-foreground/70 sm:text-sm">
@@ -120,7 +125,7 @@ export function AboutPageContent() {
             {ABOUT_VALUES.map((item) => (
               <li
                 key={item.index}
-                className="about-page__value glass-panel rounded-2xl p-5 sm:p-6"
+                className="about-page__value glass-panel p-5 sm:p-6"
               >
                 <span className="font-mono text-xs tracking-[0.2em] text-metallic">
                   {item.index}
@@ -156,16 +161,22 @@ export function AboutPageContent() {
                 <Link
                   href={`/services/${service.slug}`}
                   data-interactive
-                  className="about-page__service-link group flex h-full gap-4 rounded-2xl border border-white/10 bg-surface/40 p-4 backdrop-blur-md transition-colors hover:border-white/22 hover:bg-surface/60 sm:p-5"
+                  className="about-page__service-link group flex h-full flex-col border border-white/16 bg-surface transition-colors hover:border-white/40"
                 >
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-foreground/90 transition-colors group-hover:border-white/20">
-                    <ServiceNavIcon icon={service.nav.icon} className="h-5 w-5" />
+                  <span className="service-card__media">
+                    <Image
+                      src={service.imageSrc}
+                      alt=""
+                      fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                      className="object-contain object-center"
+                    />
                   </span>
-                  <span className="min-w-0">
-                    <span className="block text-sm font-semibold text-foreground">
-                      {service.nav.label}
+                  <span className="min-w-0 p-4 sm:p-5">
+                    <span className="block text-sm font-semibold tracking-tight text-foreground uppercase">
+                      {service.displayTitle}
                     </span>
-                    <span className="mt-1 block text-xs leading-relaxed text-foreground/65">
+                    <span className="mt-2 block text-xs leading-relaxed text-foreground/65">
                       {service.description}
                     </span>
                   </span>
@@ -175,7 +186,7 @@ export function AboutPageContent() {
           </ul>
         </section>
 
-        <section className="about-page__cta mt-16 rounded-2xl border border-white/12 bg-[linear-gradient(135deg,color-mix(in_srgb,var(--surface)_90%,transparent),color-mix(in_srgb,#ffffff_6%,transparent))] px-5 py-10 text-center backdrop-blur-md sm:mt-20 sm:px-10 sm:py-12">
+        <section className="about-page__cta mt-16 border border-white/16 bg-surface px-5 py-10 sm:mt-20 sm:px-10 sm:py-12">
           <p className="text-[0.65rem] font-medium tracking-[0.28em] text-foreground/70 uppercase sm:text-xs">
             {ABOUT_CTA.eyebrow}
           </p>
@@ -206,5 +217,6 @@ export function AboutPageContent() {
         </section>
       </div>
     </article>
+    </>
   );
 }
