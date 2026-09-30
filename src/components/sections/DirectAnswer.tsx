@@ -1,5 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
+import { MACHINES } from "@/lib/site/machines";
 
 const PILLARS = [
   {
@@ -15,18 +17,20 @@ const PILLARS = [
   { href: "/contact", label: "Start a project" },
 ] as const;
 
+const readout = MACHINES.readout;
+
 export function DirectAnswer() {
   return (
     <section
-      className="aeo-block relative border-t border-white/8 px-4 py-14 sm:px-6 sm:py-16"
+      className="instrument-split"
       aria-labelledby="aeo-heading"
     >
-      <div className="mx-auto max-w-3xl">
+      <div className="instrument-split__copy">
         <PageEyebrow>Direct answer</PageEyebrow>
-        <h2 id="aeo-heading" className="section-heading mt-3 text-metallic-gradient">
+        <h2 id="aeo-heading" className="section-heading mt-3">
           What does Quantex AI Solutions build?
         </h2>
-        <div className="aeo-answer mt-5 space-y-4 text-sm leading-relaxed text-foreground/80 sm:text-base">
+        <div className="mt-5 max-w-xl space-y-4 text-sm leading-relaxed sm:text-base">
           <p>
             Quantex AI Solutions is a Beirut studio founded in 2024. We build
             high-converting websites and on-brand AI chatbots, plus custom
@@ -39,18 +43,15 @@ export function DirectAnswer() {
             on the website or WhatsApp with a human handoff when the answer
             needs a person.
           </p>
-          <p>
-            You work with the engineers writing the code—not a layer of
-            coordinators.
-          </p>
+          <p>You work with the engineers writing the code.</p>
         </div>
-        <ul className="aeo-pillars mt-6 flex flex-wrap gap-2">
+        <ul className="mt-6 flex flex-wrap gap-2">
           {PILLARS.map((item) => (
             <li key={item.href}>
               <Link
                 href={item.href}
                 data-interactive
-                className="inline-flex min-h-11 items-center rounded-full border border-white/12 bg-surface px-4 text-sm text-foreground/85 transition-colors hover:border-white/30 hover:text-foreground"
+                className="instrument-pill"
               >
                 {item.label}
               </Link>
@@ -62,6 +63,16 @@ export function DirectAnswer() {
             Send a brief
           </Link>
         </p>
+      </div>
+      <div className="instrument-split__media">
+        <Image
+          src={readout.src}
+          alt={readout.alt}
+          fill
+          quality={70}
+          sizes="(max-width: 900px) 100vw, 40vw"
+          className="poster__photo"
+        />
       </div>
     </section>
   );

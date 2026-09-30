@@ -1,15 +1,27 @@
+import Image from "next/image";
 import Link from "next/link";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
+import { MACHINES } from "@/lib/site/machines";
 import { PROCESS } from "@/lib/site/process";
 
 export function ProcessSection() {
   return (
     <section
       id="process"
-      className="process-section relative scroll-mt-24 border-t border-white/8 py-20 sm:py-24 md:py-28"
+      className="process-section relative scroll-mt-24"
       aria-labelledby="process-heading"
     >
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <div className="instrument-band">
+        <Image
+          src={MACHINES.toggles.src}
+          alt={MACHINES.toggles.alt}
+          fill
+          quality={70}
+          sizes="100vw"
+          className="poster__photo"
+        />
+      </div>
+      <div className="mx-auto w-full max-w-7xl px-4 py-16 sm:px-6 sm:py-20">
         <header className="process-section__header mb-8 sm:mb-10" data-reveal>
           <PageEyebrow>{PROCESS.eyebrow}</PageEyebrow>
           <h2

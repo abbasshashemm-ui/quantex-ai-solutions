@@ -1,12 +1,26 @@
+import Image from "next/image";
 import Link from "next/link";
 import { CONTACT } from "@/lib/site/contact";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
+import { MACHINES } from "@/lib/site/machines";
 
 export function HomeCta() {
   return (
-    <section className="home-cta relative px-4 py-16 sm:px-6 sm:py-20 md:py-24">
-      <div className="mx-auto max-w-5xl">
-        <div className="home-cta__panel">
+    <section className="cta-stage relative px-4 py-16 sm:px-6 sm:py-20 md:py-24">
+      <div className="cta-stage__media" aria-hidden>
+        <Image
+          src={MACHINES.knob.src}
+          alt=""
+          fill
+          quality={70}
+          sizes="100vw"
+          className="poster__photo"
+          style={{ objectPosition: "right center" }}
+        />
+      </div>
+      <div className="cta-stage__scrim" aria-hidden />
+      <div className="relative z-[1] mx-auto max-w-5xl">
+        <div className="relative text-center">
           <PageEyebrow align="center">Next step</PageEyebrow>
           <h2 className="section-heading mx-auto mt-4 max-w-2xl text-metallic-gradient">
             How do I start a project with Quantex?

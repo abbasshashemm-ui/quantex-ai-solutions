@@ -1,43 +1,43 @@
-import Link from "next/link";
+import { MachinePlate } from "@/components/sections/MachinePlate";
+import { CONVERSION_EVENTS } from "@/lib/analytics/events";
 import { SERVICES } from "@/lib/services/data";
-import { PageEyebrow } from "@/components/ui/PageEyebrow";
-import { ServiceCard } from "./ServiceCard";
+import {
+  HOME_SERVICE_ORDER,
+  MACHINES,
+  SERVICE_PLATES,
+} from "@/lib/site/machines";
 
 export function ServicesSection() {
+  const ordered = HOME_SERVICE_ORDER.flatMap((id) => {
+    const service = SERVICES.find((item) => item.id === id);
+    return service ? [service] : [];
+  });
+
   return (
-    <section
-      id="solutions"
-      className="services-section relative scroll-mt-24 py-20 sm:py-24 md:py-28"
-      aria-labelledby="services-heading"
-    >
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
-        <header className="services-section__header mb-8 sm:mb-10">
-          <PageEyebrow>Solutions</PageEyebrow>
-          <h2
-            id="services-heading"
-            className="section-heading mt-3 max-w-2xl text-metallic-gradient"
-          >
-            What services does Quantex offer?
-          </h2>
-          <p className="mt-4 max-w-xl text-sm leading-relaxed text-foreground/65 sm:text-base">
-            Websites, chatbots, software, and the systems around them—each
-            engagement scoped for a measurable outcome.
-          </p>
-        </header>
-
-        <div className="services-section__grid">
-          {SERVICES.map((service) => (
-            <ServiceCard key={service.id} service={service} />
-          ))}
-        </div>
-
-        <p className="explore-next">
-          <Link href="#work" data-interactive>
-            See them live in the work
-            <span aria-hidden>→</span>
-          </Link>
-        </p>
-      </div>
+    <section id="solutions" className="solutions-stack" aria-labelledby="services-heading">
+      <header className="stack-index">
+        <p className="poster__index">Solutions</p>
+        <h2 id="services-heading" className="stack-index__title">
+          What services does Quantex offer?
+        </h2>
+      </header>
+      {ordered.map((service, index) => {
+        const plate = SERVICE_PLATES[service.id];
+        const machine = plate?.machine ? MACHINES[plate.machine] : null;
+        return (
+          <MachinePlate
+            key={service.id}
+            machine={machine}
+            index={String(index + 1).padStart(2, "0")}
+            title={plate?.slogan ?? service.nav.label}
+            body={service.description}
+            href={`/services/${service.slug}`}
+            cta="Open"
+            conversion={CONVERSION_EVENTS.SERVICE_CLICK}
+            conversionLocation="services_plate"
+          />
+        );
+      })}
     </section>
   );
 }

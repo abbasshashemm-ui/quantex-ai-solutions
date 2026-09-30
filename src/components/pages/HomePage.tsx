@@ -1,3 +1,4 @@
+import { HeroChat } from "@/components/chat/HeroChat";
 import { CapabilityMarquee } from "@/components/sections/CapabilityMarquee";
 import { DirectAnswer } from "@/components/sections/DirectAnswer";
 import { ExploreBand } from "@/components/sections/ExploreBand";
@@ -11,8 +12,21 @@ export function HomePage() {
   return (
     <>
       <HeroSection />
-      <DirectAnswer />
       <CapabilityMarquee />
+      <section className="ask-bay" aria-labelledby="ask-heading">
+        <div className="ask-bay__copy">
+          <p className="poster__index">Assistant online</p>
+          <h2 id="ask-heading" className="ask-bay__title">
+            Ask the machine.
+          </h2>
+          <p>
+            Websites, chatbots, timelines, and pricing. When the answer needs
+            a person, it hands off.
+          </p>
+        </div>
+        <HeroChat />
+      </section>
+      <DirectAnswer />
       <ServicesSection />
       <ProcessSection />
       <RecentProjectsSection />

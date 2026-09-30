@@ -51,7 +51,7 @@ export function Navbar() {
             data-conversion-location="navbar"
             className="btn-secondary hidden sm:inline-flex sm:px-4 md:px-5"
           >
-            Book strategy call
+            WhatsApp
           </a>
           <MobileNav />
         </div>

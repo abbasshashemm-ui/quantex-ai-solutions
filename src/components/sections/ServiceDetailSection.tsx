@@ -1,9 +1,11 @@
 import Link from "next/link";
+import { MachinePlate } from "@/components/sections/MachinePlate";
 import { ServiceNavIcon } from "@/components/layout/ServiceNavIcon";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import type { Service } from "@/lib/services/data";
 import { SOLUTIONS_OVERVIEW_HREF, getRelatedNavServices } from "@/lib/services/nav";
 import { CONTACT } from "@/lib/site/contact";
+import { HOME_SERVICE_ORDER, MACHINES, SERVICE_PLATES } from "@/lib/site/machines";
 
 type ServiceDetailSectionProps = {
   service: Service;
@@ -29,7 +31,10 @@ function CheckIcon() {
 }
 
 export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
-  const indexLabel = String(service.index + 1).padStart(2, "0");
+  const orderIndex = HOME_SERVICE_ORDER.indexOf(
+    service.id as (typeof HOME_SERVICE_ORDER)[number],
+  );
+  const indexLabel = String((orderIndex === -1 ? service.index : orderIndex) + 1).padStart(2, "0");
   const { nav: navMeta, overview, detail } = service;
   const related = getRelatedNavServices(service.slug);
   const spokePages = [
@@ -37,10 +42,22 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
     { href: "/contact", label: "Start a project", tagline: "Send a brief" },
   ] as const;
 
+  const plate = SERVICE_PLATES[service.id];
+  const machine = plate?.machine ? MACHINES[plate.machine] : null;
+
   return (
+    <>
+    <MachinePlate
+      machine={machine}
+      index={`${indexLabel} / Service`}
+      title={plate?.slogan ?? navMeta.label}
+      body={service.description}
+      titleAs="h1"
+      priority
+    />
     <article
       id="service-page"
-      className="service-page relative min-h-[100dvh] px-4 pb-24 pt-[calc(6rem+env(safe-area-inset-top))] sm:px-6 sm:pt-32"
+      className="service-page relative min-h-[100dvh] px-4 pb-24 pt-12 sm:px-6"
     >
       <div className="page-grid-bg absolute inset-0" aria-hidden />
       <div className="service-page__glow pointer-events-none absolute inset-0" aria-hidden />
@@ -57,15 +74,9 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
         <header className="service-page__hero mt-8 grid gap-8 lg:mt-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-start lg:gap-10 xl:gap-14">
           <div>
             <PageEyebrow className="text-foreground/80">
-              {indexLabel} · Services
+              {indexLabel} · {navMeta?.label ?? "Services"}
             </PageEyebrow>
-            <h1 className="section-heading mt-4 text-metallic-gradient lg:text-[2.35rem]">
-              {navMeta?.label ?? service.title}
-            </h1>
-            <p className="mt-4 max-w-xl text-sm leading-relaxed text-foreground/90 sm:text-base">
-              {service.description}
-            </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+            <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
               <Link
                 href="/contact"
                 data-interactive
@@ -246,7 +257,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
           </ul>
         </section>
 
-        <div className="service-page__cta mt-10 rounded-3xl border border-white/12 bg-surface px-5 py-8 text-center sm:mt-12 sm:px-8 sm:py-10">
+        <div className="service-page__cta mt-10 border border-white/12 bg-surface px-5 py-8 text-center sm:mt-12 sm:px-8 sm:py-10">
           <h2 className="mx-auto max-w-lg text-xl font-semibold tracking-tight text-foreground sm:text-2xl">
             How do I start this with Quantex?
           </h2>
@@ -284,5 +295,6 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
         </div>
       </div>
     </article>
+    </>
   );
 }

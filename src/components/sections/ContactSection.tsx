@@ -1,5 +1,7 @@
+import Image from "next/image";
 import Link from "next/link";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
+import { MACHINES } from "@/lib/site/machines";
 import { CONTACT, CONTACT_CHANNELS } from "@/lib/site/contact";
 import { ContactForm } from "./ContactForm";
 
@@ -99,6 +101,17 @@ export function ContactSection() {
             </Link>
           </p>
         </header>
+
+        <div className="contact-banner">
+          <Image
+            src={MACHINES.switches.src}
+            alt={MACHINES.switches.alt}
+            fill
+            quality={70}
+            sizes="100vw"
+            className="poster__photo"
+          />
+        </div>
 
         <div className="contact-page__layout mt-10 grid gap-8 lg:mt-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] lg:gap-10 xl:gap-14">
           <aside className="space-y-6">

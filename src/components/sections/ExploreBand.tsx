@@ -1,4 +1,6 @@
+import Image from "next/image";
 import Link from "next/link";
+import { MACHINES } from "@/lib/site/machines";
 
 const PATHS = [
   {
@@ -6,18 +8,21 @@ const PATHS = [
     eyebrow: "Work",
     title: "See what shipped",
     body: "Live sites and internal tools. Open a build, then keep going.",
+    image: MACHINES.vents,
   },
   {
     href: "/about",
     eyebrow: "Studio",
     title: "Meet the people",
     body: "Beirut, 2024. A small team that writes the code you launch.",
+    image: MACHINES.readout,
   },
   {
     href: "/contact",
     eyebrow: "Brief",
     title: "Start a project",
     body: "Tell us the goal. You get a scoped first milestone, not a deck.",
+    image: MACHINES.knob,
   },
 ] as const;
 
@@ -35,12 +40,24 @@ export function ExploreBand() {
             data-interactive
             className="explore-band__card group"
           >
+            <span className="instrument-frame">
+              <Image
+                src={path.image.src}
+                alt=""
+                fill
+                quality={70}
+                sizes="(max-width: 640px) 100vw, 30vw"
+                className="poster__photo"
+              />
+            </span>
+            <span className="explore-band__copy">
             <p className="explore-band__eyebrow">{path.eyebrow}</p>
             <h2 className="explore-band__title">{path.title}</h2>
             <p className="explore-band__body">{path.body}</p>
             <span className="explore-band__more">
               Continue
               <span aria-hidden>→</span>
+            </span>
             </span>
           </Link>
         ))}

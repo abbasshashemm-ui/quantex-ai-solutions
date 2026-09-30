@@ -1,5 +1,5 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ServiceNavIcon } from "@/components/layout/ServiceNavIcon";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import {
   ABOUT_CAPABILITIES,
@@ -12,6 +12,7 @@ import {
 } from "@/lib/site/about";
 import { CONTACT } from "@/lib/site/contact";
 import { SERVICES } from "@/lib/services/data";
+import { MACHINES, SERVICE_PLATES } from "@/lib/site/machines";
 import { SOLUTIONS_OVERVIEW_HREF } from "@/lib/services/nav";
 
 export function AboutPageContent() {
@@ -31,14 +32,27 @@ export function AboutPageContent() {
           ← Home
         </Link>
 
-        <header className="about-page__hero mt-8 max-w-3xl sm:mt-10">
-          <PageEyebrow>{ABOUT_HERO.eyebrow}</PageEyebrow>
-          <h1 className="section-heading mt-4 text-metallic-gradient lg:text-[2.35rem]">
-            {ABOUT_HERO.title}
-          </h1>
-          <p className="mt-5 text-sm leading-relaxed text-foreground/85 sm:text-base">
-            {ABOUT_HERO.lead}
-          </p>
+        <header className="about-hero-grid mt-8 sm:mt-10">
+          <div>
+            <PageEyebrow>{ABOUT_HERO.eyebrow}</PageEyebrow>
+            <h1 className="section-heading mt-4 text-metallic-gradient lg:text-[2.35rem]">
+              {ABOUT_HERO.title}
+            </h1>
+            <p className="mt-5 max-w-xl text-sm leading-relaxed text-foreground/85 sm:text-base">
+              {ABOUT_HERO.lead}
+            </p>
+          </div>
+          <div className="instrument-frame min-h-64">
+            <Image
+              src={MACHINES.bots.src}
+              alt={MACHINES.bots.alt}
+              fill
+              quality={70}
+              sizes="(max-width: 900px) 100vw, 40vw"
+              className="poster__photo"
+              priority
+            />
+          </div>
         </header>
 
         <section
@@ -151,15 +165,29 @@ export function AboutPageContent() {
             {ABOUT_CAPABILITIES.lead}
           </p>
           <ul className="mt-8 grid gap-3 sm:grid-cols-2 sm:gap-4 lg:grid-cols-3">
-            {SERVICES.map((service) => (
+            {SERVICES.map((service) => {
+              const machineId = SERVICE_PLATES[service.id]?.machine;
+              const machine = machineId ? MACHINES[machineId] : null;
+              return (
               <li key={service.id}>
                 <Link
                   href={`/services/${service.slug}`}
                   data-interactive
-                  className="about-page__service-link group flex h-full gap-4 rounded-2xl border border-white/10 bg-surface p-4 transition-colors hover:border-white/25 hover:bg-white/5 sm:p-5"
+                  className="about-page__service-link group flex h-full gap-4 border border-white/10 bg-surface transition-colors hover:border-white/25"
                 >
-                  <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl border border-white/12 bg-void text-metallic transition-colors group-hover:border-white/30">
-                    <ServiceNavIcon icon={service.nav.icon} className="h-5 w-5" />
+                  <span className="instrument-frame instrument-frame--thumb">
+                    {machine ? (
+                      <Image
+                        src={machine.src}
+                        alt=""
+                        fill
+                        quality={70}
+                        sizes="104px"
+                        className="poster__photo"
+                      />
+                    ) : (
+                      <span className="instrument-mark" aria-hidden />
+                    )}
                   </span>
                   <span className="min-w-0">
                     <span className="block text-sm font-semibold text-foreground">
@@ -171,11 +199,12 @@ export function AboutPageContent() {
                   </span>
                 </Link>
               </li>
-            ))}
+              );
+            })}
           </ul>
         </section>
 
-        <section className="about-page__cta mt-16 rounded-3xl border border-white/12 bg-surface px-5 py-10 text-center sm:mt-20 sm:px-10 sm:py-12">
+        <section className="about-page__cta mt-16 border border-white/12 bg-surface px-5 py-10 text-center sm:mt-20 sm:px-10 sm:py-12">
           <p className="text-[0.65rem] font-medium tracking-[0.28em] text-foreground/70 uppercase sm:text-xs">
             {ABOUT_CTA.eyebrow}
           </p>
