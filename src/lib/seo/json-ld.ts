@@ -1,9 +1,26 @@
-import type { Service } from "@/lib/services/data";
+import { SERVICES, type Service } from "@/lib/services/data";
 import { SITE_FAQ, type FaqItem } from "./faq";
 import { absoluteUrl } from "./metadata";
 import { SITE, getSiteUrl } from "./site";
 
 type JsonLd = Record<string, unknown>;
+
+export function buildPersonSchema(): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": `${getSiteUrl()}/#founder`,
+    name: SITE.founder,
+    jobTitle: "Full Stack Developer",
+    url: absoluteUrl("/about"),
+    worksFor: { "@id": `${getSiteUrl()}/#organization` },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Beirut",
+      addressCountry: "LB",
+    },
+  };
+}
 
 export function buildOrganizationSchema(): JsonLd {
   return {
@@ -18,17 +35,13 @@ export function buildOrganizationSchema(): JsonLd {
     email: SITE.email,
     telephone: SITE.phone,
     foundingDate: SITE.foundingDate,
-    founder: {
-      "@type": "Person",
-      name: SITE.founder,
-      jobTitle: "Full Stack Developer",
-    },
+    founder: { "@id": `${getSiteUrl()}/#founder` },
     address: {
       "@type": "PostalAddress",
       addressLocality: "Beirut",
       addressCountry: "LB",
     },
-    sameAs: [SITE.social.instagram],
+    sameAs: [SITE.social.instagram, SITE.social.linkedin],
     areaServed: ["LB", "Middle East", "Worldwide"],
   };
 }
@@ -54,6 +67,25 @@ export function buildWebSiteSchema(): JsonLd {
   };
 }
 
+export function buildOfferCatalogSchema(): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "OfferCatalog",
+    "@id": `${getSiteUrl()}/#offer-catalog`,
+    name: `${SITE.name} services`,
+    itemListElement: SERVICES.map((service, index) => ({
+      "@type": "Offer",
+      position: index + 1,
+      itemOffered: {
+        "@type": "Service",
+        name: service.nav.label,
+        description: service.description,
+        url: absoluteUrl(`/services/${service.slug}`),
+      },
+    })),
+  };
+}
+
 export function buildProfessionalServiceSchema(): JsonLd {
   return {
     "@context": "https://schema.org",
@@ -72,6 +104,7 @@ export function buildProfessionalServiceSchema(): JsonLd {
       addressCountry: "LB",
     },
     parentOrganization: { "@id": `${getSiteUrl()}/#organization` },
+    hasOfferCatalog: { "@id": `${getSiteUrl()}/#offer-catalog` },
     areaServed: ["Beirut", "Lebanon", "Middle East"],
     knowsAbout: [
       "Custom software development",
@@ -80,7 +113,27 @@ export function buildProfessionalServiceSchema(): JsonLd {
       "Business process automation",
       "Technical SEO",
       "Cloud system architecture",
+      "Next.js",
+      "Core Web Vitals",
+      "Google Search Console",
     ],
+  };
+}
+
+export function buildWebPageSchema(): JsonLd {
+  return {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${getSiteUrl()}/#webpage`,
+    url: getSiteUrl(),
+    name: SITE.name,
+    description: SITE.description,
+    isPartOf: { "@id": `${getSiteUrl()}/#website` },
+    about: { "@id": `${getSiteUrl()}/#organization` },
+    speakable: {
+      "@type": "SpeakableSpecification",
+      cssSelector: [".aeo-answer", ".faq-section"],
+    },
   };
 }
 
@@ -97,6 +150,10 @@ export function buildFaqPageSchema(items: FaqItem[] = SITE_FAQ): JsonLd {
       },
     })),
   };
+}
+
+export function buildHomePageSchemas(): JsonLd[] {
+  return [buildFaqPageSchema(), buildWebPageSchema()];
 }
 
 export function buildBreadcrumbSchema(
@@ -135,8 +192,10 @@ export function buildServiceSchema(service: Service): JsonLd {
 
 export function buildGlobalSchemas(): JsonLd[] {
   return [
+    buildPersonSchema(),
     buildOrganizationSchema(),
     buildWebSiteSchema(),
+    buildOfferCatalogSchema(),
     buildProfessionalServiceSchema(),
   ];
 }

@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { ServiceNavIcon } from "@/components/layout/ServiceNavIcon";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
@@ -16,7 +14,7 @@ export function ServiceCard({ service }: ServiceCardProps) {
       data-interactive
       data-conversion={CONVERSION_EVENTS.SERVICE_CLICK}
       data-conversion-location="services_grid"
-      className="service-card-link"
+      className="service-card-link card-stack"
     >
       <article data-service-card className="service-card">
         <div className="service-card__inner">

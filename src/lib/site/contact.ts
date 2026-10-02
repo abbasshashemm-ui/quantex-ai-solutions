@@ -5,11 +5,11 @@ export const LEGACY_SITE_URL = "https://www.quantexai.info";
 export const COMPANY = {
   name: "Quantex AI Solutions",
   tagline:
-    "Web and app design engineered to convert — polished interfaces, thoughtful UX, and builds you can ship with confidence.",
+    "Technical SEO, Core Web Vitals, and search visibility—engineered at the source.",
 } as const;
 
 export const CONTACT = {
-  email: "hello@quantexai.solutions",
+  email: "abbas@quantexai.solutions",
   whatsapp: "https://wa.me/9613642102",
   phoneDisplay: "+961 3 642 102",
   phoneTel: "+9613642102",
@@ -61,6 +61,11 @@ export const CONTACT_CHANNELS = [
 
 export const CONTACT_LINKS = [
   {
+    label: CONTACT.email,
+    href: `mailto:${CONTACT.email}`,
+    external: false,
+  },
+  {
     label: "Chat on WhatsApp",
     href: CONTACT.whatsapp,
     external: true,
@@ -71,7 +76,7 @@ export const CONTACT_LINKS = [
     external: false,
   },
   {
-    label: "Book Strategy Call",
+    label: "Book strategy call",
     href: CONTACT.whatsapp,
     external: true,
   },
@@ -80,19 +85,12 @@ export const CONTACT_LINKS = [
 export const SITE_NAV = [
   { label: "Home", href: "/" },
   { label: "Solutions", href: "/#solutions" },
+  { label: "Work", href: "/#work" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ] as const;
 
 export const FOOTER_NAV = SITE_NAV.filter((item) => item.href !== "/");
-
-export const FOOTER_EXTRA = [
-  {
-    label: "quantexai.info",
-    href: LEGACY_SITE_URL,
-    external: true,
-  },
-] as const;
 
 export const FOOTER_LEGAL = [
   { label: "Privacy Policy", href: "/privacy" },

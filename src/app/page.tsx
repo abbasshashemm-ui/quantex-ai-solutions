@@ -2,26 +2,28 @@ import { HomePage } from "@/components/pages/HomePage";
 import { FaqSection } from "@/components/sections/FaqSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { createPageMetadata } from "@/lib/seo/metadata";
-import { buildFaqPageSchema } from "@/lib/seo/json-ld";
+import { buildHomePageSchemas } from "@/lib/seo/json-ld";
 import { SITE } from "@/lib/seo/site";
+
+export const dynamic = "force-static";
 
 export const metadata = createPageMetadata({
   title: SITE.name,
   description:
-    "Custom software, AI chatbots, high-converting websites, and automation—built in Beirut by Quantex AI Solutions for businesses that need production-ready delivery.",
+    "Web. Chatbots. Ship. Quantex AI Solutions builds high-converting websites and on-brand AI chatbots—plus software and automation that ship.",
   path: "/",
   keywords: [
-    "AI solutions Lebanon",
-    "custom software Beirut",
-    "WhatsApp chatbot development",
-    "Next.js web agency",
+    "web development Lebanon",
+    "AI chatbots Beirut",
+    "Next.js websites",
+    "Quantex AI Solutions",
   ],
 });
 
 export default function Home() {
   return (
     <>
-      <JsonLd data={buildFaqPageSchema()} />
+      <JsonLd data={buildHomePageSchemas()} />
       <HomePage />
       <FaqSection />
     </>

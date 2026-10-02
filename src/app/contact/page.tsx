@@ -1,16 +1,19 @@
 import type { Metadata } from "next";
-import { ContactPageShell } from "@/components/layout/ContactPageShell";
+import { ContactPageTracker } from "@/components/analytics/ContactPageTracker";
+import { ContactSection } from "@/components/sections/ContactSection";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { createPageMetadata } from "@/lib/seo/metadata";
 import { buildBreadcrumbSchema } from "@/lib/seo/json-ld";
 import { CONTACT } from "@/lib/site/contact";
 
+export const dynamic = "force-static";
+
 export const metadata: Metadata = createPageMetadata({
   title: "Contact",
   description:
-    `Contact Quantex AI Solutions about web design, custom software, AI chatbots, and automation. Email ${CONTACT.email} or message on WhatsApp—we respond within 24 hours.`,
+    `Contact Quantex AI Solutions about visibility audits, technical SEO, sites, software, and automation. Email ${CONTACT.email} or message on WhatsApp—we respond within 24 hours.`,
   path: "/contact",
-  keywords: ["contact Quantex", "hire web developer Beirut", "AI agency Lebanon"],
+  keywords: ["contact Quantex", "visibility audit", "technical SEO Beirut"],
 });
 
 export default function ContactPage() {
@@ -22,7 +25,8 @@ export default function ContactPage() {
           { name: "Contact", path: "/contact" },
         ])}
       />
-      <ContactPageShell />
+      <ContactPageTracker />
+      <ContactSection />
     </>
   );
 }

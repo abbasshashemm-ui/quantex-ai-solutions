@@ -1,54 +1,70 @@
+import Link from "next/link";
+import { HeroChat } from "@/components/chat/HeroChat";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
-import { CONTACT } from "@/lib/site/contact";
-import { SOLUTIONS_OVERVIEW_HREF } from "@/lib/services/nav";
 
 export function HeroSection() {
   return (
     <section
       id="home"
-      className="relative grid min-h-[100dvh] grid-rows-[minmax(0,1.1fr)_auto_minmax(4.5rem,0.72fr)] px-4 pt-[calc(6rem+env(safe-area-inset-top))] sm:px-6 sm:pt-32 md:grid-rows-[minmax(0,1fr)_auto_minmax(5rem,0.85fr)]"
+      className="hero-studio"
+      aria-labelledby="hero-heading"
     >
-      <div aria-hidden className="min-h-0" />
+      <div className="hero-veil" aria-hidden />
 
-      <div className="mx-auto w-full max-w-3xl px-1 text-center sm:px-2">
-        <PageEyebrow align="center" className="text-metallic-gradient">
-          Quantex AI Solutions
-        </PageEyebrow>
-        <h1 className="mt-3 text-balance text-[2.15rem] font-semibold leading-[1.08] tracking-tight text-metallic-gradient sm:text-4xl md:text-5xl lg:text-6xl">
-          Digital products built to perform—and convert
-        </h1>
-        <p className="mx-auto mt-4 max-w-xl text-pretty text-sm leading-relaxed text-foreground/78 sm:mt-5 sm:text-base sm:leading-relaxed">
-          Custom software, high-converting websites, automation, and AI
-          assistants—designed, built, and shipped with clarity from first call
-          to launch.
-        </p>
-
-        <div className="mt-7 flex flex-col items-stretch justify-center gap-3 sm:mt-8 sm:flex-row sm:items-center sm:gap-4">
-          <a
-            href={CONTACT.whatsapp}
-            target="_blank"
-            rel="noopener noreferrer"
-            data-interactive
-            data-conversion={CONVERSION_EVENTS.WHATSAPP_CLICK}
-            data-conversion-location="hero"
-            className="btn-primary w-full sm:w-auto"
-          >
-            Book strategy call
-          </a>
-          <a
-            href={SOLUTIONS_OVERVIEW_HREF}
-            data-interactive
-            data-conversion={CONVERSION_EVENTS.SOLUTIONS_CLICK}
-            data-conversion-location="hero"
-            className="btn-secondary w-full sm:w-auto"
-          >
-            View solutions
-          </a>
+      <div className="hero-studio__inner">
+        <div className="hero-studio__copy">
+          <PageEyebrow>Beirut · AI studio</PageEyebrow>
+          <h1 id="hero-heading" className="hero-heading">
+            <span className="hero-heading__line">Automate.</span>
+            <span className="hero-heading__line">Scale.</span>
+            <span className="hero-heading__line">Dominate.</span>
+          </h1>
+          <p>
+            High-converting websites and on-brand AI assistants—built to
+            perform, convert, and hand off to humans when it matters.
+          </p>
+          <div className="hero-ctas">
+            <a
+              href="#work"
+              data-interactive
+              data-conversion={CONVERSION_EVENTS.SOLUTIONS_CLICK}
+              data-conversion-location="hero"
+              className="btn-primary"
+            >
+              See the work
+            </a>
+            <a
+              href="#solutions"
+              data-interactive
+              className="btn-secondary"
+            >
+              Explore solutions
+            </a>
+          </div>
+          <div className="hero-follow">
+            <Link href="/about" data-interactive>
+              The studio
+            </Link>
+            <span aria-hidden>·</span>
+            <Link href="/contact" data-interactive>
+              Start a project
+            </Link>
+          </div>
+          <div className="hero-meta">
+            <span className="hero-meta__chip">
+              <span className="hero-meta__dot" aria-hidden />
+              Assistant online
+            </span>
+            <Link href="/about" className="hero-meta__chip" data-interactive>
+              10+ businesses
+            </Link>
+            <span className="hero-meta__chip">Founded 2024</span>
+          </div>
         </div>
-      </div>
 
-      <div aria-hidden className="min-h-0" />
+        <HeroChat />
+      </div>
     </section>
   );
 }

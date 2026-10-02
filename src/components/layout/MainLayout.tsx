@@ -1,5 +1,5 @@
 import type { ReactNode } from "react";
-import { ChatWidget } from "@/components/chat/ChatWidget";
+import { ChatWidgetGate } from "@/components/chat/ChatWidgetGate";
 import { Footer } from "./Footer";
 import { Navbar } from "./Navbar";
 
@@ -10,6 +10,8 @@ type MainLayoutProps = {
 export function MainLayout({ children }: MainLayoutProps) {
   return (
     <>
+      <div className="site-grain" aria-hidden />
+      <div className="site-ambient" aria-hidden />
       <Navbar />
       <main
         id="main-content"
@@ -18,7 +20,7 @@ export function MainLayout({ children }: MainLayoutProps) {
         {children}
       </main>
       <Footer />
-      <ChatWidget />
+      <ChatWidgetGate />
     </>
   );
 }
