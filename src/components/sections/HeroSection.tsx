@@ -26,13 +26,13 @@ export function HeroSection() {
           </p>
           <div className="hero-ctas">
             <a
-              href="#work"
+              href="/contact"
               data-interactive
               data-conversion={CONVERSION_EVENTS.SOLUTIONS_CLICK}
               data-conversion-location="hero"
               className="btn-primary"
             >
-              See the work
+              Start a project
             </a>
             <a
               href="#solutions"
@@ -47,8 +47,8 @@ export function HeroSection() {
               The studio
             </Link>
             <span aria-hidden>·</span>
-            <Link href="/contact" data-interactive>
-              Start a project
+            <Link href="#process" data-interactive>
+              How we work
             </Link>
           </div>
           <div className="hero-meta">

@@ -85,13 +85,13 @@ export function ContactSection() {
             <span className="text-metallic-gradient">We reply within 24 hours.</span>
           </h1>
           <p className="mt-4 text-sm leading-relaxed text-foreground/80 sm:text-base">
-            Websites, AI assistants, custom software, automation, or
-            technical SEO—send the brief and we&apos;ll route it.
+            AI assistants, search-ready websites, custom software, or
+            automation—send the brief and we&apos;ll route it.
           </p>
           <p className="mt-4 text-sm text-foreground/70">
             Still browsing?{" "}
-            <Link href="/#work" className="text-foreground/80 underline-offset-2 hover:underline">
-              See the work
+            <Link href="/#solutions" className="text-foreground/80 underline-offset-2 hover:underline">
+              See what we build
             </Link>
             {" · "}
             <Link href="/about" className="text-foreground/80 underline-offset-2 hover:underline">

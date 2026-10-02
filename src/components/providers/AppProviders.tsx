@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
 import type { ReactNode } from "react";
 import { HashScrollHandler } from "./HashScrollHandler";
+import { RevealOnScroll } from "./RevealOnScroll";
 import { ScrollToTopOnNavigate } from "./ScrollToTopOnNavigate";
 
 const ConversionTracker = dynamic(
@@ -26,6 +27,7 @@ export function AppProviders({ children }: AppProvidersProps) {
     <>
       <ConversionTracker />
       <ScrollToTopOnNavigate />
+      <RevealOnScroll />
       {isHome ? <HashScrollHandler /> : null}
       {children}
     </>

@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { PageEyebrow } from "@/components/ui/PageEyebrow";
 
 const PILLARS = [
   {
@@ -22,19 +21,19 @@ export function DirectAnswer() {
       aria-labelledby="aeo-heading"
     >
       <div className="mx-auto max-w-7xl"><div className="max-w-3xl">
-        <PageEyebrow>Direct answer</PageEyebrow>
         <h2 id="aeo-heading" className="section-heading mt-3 text-metallic-gradient">
           What does Quantex AI Solutions build?
         </h2>
-        <div className="aeo-answer mt-5 space-y-4 text-sm leading-relaxed text-foreground/80 sm:text-base">
+        <div className="aeo-answer mt-5 space-y-4 text-base leading-[1.75] text-foreground/80 sm:text-[1.0625rem]">
           <p>
-            Quantex AI Solutions is a Beirut studio founded in 2024. We build
-            high-converting websites and on-brand AI chatbots, plus custom
-            software, automation, and technical SEO.
+            Quantex AI Solutions is a Beirut AI studio founded in 2024. We build
+            on-brand AI chatbots and automation, and websites that are
+            search-ready from the first commit—plus custom software and
+            technical SEO.
           </p>
           <p>
-            Marketing sites ship on Next.js and Vercel, tuned for Core Web
-            Vitals and measured in Google Search Console. Assistants are
+            Sites ship on Next.js and Vercel with clean structure, fast Core Web
+            Vitals, and measurement in Google Search Console. Assistants are
             grounded with Gemini on your documents and policies, then deployed
             on the website or WhatsApp with a human handoff when the answer
             needs a person.

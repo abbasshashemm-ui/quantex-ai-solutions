@@ -2,10 +2,10 @@ import Link from "next/link";
 
 const PATHS = [
   {
-    href: "#work",
-    eyebrow: "Work",
-    title: "See what shipped",
-    body: "Live sites and internal tools. Open a build, then keep going.",
+    href: "#solutions",
+    eyebrow: "Solutions",
+    title: "See what we build",
+    body: "Websites, AI assistants, software, and search—one team across all of it.",
   },
   {
     href: "/about",

@@ -7,7 +7,7 @@ export const FOUNDER = {
 export const ABOUT_HERO = {
   eyebrow: "About Quantex AI Solutions",
   title: "A studio that ships products, not decks.",
-  lead: "Quantex AI Solutions launched in 2024 in Beirut. We ship Next.js sites on Vercel, tuned for Core Web Vitals and Google Search Console, plus Gemini-powered chatbots on WhatsApp and the web—alongside custom software, technical SEO, and automation.",
+  lead: "Quantex AI Solutions launched in 2024 in Beirut. We are an AI studio: Gemini-powered chatbots on WhatsApp and the web, automation, and custom software—plus Next.js sites on Vercel built search-ready, with Core Web Vitals and Google Search Console in mind from day one.",
 } as const;
 
 export const ABOUT_STORY = {

@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { SERVICES } from "@/lib/services/data";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { ServiceCard } from "./ServiceCard";
@@ -19,7 +18,7 @@ export function ServicesSection() {
           >
             What services does Quantex offer?
           </h2>
-          <p className="mt-4 max-w-xl text-sm leading-relaxed text-foreground/70 sm:text-base">
+          <p className="mt-4 max-w-xl text-base leading-[1.75] text-foreground/70 sm:text-[1.0625rem]">
             Websites, chatbots, software, and the systems around them—each
             engagement scoped for a measurable outcome.
           </p>
@@ -30,13 +29,6 @@ export function ServicesSection() {
             <ServiceCard key={service.id} service={service} />
           ))}
         </div>
-
-        <p className="explore-next">
-          <Link href="#work" data-interactive>
-            See them live in the work
-            <span aria-hidden>→</span>
-          </Link>
-        </p>
       </div>
     </section>
   );

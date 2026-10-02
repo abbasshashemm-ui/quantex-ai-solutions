@@ -1,17 +1,15 @@
 import Link from "next/link";
 import { CONTACT } from "@/lib/site/contact";
-import { PageEyebrow } from "@/components/ui/PageEyebrow";
 
 export function HomeCta() {
   return (
     <section className="home-cta relative px-4 py-16 sm:px-6 sm:py-20 md:py-24">
       <div className="mx-auto max-w-5xl">
         <div className="home-cta__panel">
-          <PageEyebrow align="center">Next step</PageEyebrow>
           <h2 className="section-heading mx-auto mt-4 max-w-2xl text-metallic-gradient">
             How do I start a project with Quantex?
           </h2>
-          <p className="mx-auto mt-4 max-w-lg text-sm leading-relaxed text-foreground/70 sm:text-base">
+          <p className="mx-auto mt-4 max-w-lg text-base leading-[1.75] text-foreground/70 sm:text-[1.0625rem]">
             Share the product, the goal, and the timeline. We&apos;ll come back
             with a scoped first milestone—not a generic pitch.
           </p>
