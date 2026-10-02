@@ -14,6 +14,8 @@
   --signal: #5ee9a6;
   --glow: color-mix(in srgb, #c9ced8 24%, transparent);
   --radius: 0.85rem;
+  --amber: #ffa63d;
+  --amber-dim: #b9742a;
   /* brushed chrome */
   --chrome-hi: #ffffff;
   --chrome-mid: #cfd4dc;
@@ -372,7 +374,8 @@ section[id] {
   isolation: isolate;
   min-height: 100dvh;
   padding: calc(5.75rem + env(safe-area-inset-top)) 1rem 2.5rem;
-  overflow: visible;
+  overflow-x: clip;
+  overflow-y: visible;
 }
 
 @media (min-width: 640px) {
@@ -441,12 +444,26 @@ section[id] {
   width: fit-content;
   max-width: 100%;
   padding-block: 0.06em;
-  background-image: linear-gradient(
-    180deg,
-    #ffffff 0%,
-    #d7dbe3 42%,
-    #9aa1ad 100%
-  );
+  background-image:
+    linear-gradient(
+      105deg,
+      transparent 38%,
+      rgba(255, 255, 255, 0.95) 50%,
+      transparent 62%
+    ),
+    linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #e4e8ef 28%,
+      #9aa1ad 50%,
+      #dfe3ea 66%,
+      #7f8794 100%
+    );
+  background-size: 260% 100%, 100% 100%;
+  background-repeat: no-repeat;
+  background-position: 160% 0, 0 0;
+  animation: chrome-sweep 7s ease-in-out 1.2s infinite;
+  filter: drop-shadow(0 2px 0 rgba(0, 0, 0, 0.55));
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
@@ -538,6 +555,7 @@ a.hero-meta__chip:hover {
 .hero-chat {
   position: relative;
   z-index: 1;
+  backdrop-filter: blur(14px) saturate(130%);
   display: flex;
   justify-self: end;
   width: 100%;
@@ -549,8 +567,8 @@ a.hero-meta__chip:hover {
   background:
     linear-gradient(
       180deg,
-      color-mix(in srgb, var(--surface-elevated) 88%, transparent),
-      color-mix(in srgb, var(--void) 88%, transparent)
+      color-mix(in srgb, var(--surface-elevated) 62%, transparent),
+      color-mix(in srgb, var(--void) 70%, transparent)
     );
   box-shadow:
     0 30px 80px color-mix(in srgb, #000 55%, transparent),
@@ -1962,4 +1980,288 @@ span.chat-panel__input {
     transform: none;
     transition: none;
   }
+}
+
+
+/* ——— Brand lockup ——— */
+.brand-descriptor {
+  display: none;
+  margin-left: 0.7rem;
+  padding-left: 0.7rem;
+  border-left: 1px solid color-mix(in srgb, var(--foreground) 24%, transparent);
+  font-size: 0.62rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--foreground) 74%, transparent);
+  white-space: nowrap;
+}
+
+@media (min-width: 640px) {
+  .brand-descriptor {
+    display: inline;
+  }
+}
+
+/* ——— Hero chrome mark ——— */
+.hero-mark {
+  pointer-events: none;
+  position: absolute;
+  z-index: 0;
+  right: 1%;
+  top: 9%;
+  width: min(46vw, 40rem);
+  height: auto;
+  opacity: 0.62;
+  filter: drop-shadow(0 30px 80px rgba(0, 0, 0, 0.7));
+  animation: mark-float 14s ease-in-out infinite;
+}
+
+@media (max-width: 1023px) {
+  .hero-mark {
+    right: -18%;
+    top: 22%;
+    width: 80vw;
+    opacity: 0.3;
+  }
+}
+
+@keyframes mark-float {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-14px) rotate(1.5deg); }
+}
+
+@keyframes chrome-sweep {
+  0%, 55% { background-position: 160% 0, 0 0; }
+  100% { background-position: -60% 0, 0 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-mark,
+  .hero-heading__line {
+    animation: none;
+  }
+}
+
+/* ——— Hardware showcase ——— */
+.showcase__tag {
+  margin-top: 1.1rem;
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--amber);
+}
+
+.showcase__grid {
+  margin-top: 3rem;
+  display: grid;
+  gap: 1.5rem;
+}
+
+@media (min-width: 900px) {
+  .showcase__grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem 1.75rem;
+  }
+  .showcase__grid > :nth-child(1) { grid-column: 1 / -1; }
+}
+
+.device {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+}
+
+.device__face {
+  position: relative;
+  display: grid;
+  gap: 1rem;
+  padding: 1.25rem;
+  border-radius: 0.9rem;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  background:
+    var(--chrome-brush),
+    linear-gradient(135deg, #f1f3f7 0%, #c9ced7 45%, #e3e6ec 70%, #a9afba 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -2px 0 rgba(0, 0, 0, 0.18),
+    0 28px 60px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(0, 0, 0, 0.5);
+}
+
+.device--lead .device__face {
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem 2.25rem;
+}
+
+.device--lead .device__screen {
+  font-size: 0.82rem;
+  padding: 1.2rem 1.4rem;
+}
+
+.device--lead .device__mark {
+  width: 6.5rem;
+}
+
+@media (max-width: 640px) {
+  .device--lead .device__face {
+    grid-template-columns: 1fr;
+  }
+}
+
+.device__brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.6rem;
+  color: #2a2e36;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  font-size: 0.8rem;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+.device__brand--sm {
+  flex-direction: row;
+  align-items: center;
+  font-size: 0.68rem;
+}
+
+.device__mark {
+  width: 4.4rem;
+  height: auto;
+  filter: contrast(1.1) brightness(0.8);
+}
+
+.device__brand--sm .device__mark {
+  width: 2.4rem;
+}
+
+.device__screen {
+  padding: 0.9rem 1rem;
+  border-radius: 0.5rem;
+  background: linear-gradient(180deg, #0a0805, #130d06);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 166, 61, 0.18),
+    inset 0 6px 18px rgba(0, 0, 0, 0.8),
+    0 1px 0 rgba(255, 255, 255, 0.7);
+  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  color: var(--amber);
+}
+
+.device__screen p {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin: 0;
+  padding-block: 0.22rem;
+  border-bottom: 1px dashed rgba(255, 166, 61, 0.2);
+}
+
+.device__screen p span {
+  color: var(--amber-dim);
+}
+
+.device__screen b {
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(255, 166, 61, 0.55);
+}
+
+.device__bars {
+  display: flex;
+  align-items: flex-end;
+  gap: 3px;
+  height: 1.1rem;
+  margin-top: 0.6rem;
+}
+
+.device__bars u {
+  display: block;
+  width: 5px;
+  background: var(--amber);
+  box-shadow: 0 0 6px rgba(255, 166, 61, 0.6);
+}
+
+.device__bars u:nth-child(1) { height: 30%; }
+.device__bars u:nth-child(2) { height: 55%; }
+.device__bars u:nth-child(3) { height: 85%; }
+.device__bars u:nth-child(4) { height: 65%; }
+.device__bars u:nth-child(5) { height: 100%; }
+
+.device__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.device__knob {
+  width: 2.9rem;
+  height: 2.9rem;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 35% 30%, #ffffff 0%, #c4c9d2 38%, #6f7683 100%);
+  box-shadow:
+    0 0 0 3px #8a909c,
+    0 0 0 4px rgba(0, 0, 0, 0.45),
+    0 6px 12px rgba(0, 0, 0, 0.5),
+    inset 0 -3px 5px rgba(0, 0, 0, 0.3);
+}
+
+.device__led {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--amber);
+  box-shadow: 0 0 10px 2px rgba(255, 166, 61, 0.7);
+}
+
+.device__led--dim {
+  background: #5b4730;
+  box-shadow: none;
+}
+
+.device__caption h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.device__caption p {
+  margin-top: 0.4rem;
+  max-width: 34rem;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: color-mix(in srgb, var(--foreground) 76%, transparent);
+}
+
+.device__link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.7rem;
+  min-height: 2.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--foreground);
+}
+
+.device__link:hover {
+  color: var(--amber);
+}
+
+/* ——— CTA watermark ——— */
+.home-cta__panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: url("/quantex-chrome-mark-sm-v2.webp") no-repeat right -4rem center / 22rem auto;
+  opacity: 0.12;
+  pointer-events: none;
 }

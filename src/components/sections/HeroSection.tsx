@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { HeroChat } from "@/components/chat/HeroChat";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
@@ -10,11 +11,22 @@ export function HeroSection() {
       className="hero-studio"
       aria-labelledby="hero-heading"
     >
-      <div className="hero-veil" aria-hidden />
+      <div className="hero-veil" aria-hidden>
+        <Image
+          src="/quantex-chrome-mark-v2.webp"
+          alt=""
+          width={1100}
+          height={966}
+          priority
+          sizes="(max-width: 1024px) 70vw, 46vw"
+          className="hero-mark"
+          aria-hidden
+        />
+      </div>
 
       <div className="hero-studio__inner">
         <div className="hero-studio__copy">
-          <PageEyebrow>Beirut · AI studio</PageEyebrow>
+          <PageEyebrow>[ AI Solutions · Beirut ]</PageEyebrow>
           <h1 id="hero-heading" className="hero-heading">
             <span className="hero-heading__line">Automate.</span>
             <span className="hero-heading__line">Scale.</span>

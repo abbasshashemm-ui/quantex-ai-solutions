@@ -24,6 +24,9 @@ export function Navbar() {
             priority
             className="h-8 w-auto max-w-[min(240px,52vw)] sm:h-9 md:h-10"
           />
+          <span className="brand-descriptor" aria-hidden>
+            AI Solutions
+          </span>
         </Link>
 
         <ul className="hidden items-center gap-1 md:flex lg:gap-2">

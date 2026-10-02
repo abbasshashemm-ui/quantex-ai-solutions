@@ -22,11 +22,11 @@ export function DirectAnswer() {
     >
       <div className="mx-auto max-w-7xl"><div className="max-w-3xl">
         <h2 id="aeo-heading" className="section-heading mt-3 text-metallic-gradient">
-          What does Quantex AI Solutions build?
+          What does Quantex build?
         </h2>
         <div className="aeo-answer mt-5 space-y-4 text-base leading-[1.75] text-foreground/80 sm:text-[1.0625rem]">
           <p>
-            Quantex AI Solutions is a Beirut AI studio founded in 2024. We build
+            Quantex is a Beirut studio founded in 2024 that delivers AI solutions. We build
             on-brand AI chatbots and automation, and websites that are
             search-ready from the first commit—plus custom software and
             technical SEO.
