@@ -293,6 +293,12 @@ body {
     transform 0.18s ease;
 }
 
+@media (max-width: 639px) {
+  .site-header__cta {
+    display: none;
+  }
+}
+
 .btn-secondary:hover {
   border-color: color-mix(in srgb, var(--foreground) 45%, transparent);
   background: color-mix(in srgb, var(--foreground) 8%, transparent);
@@ -319,6 +325,11 @@ body {
 
 .glow-accent {
   box-shadow: 0 0 28px var(--glow);
+}
+
+/* Anchored sections clear the fixed header */
+section[id] {
+  scroll-margin-top: 6rem;
 }
 
 /* ——— Hero ——— */
@@ -445,7 +456,7 @@ body {
   align-items: center;
   gap: 0.55rem 0.7rem;
   font-size: 0.9rem;
-  color: color-mix(in srgb, var(--foreground) 55%, transparent);
+  color: color-mix(in srgb, var(--foreground) 72%, transparent);
 }
 
 .hero-follow a {
@@ -521,9 +532,9 @@ a.hero-meta__chip:hover {
 
 @media (min-width: 1024px) {
   .hero-chat {
-    min-height: 34rem;
-    max-height: min(38rem, calc(100dvh - 10rem));
-    height: min(38rem, calc(100dvh - 10rem));
+    min-height: 30rem;
+    max-height: min(34rem, calc(100dvh - 10rem));
+    height: min(34rem, calc(100dvh - 10rem));
     min-width: 22rem;
   }
 }
@@ -693,7 +704,7 @@ a.capability-marquee__item:hover {
   flex: 1;
   font-size: 0.9rem;
   line-height: 1.55;
-  color: color-mix(in srgb, var(--foreground) 65%, transparent);
+  color: color-mix(in srgb, var(--foreground) 74%, transparent);
 }
 
 .explore-band__more {
@@ -859,7 +870,7 @@ a.capability-marquee__item:hover {
   flex: 1;
   font-size: 0.9rem;
   line-height: 1.65;
-  color: color-mix(in srgb, var(--foreground) 64%, transparent);
+  color: color-mix(in srgb, var(--foreground) 70%, transparent);
 }
 
 .service-card__more {
@@ -954,7 +965,7 @@ a.capability-marquee__item:hover {
   font-weight: 600;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: color-mix(in srgb, var(--foreground) 62%, transparent);
+  color: color-mix(in srgb, var(--foreground) 70%, transparent);
 }
 
 .process-card__title {
@@ -968,7 +979,7 @@ a.capability-marquee__item:hover {
 
 .process-card__body {
   margin: 0.65rem 0 0;
-  color: color-mix(in srgb, #ffffff 68%, transparent);
+  color: color-mix(in srgb, #ffffff 76%, transparent);
   font-size: 0.9rem;
   line-height: 1.6;
 }
@@ -1429,7 +1440,7 @@ body:has(#home) .chat-widget {
 .chat-panel__subtitle {
   margin-top: 0.15rem;
   font-size: 0.72rem;
-  color: color-mix(in srgb, var(--foreground) 55%, transparent);
+  color: color-mix(in srgb, var(--foreground) 70%, transparent);
 }
 
 .chat-panel__header-actions {
@@ -1516,11 +1527,31 @@ body:has(#home) .chat-widget {
 .chat-panel__typing,
 .chat-panel__error {
   font-size: 0.75rem;
-  color: color-mix(in srgb, var(--foreground) 60%, transparent);
+  color: color-mix(in srgb, var(--foreground) 70%, transparent);
 }
 
 .chat-panel__error {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem 0.75rem;
   color: #ff8a8a;
+}
+
+.chat-panel__error-action {
+  min-height: 2rem;
+  padding: 0 0.7rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--foreground) 28%, transparent);
+  background: transparent;
+  color: var(--foreground);
+  font-size: 0.72rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.chat-panel__error-action:hover {
+  border-color: color-mix(in srgb, var(--foreground) 55%, transparent);
 }
 
 .chat-panel__quick-replies {
@@ -1576,13 +1607,13 @@ body:has(#home) .chat-widget {
 }
 
 .chat-panel__input::placeholder {
-  color: color-mix(in srgb, var(--foreground) 48%, transparent);
+  color: color-mix(in srgb, var(--foreground) 70%, transparent);
 }
 
 span.chat-panel__input {
   display: flex;
   align-items: center;
-  color: color-mix(in srgb, var(--foreground) 48%, transparent);
+  color: color-mix(in srgb, var(--foreground) 70%, transparent);
 }
 
 .chat-panel__input:focus {
@@ -1636,7 +1667,7 @@ span.chat-panel__input {
   font-size: 0.72rem;
   letter-spacing: 0;
   text-transform: none;
-  color: color-mix(in srgb, var(--foreground) 62%, transparent);
+  color: color-mix(in srgb, var(--foreground) 70%, transparent);
 }
 
 .chat-panel__mark {
@@ -1703,7 +1734,7 @@ span.chat-panel__input {
 }
 
 .chat-panel--terminal .chat-panel__typing {
-  color: color-mix(in srgb, var(--foreground) 62%, transparent);
+  color: color-mix(in srgb, var(--foreground) 70%, transparent);
   font-size: 0.75rem;
 }
 
@@ -1766,7 +1797,7 @@ span.chat-panel__input {
 }
 
 .brand-logo-text__bracket {
-  color: color-mix(in srgb, var(--foreground) 45%, transparent);
+  color: color-mix(in srgb, var(--foreground) 70%, transparent);
 }
 
 @media (prefers-reduced-motion: reduce) {

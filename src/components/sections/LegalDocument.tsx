@@ -27,7 +27,7 @@ export function LegalDocument({
         <Link
           href="/"
           data-interactive
-          className="inline-flex min-h-11 items-center text-xs tracking-wide text-foreground/65 transition-colors hover:text-foreground"
+          className="inline-flex min-h-11 items-center text-xs tracking-wide text-foreground/70 transition-colors hover:text-foreground"
         >
           ← Home
         </Link>
@@ -35,7 +35,7 @@ export function LegalDocument({
         <header className="mt-8 sm:mt-10">
           <PageEyebrow>{eyebrow}</PageEyebrow>
           <h1 className="section-heading mt-4 text-foreground">{title}</h1>
-          <p className="mt-3 text-sm text-foreground/60">
+          <p className="mt-3 text-sm text-foreground/70">
             Last updated: {lastUpdated}
           </p>
           <p className="mt-5 text-sm leading-relaxed text-foreground/85 sm:text-base">
@@ -57,7 +57,7 @@ export function LegalDocument({
                   <p key={paragraph.slice(0, 40)}>{paragraph}</p>
                 ))}
                 {section.list ? (
-                  <ul className="list-disc space-y-2 pl-5 marker:text-foreground/50">
+                  <ul className="list-disc space-y-2 pl-5 marker:text-foreground/70">
                     {section.list.map((item) => (
                       <li key={item}>{item}</li>
                     ))}

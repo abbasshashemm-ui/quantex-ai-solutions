@@ -6,21 +6,21 @@ export const PROCESS = {
   stages: [
     {
       n: "01",
-      code: "AUDIT",
-      title: "Map the crawl",
-      body: "Scope, crawl budget, and the brief you leave the call with.",
+      code: "SCOPE",
+      title: "Map the build",
+      body: "Goals, scope, and the brief you leave the call with.",
     },
     {
       n: "02",
       code: "ENGINEER",
-      title: "Fix the source",
-      body: "Technical SEO, CWV, and architecture in short, reviewable rounds.",
+      title: "Engineer it",
+      body: "Architecture, code, and integrations in short, reviewable rounds.",
     },
     {
       n: "03",
       code: "SHIP",
-      title: "Make it rank",
-      body: "Build, index, and test on real devices. Progress as it happens.",
+      title: "Ship it fast",
+      body: "Build and test on real devices. Progress as it happens.",
     },
     {
       n: "04",

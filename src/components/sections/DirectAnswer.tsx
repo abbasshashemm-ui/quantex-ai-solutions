@@ -21,7 +21,7 @@ export function DirectAnswer() {
       className="aeo-block relative border-t border-white/8 px-4 py-14 sm:px-6 sm:py-16"
       aria-labelledby="aeo-heading"
     >
-      <div className="mx-auto max-w-3xl">
+      <div className="mx-auto max-w-7xl"><div className="max-w-3xl">
         <PageEyebrow>Direct answer</PageEyebrow>
         <h2 id="aeo-heading" className="section-heading mt-3 text-metallic-gradient">
           What does Quantex AI Solutions build?
@@ -62,7 +62,7 @@ export function DirectAnswer() {
             Send a brief
           </Link>
         </p>
-      </div>
+      </div></div>
     </section>
   );
 }

@@ -14,10 +14,10 @@ export function Footer() {
   return (
     <footer
       id="contact"
-      className="relative z-20 border-t border-white/8 bg-void"
+      className="relative z-20 border-t border-white/8 bg-void px-4 sm:px-6"
       data-reveal
     >
-      <div className="mx-auto max-w-7xl px-4 py-8 pb-[calc(2rem+env(safe-area-inset-bottom))] sm:px-6 sm:py-10">
+      <div className="mx-auto max-w-7xl py-8 pb-[calc(2rem+env(safe-area-inset-bottom))] sm:py-10">
         <div className="grid grid-cols-2 gap-4 sm:gap-5 md:gap-6 lg:grid-cols-3 lg:gap-8">
           <div className="col-span-2 lg:col-span-1">
           <BrandLogo className="h-5 w-auto max-w-[10rem] sm:h-6" />
@@ -154,7 +154,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-6 flex flex-col gap-3 border-t border-white/8 pt-4 text-[0.7rem] text-foreground/55 sm:mt-8 sm:flex-row sm:items-center sm:justify-between sm:pt-5 sm:text-xs">
+        <div className="mt-6 flex flex-col gap-3 border-t border-white/8 pt-4 text-[0.7rem] text-foreground/70 sm:mt-8 sm:flex-row sm:items-center sm:justify-between sm:pt-5 sm:text-xs">
           <p>
             &copy; {year} {COMPANY.name}
           </p>

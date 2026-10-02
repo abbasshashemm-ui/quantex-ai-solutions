@@ -31,7 +31,7 @@ export function HomeCta() {
               About the studio
             </Link>
           </div>
-          <p className="mt-5 text-sm text-foreground/55">
+          <p className="mt-5 text-sm text-foreground/70">
             Prefer chat?{" "}
             <a
               href={CONTACT.whatsapp}

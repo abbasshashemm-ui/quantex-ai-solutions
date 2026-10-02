@@ -9,7 +9,7 @@ export function FaqSection() {
       className="faq-section relative border-t border-white/8 px-4 py-20 sm:px-6 sm:py-24 md:py-28"
       aria-labelledby="faq-heading"
     >
-      <div className="mx-auto max-w-3xl">
+      <div className="mx-auto max-w-7xl"><div className="max-w-3xl">
         <PageEyebrow>FAQ</PageEyebrow>
         <h2
           id="faq-heading"
@@ -17,7 +17,7 @@ export function FaqSection() {
         >
           What do people ask Quantex?
         </h2>
-        <p className="mt-4 text-sm leading-relaxed text-foreground/65 sm:text-base">
+        <p className="mt-4 text-sm leading-relaxed text-foreground/70 sm:text-base">
           Straight answers about who we are, what we build, and how to get
           started. Want the longer version?{" "}
           <Link href="/about" className="text-foreground/85 underline-offset-2 hover:underline">
@@ -35,7 +35,7 @@ export function FaqSection() {
                     {item.question}
                   </h3>
                   <span
-                    className="text-foreground/50 transition-transform group-open:rotate-45"
+                    className="text-foreground/70 transition-transform group-open:rotate-45"
                     aria-hidden
                   >
                     +
@@ -48,7 +48,7 @@ export function FaqSection() {
             </li>
           ))}
         </ul>
-      </div>
+      </div></div>
     </section>
   );
 }
