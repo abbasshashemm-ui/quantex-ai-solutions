@@ -3,7 +3,7 @@ import type { NextConfig } from "next";
 const immutableAssetHeaders = [
   {
     key: "Cache-Control",
-    value: "public, max-age=31536000, immutable",
+    value: "public, max-age=604800, stale-while-revalidate=86400",
   },
 ];
 
@@ -31,8 +31,6 @@ const nextConfig: NextConfig = {
       "/apple-touch-icon.png",
       "/icon-192.png",
       "/icon-512.png",
-      "/globe.svg",
-      "/next.svg",
     ];
 
     return [
