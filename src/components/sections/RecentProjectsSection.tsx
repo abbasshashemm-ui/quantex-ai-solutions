@@ -13,17 +13,17 @@ export function RecentProjectsSection() {
   return (
     <section
       id="work"
-      className="projects-section relative border-t border-white/8 py-20 sm:py-24 md:py-28"
+      className="projects-section relative border-t border-white/8 px-4 py-20 sm:px-6 sm:py-24 md:py-28"
       aria-labelledby="projects-heading"
     >
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
+      <div className="mx-auto max-w-7xl">
         <header className="projects-section__header flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div className="max-w-2xl">
             <PageEyebrow>Work</PageEyebrow>
             <h2 id="projects-heading" className="section-heading text-metallic-gradient">
               What has Quantex shipped?
             </h2>
-            <p className="mt-4 text-sm leading-relaxed text-foreground/65 sm:text-base">
+            <p className="mt-4 text-sm leading-relaxed text-foreground/70 sm:text-base">
               Live client systems—sites, operations software, and brands shipped
               end to end.
             </p>

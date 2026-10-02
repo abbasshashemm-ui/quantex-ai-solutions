@@ -14,7 +14,7 @@ export const SITE = {
   name: COMPANY.name,
   tagline: COMPANY.tagline,
   description:
-    "Quantex AI Solutions engineers technical SEO, Core Web Vitals, and search visibility—plus custom software, high-converting websites, and automation for teams that ship.",
+    "Quantex AI Solutions is a Beirut AI studio that builds search-ready websites, AI chatbots, custom software, and automation—engineered for technical SEO and Core Web Vitals from the first commit.",
   locale: "en_US",
   email: CONTACT.email,
   phone: CONTACT.phoneDisplay,

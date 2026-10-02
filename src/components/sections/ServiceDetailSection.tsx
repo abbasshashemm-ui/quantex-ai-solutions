@@ -49,7 +49,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
         <Link
           href={SOLUTIONS_OVERVIEW_HREF}
           data-interactive
-          className="inline-flex min-h-11 items-center text-xs tracking-wide text-foreground/65 transition-colors hover:text-foreground"
+          className="inline-flex min-h-11 items-center text-xs tracking-wide text-foreground/70 transition-colors hover:text-foreground"
         >
           ← All solutions
         </Link>
@@ -92,7 +92,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
                   <ServiceNavIcon icon={navMeta.icon} className="h-6 w-6" />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-[0.65rem] font-medium tracking-[0.2em] text-foreground/55 uppercase">
+                  <p className="text-[0.65rem] font-medium tracking-[0.2em] text-foreground/70 uppercase">
                     Focus area
                   </p>
                   <p className="mt-1 text-sm font-medium text-foreground sm:text-base">
@@ -115,7 +115,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
             ) : null}
             <dl className="service-page__stats mt-6 grid grid-cols-1 gap-4 border-t border-white/8 pt-5 sm:grid-cols-3 sm:gap-3">
               <div>
-                <dt className="text-[0.6rem] tracking-[0.18em] text-foreground/50 uppercase">
+                <dt className="text-[0.6rem] tracking-[0.18em] text-foreground/70 uppercase">
                   Delivery
                 </dt>
                 <dd className="mt-1 text-xs font-medium text-foreground sm:text-sm">
@@ -123,7 +123,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
                 </dd>
               </div>
               <div>
-                <dt className="text-[0.6rem] tracking-[0.18em] text-foreground/50 uppercase">
+                <dt className="text-[0.6rem] tracking-[0.18em] text-foreground/70 uppercase">
                   Handover
                 </dt>
                 <dd className="mt-1 text-xs font-medium text-foreground sm:text-sm">
@@ -131,7 +131,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
                 </dd>
               </div>
               <div>
-                <dt className="text-[0.6rem] tracking-[0.18em] text-foreground/50 uppercase">
+                <dt className="text-[0.6rem] tracking-[0.18em] text-foreground/70 uppercase">
                   Support
                 </dt>
                 <dd className="mt-1 text-xs font-medium text-foreground sm:text-sm">
@@ -218,7 +218,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
                     <span className="block text-xs font-medium text-foreground sm:text-sm">
                       {item.label}
                     </span>
-                    <span className="block truncate text-[0.65rem] text-foreground/60 sm:max-w-[12rem]">
+                    <span className="block truncate text-[0.65rem] text-foreground/70 sm:max-w-[12rem]">
                       {item.tagline}
                     </span>
                   </span>
@@ -236,7 +236,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
                     <span className="block text-xs font-medium text-foreground sm:text-sm">
                       {item.label}
                     </span>
-                    <span className="block truncate text-[0.65rem] text-foreground/60 sm:max-w-[12rem]">
+                    <span className="block truncate text-[0.65rem] text-foreground/70 sm:max-w-[12rem]">
                       {item.tagline}
                     </span>
                   </span>
@@ -272,7 +272,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
               Continue on WhatsApp
             </a>
           </div>
-          <p className="mt-5 text-sm text-foreground/55">
+          <p className="mt-5 text-sm text-foreground/70">
             <Link
               href="/"
               data-interactive

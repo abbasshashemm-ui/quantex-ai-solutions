@@ -5,7 +5,7 @@ import {
   type UIMessage,
 } from "ai";
 import { prepareMessagesForModel } from "@/lib/chat/normalize-messages";
-import { parseChatRequest, toUiMessages } from "@/lib/chat/parse-request";
+import { MAX_BODY_CHARS, parseChatRequest, toUiMessages } from "@/lib/chat/parse-request";
 import { buildSalesSystemPrompt } from "@/lib/chat/system-prompt";
 import { checkChatRateLimit, getClientIp } from "@/lib/chat/rate-limit";
 
@@ -44,9 +44,18 @@ export async function POST(request: Request) {
     );
   }
 
+  const declaredLength = Number(request.headers.get("content-length"));
+  if (Number.isFinite(declaredLength) && declaredLength > MAX_BODY_CHARS) {
+    return Response.json({ error: "Request too large." }, { status: 413 });
+  }
+
   let body: unknown;
   try {
-    body = await request.json();
+    const raw = await request.text();
+    if (raw.length > MAX_BODY_CHARS) {
+      return Response.json({ error: "Request too large." }, { status: 413 });
+    }
+    body = JSON.parse(raw);
   } catch {
     return Response.json({ error: "Invalid request." }, { status: 400 });
   }
@@ -68,7 +77,8 @@ export async function POST(request: Request) {
 
   try {
     const result = streamText({
-      model: google("gemini-2.5-flash"),
+      model: google(process.env.GEMINI_MODEL?.trim() || "gemini-2.5-flash"),
+      maxOutputTokens: 600,
       system: buildSalesSystemPrompt(),
       messages: await convertToModelMessages(modelMessages),
     });
@@ -79,9 +89,7 @@ export async function POST(request: Request) {
       originalMessages,
       onError: (error) => {
         console.error("[chat] stream error:", error);
-        return error instanceof Error
-          ? error.message
-          : "Unable to generate a reply right now.";
+        return "Unable to generate a reply right now. Please try WhatsApp instead.";
       },
     });
   } catch (error) {

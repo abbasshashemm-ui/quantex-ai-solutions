@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { PROCESS } from "@/lib/site/process";
 
@@ -6,10 +5,10 @@ export function ProcessSection() {
   return (
     <section
       id="process"
-      className="process-section relative scroll-mt-24 border-t border-white/8 py-20 sm:py-24 md:py-28"
+      className="process-section relative scroll-mt-24 border-t border-white/8 px-4 py-20 sm:px-6 sm:py-24 md:py-28"
       aria-labelledby="process-heading"
     >
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <div className="mx-auto w-full max-w-7xl">
         <header className="process-section__header mb-8 sm:mb-10" data-reveal>
           <PageEyebrow>{PROCESS.eyebrow}</PageEyebrow>
           <h2
@@ -18,11 +17,8 @@ export function ProcessSection() {
           >
             {PROCESS.heading}
           </h2>
-          <p className="mt-4 text-sm leading-relaxed text-foreground/65 sm:text-base">
-            {PROCESS.support}{" "}
-            <Link href="#work" data-interactive className="text-foreground/85 underline-offset-2 hover:underline">
-              Then see it live.
-            </Link>
+          <p className="mt-4 text-base leading-[1.75] text-foreground/70 sm:text-[1.0625rem]">
+            {PROCESS.support}
           </p>
         </header>
 

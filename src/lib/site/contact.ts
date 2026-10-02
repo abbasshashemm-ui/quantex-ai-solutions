@@ -5,7 +5,7 @@ export const LEGACY_SITE_URL = "https://www.quantexai.info";
 export const COMPANY = {
   name: "Quantex AI Solutions",
   tagline:
-    "Technical SEO, Core Web Vitals, and search visibility—engineered at the source.",
+    "An AI studio that builds search-ready websites, assistants, and software.",
 } as const;
 
 export const CONTACT = {
@@ -85,7 +85,6 @@ export const CONTACT_LINKS = [
 export const SITE_NAV = [
   { label: "Home", href: "/" },
   { label: "Solutions", href: "/#solutions" },
-  { label: "Work", href: "/#work" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ] as const;

@@ -55,7 +55,7 @@ export function sanitizeEmail(value: string): string {
   return truncate(
     stripControlChars(stripHtml(value))
       .toLowerCase()
-      .replace(/[^\w.+%@-]/g, "")
+      .replace(/[^\w.+%@'\/=?^`{|}~!#$&*-]/g, "")
       .trim(),
     CONTACT_FORM_LIMITS.email,
   );
@@ -75,8 +75,7 @@ export function sanitizeMessage(value: string): string {
   return truncate(
     stripControlChars(stripHtml(value), true)
       .replace(/\r\n/g, "\n")
-      .replace(/\n{4,}/g, "\n\n\n")
-      .trimStart(),
+      .replace(/\n{4,}/g, "\n\n\n"),
     CONTACT_FORM_LIMITS.message,
   );
 }
@@ -114,7 +113,7 @@ export function sanitizeContactForm(form: ContactFormFields): ContactFormFields 
     phone: sanitizePhone(form.phone),
     service: sanitizeService(form.service),
     budget: sanitizeBudget(form.budget),
-    message: sanitizeMessage(form.message),
+    message: sanitizeMessage(form.message).trim(),
   };
 }
 

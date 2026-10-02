@@ -87,7 +87,7 @@ export function ServicesNavDropdown({
                     <span className="block text-sm font-medium text-foreground">
                       {item.label}
                     </span>
-                    <span className="mt-0.5 block text-xs text-foreground/65">
+                    <span className="mt-0.5 block text-xs text-foreground/70">
                       {item.tagline}
                     </span>
                   </span>
@@ -161,7 +161,7 @@ export function ServicesNavDropdown({
                     <span className="block text-sm font-semibold text-foreground">
                       {item.label}
                     </span>
-                    <span className="mt-0.5 block text-xs leading-snug text-foreground/65">
+                    <span className="mt-0.5 block text-xs leading-snug text-foreground/70">
                       {item.tagline}
                     </span>
                   </span>
@@ -194,7 +194,7 @@ export function ServicesNavDropdown({
                 <span className="block text-sm font-semibold text-foreground">
                   All solutions
                 </span>
-                <span className="mt-0.5 block text-xs text-foreground/65">
+                <span className="mt-0.5 block text-xs text-foreground/70">
                   Overview on the home page
                 </span>
               </span>
@@ -226,7 +226,7 @@ export function ServicesNavDropdown({
                 <span className="flex items-center gap-1.5 text-sm font-semibold text-foreground">
                   quantexai.info
                   <svg
-                    className="h-3 w-3 text-foreground/50"
+                    className="h-3 w-3 text-foreground/70"
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
@@ -236,7 +236,7 @@ export function ServicesNavDropdown({
                     <path d="M14 5h5v5M10 14L19 5M19 14v5H5V5h5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </span>
-                <span className="mt-0.5 block text-xs text-foreground/65">
+                <span className="mt-0.5 block text-xs text-foreground/70">
                   Previous site & portfolio
                 </span>
               </span>

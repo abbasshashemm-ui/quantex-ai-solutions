@@ -9,7 +9,7 @@ export const SITE_FAQ: FaqItem[] = [
   {
     question: "What does Quantex AI Solutions do?",
     answer:
-      "Quantex AI Solutions is a Beirut-based studio founded in 2024. We engineer technical SEO, Core Web Vitals, and search visibility at the source—alongside custom software, high-converting websites, AI chatbots, business process automation, and system architecture for teams in Lebanon and internationally.",
+      "Quantex AI Solutions is a Beirut-based studio founded in 2024. We are an AI studio and SEO-minded web development team: we build AI chatbots and automation, plus websites engineered for technical SEO and Core Web Vitals from the first commit, alongside custom software and system architecture for teams in Lebanon and internationally.",
   },
   {
     question: "Who founded Quantex?",

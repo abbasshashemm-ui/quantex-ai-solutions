@@ -26,7 +26,7 @@ export function AboutPageContent() {
         <Link
           href="/"
           data-interactive
-          className="inline-flex min-h-11 items-center text-xs tracking-wide text-foreground/65 transition-colors hover:text-foreground"
+          className="inline-flex min-h-11 items-center text-xs tracking-wide text-foreground/70 transition-colors hover:text-foreground"
         >
           ← Home
         </Link>
@@ -75,7 +75,7 @@ export function AboutPageContent() {
               AH
             </div>
             <div>
-              <p className="text-[0.65rem] font-medium tracking-[0.22em] text-foreground/55 uppercase">
+              <p className="text-[0.65rem] font-medium tracking-[0.22em] text-foreground/70 uppercase">
                 {FOUNDER.title}
               </p>
               <p className="mt-1 text-lg font-semibold text-foreground">
@@ -165,7 +165,7 @@ export function AboutPageContent() {
                     <span className="block text-sm font-semibold text-foreground">
                       {service.nav.label}
                     </span>
-                    <span className="mt-1 block text-xs leading-relaxed text-foreground/65">
+                    <span className="mt-1 block text-xs leading-relaxed text-foreground/70">
                       {service.description}
                     </span>
                   </span>
@@ -201,7 +201,7 @@ export function AboutPageContent() {
               {ABOUT_CTA.secondaryLabel}
             </Link>
           </div>
-          <p className="mt-5 text-sm text-foreground/55">
+          <p className="mt-5 text-sm text-foreground/70">
             Prefer chat?{" "}
             <a
               href={CONTACT.whatsapp}

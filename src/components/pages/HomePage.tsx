@@ -4,8 +4,8 @@ import { ExploreBand } from "@/components/sections/ExploreBand";
 import { HeroSection } from "@/components/sections/HeroSection";
 import { HomeCta } from "@/components/sections/HomeCta";
 import { ProcessSection } from "@/components/sections/ProcessSection";
-import { RecentProjectsSection } from "@/components/sections/RecentProjectsSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
+import { StatBand } from "@/components/sections/StatBand";
 
 export function HomePage() {
   return (
@@ -14,8 +14,8 @@ export function HomePage() {
       <DirectAnswer />
       <CapabilityMarquee />
       <ServicesSection />
+      <StatBand />
       <ProcessSection />
-      <RecentProjectsSection />
       <ExploreBand />
       <HomeCta />
     </>

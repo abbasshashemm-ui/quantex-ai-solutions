@@ -73,7 +73,7 @@ export function ContactSection() {
         <Link
           href="/"
           data-interactive
-          className="inline-flex min-h-11 items-center text-xs tracking-wide text-foreground/65 transition-colors hover:text-foreground"
+          className="inline-flex min-h-11 items-center text-xs tracking-wide text-foreground/70 transition-colors hover:text-foreground"
         >
           ← Home
         </Link>
@@ -85,13 +85,13 @@ export function ContactSection() {
             <span className="text-metallic-gradient">We reply within 24 hours.</span>
           </h1>
           <p className="mt-4 text-sm leading-relaxed text-foreground/80 sm:text-base">
-            Visibility audits, technical SEO, sites, software, or
+            AI assistants, search-ready websites, custom software, or
             automation—send the brief and we&apos;ll route it.
           </p>
-          <p className="mt-4 text-sm text-foreground/55">
+          <p className="mt-4 text-sm text-foreground/70">
             Still browsing?{" "}
-            <Link href="/#work" className="text-foreground/80 underline-offset-2 hover:underline">
-              See the work
+            <Link href="/#solutions" className="text-foreground/80 underline-offset-2 hover:underline">
+              See what we build
             </Link>
             {" · "}
             <Link href="/about" className="text-foreground/80 underline-offset-2 hover:underline">
@@ -110,7 +110,7 @@ export function ContactSection() {
                       <ContactIcon id={channel.id} />
                     </span>
                     <span className="min-w-0">
-                      <span className="block text-[0.65rem] font-medium tracking-[0.2em] text-foreground/55 uppercase">
+                      <span className="block text-[0.65rem] font-medium tracking-[0.2em] text-foreground/70 uppercase">
                         {channel.label}
                       </span>
                       <span className="mt-1 block text-sm text-foreground sm:text-base">

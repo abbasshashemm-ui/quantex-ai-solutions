@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { SERVICES } from "@/lib/services/data";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { ServiceCard } from "./ServiceCard";
@@ -7,10 +6,10 @@ export function ServicesSection() {
   return (
     <section
       id="solutions"
-      className="services-section relative scroll-mt-24 py-20 sm:py-24 md:py-28"
+      className="services-section relative scroll-mt-24 px-4 py-20 sm:px-6 sm:py-24 md:py-28"
       aria-labelledby="services-heading"
     >
-      <div className="mx-auto w-full max-w-7xl px-4 sm:px-6">
+      <div className="mx-auto w-full max-w-7xl">
         <header className="services-section__header mb-8 sm:mb-10">
           <PageEyebrow>Solutions</PageEyebrow>
           <h2
@@ -19,7 +18,7 @@ export function ServicesSection() {
           >
             What services does Quantex offer?
           </h2>
-          <p className="mt-4 max-w-xl text-sm leading-relaxed text-foreground/65 sm:text-base">
+          <p className="mt-4 max-w-xl text-base leading-[1.75] text-foreground/70 sm:text-[1.0625rem]">
             Websites, chatbots, software, and the systems around them—each
             engagement scoped for a measurable outcome.
           </p>
@@ -30,13 +29,6 @@ export function ServicesSection() {
             <ServiceCard key={service.id} service={service} />
           ))}
         </div>
-
-        <p className="explore-next">
-          <Link href="#work" data-interactive>
-            See them live in the work
-            <span aria-hidden>→</span>
-          </Link>
-        </p>
       </div>
     </section>
   );

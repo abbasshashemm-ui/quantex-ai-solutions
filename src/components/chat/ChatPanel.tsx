@@ -34,7 +34,7 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
   const [openedTracked, setOpenedTracked] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
   const isTerminal = variant === "terminal";
-  const { messages, sendMessage, status, error, clearError } =
+  const { messages, sendMessage, regenerate, status, error, clearError } =
     useSalesChat(variant);
   const location = isTerminal ? "hero_terminal" : "chat_panel";
 
@@ -149,7 +149,24 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
         ) : null}
         {error ? (
           <p className="chat-panel__error" role="alert">
-            Something went wrong. Try again or message us on WhatsApp.
+            <span>Something went wrong.</span>
+            <button
+              type="button"
+              className="chat-panel__error-action"
+              onClick={() => {
+                clearError();
+                void regenerate();
+              }}
+            >
+              Retry
+            </button>
+            <button
+              type="button"
+              className="chat-panel__error-action"
+              onClick={() => openWhatsApp()}
+            >
+              WhatsApp
+            </button>
           </p>
         ) : null}
       </div>
