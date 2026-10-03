@@ -557,7 +557,7 @@ a.hero-meta__chip:hover {
 .hero-chat {
   position: relative;
   z-index: 1;
-  backdrop-filter: blur(14px) saturate(130%);
+  backdrop-filter: blur(6px) saturate(130%);
   display: flex;
   justify-self: end;
   width: 100%;
@@ -2006,23 +2006,48 @@ span.chat-panel__input {
 }
 
 /* ——— Hero chrome mark ——— */
+/* same width/edges as .hero-studio__inner so the mark tracks the chat panel */
+.hero-mark-anchor {
+  position: absolute;
+  inset-block: 0;
+  inset-inline: 1rem;
+  max-width: 80rem;
+  margin-inline: auto;
+  pointer-events: none;
+}
+
+@media (min-width: 640px) {
+  .hero-mark-anchor {
+    inset-inline: 1.5rem;
+  }
+}
+
 .hero-mark {
   pointer-events: none;
   position: absolute;
   z-index: 0;
-  right: 1%;
-  top: 9%;
-  width: min(46vw, 40rem);
+  right: -5.5rem;
+  top: calc(50% + 2.5rem);
+  translate: 0 -50%;
+  width: 42rem;
   height: auto;
-  opacity: 0.62;
+  opacity: 0.85;
   filter: drop-shadow(0 30px 80px rgba(0, 0, 0, 0.7));
   animation: mark-float 14s ease-in-out infinite;
+}
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  .hero-mark {
+    right: -4rem;
+    width: 36rem;
+  }
 }
 
 @media (max-width: 1023px) {
   .hero-mark {
     right: -18%;
     top: 22%;
+    translate: none;
     width: 80vw;
     opacity: 0.3;
   }

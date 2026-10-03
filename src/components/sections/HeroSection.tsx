@@ -12,16 +12,18 @@ export function HeroSection() {
       aria-labelledby="hero-heading"
     >
       <div className="hero-veil" aria-hidden>
-        <Image
-          src="/quantex-chrome-mark-v2.webp"
-          alt=""
-          width={1100}
-          height={966}
-          priority
-          sizes="(max-width: 1024px) 70vw, 46vw"
-          className="hero-mark"
-          aria-hidden
-        />
+        <div className="hero-mark-anchor">
+          <Image
+            src="/quantex-chrome-mark-v2.webp"
+            alt=""
+            width={1100}
+            height={966}
+            priority
+            sizes="(max-width: 1024px) 70vw, 46vw"
+            className="hero-mark"
+            aria-hidden
+          />
+        </div>
       </div>
 
       <div className="hero-studio__inner">
