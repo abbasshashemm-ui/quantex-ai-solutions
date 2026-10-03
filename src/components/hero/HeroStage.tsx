@@ -10,7 +10,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { initialMotionState, type MotionState } from "./motion";
+import { SLOT_FILL, initialMotionState, type MotionState } from "./motion";
 
 const ChromeScene = dynamic(() => import("./ChromeScene"), { ssr: false });
 const FlatScene = dynamic(() => import("./FlatScene"), { ssr: false });
@@ -200,10 +200,10 @@ export function HeroStage({ children }: HeroStageProps) {
       state.slotCenter = center / height;
 
       // The still image uses the same band, so nothing jumps when 3D arrives.
-      // The sculpture's circumscribed circle fills 86% of the band; at rest the
+      // The sculpture's circumscribed circle fills most of the band; at rest the
       // upright triangle is 1.5 radii tall and its box sits 0.25 radii above
       // the circle's centre.
-      const radius = (size * 0.86) / 2;
+      const radius = (size * SLOT_FILL) / 2;
       const posterWidth = (1.5 * radius * 0.95) / POSTER.heightFrac;
       const boxCentre = center - 0.25 * radius;
       stage.style.setProperty("--slot-center", `${center}px`);

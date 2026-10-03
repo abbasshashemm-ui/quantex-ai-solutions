@@ -24,3 +24,10 @@ export const initialMotionState = (): MotionState => ({
   slotCenter: 0,
   slotSize: 0,
 });
+
+/**
+ * On phones the sculpture spins, and a spinning triangle sweeps a circle, so it
+ * is sized by its circumscribed circle (radius = scale) and centred on it.
+ * The fraction leaves room for tube thickness, tilt and perspective.
+ */
+export const SLOT_FILL = 0.94;

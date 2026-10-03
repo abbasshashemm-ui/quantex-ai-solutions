@@ -30,11 +30,13 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
   const [input, setInput] = useState("");
   const [openedTracked, setOpenedTracked] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
   const isTerminal = variant === "terminal";
   const { messages, sendMessage, regenerate, status, error, clearError } =
     useSalesChat(variant);
   const location = isTerminal ? "hero_terminal" : "chat_panel";
 
+  const hasUserMessage = messages.some((message) => message.role === "user");
   const isBusy = status === "submitted" || status === "streaming";
   const showTyping =
     isBusy &&
@@ -45,6 +47,16 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
     if (!node) return;
     node.scrollTop = node.scrollHeight;
   }, [messages, status]);
+
+  // The box grows with what you type, up to a few lines, then scrolls.
+  useEffect(() => {
+    const node = inputRef.current;
+    if (!node) return;
+    node.style.height = "auto";
+    // scrollHeight leaves out the border, so add it back or a scrollbar appears.
+    const border = node.offsetHeight - node.clientHeight;
+    node.style.height = `${Math.min(node.scrollHeight + border, 120)}px`;
+  }, [input]);
 
   const markOpened = useCallback(() => {
     if (!isTerminal || openedTracked) return;
@@ -98,14 +110,9 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
           <span className="chat-panel__mark" aria-hidden>
             <BrandLogo variant="mark" className="h-5 w-auto" />
           </span>
-          <div>
-            <p className="chat-panel__title">
-              {isTerminal ? "Ask Quantex" : "QUANTEX Assistant"}
-            </p>
-            <p className="chat-panel__subtitle">
-              {isTerminal ? "Websites, assistants & quotes" : "Audits & quotes"}
-            </p>
-          </div>
+          <p className="chat-panel__title">
+            {isTerminal ? "Ask Quantex" : "Quantex Assistant"}
+          </p>
         </div>
         <div className="chat-panel__header-actions">
           <button
@@ -113,7 +120,7 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
             className="chat-panel__whatsapp"
             onClick={() => openWhatsApp()}
           >
-            {isTerminal ? "WhatsApp" : "Chat on WhatsApp"}
+            Talk to a person
           </button>
           {onClose ? (
             <button
@@ -128,21 +135,37 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
         </div>
       </header>
 
-      {isTerminal ? (
-        <p className="chat-panel__purpose">
-          Ask about websites, AI assistants, timelines or pricing. Want a person
-          instead? Tap WhatsApp any time.
-        </p>
-      ) : null}
-
-      <div ref={listRef} className="chat-panel__messages">
+      <div ref={listRef} className="chat-panel__messages" tabIndex={0}>
         {messages.map((message) => (
           <ChatMessage key={message.id} message={message} />
         ))}
+        {!hasUserMessage ? (
+          <div className="chat-panel__quick-replies">
+            {QUICK_REPLIES.map((item) => (
+              <button
+                key={item.label}
+                type="button"
+                className="chat-panel__chip"
+                disabled={isBusy}
+                onClick={() => {
+                  if (item.send) {
+                    submitMessage(item.label);
+                  } else {
+                    openWhatsApp();
+                  }
+                }}
+              >
+                {item.label}
+              </button>
+            ))}
+          </div>
+        ) : null}
         {showTyping ? (
-          <p className="chat-panel__typing" aria-live="polite">
-            {isTerminal ? "Typing…" : "Typing…"}
-          </p>
+          <span className="chat-typing" role="status" aria-label="Typing">
+            <i />
+            <i />
+            <i />
+          </span>
         ) : null}
         {error ? (
           <p className="chat-panel__error" role="alert">
@@ -168,26 +191,6 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
         ) : null}
       </div>
 
-      <div className="chat-panel__quick-replies">
-        {QUICK_REPLIES.map((item) => (
-          <button
-            key={item.label}
-            type="button"
-            className="chat-panel__chip"
-            disabled={isBusy}
-            onClick={() => {
-              if (item.send) {
-                submitMessage(item.label);
-              } else {
-                openWhatsApp();
-              }
-            }}
-          >
-            {item.label}
-          </button>
-        ))}
-      </div>
-
       <form className="chat-panel__form" onSubmit={handleSubmit}>
         <label
           className="sr-only"
@@ -196,39 +199,34 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
           Message
         </label>
         <textarea
+          ref={inputRef}
           id={isTerminal ? "hero-chat-input" : "chat-input"}
           className="chat-panel__input"
           value={input}
           onChange={(event) => setInput(event.target.value)}
           onFocus={isTerminal ? markOpened : undefined}
           onKeyDown={handleKeyDown}
-          placeholder={
-            isTerminal
-              ? "Ask about websites, assistants, pricing…"
-              : "Ask about services or timelines…"
-          }
-          rows={isTerminal ? 1 : 2}
+          placeholder="Ask anything"
+          rows={1}
           maxLength={CHAT_MESSAGE_LIMITS.maxLength}
-          disabled={isBusy}
         />
         <button
           type="submit"
-          className="chat-panel__send btn-primary"
+          className="chat-panel__send"
           disabled={isBusy || !input.trim()}
+          aria-label="Send message"
         >
-          Send
+          <svg viewBox="0 0 24 24" fill="none" aria-hidden>
+            <path
+              d="M12 19V5M12 5l-6 6M12 5l6 6"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </button>
       </form>
-
-      <footer className="chat-panel__footer">
-        <button
-          type="button"
-          className="chat-panel__footer-whatsapp"
-          onClick={() => openWhatsApp()}
-        >
-          Prefer WhatsApp? Continue there →
-        </button>
-      </footer>
     </div>
   );
 }
