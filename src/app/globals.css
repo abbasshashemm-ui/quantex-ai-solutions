@@ -1883,7 +1883,6 @@ span.chat-panel__input {
   }
 }
 
-
 /* ——— Stat band ——— */
 .stat-band {
   background:
@@ -1984,7 +1983,6 @@ span.chat-panel__input {
   }
 }
 
-
 /* ——— Brand lockup ——— */
 .brand-descriptor {
   display: none;
@@ -2016,220 +2014,6 @@ span.chat-panel__input {
     animation: none;
   }
 }
-
-/* ——— Hardware showcase ——— */
-.showcase__tag {
-  margin-top: 1.1rem;
-  font-size: 0.8rem;
-  font-weight: 500;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--amber);
-}
-
-.showcase__grid {
-  margin-top: 3rem;
-  display: grid;
-  gap: 1.5rem;
-}
-
-@media (min-width: 900px) {
-  .showcase__grid {
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem 1.75rem;
-  }
-  .showcase__grid > :nth-child(1) { grid-column: 1 / -1; }
-}
-
-.device {
-  display: flex;
-  flex-direction: column;
-  gap: 1.1rem;
-}
-
-.device__face {
-  position: relative;
-  display: grid;
-  gap: 1rem;
-  padding: 1.25rem;
-  border-radius: 0.9rem;
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  background:
-    var(--chrome-brush),
-    linear-gradient(135deg, #f1f3f7 0%, #c9ced7 45%, #e3e6ec 70%, #a9afba 100%);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.95),
-    inset 0 -2px 0 rgba(0, 0, 0, 0.18),
-    0 28px 60px rgba(0, 0, 0, 0.6),
-    0 0 0 1px rgba(0, 0, 0, 0.5);
-}
-
-.device--lead .device__face {
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  align-items: center;
-  gap: 2rem;
-  padding: 2rem 2.25rem;
-}
-
-.device--lead .device__screen {
-  font-size: 0.82rem;
-  padding: 1.2rem 1.4rem;
-}
-
-.device--lead .device__mark {
-  width: 6.5rem;
-}
-
-@media (max-width: 640px) {
-  .device--lead .device__face {
-    grid-template-columns: 1fr;
-  }
-}
-
-.device__brand {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.6rem;
-  color: #2a2e36;
-  font-weight: 600;
-  letter-spacing: 0.28em;
-  font-size: 0.8rem;
-  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
-}
-
-.device__brand--sm {
-  flex-direction: row;
-  align-items: center;
-  font-size: 0.68rem;
-}
-
-.device__mark {
-  width: 4.4rem;
-  height: auto;
-  filter: contrast(1.1) brightness(0.8);
-}
-
-.device__brand--sm .device__mark {
-  width: 2.4rem;
-}
-
-.device__screen {
-  padding: 0.9rem 1rem;
-  border-radius: 0.5rem;
-  background: linear-gradient(180deg, #0a0805, #130d06);
-  box-shadow:
-    inset 0 0 0 1px rgba(255, 166, 61, 0.18),
-    inset 0 6px 18px rgba(0, 0, 0, 0.8),
-    0 1px 0 rgba(255, 255, 255, 0.7);
-  font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
-  font-size: 0.7rem;
-  letter-spacing: 0.1em;
-  color: var(--amber);
-}
-
-.device__screen p {
-  display: flex;
-  justify-content: space-between;
-  gap: 1rem;
-  margin: 0;
-  padding-block: 0.22rem;
-  border-bottom: 1px dashed rgba(255, 166, 61, 0.2);
-}
-
-.device__screen p span {
-  color: var(--amber-dim);
-}
-
-.device__screen b {
-  font-weight: 600;
-  text-shadow: 0 0 8px rgba(255, 166, 61, 0.55);
-}
-
-.device__bars {
-  display: flex;
-  align-items: flex-end;
-  gap: 3px;
-  height: 1.1rem;
-  margin-top: 0.6rem;
-}
-
-.device__bars u {
-  display: block;
-  width: 5px;
-  background: var(--amber);
-  box-shadow: 0 0 6px rgba(255, 166, 61, 0.6);
-}
-
-.device__bars u:nth-child(1) { height: 30%; }
-.device__bars u:nth-child(2) { height: 55%; }
-.device__bars u:nth-child(3) { height: 85%; }
-.device__bars u:nth-child(4) { height: 65%; }
-.device__bars u:nth-child(5) { height: 100%; }
-
-.device__controls {
-  display: flex;
-  align-items: center;
-  gap: 0.9rem;
-}
-
-.device__knob {
-  width: 2.9rem;
-  height: 2.9rem;
-  border-radius: 50%;
-  background:
-    radial-gradient(circle at 35% 30%, #ffffff 0%, #c4c9d2 38%, #6f7683 100%);
-  box-shadow:
-    0 0 0 3px #8a909c,
-    0 0 0 4px rgba(0, 0, 0, 0.45),
-    0 6px 12px rgba(0, 0, 0, 0.5),
-    inset 0 -3px 5px rgba(0, 0, 0, 0.3);
-}
-
-.device__led {
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%;
-  background: var(--amber);
-  box-shadow: 0 0 10px 2px rgba(255, 166, 61, 0.7);
-}
-
-.device__led--dim {
-  background: #5b4730;
-  box-shadow: none;
-}
-
-.device__caption h3 {
-  font-size: 1.15rem;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-}
-
-.device__caption p {
-  margin-top: 0.4rem;
-  max-width: 34rem;
-  font-size: 0.95rem;
-  line-height: 1.65;
-  color: color-mix(in srgb, var(--foreground) 76%, transparent);
-}
-
-.device__link {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  margin-top: 0.7rem;
-  min-height: 2.75rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--foreground);
-}
-
-.device__link:hover {
-  color: var(--amber);
-}
-
-
 
 /* ═══════════════ Telemetry layer ═══════════════
    Grid, mono labels, status bar and numerals borrowed from the industrial
@@ -2483,11 +2267,6 @@ body::after {
   letter-spacing: 0.2em;
 }
 
-/* hardware showcase: square it up */
-.device__face,
-.device__screen {
-  border-radius: 0.2rem;
-}
 
 .faq-card {
   border-radius: 0.2rem !important;
@@ -2515,7 +2294,6 @@ body::after {
   letter-spacing: 0.1em;
   color: color-mix(in srgb, var(--foreground) 60%, transparent);
 }
-
 
 /* ═══════════════ Elevation pass ═══════════════ */
 
@@ -2619,39 +2397,12 @@ body::after {
 .stat-band__grid > :nth-child(3) { --i: 2; }
 .process-section__grid > li:nth-child(4),
 .stat-band__grid > :nth-child(4) { --i: 3; }
-.showcase__grid > :nth-child(2) { --i: 1; }
-.showcase__grid > :nth-child(3) { --i: 2; }
-
-/* perpetual micro-interactions (transform/opacity only) */
-.device__bars u {
-  transform-origin: bottom;
-  animation: eq 1.6s ease-in-out infinite;
-}
-.device__bars u:nth-child(2) { animation-delay: -0.4s; }
-.device__bars u:nth-child(3) { animation-delay: -0.9s; }
-.device__bars u:nth-child(4) { animation-delay: -0.2s; }
-.device__bars u:nth-child(5) { animation-delay: -1.2s; }
-
-@keyframes eq {
-  0%, 100% { transform: scaleY(0.45); }
-  50% { transform: scaleY(1); }
-}
-
-.device__led:not(.device__led--dim) {
-  animation: led-breathe 2.6s ease-in-out infinite;
-}
-
-@keyframes led-breathe {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.35; }
-}
 
 /* tactile feedback */
 .btn-primary:active,
 .btn-secondary:active,
 .chat-panel__chip:active,
-.chat-panel__send:active,
-.device__link:active {
+.chat-panel__send:active {
   transform: translateY(1px) scale(0.98);
   transition-duration: 0.06s;
 }
@@ -2691,8 +2442,6 @@ body::after {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .device__bars u,
-  .device__led,
   .chat-skeleton i::after {
     animation: none;
   }
@@ -2700,7 +2449,6 @@ body::after {
     transition: none;
   }
 }
-
 
 /* ═══════════════ Photographic assets ═══════════════
    The renders have pure-black backgrounds, so `lighten` lets the page colour
@@ -2735,23 +2483,6 @@ body::after {
   .hero-plate-wrap {
     width: 100%;
     opacity: 0.2;
-  }
-}
-
-.device--lead .device__photo {
-  display: none;
-  width: 100%;
-  height: auto;
-  border: 1px solid var(--grid-line);
-}
-
-@media (min-width: 640px) {
-  .device--lead .device__photo {
-    display: block;
-  }
-  .device--lead .device__face--fallback,
-  .device--lead .device__ears {
-    display: none;
   }
 }
 
@@ -2791,16 +2522,6 @@ body::after {
   .home-cta__art {
     opacity: 1;
   }
-}
-
-
-/* stack small panels: photographs */
-.device__shot {
-  display: block;
-  width: 100%;
-  height: auto;
-  border: 1px solid var(--grid-line);
-  background: var(--void);
 }
 
 /* service cards with photography: identical 3:2 frames, subject size
