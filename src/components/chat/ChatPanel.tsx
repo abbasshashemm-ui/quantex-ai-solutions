@@ -143,9 +143,11 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
           <ChatMessage key={message.id} message={message} />
         ))}
         {showTyping ? (
-          <p className="chat-panel__typing" aria-live="polite">
-            {isTerminal ? "Typing…" : "Typing…"}
-          </p>
+          <div className="chat-skeleton" role="status" aria-live="polite">
+            <span className="sr-only">Typing…</span>
+            <i />
+            <i />
+          </div>
         ) : null}
         {error ? (
           <p className="chat-panel__error" role="alert">

@@ -1,6 +1,7 @@
 import { SERVICES } from "@/lib/services/data";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { ServiceCard } from "./ServiceCard";
+import { SpotlightGrid } from "./SpotlightGrid";
 
 export function ServicesSection() {
   return (
@@ -24,11 +25,11 @@ export function ServicesSection() {
           </p>
         </header>
 
-        <div className="services-section__grid">
+        <SpotlightGrid className="services-section__grid">
           {SERVICES.map((service) => (
             <ServiceCard key={service.id} service={service} index={SERVICES.indexOf(service) + 1} total={SERVICES.length} />
           ))}
-        </div>
+        </SpotlightGrid>
       </div>
     </section>
   );

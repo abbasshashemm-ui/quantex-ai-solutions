@@ -1,5 +1,14 @@
 import Link from "next/link";
 
+const SPECS = [
+  ["Founded", "2024"],
+  ["Base", "Beirut, Lebanon"],
+  ["Stack", "Next.js · Vercel · Gemini"],
+  ["Channels", "Website · WhatsApp"],
+  ["Handoff", "A human, when needed"],
+  ["First reply", "Within 24 hours"],
+] as const;
+
 const PILLARS = [
   {
     href: "/services/high-converting-websites",
@@ -20,7 +29,8 @@ export function DirectAnswer() {
       className="aeo-block relative border-t border-white/8 px-4 py-14 sm:px-6 sm:py-16"
       aria-labelledby="aeo-heading"
     >
-      <div className="mx-auto max-w-7xl"><div className="max-w-3xl">
+      <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-20">
+        <div className="max-w-3xl" data-reveal>
         <h2 id="aeo-heading" className="section-heading mt-3 text-metallic-gradient">
           What does Quantex build?
         </h2>
@@ -61,7 +71,17 @@ export function DirectAnswer() {
             Send a brief
           </Link>
         </p>
-      </div></div>
+        </div>
+
+        <dl className="spec-sheet lg:mt-14" data-reveal aria-label="Quantex at a glance">
+          {SPECS.map(([label, value]) => (
+            <div key={label} className="spec-sheet__row">
+              <dt>{label}</dt>
+              <dd>{value}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
     </section>
   );
 }

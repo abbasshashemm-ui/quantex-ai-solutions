@@ -8,7 +8,8 @@ export function FaqSection() {
       className="faq-section faq-section--light relative px-4 py-20 sm:px-6 sm:py-24 md:py-28"
       aria-labelledby="faq-heading"
     >
-      <div className="mx-auto max-w-7xl"><div className="max-w-3xl">
+      <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-20">
+        <div className="lg:sticky lg:top-36 lg:self-start">
         <h2
           id="faq-heading"
           className="section-heading"
@@ -23,8 +24,9 @@ export function FaqSection() {
           </Link>
           .
         </p>
+        </div>
 
-        <ul className="mt-8 space-y-3">
+        <ul className="space-y-3">
           {SITE_FAQ.map((item) => (
             <li key={item.question}>
               <details className="faq-item faq-card group">
@@ -46,7 +48,7 @@ export function FaqSection() {
             </li>
           ))}
         </ul>
-      </div></div>
+      </div>
     </section>
   );
 }
