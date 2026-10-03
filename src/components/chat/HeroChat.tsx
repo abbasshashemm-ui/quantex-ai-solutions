@@ -19,12 +19,7 @@ function HeroChatShell() {
           <span className="chat-panel__mark" aria-hidden>
             <BrandLogo variant="mark" className="h-5 w-auto" />
           </span>
-          <div>
-            <p className="chat-panel__title">Ask Quantex</p>
-            <p className="chat-panel__subtitle">
-              Websites, assistants & quotes
-            </p>
-          </div>
+          <p className="chat-panel__title">Ask Quantex</p>
         </div>
         <div className="chat-panel__header-actions">
           <a
@@ -33,41 +28,38 @@ function HeroChatShell() {
             rel="noopener noreferrer"
             className="chat-panel__whatsapp"
           >
-            WhatsApp
+            Talk to a person
           </a>
         </div>
       </header>
-      <p className="chat-panel__purpose">
-        Ask about websites, AI assistants, timelines or pricing. Want a person
-        instead? Tap WhatsApp any time.
-      </p>
       <div className="chat-panel__messages">
         <div className="chat-message chat-message--assistant">
           <p className="chat-message__text">
-            Hi, I&apos;m the Quantex assistant. Ask me about websites, AI
-            assistants, timelines or pricing, and I&apos;ll help you find the
-            right fit.
+            Hi, I&apos;m the Quantex assistant. What can I help you with?
           </p>
         </div>
-      </div>
-      <div className="chat-panel__quick-replies">
-        {QUICK_REPLIES.map((label) => (
-          <span key={label} className="chat-panel__chip">
-            {label}
-          </span>
-        ))}
+        <div className="chat-panel__quick-replies">
+          {QUICK_REPLIES.map((label) => (
+            <span key={label} className="chat-panel__chip">
+              {label}
+            </span>
+          ))}
+        </div>
       </div>
       <div className="chat-panel__form">
-        <span className="chat-panel__input">
-          Ask about websites, assistants, pricing…
+        <span className="chat-panel__input">Ask anything</span>
+        <span className="chat-panel__send" aria-hidden>
+          <svg viewBox="0 0 24 24" fill="none">
+            <path
+              d="M12 19V5M12 5l-6 6M12 5l6 6"
+              stroke="currentColor"
+              strokeWidth="2.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
         </span>
-        <span className="chat-panel__send btn-primary">Send</span>
       </div>
-      <footer className="chat-panel__footer">
-        <span className="chat-panel__footer-whatsapp">
-          Prefer WhatsApp? Continue there →
-        </span>
-      </footer>
     </div>
   );
 }

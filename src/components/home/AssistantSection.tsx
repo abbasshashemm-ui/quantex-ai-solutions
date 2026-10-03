@@ -15,9 +15,8 @@ export function AssistantSection() {
             Ask the studio anything.
           </h2>
           <p className="alu-lede">
-            Our assistant answers questions about websites, AI assistants and
-            pricing, and passes you to a real person on WhatsApp whenever you
-            want. It is the same kind of assistant we build for clients.
+            This is the kind of assistant we build for clients. Ask it about
+            websites, assistants or pricing, or talk to a person any time.
           </p>
         </div>
         <HeroChat />

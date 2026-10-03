@@ -17,8 +17,8 @@ export function HomePage() {
       </HeroStage>
       <Ticker />
       <AeoBlock />
-      <ServicesSection />
       <AssistantSection />
+      <ServicesSection />
       <StatBand />
       <ProcessSection />
       <FaqSection />
