@@ -6,8 +6,8 @@ type BrandLogoProps = {
   variant?: "full" | "mark";
 };
 
-const FULL_LOGO = "/quantex-logo.png";
-const MARK_LOGO = "/quantex-mark.png";
+const FULL_LOGO = "/quantex-logo-dark.png";
+const MARK_LOGO = "/quantex-mark-dark.png";
 
 export function BrandLogo({
   className,

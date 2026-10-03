@@ -11,7 +11,7 @@ export function buildPersonSchema(): JsonLd {
     "@type": "Person",
     "@id": `${getSiteUrl()}/#founder`,
     name: SITE.founder,
-    jobTitle: "Full Stack Developer",
+    jobTitle: "Founder and full-stack developer",
     url: absoluteUrl("/about"),
     worksFor: { "@id": `${getSiteUrl()}/#organization` },
     address: {
@@ -107,15 +107,13 @@ export function buildProfessionalServiceSchema(): JsonLd {
     hasOfferCatalog: { "@id": `${getSiteUrl()}/#offer-catalog` },
     areaServed: ["Beirut", "Lebanon", "Middle East"],
     knowsAbout: [
-      "Custom software development",
-      "Artificial intelligence chatbots",
-      "Web development",
+      "Website design and development",
+      "AI chatbots and assistants",
+      "WhatsApp automation",
       "Business process automation",
-      "Technical SEO",
-      "Cloud system architecture",
-      "Next.js",
-      "Core Web Vitals",
-      "Google Search Console",
+      "Custom software development",
+      "Search engine optimization",
+      "System design",
     ],
   };
 }

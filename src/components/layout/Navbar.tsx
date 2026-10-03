@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
-import { SITE_NAV, CONTACT } from "@/lib/site/contact";
+import { SITE_NAV } from "@/lib/site/contact";
 import { BrandLogo } from "./BrandLogo";
 import { MobileNav } from "./MobileNav";
 import { ServicesNavDropdown } from "./ServicesNavDropdown";
@@ -11,14 +11,14 @@ const NAV_LINKS = SITE_NAV.filter(
 
 export function Navbar() {
   return (
-    <header className="site-header fixed inset-x-0 top-0 z-50 border-b border-white/8 bg-void/80 px-4 pt-[env(safe-area-inset-top)] backdrop-blur-xl sm:px-6">
+    <header className="site-header fixed inset-x-0 top-0 z-50 px-4 pt-[env(safe-area-inset-top)] sm:px-6">
       <nav
         aria-label="Primary"
         className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 py-3 sm:py-3.5"
       >
         <Link
           href="/"
-          className="inline-flex min-h-11 shrink-0 items-center sm:min-h-12"
+          className="relative z-[41] inline-flex min-h-11 shrink-0 items-center sm:min-h-12"
         >
           <BrandLogo
             priority
@@ -34,7 +34,7 @@ export function Navbar() {
             <li key={link.href}>
               <Link
                 href={link.href}
-                className="inline-flex min-h-11 items-center rounded-full px-3 text-sm text-foreground/80 transition-colors hover:bg-white/6 hover:text-foreground sm:px-4"
+                className="inline-flex min-h-11 items-center rounded-full px-3 text-sm text-foreground/80 transition-colors hover:bg-foreground/6 hover:text-foreground sm:px-4"
               >
                 {link.label}
               </Link>
@@ -43,20 +43,17 @@ export function Navbar() {
         </ul>
 
         <div className="flex items-center gap-2 sm:gap-3">
-          <a
-            href={CONTACT.whatsapp}
-            target="_blank"
-            rel="noopener noreferrer"
-            data-conversion={CONVERSION_EVENTS.WHATSAPP_CLICK}
+          <Link
+            href="/contact"
+            data-conversion={CONVERSION_EVENTS.CTA_CLICK}
             data-conversion-location="navbar"
-            className="btn-secondary site-header__cta sm:px-4 md:px-5"
+            className="btn-primary site-header__cta min-h-11! sm:px-4 md:px-5"
           >
-            Book a call
-          </a>
+            Start a project
+          </Link>
           <MobileNav />
         </div>
       </nav>
-      <div className="site-header__line" aria-hidden />
     </header>
   );
 }

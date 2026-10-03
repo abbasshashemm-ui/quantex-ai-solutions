@@ -185,12 +185,11 @@ export function HeroStage({ children }: HeroStageProps) {
       aria-label="Quantex AI Solutions"
     >
       <div className="alu-stage__panel">
-        <div className="alu-stage__backdrop alu-surface" aria-hidden />
         <div className="alu-stage__shadow" aria-hidden />
 
         <div className="alu-stage__visual" aria-hidden>
           <Image
-            src="/prototype/chrome-mark.webp"
+            src="/hero/chrome-mark.webp"
             alt=""
             width={1000}
             height={1000}

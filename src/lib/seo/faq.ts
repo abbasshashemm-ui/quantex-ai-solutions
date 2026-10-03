@@ -7,43 +7,47 @@ export type FaqItem = {
 
 export const SITE_FAQ: FaqItem[] = [
   {
-    question: "What does Quantex AI Solutions do?",
+    question: "What does Quantex do?",
     answer:
-      "Quantex AI Solutions is a Beirut-based studio founded in 2024. We are an AI studio and SEO-minded web development team: we build AI chatbots and automation, plus websites engineered for technical SEO and Core Web Vitals from the first commit, alongside custom software and system architecture for teams in Lebanon and internationally.",
+      "Quantex is a Beirut studio founded in 2024. We build websites that turn visitors into customers, AI assistants that answer customer questions on your website and WhatsApp, and the custom software, automation and search work behind your business. We work with companies in Lebanon and abroad.",
   },
   {
-    question: "Who founded Quantex?",
+    question: "Who is behind Quantex?",
     answer:
-      "The company was founded in 2024 by Abbas Hachem, a full-stack developer. Clients work directly with engineering throughout discovery, build, and launch.",
+      "Quantex was founded in 2024 by Abbas Hachem, a full-stack developer. When you get in touch, you speak directly with him throughout the project.",
   },
   {
     question: "What services does Quantex offer?",
     answer:
-      "Core modules include custom software development, business process automation, custom system architectures, high-converting websites, SEO, and custom intelligent chatbots integrated with tools like WhatsApp and internal dashboards.",
+      "Six services: websites, AI assistants and chatbots, business automation, custom software, search visibility (SEO), and system design. You can choose one or combine several.",
   },
   {
     question: "How many clients has Quantex worked with?",
     answer:
-      "Quantex has partnered with more than ten businesses on projects ranging from AI assistants and marketing sites to bespoke operational applications.",
+      "Ten or more paying clients, on projects ranging from AI assistants and business websites to custom software.",
   },
   {
-    question: "How do I contact Quantex AI Solutions?",
-    answer:
-      `Visit the contact page at quantexai.solutions/contact, email ${CONTACT.email}, or message the team on WhatsApp. Typical first response is within 24 hours.`,
+    question: "How do I contact Quantex?",
+    answer: `Use the contact page at quantexai.solutions/contact, email ${CONTACT.email}, or message us on WhatsApp. We reply within 24 hours.`,
   },
   {
     question: "Where is Quantex based?",
     answer:
-      "Quantex AI Solutions is based in Beirut, Lebanon, and works with clients locally and remotely across the Middle East and worldwide.",
+      "Quantex is based in Beirut, Lebanon, and works with clients locally and remotely across the Middle East and worldwide.",
   },
   {
-    question: "Does Quantex build AI chatbots for WhatsApp?",
+    question: "Can Quantex build a chatbot for WhatsApp?",
     answer:
-      "Yes. Quantex builds on-brand AI assistants trained on your documents and policies, with human handoff when needed, including WhatsApp, web chat, and internal tool integrations.",
+      "Yes. We build assistants trained on your own information, such as your products, prices and policies. They reply on WhatsApp, your website, or both, and hand the conversation to a real person when needed.",
   },
   {
-    question: "What technologies does Quantex use for websites?",
+    question: "Will I own what you build?",
     answer:
-      "Marketing and product sites are typically built with Next.js for performance, SEO-ready structure, Core Web Vitals, analytics, and maintainable content workflows.",
+      "Yes. Your code, domain, accounts and content are handed over to you. We are partners on the build, not gatekeepers of the result.",
+  },
+  {
+    question: "Which tools and technologies do you use?",
+    answer:
+      "We pick the right tools for each project instead of forcing every client onto the same setup. You will always know what is being used, and you keep ownership of everything we build.",
   },
 ];

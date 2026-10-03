@@ -14,19 +14,19 @@ export const SITE = {
   name: COMPANY.name,
   tagline: COMPANY.tagline,
   description:
-    "Quantex AI Solutions is a Beirut AI studio that builds search-ready websites, AI chatbots, custom software, and automation—engineered for technical SEO and Core Web Vitals from the first commit.",
+    "Quantex is a Beirut studio that builds websites that win customers, AI assistants that answer them on your website and WhatsApp, and the software and automation behind your business.",
   locale: "en_US",
   email: CONTACT.email,
   phone: CONTACT.phoneDisplay,
   location: CONTACT.location,
   foundingDate: "2024",
   founder: "Abbas Hachem",
-  logoPath: "/quantex-logo.png",
-  markPath: "/quantex-mark.png",
+  logoPath: "/quantex-logo-dark.png",
+  markPath: "/quantex-mark-dark.png",
   social: {
     instagram: CONTACT.instagram,
     linkedin: CONTACT.linkedin,
   },
 } as const;
 
-export const DEFAULT_OG_IMAGE = "/quantex-logo.png";
+export const DEFAULT_OG_IMAGE = "/og.png";

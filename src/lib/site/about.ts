@@ -1,72 +1,71 @@
 export const FOUNDER = {
   name: "Abbas Hachem",
-  role: "Full Stack Developer",
+  role: "Full-stack developer",
   title: "Founder",
 } as const;
 
 export const ABOUT_HERO = {
-  eyebrow: "About Quantex AI Solutions",
-  title: "A studio that ships products, not decks.",
-  lead: "Quantex AI Solutions launched in 2024 in Beirut. We are an AI studio: Gemini-powered chatbots on WhatsApp and the web, automation, and custom software—plus Next.js sites on Vercel built search-ready, with Core Web Vitals and Google Search Console in mind from day one.",
+  eyebrow: "About Quantex",
+  title: "A Beirut studio that builds what it promises.",
+  lead: "Quantex is a Beirut studio founded in 2024. We build websites that win customers, AI assistants that answer them, and the software and automation behind your business—and we explain everything in plain language, from the first call.",
 } as const;
 
 export const ABOUT_STORY = {
   eyebrow: "Background",
-  title: "Who is behind Quantex AI Solutions?",
+  title: "Who is behind Quantex?",
   paragraphs: [
-    "Abbas Hachem started Quantex AI Solutions after years of full-stack work across startups and client projects. The pattern was always the same—lots of talk about growth and visibility, but slow sites, weak crawlability, brittle chatbots, and codebases that were painful to extend after launch.",
-    "Quantex is the opposite of that cycle. We scope in plain language, prototype the risky parts early, and deliver systems your team can run: technical SEO engineered at the source, Next.js sites tuned for Core Web Vitals, assistants trained on your content, internal tools shaped around real workflows, and integrations that remove manual steps instead of adding dashboards nobody opens.",
+    "Abbas Hachem started Quantex in 2024 after years of building software for startups and businesses. The pattern was always the same: plenty of talk about growth, but slow websites, chatbots that gave wrong answers, and systems that were hard to change once the builders had left.",
+    "Quantex is built to break that pattern. We explain things in plain language, test the risky parts early, and hand over work your team can actually run. We choose the right tools for each project instead of forcing every client into the same template.",
     {
-      before:
-        "Since 2024 we have partnered with ",
-      highlight: "10+ businesses",
+      before: "Since 2024 we have worked with ",
+      highlight: "10+ paying clients",
       after:
-        " across Lebanon and the wider region—on AI chatbots, marketing sites, bespoke apps, and workflow automation. You work directly with the people writing the code, not a layer of coordinators.",
+        " across Lebanon and the wider region, on websites, AI assistants, custom software and automation. When you get in touch, you speak directly with Abbas, the person leading the work.",
     },
   ],
 } as const;
 
 export const ABOUT_STATS = [
   { value: "2024", label: "Year founded" },
-  { value: "10+", label: "Clients served" },
-  { value: "6", label: "Practice areas" },
-  { value: "24h", label: "First reply target" },
+  { value: "10+", label: "Paying clients" },
+  { value: "6", label: "Services" },
+  { value: "24h", label: "Reply time" },
 ] as const;
 
 export const ABOUT_VALUES = [
   {
     index: "01",
-    title: "Ship what runs in production",
-    body: "We optimize for go-live: tested flows, monitoring hooks, and handover docs—not slide decks that stall after sign-off.",
+    title: "You own everything",
+    body: "Your code, domain, accounts and content are handed over to you. We are partners on the build, not gatekeepers of the result.",
   },
   {
     index: "02",
-    title: "Your repo, your data, your keys",
-    body: "Repositories, hosting access, and training materials go to you. We are partners on the build, not gatekeepers on the outcome.",
+    title: "A direct line",
+    body: "You talk to the person doing the work, on WhatsApp or email. No account managers, and no waiting for messages to be passed along.",
   },
   {
     index: "03",
-    title: "AI with context and limits",
-    body: "Bots and automations are grounded in your documents, products, and policies—with clear fallbacks when a human should take over.",
+    title: "A reply within 24 hours",
+    body: "Message us and you get a reply from a real person within 24 hours, not an automatic response.",
   },
   {
     index: "04",
-    title: "Milestones you can track",
-    body: "Work breaks into visible phases with demos you can click through, so budget and timeline stay understandable before they become problems.",
+    title: "Honest AI",
+    body: "Our assistants answer only from your information, say so when they don't know, and hand over to a person when it matters.",
   },
 ] as const;
 
 export const ABOUT_CAPABILITIES = {
-  eyebrow: "Capabilities",
+  eyebrow: "Services",
   title: "What can Quantex build?",
-  lead: "Pick one lane or combine several—we design, build, and launch across the stack so your brand, product, and AI touchpoints stay aligned.",
+  lead: "Pick one service or combine several. Everything is designed to work together, from your website to your assistant to the systems behind them.",
 } as const;
 
 export const ABOUT_CTA = {
   eyebrow: "Next step",
-  title: "How do I start a project with Quantex?",
-  lead: "Share a short brief. We will respond with scope options and a realistic first milestone—no generic retainer pitch.",
-  primaryLabel: "Send a brief",
+  title: "Ready to start a project?",
+  lead: "Tell us what you need. We will reply within 24 hours with options and a realistic first step.",
+  primaryLabel: "Start a project",
   primaryHref: "/contact",
-  secondaryLabel: "Explore services",
+  secondaryLabel: "See what we build",
 } as const;

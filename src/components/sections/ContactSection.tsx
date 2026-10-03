@@ -37,7 +37,13 @@ function ContactIcon({ id }: { id: string }) {
             stroke="currentColor"
             strokeWidth="1.5"
           />
-          <circle cx="12" cy="11" r="2" stroke="currentColor" strokeWidth="1.5" />
+          <circle
+            cx="12"
+            cy="11"
+            r="2"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          />
         </svg>
       );
     case "instagram":
@@ -52,7 +58,13 @@ function ContactIcon({ id }: { id: string }) {
             stroke="currentColor"
             strokeWidth="1.5"
           />
-          <circle cx="12" cy="12" r="3.5" stroke="currentColor" strokeWidth="1.5" />
+          <circle
+            cx="12"
+            cy="12"
+            r="3.5"
+            stroke="currentColor"
+            strokeWidth="1.5"
+          />
           <circle cx="17" cy="7" r="0.75" fill="currentColor" />
         </svg>
       );
@@ -65,36 +77,40 @@ export function ContactSection() {
   return (
     <article
       id="contact-page"
-      className="contact-page relative min-h-[100dvh] px-4 pb-20 pt-[calc(6rem+env(safe-area-inset-top))] sm:px-6 sm:pt-32"
+      className="contact-page page-shell min-h-[100dvh]"
     >
       <div className="page-grid-bg absolute inset-0" aria-hidden />
 
       <div className="relative mx-auto max-w-7xl">
-        <Link
-          href="/"
-          data-interactive
-          className="inline-flex min-h-11 items-center text-xs tracking-wide text-foreground/70 transition-colors hover:text-foreground"
-        >
+        <Link href="/" data-interactive className="page-back">
           ← Home
         </Link>
 
         <header className="contact-page__header mx-auto mt-8 max-w-3xl text-center sm:mt-10">
           <PageEyebrow align="center">Contact</PageEyebrow>
-          <h1 className="section-heading mt-4 text-foreground lg:text-5xl">
-            How do I contact Quantex?{" "}
-            <span className="text-metallic-gradient">We reply within 24 hours.</span>
+          <h1 className="alu-display page-title page-title--sm mt-4">
+            Tell us what you need.
+            <span className="block text-foreground/55">
+              We reply within 24 hours.
+            </span>
           </h1>
-          <p className="mt-4 text-sm leading-relaxed text-foreground/80 sm:text-base">
-            AI assistants, search-ready websites, custom software, or
-            automation—send the brief and we&apos;ll route it.
+          <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-foreground/80">
+            A website, an AI assistant, custom software or automation: send a
+            short brief and we&apos;ll point you to the right next step.
           </p>
           <p className="mt-4 text-sm text-foreground/70">
             Still browsing?{" "}
-            <Link href="/#solutions" className="text-foreground/80 underline-offset-2 hover:underline">
+            <Link
+              href="/#solutions"
+              className="font-semibold text-foreground underline underline-offset-4"
+            >
               See what we build
             </Link>
             {" · "}
-            <Link href="/about" className="text-foreground/80 underline-offset-2 hover:underline">
+            <Link
+              href="/about"
+              className="font-semibold text-foreground underline underline-offset-4"
+            >
               About the studio
             </Link>
           </p>
@@ -106,13 +122,11 @@ export function ContactSection() {
               {CONTACT_CHANNELS.map((channel) => {
                 const content = (
                   <>
-                    <span className="contact-channel__icon flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/12 bg-void text-metallic">
+                    <span className="contact-channel__icon page-icon h-10 w-10">
                       <ContactIcon id={channel.id} />
                     </span>
                     <span className="min-w-0">
-                      <span className="block text-[0.65rem] font-medium tracking-[0.2em] text-foreground/70 uppercase">
-                        {channel.label}
-                      </span>
+                      <span className="page-label block">{channel.label}</span>
                       <span className="mt-1 block text-sm text-foreground sm:text-base">
                         {channel.value}
                       </span>
@@ -129,33 +143,35 @@ export function ContactSection() {
                           ? { target: "_blank", rel: "noopener noreferrer" }
                           : {})}
                         data-interactive
-                        className="contact-channel flex min-h-11 gap-4 rounded-xl px-1 transition-colors hover:bg-white/6 sm:px-2"
+                        className="contact-channel flex min-h-11 gap-4 rounded-xl px-1 transition-colors hover:bg-foreground/6 sm:px-2"
                       >
                         {content}
                       </a>
                     ) : (
-                      <div className="contact-channel flex gap-4">{content}</div>
+                      <div className="contact-channel flex min-h-11 gap-4 px-1 sm:px-2">
+                        {content}
+                      </div>
                     )}
                   </li>
                 );
               })}
             </ul>
 
-            <div className="glass-panel p-5">
+            <div className="alu-glass page-panel">
               <div className="flex gap-3">
                 <span
-                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-signal/40 bg-void text-sm text-signal"
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-signal/40 bg-white/60 text-sm text-signal"
                   aria-hidden
                 >
                   ✓
                 </span>
                 <div>
                   <p className="text-sm font-semibold text-foreground">
-                    We respond within 24 hours
+                    A person replies within 24 hours
                   </p>
                   <p className="mt-1.5 text-sm leading-relaxed text-foreground/75">
-                    Share as much context as you can—we&apos;ll reply with next
-                    steps or a link to book a strategy call on{" "}
+                    Share as much as you can and we&apos;ll reply with next
+                    steps. Prefer a quick chat? Message us on{" "}
                     <a
                       href={CONTACT.whatsapp}
                       target="_blank"

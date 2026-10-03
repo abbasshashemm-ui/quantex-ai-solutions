@@ -1,7 +1,7 @@
 import type { Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Outfit, Syne } from "next/font/google";
+import { Barlow_Condensed, Outfit } from "next/font/google";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -16,18 +16,19 @@ const outfit = Outfit({
   weight: ["400", "500", "600"],
 });
 
-const syne = Syne({
-  variable: "--font-syne",
+const condensed = Barlow_Condensed({
+  variable: "--font-condensed",
   subsets: ["latin"],
   display: "swap",
-  weight: ["700", "800"],
+  weight: ["600", "700", "800"],
+  style: ["normal", "italic"],
 });
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#050506",
+  themeColor: "#e6e9ed",
 };
 
 export const metadata = rootMetadata;
@@ -41,7 +42,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${outfit.variable} ${syne.variable} dark h-full antialiased`}
+      className={`${outfit.variable} ${condensed.variable} h-full antialiased`}
     >
       <head>
         <link rel="llms-txt" href="/llms.txt" />

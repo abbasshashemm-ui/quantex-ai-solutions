@@ -9,10 +9,7 @@ import {
   type KeyboardEvent,
 } from "react";
 import { BrandLogo } from "@/components/layout/BrandLogo";
-import {
-  CONVERSION_EVENTS,
-  trackConversion,
-} from "@/lib/analytics/events";
+import { CONVERSION_EVENTS, trackConversion } from "@/lib/analytics/events";
 import { buildWhatsAppQuoteUrl } from "@/lib/chat/whatsapp";
 import { CHAT_MESSAGE_LIMITS } from "@/lib/sanitize/chat-message";
 import { ChatMessage } from "./ChatMessage";
@@ -20,7 +17,7 @@ import { useSalesChat } from "./useSalesChat";
 
 const QUICK_REPLIES = [
   { label: "Build a website", send: true },
-  { label: "AI chatbots", send: true },
+  { label: "AI assistants", send: true },
   { label: "Get a quote", send: false },
 ] as const;
 
@@ -106,7 +103,7 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
               {isTerminal ? "Ask Quantex" : "QUANTEX Assistant"}
             </p>
             <p className="chat-panel__subtitle">
-              {isTerminal ? "Websites, chatbots & quotes" : "Audits & quotes"}
+              {isTerminal ? "Websites, assistants & quotes" : "Audits & quotes"}
             </p>
           </div>
         </div>
@@ -133,8 +130,8 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
 
       {isTerminal ? (
         <p className="chat-panel__purpose">
-          Talk to our AI sales bot—ask about websites, AI chatbots, timelines,
-          and how we ship.
+          Ask about websites, AI assistants, timelines or pricing. Want a person
+          instead? Tap WhatsApp any time.
         </p>
       ) : null}
 
@@ -192,7 +189,10 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
       </div>
 
       <form className="chat-panel__form" onSubmit={handleSubmit}>
-        <label className="sr-only" htmlFor={isTerminal ? "hero-chat-input" : "chat-input"}>
+        <label
+          className="sr-only"
+          htmlFor={isTerminal ? "hero-chat-input" : "chat-input"}
+        >
           Message
         </label>
         <textarea
@@ -204,7 +204,7 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
           onKeyDown={handleKeyDown}
           placeholder={
             isTerminal
-              ? "Ask about websites, chatbots, or pricing…"
+              ? "Ask about websites, assistants, pricing…"
               : "Ask about services or timelines…"
           }
           rows={isTerminal ? 1 : 2}

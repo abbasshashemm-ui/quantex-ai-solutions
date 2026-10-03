@@ -49,6 +49,13 @@ export function HeroCopy() {
         </ul>
       </div>
 
+      <p className="sr-only">
+        Websites that convert: fast, clear, and built around one goal, turning
+        visitors into enquiries. Assistants that answer: a chatbot that knows
+        your business, replies on your website and WhatsApp, and hands over to
+        you when a person is needed.
+      </p>
+
       <div className="alu-beat alu-beat--one">
         <p className="alu-beat__index">01 / Websites</p>
         <h2 className="alu-display alu-beat__title">Websites that convert.</h2>

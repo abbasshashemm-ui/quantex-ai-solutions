@@ -5,7 +5,11 @@ import { useCallback, useEffect, useState } from "react";
 import { BrandLogo } from "@/components/layout/BrandLogo";
 import { CONTACT } from "@/lib/site/contact";
 
-const QUICK_REPLIES = ["Build a website", "AI chatbots", "Get a quote"] as const;
+const QUICK_REPLIES = [
+  "Build a website",
+  "AI assistants",
+  "Get a quote",
+] as const;
 
 function HeroChatShell() {
   return (
@@ -17,7 +21,9 @@ function HeroChatShell() {
           </span>
           <div>
             <p className="chat-panel__title">Ask Quantex</p>
-            <p className="chat-panel__subtitle">Websites, chatbots & quotes</p>
+            <p className="chat-panel__subtitle">
+              Websites, assistants & quotes
+            </p>
           </div>
         </div>
         <div className="chat-panel__header-actions">
@@ -32,14 +38,15 @@ function HeroChatShell() {
         </div>
       </header>
       <p className="chat-panel__purpose">
-        Talk to our AI sales bot—ask about websites, AI chatbots, timelines,
-        and how we ship.
+        Ask about websites, AI assistants, timelines or pricing. Want a person
+        instead? Tap WhatsApp any time.
       </p>
       <div className="chat-panel__messages">
         <div className="chat-message chat-message--assistant">
           <p className="chat-message__text">
-            I&apos;m the Quantex AI assistant. Ask about websites, AI chatbots,
-            timelines, or pricing—I&apos;ll help you pick the right build.
+            Hi, I&apos;m the Quantex assistant. Ask me about websites, AI
+            assistants, timelines or pricing, and I&apos;ll help you find the
+            right fit.
           </p>
         </div>
       </div>
@@ -52,7 +59,7 @@ function HeroChatShell() {
       </div>
       <div className="chat-panel__form">
         <span className="chat-panel__input">
-          Ask about websites, chatbots, or pricing…
+          Ask about websites, assistants, pricing…
         </span>
         <span className="chat-panel__send btn-primary">Send</span>
       </div>
@@ -89,11 +96,7 @@ export function HeroChat() {
   }, [ready]);
 
   return (
-    <aside
-      className="hero-chat"
-      onPointerDown={load}
-      onFocusCapture={load}
-    >
+    <aside className="hero-chat" onPointerDown={load} onFocusCapture={load}>
       {ready ? <ChatPanel variant="terminal" /> : <HeroChatShell />}
     </aside>
   );

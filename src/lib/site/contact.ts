@@ -4,8 +4,7 @@ export const LEGACY_SITE_URL = "https://www.quantexai.info";
 
 export const COMPANY = {
   name: "Quantex AI Solutions",
-  tagline:
-    "An AI studio that builds search-ready websites, assistants, and software.",
+  tagline: "A Beirut studio for websites, AI assistants and business software.",
 } as const;
 
 export const CONTACT = {
@@ -76,7 +75,7 @@ export const CONTACT_LINKS = [
     external: false,
   },
   {
-    label: "Book strategy call",
+    label: "Start a project on WhatsApp",
     href: CONTACT.whatsapp,
     external: true,
   },

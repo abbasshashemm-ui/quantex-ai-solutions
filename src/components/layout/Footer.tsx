@@ -14,13 +14,13 @@ export function Footer() {
   return (
     <footer
       id="contact"
-      className="relative z-20 border-t border-white/8 bg-void px-4 sm:px-6"
+      className="relative z-20 border-t border-line bg-surface/70 px-4 backdrop-blur-xl sm:px-6"
       data-reveal
     >
       <div className="mx-auto max-w-7xl py-8 pb-[calc(2rem+env(safe-area-inset-bottom))] sm:py-10">
         <div className="grid grid-cols-2 gap-4 sm:gap-5 md:gap-6 lg:grid-cols-3 lg:gap-8">
           <div className="col-span-2 lg:col-span-1">
-          <BrandLogo className="h-5 w-auto max-w-[10rem] sm:h-6" />
+            <BrandLogo className="h-5 w-auto max-w-[10rem] sm:h-6" />
             <p className="mt-3 max-w-sm text-xs leading-relaxed text-foreground/75 sm:text-sm">
               {COMPANY.tagline}
             </p>
@@ -31,7 +31,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram"
-                  className="footer-social inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/18 text-foreground/85 transition-colors hover:border-white/40 hover:bg-white/8 hover:text-foreground"
+                  className="footer-social inline-flex h-11 w-11 items-center justify-center rounded-full border border-line-strong text-foreground/85 transition-colors hover:border-foreground/40 hover:bg-foreground/6 hover:text-foreground"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -65,7 +65,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
-                  className="footer-social inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/18 text-foreground/85 transition-colors hover:border-white/40 hover:bg-white/8 hover:text-foreground"
+                  className="footer-social inline-flex h-11 w-11 items-center justify-center rounded-full border border-line-strong text-foreground/85 transition-colors hover:border-foreground/40 hover:bg-foreground/6 hover:text-foreground"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -89,7 +89,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="WhatsApp"
-                  className="footer-social inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/18 text-foreground/85 transition-colors hover:border-white/40 hover:bg-white/8 hover:text-foreground"
+                  className="footer-social inline-flex h-11 w-11 items-center justify-center rounded-full border border-line-strong text-foreground/85 transition-colors hover:border-foreground/40 hover:bg-foreground/6 hover:text-foreground"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -154,7 +154,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-6 flex flex-col gap-3 border-t border-white/8 pt-4 text-[0.7rem] text-foreground/70 sm:mt-8 sm:flex-row sm:items-center sm:justify-between sm:pt-5 sm:text-xs">
+        <div className="mt-6 flex flex-col gap-3 border-t border-line pt-4 text-[0.7rem] text-foreground/70 sm:mt-8 sm:flex-row sm:items-center sm:justify-between sm:pt-5 sm:text-xs">
           <p>
             &copy; {year} {COMPANY.name}
           </p>
@@ -171,7 +171,7 @@ export function Footer() {
             ))}
           </ul>
           <p className="tracking-wide sm:text-right">
-            Web. Chatbots. Ship.
+            Websites. Assistants. Software.
           </p>
         </div>
       </div>

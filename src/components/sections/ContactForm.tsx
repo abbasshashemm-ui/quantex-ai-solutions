@@ -1,17 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import {
-  useState,
-  type ChangeEvent,
-  type FormEvent,
-} from "react";
+import { useState, type ChangeEvent, type FormEvent } from "react";
 import { CONTACT } from "@/lib/site/contact";
 import { PRIVACY_POLICY } from "@/lib/site/legal/privacy-policy";
-import {
-  CONVERSION_EVENTS,
-  trackConversion,
-} from "@/lib/analytics/events";
+import { CONVERSION_EVENTS, trackConversion } from "@/lib/analytics/events";
 import {
   CONTACT_FORM_LIMITS,
   sanitizeContactField,
@@ -32,7 +25,7 @@ const initialState: ContactFormFields = {
 const MAX_WHATSAPP_URL_LENGTH = 2048;
 
 const inputClassName =
-  "mt-1.5 block w-full rounded-xl border border-white/12 bg-surface-elevated px-3.5 py-2.5 text-sm text-foreground outline-none transition placeholder:text-foreground/70 focus:border-white/35 focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--metallic)_16%,transparent)]";
+  "mt-1.5 block w-full rounded-xl border border-line-strong bg-white/70 px-3.5 py-2.5 text-sm text-foreground outline-none transition placeholder:text-foreground/55 focus:border-foreground focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--foreground)_12%,transparent)]";
 
 function buildWhatsAppBody(data: ContactFormFields) {
   return [
@@ -88,9 +81,9 @@ export function ContactForm() {
   };
 
   return (
-    <div className="contact-form-card glass-panel p-5 sm:p-7 md:p-8">
-      <h2 className="text-lg font-semibold tracking-tight text-foreground sm:text-xl">
-        How do I send a brief?
+    <div className="contact-form-card alu-glass p-5 sm:p-7 md:p-8">
+      <h2 className="alu-display text-[2.4rem] sm:text-[3rem]">
+        Send us a brief
       </h2>
       <p className="mt-2 text-sm leading-relaxed text-foreground/75">
         Name, email, and what you need. Phone is optional.
@@ -155,7 +148,7 @@ export function ContactForm() {
             minLength={10}
             maxLength={CONTACT_FORM_LIMITS.message}
             rows={5}
-            placeholder="Product, goal, and timeline..."
+            placeholder="What do you need, and by when?"
             value={form.message}
             onChange={update("message")}
             data-interactive
@@ -164,7 +157,7 @@ export function ContactForm() {
         </label>
 
         {error ? (
-          <p className="text-sm text-red-400/90" role="alert">
+          <p className="text-sm text-red-700" role="alert">
             {error}
           </p>
         ) : null}

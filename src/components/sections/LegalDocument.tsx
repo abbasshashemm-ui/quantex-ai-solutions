@@ -18,23 +18,17 @@ export function LegalDocument({
   sections,
 }: LegalDocumentProps) {
   return (
-    <article
-      className="legal-page relative px-4 pb-24 pt-[calc(6rem+env(safe-area-inset-top))] sm:px-6 sm:pt-32"
-    >
+    <article className="legal-page page-shell">
       <div className="page-grid-bg absolute inset-0" aria-hidden />
 
       <div className="relative mx-auto max-w-3xl">
-        <Link
-          href="/"
-          data-interactive
-          className="inline-flex min-h-11 items-center text-xs tracking-wide text-foreground/70 transition-colors hover:text-foreground"
-        >
+        <Link href="/" data-interactive className="page-back">
           ← Home
         </Link>
 
         <header className="mt-8 sm:mt-10">
           <PageEyebrow>{eyebrow}</PageEyebrow>
-          <h1 className="section-heading mt-4 text-foreground">{title}</h1>
+          <h1 className="alu-display page-title mt-4">{title}</h1>
           <p className="mt-3 text-sm text-foreground/70">
             Last updated: {lastUpdated}
           </p>

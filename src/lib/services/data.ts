@@ -39,45 +39,103 @@ export type Service = {
 
 export const SERVICES: Service[] = [
   {
-    id: "software",
-    slug: "custom-software-development",
-    title: "CUSTOM SOFTWARE DEVELOPMENT",
+    id: "websites",
+    slug: "high-converting-websites",
+    title: "HIGH-CONVERTING WEBSITES",
     description:
-      "Bespoke applications engineered for scale, security, and long-term maintainability.",
-    accent: "white",
+      "Fast, clear websites designed to turn visitors into enquiries.",
+    accent: "metallic",
     index: 0,
     nav: {
-      label: "Custom software",
-      tagline: "Dashboards, portals & bespoke apps",
-      icon: "code",
+      label: "Websites",
+      tagline: "Fast sites that win customers",
+      icon: "monitor",
     },
     overview:
-      "We design and build software around your workflows—not templates. From internal tools and client portals to full product platforms, every build is scoped for clarity, owned by your team, and structured so features can ship without rewriting the foundation.",
+      "Your website is the first conversation a customer has with your business. We build sites that load quickly on every phone, say clearly what you do, and make the next step—call, message or request a quote—impossible to miss.",
     detail: {
-      highlights: ["Bespoke builds", "Clean handover", "Staged releases"],
+      highlights: [
+        "Fast on every phone",
+        "One clear next step",
+        "Found on Google",
+      ],
       deliverables: [
-        "Production-ready application with maintainable architecture",
-        "Role-based access, APIs, and integration hooks",
-        "QA on real devices with staged release cadence",
-        "Deployment support and developer documentation",
-        "Optional retainers for post-launch enhancements",
+        "A fast, mobile-first website designed around one clear goal",
+        "Words and layout that explain what you do in seconds",
+        "Tracking set up, so you can see which pages bring enquiries",
+        "The basics of search visibility built in from day one",
+        "A site you can update yourself, or we update it for you",
+        "Tested on real phones, tablets and browsers before launch",
       ],
       processSteps: [
         {
-          label: "Discovery",
-          detail: "Workshops define users, risks, and success metrics.",
+          label: "Align",
+          detail:
+            "We agree who the site is for, what you offer and what visitors should do.",
         },
         {
-          label: "Prototype",
-          detail: "Critical flows validated before full build.",
+          label: "Sketch",
+          detail: "The key pages are mapped out before any design work begins.",
         },
         {
           label: "Build",
-          detail: "Short cycles with demos you can test each sprint.",
+          detail: "Words and design come together in short review rounds.",
         },
         {
-          label: "Launch",
-          detail: "Monitoring hooks plus a defined support window.",
+          label: "Learn",
+          detail:
+            "After launch we look at what visitors do and suggest improvements.",
+        },
+      ],
+    },
+  },
+  {
+    id: "chatbots",
+    slug: "custom-intelligent-chatbots",
+    title: "AI CHATBOTS & ASSISTANTS",
+    description:
+      "Assistants that know your business, answer customers on your website and WhatsApp, and hand over to you when a person is needed.",
+    accent: "grey",
+    index: 1,
+    nav: {
+      label: "AI assistants",
+      tagline: "Answers customers on web and WhatsApp",
+      icon: "chat",
+    },
+    overview:
+      "A generic chat widget frustrates customers when its answers are wrong or off-brand. We build assistants trained on your own information—your products, prices, policies and tone—so replies stay accurate, sound like you, and pass the conversation to a real person whenever it matters.",
+    detail: {
+      highlights: [
+        "Sounds like you",
+        "Hands over to people",
+        "Web and WhatsApp",
+      ],
+      deliverables: [
+        "An assistant trained on your products, services and policies",
+        "Replies on your website, on WhatsApp, or both",
+        "Clear limits on what it will and won't answer, with a handover to you",
+        "A record of conversations, so you can see what customers ask",
+        "A simple way to update what it knows as your business changes",
+        "Links to your booking, CRM or support tools where needed",
+      ],
+      processSteps: [
+        {
+          label: "Collect",
+          detail:
+            "We list the questions customers ask most and what the assistant should never answer.",
+        },
+        {
+          label: "Draft",
+          detail: "You read sample conversations and tell us what to change.",
+        },
+        {
+          label: "Test",
+          detail:
+            "We try it against awkward and unusual questions before it goes live.",
+        },
+        {
+          label: "Improve",
+          detail: "We review real conversations and tune the answers.",
         },
       ],
     },
@@ -85,131 +143,98 @@ export const SERVICES: Service[] = [
   {
     id: "automation",
     slug: "business-process-automation",
-    title: "BUSINESS PROCESS AUTOMATION",
+    title: "BUSINESS AUTOMATION",
     description:
-      "Intelligent workflows that eliminate friction and accelerate operational throughput.",
+      "Repetitive tasks handled automatically, so your team's time goes to customers.",
     accent: "grey",
-    index: 1,
+    index: 2,
     nav: {
-      label: "Process automation",
-      tagline: "Workflows, integrations & throughput",
+      label: "Automation",
+      tagline: "Less manual work, fewer mistakes",
       icon: "workflow",
     },
     overview:
-      "Manual handoffs, duplicate data entry, and spreadsheet bridges slow teams down. We map how work actually moves through your business and automate the repetitive steps—connecting CRMs, inboxes, spreadsheets, and custom apps so information flows once and stays accurate.",
+      "Copying data between spreadsheets, chasing approvals, forwarding emails—small tasks add up to hours every week. We map how work really moves through your business and automate the repetitive steps, connecting the tools you already use so information is entered once and stays right.",
     detail: {
-      highlights: ["Fewer handoffs", "Live dashboards", "Audit-ready logs"],
+      highlights: ["Fewer manual steps", "Clear visibility", "Clear records"],
       deliverables: [
-        "Documented process maps and automation blueprints",
-        "Triggers, approvals, and error alerts wired to your stack",
-        "Dashboards surfacing bottlenecks in real time",
-        "Tested workflows with safe runbooks for your team",
-        "Logging and audit trails for compliance needs",
+        "A written map of how your processes work today",
+        "Automations that move information between your tools",
+        "Approvals and alerts that reach the right person at the right time",
+        "A simple dashboard showing what is slowing things down",
+        "Tested workflows, with plain instructions for your team",
+        "A record of what ran and when, for peace of mind",
       ],
       processSteps: [
         {
           label: "Map",
-          detail: "Shadow workflows and quantify time lost per step.",
+          detail: "We follow the work and measure how long each step takes.",
         },
         {
-          label: "Prioritize",
-          detail: "Automations ranked by ROI and implementation risk.",
+          label: "Rank",
+          detail:
+            "We pick the automations that save the most time for the least risk.",
         },
         {
           label: "Pilot",
-          detail: "One team validates before company-wide rollout.",
+          detail: "One team tries it first, before it reaches everyone.",
         },
         {
-          label: "Scale",
-          detail: "Tune from real feedback until metrics move.",
+          label: "Grow",
+          detail: "We adjust based on feedback until the numbers improve.",
         },
       ],
     },
   },
   {
-    id: "architecture",
-    slug: "custom-system-architectures",
-    title: "CUSTOM SYSTEM ARCHITECTURES",
+    id: "software",
+    slug: "custom-software-development",
+    title: "CUSTOM SOFTWARE",
     description:
-      "Resilient, cloud-native foundations designed around your data and growth trajectory.",
+      "Software built around the way your business works, not the other way round.",
     accent: "white",
-    index: 2,
-    nav: {
-      label: "System architecture",
-      tagline: "Cloud-native foundations & scale",
-      icon: "layers",
-    },
-    overview:
-      "Growth exposes weak architecture fast—slow queries, fragile deploys, and security gaps. We design system blueprints that fit your scale today and your roadmap tomorrow: service boundaries, data models, auth, caching, and infrastructure choices explained in plain language for stakeholders and engineers alike.",
-    detail: {
-      highlights: ["Cloud-native", "Clear ADRs", "Phased migration"],
-      deliverables: [
-        "Architecture decision records stakeholders can read",
-        "Infrastructure diagrams and API contracts",
-        "Staging and production environment strategy",
-        "Security baselines aligned to your compliance",
-        "CI/CD, observability, and reference setups when in scope",
-      ],
-      processSteps: [
-        {
-          label: "Audit",
-          detail: "Existing systems, owners, and constraints reviewed.",
-        },
-        {
-          label: "Spike",
-          detail: "Assumptions stress-tested with focused prototypes.",
-        },
-        {
-          label: "Design",
-          detail: "Phased plan: stabilize, optimize, then scale.",
-        },
-        {
-          label: "Sign-off",
-          detail: "Engineering reviews until the blueprint is actionable.",
-        },
-      ],
-    },
-  },
-  {
-    id: "websites",
-    slug: "high-converting-websites",
-    title: "HIGH-CONVERTING WEBSITES",
-    description:
-      "Immersive, performance-first experiences that turn attention into measurable outcomes.",
-    accent: "metallic",
     index: 3,
     nav: {
-      label: "High-converting websites",
-      tagline: "Performance-first sites that convert",
-      icon: "monitor",
+      label: "Custom software",
+      tagline: "Apps and portals built for you",
+      icon: "code",
     },
     overview:
-      "Your site is the first sales conversation. We craft fast, brand-aligned experiences—landing pages, marketing sites, and product showcases—where layout, copy hierarchy, and motion guide visitors toward one clear action: book a call, request a quote, or start a trial.",
+      "When off-the-shelf tools don't fit, we build ones that do: internal tools, customer portals, or full products. Each build is scoped in plain language, delivered in stages you can try, and handed over so your team owns it.",
     detail: {
-      highlights: ["Core Web Vitals", "Conversion tracking", "SEO-ready"],
+      highlights: [
+        "Built for your workflow",
+        "Delivered in stages",
+        "Yours to keep",
+      ],
       deliverables: [
-        "Fast Next.js builds tuned for Core Web Vitals",
-        "Analytics, funnels, and conversion tracking configured",
-        "SEO structure and consistent design system",
-        "CMS or static workflows your team can update",
-        "Pre-launch QA across devices, a11y, and browsers",
+        "A working application designed around how your team works",
+        "Different access for staff, customers and administrators",
+        "Connections to the other tools you use",
+        "Testing on real devices at every stage",
+        "Launch support and clear documentation",
+        "Optional ongoing help for new features",
       ],
       processSteps: [
         {
-          label: "Align",
-          detail: "Audience, offer, and proof points locked early.",
+          label: "Discover",
+          detail:
+            "We learn who will use it, what could go wrong and how success will be measured.",
         },
         {
-          label: "Wireframe",
-          detail: "Key pages mapped before visual design.",
+          label: "Prototype",
+          detail:
+            "The most important screens are tested before the full build.",
         },
         {
           label: "Build",
-          detail: "Copy and UI refined together in review rounds.",
+          detail:
+            "Short cycles, with something for you to try at the end of each.",
         },
         {
-          label: "Measure",
-          detail: "Post-launch funnel review and A/B recommendations.",
+          label: "Launch",
+          detail:
+            "We go live together and agree what support looks like afterwards.",
         },
       ],
     },
@@ -219,85 +244,87 @@ export const SERVICES: Service[] = [
     slug: "seo",
     title: "SEO",
     description:
-      "We fix the technical issues that hold your site back on Google—speed, structure, meta tags, and the works.",
+      "We fix what holds your site back on Google, so the right customers can find you.",
     accent: "metallic",
     index: 4,
     nav: {
       label: "SEO",
-      tagline: "Technical SEO, speed & search visibility",
+      tagline: "Get found on Google",
       icon: "search",
     },
     overview:
-      "Ranking is not just keywords—it is crawlability, page speed, structured data, and content that matches search intent. We audit what search engines and users actually see, then fix technical blockers and on-page gaps so your site earns visibility without risky shortcuts or filler content.",
+      "Ranking isn't only about keywords. It depends on whether Google can read your site, whether your pages load quickly, and whether your content answers what people actually search for. We check what search engines and visitors really see, fix the technical problems and gaps, and avoid risky shortcuts or filler content.",
     detail: {
-      highlights: ["Technical fixes", "Core Web Vitals", "Search Console"],
+      highlights: ["Site health check", "Faster pages", "Clear reporting"],
       deliverables: [
-        "Full technical SEO audit with prioritized fix list",
-        "Meta titles, descriptions, headings, and schema markup",
-        "Sitemap, robots.txt, and indexation cleanup",
-        "Page speed and Core Web Vitals improvements",
-        "Search Console setup with baseline and monthly reporting",
+        "A full health check of your site, with a prioritised list of fixes",
+        "Better page titles, descriptions and headings on every key page",
+        "Fixes so Google can find and understand your pages",
+        "Speed improvements, especially on phones",
+        "Search tracking set up, with a starting baseline and monthly reports",
       ],
       processSteps: [
         {
-          label: "Audit",
-          detail: "Crawl, speed, and ranking baseline documented.",
+          label: "Check",
+          detail:
+            "We review how your site is read, how fast it loads and where it ranks today.",
         },
         {
-          label: "Prioritize",
-          detail: "Critical indexation and blocking issues fixed first.",
+          label: "Fix first",
+          detail: "The problems that block Google come first.",
         },
         {
-          label: "Optimize",
-          detail: "On-page structure, performance, and internal links.",
+          label: "Improve",
+          detail: "Then page structure, speed and the links between pages.",
         },
         {
           label: "Track",
-          detail: "Monthly reviews on impressions, clicks, and queries.",
+          detail: "A monthly look at how many people see and click your site.",
         },
       ],
     },
   },
   {
-    id: "chatbots",
-    slug: "custom-intelligent-chatbots",
-    title: "CUSTOM INTELLIGENT CHATBOTS",
+    id: "architecture",
+    slug: "custom-system-architectures",
+    title: "SYSTEM DESIGN",
     description:
-      "Context-aware assistants that integrate with your stack and elevate customer touchpoints.",
-    accent: "grey",
+      "A clear plan for the technology behind your business, built to grow with you.",
+    accent: "white",
     index: 5,
     nav: {
-      label: "Intelligent chatbots",
-      tagline: "AI assistants wired to your stack",
-      icon: "chat",
+      label: "System design",
+      tagline: "A plan that grows with you",
+      icon: "layers",
     },
     overview:
-      "Generic chat widgets frustrate users when answers are wrong or off-brand. We build assistants trained on your docs, products, and policies—wired into WhatsApp, web chat, or internal tools—so responses stay accurate, on-tone, and escalated to humans when the situation requires it.",
+      "As a business grows, the technology behind it can start to creak: slow tools, fragile setups, security gaps. We design a plan that fits where you are today and where you're heading, explained in plain language so decision-makers and engineers can both follow it.",
     detail: {
-      highlights: ["On-brand answers", "Human handoff", "Admin controls"],
+      highlights: ["Plain-language plan", "Built to grow", "Phased steps"],
       deliverables: [
-        "Assistant trained on your docs, products, and policies",
-        "Guardrails, logging, and escalation to your team",
-        "WhatsApp, web chat, or internal tool integrations",
-        "CRM, helpdesk, or booking hooks where needed",
-        "Admin panel to update knowledge without redeploys",
+        "A written plan your leadership can actually read",
+        "Diagrams showing how everything connects",
+        "A safe way to test changes before they go live",
+        "Security basics matched to your industry's requirements",
+        "Recommendations for hosting, backups and monitoring where in scope",
       ],
       processSteps: [
         {
-          label: "Catalog",
-          detail: "Top questions, allowed topics, and fallbacks defined.",
+          label: "Review",
+          detail:
+            "We look at your current systems, who owns them and what limits them.",
         },
         {
-          label: "Prototype",
-          detail: "Dialogues reviewed with stakeholders.",
+          label: "Test",
+          detail: "Risky assumptions are checked with small experiments.",
         },
         {
-          label: "Index",
-          detail: "Knowledge tested against edge cases pre-launch.",
+          label: "Plan",
+          detail: "A phased route: stabilise first, then improve, then scale.",
         },
         {
-          label: "Refine",
-          detail: "Resolution rates drive weekly prompt tuning.",
+          label: "Agree",
+          detail: "We refine it with your team until the next steps are clear.",
         },
       ],
     },

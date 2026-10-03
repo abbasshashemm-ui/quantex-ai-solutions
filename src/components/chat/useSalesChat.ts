@@ -8,7 +8,7 @@ const WELCOME_TEXT =
   "Hi—ask about our services, timelines, or how to get started.";
 
 const TERMINAL_WELCOME_TEXT =
-  "I’m the Quantex AI assistant. Ask about websites, AI chatbots, timelines, or pricing—I’ll help you pick the right build.";
+  "Hi, I’m the Quantex assistant. Ask me about websites, AI assistants, timelines or pricing, and I’ll help you find the right fit.";
 
 const baseWelcome: UIMessage = {
   id: "welcome",
