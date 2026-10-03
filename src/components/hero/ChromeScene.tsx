@@ -21,6 +21,7 @@ import {
 import {
   CAMERA_DISTANCE,
   CAMERA_FOV_DEGREES,
+  IDLE_SPIN_SPEED,
   REFLECTION_OFFSET,
   computePose,
   ringTwist,
@@ -34,8 +35,6 @@ type ChromeSceneProps = {
   active: boolean;
   /** Reduced motion: keep the scroll-driven morph, drop autonomous motion. */
   calm: boolean;
-  /** The visitor paused the animation: one still frame in the opening pose. */
-  paused: boolean;
   onReady: () => void;
   onFail: (reason?: unknown) => void;
 };
@@ -73,18 +72,19 @@ function setEnvironment(scene: Scene, texture: Texture | null) {
 function Sculpture({
   motion,
   calm,
-  paused,
   onReady,
-}: Pick<ChromeSceneProps, "motion" | "calm" | "paused" | "onReady">) {
+}: Pick<ChromeSceneProps, "motion" | "calm" | "onReady">) {
   const gl = useThree((state) => state.gl);
   const scene = useThree((state) => state.scene);
   const invalidate = useThree((state) => state.invalidate);
 
   const groupRef = useRef<Group>(null);
   const ringRefs = useRef<(Mesh | null)[]>([]);
-  const ambient = calm || paused ? 0 : 1;
+  const ambient = calm ? 0 : 1;
   const intro = useRef(ambient === 0 ? 1 : 0);
   const pointer = useRef({ x: 0, y: 0 });
+  // Idle spin: accumulated angle, and a smoothed 0..1 "page is moving" level.
+  const spin = useRef({ angle: 0, speed: 0 });
 
   const geometries = useMemo(() => buildRingSpecs().map(buildRingGeometry), []);
   const material = useMemo(
@@ -109,11 +109,6 @@ function Sculpture({
     };
   }, [gl, scene, invalidate, onReady]);
 
-  // Pausing stops the loop, so draw one frame in the still pose.
-  useEffect(() => {
-    invalidate();
-  }, [paused, invalidate]);
-
   useEffect(() => {
     return () => {
       geometries.forEach((geometry) => geometry.dispose());
@@ -133,7 +128,7 @@ function Sculpture({
       intro.current = Math.min(1, intro.current + dt / 2.1);
     }
     const settle = ambient === 0 ? 1 : 1 - (1 - intro.current) ** 4;
-    const progress = paused ? 0 : input.progress;
+    const progress = input.progress;
 
     pointer.current.x = MathUtils.damp(
       pointer.current.x,
@@ -148,11 +143,22 @@ function Sculpture({
       dt,
     );
 
+    spin.current.speed = MathUtils.damp(
+      spin.current.speed,
+      IDLE_SPIN_SPEED * (1 - input.activity) * ambient,
+      2.5,
+      dt,
+    );
+    spin.current.angle += spin.current.speed * dt;
+
     const pose = computePose({
       progress,
       time,
       settle,
       ambient,
+      spin: spin.current.angle,
+      slotCenter: input.slotCenter,
+      slotSize: input.slotSize,
       pointerX: pointer.current.x,
       pointerY: pointer.current.y,
       viewWidth: state.viewport.width,
@@ -195,13 +201,12 @@ export default function ChromeScene({
   motion,
   active,
   calm,
-  paused,
   onReady,
   onFail,
 }: ChromeSceneProps) {
   return (
     <Canvas
-      frameloop={active ? (paused ? "demand" : "always") : "never"}
+      frameloop={active ? "always" : "never"}
       dpr={[1, 1.6]}
       camera={{
         position: [0, 0, CAMERA_DISTANCE],
@@ -224,12 +229,7 @@ export default function ChromeScene({
       }}
       aria-hidden
     >
-      <Sculpture
-        motion={motion}
-        calm={calm}
-        paused={paused}
-        onReady={onReady}
-      />
+      <Sculpture motion={motion} calm={calm} onReady={onReady} />
     </Canvas>
   );
 }

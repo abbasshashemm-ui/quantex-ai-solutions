@@ -10,6 +10,7 @@ import {
 } from "./chrome-geometry";
 import {
   CAMERA_DISTANCE,
+  IDLE_SPIN_SPEED,
   computePose,
   damp,
   lerp,
@@ -30,7 +31,6 @@ type FlatSceneProps = {
   motion: RefObject<MotionState>;
   active: boolean;
   calm: boolean;
-  paused: boolean;
   onReady: () => void;
   onFail: (reason?: unknown) => void;
 };
@@ -92,7 +92,6 @@ export default function FlatScene({
   motion,
   active,
   calm,
-  paused,
   onReady,
   onFail,
 }: FlatSceneProps) {
@@ -104,6 +103,8 @@ export default function FlatScene({
     last: 0,
     start: 0,
     ready: false,
+    spinAngle: 0,
+    spinSpeed: 0,
   });
 
   useEffect(() => {
@@ -114,7 +115,7 @@ export default function FlatScene({
       return;
     }
 
-    const ambient = calm || paused ? 0 : 1;
+    const ambient = calm ? 0 : 1;
     const state = runtime.current;
     if (ambient === 0) state.intro = 1;
 
@@ -146,10 +147,18 @@ export default function FlatScene({
 
       if (state.intro < 1) state.intro = Math.min(1, state.intro + dt / 2.1);
       const settle = ambient === 0 ? 1 : 1 - (1 - state.intro) ** 4;
-      const progress = paused ? 0 : input.progress;
+      const progress = input.progress;
 
       state.pointerX = damp(state.pointerX, input.pointerX, 3.5, dt);
       state.pointerY = damp(state.pointerY, input.pointerY, 3.5, dt);
+
+      state.spinSpeed = damp(
+        state.spinSpeed,
+        IDLE_SPIN_SPEED * (1 - input.activity) * ambient,
+        2.5,
+        dt,
+      );
+      state.spinAngle += state.spinSpeed * dt;
 
       const pointsPerUnit = height / worldHeight;
       const pose = computePose({
@@ -157,6 +166,9 @@ export default function FlatScene({
         time,
         settle,
         ambient,
+        spin: state.spinAngle,
+        slotCenter: input.slotCenter,
+        slotSize: input.slotSize,
         pointerX: state.pointerX,
         pointerY: state.pointerY,
         viewWidth: (width / height) * worldHeight,
@@ -263,14 +275,14 @@ export default function FlatScene({
     });
     observer.observe(canvas);
 
-    if (active && !paused) frame = requestAnimationFrame(tick);
+    if (active) frame = requestAnimationFrame(tick);
     else draw(performance.now());
 
     return () => {
       cancelAnimationFrame(frame);
       observer.disconnect();
     };
-  }, [active, calm, paused, motion, onReady, onFail]);
+  }, [active, calm, motion, onReady, onFail]);
 
   return <canvas ref={canvasRef} className="alu-flat" aria-hidden />;
 }
