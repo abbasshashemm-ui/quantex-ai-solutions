@@ -2006,65 +2006,12 @@ span.chat-panel__input {
 }
 
 /* ——— Hero chrome mark ——— */
-/* same width/edges as .hero-studio__inner so the mark tracks the chat panel */
-.hero-mark-anchor {
-  position: absolute;
-  inset-block: 0;
-  inset-inline: 1rem;
-  max-width: 80rem;
-  margin-inline: auto;
-  pointer-events: none;
-}
-
-@media (min-width: 640px) {
-  .hero-mark-anchor {
-    inset-inline: 1.5rem;
-  }
-}
-
-.hero-mark {
-  pointer-events: none;
-  position: absolute;
-  z-index: 0;
-  right: -5.5rem;
-  top: calc(50% + 2.5rem);
-  translate: 0 -50%;
-  width: 42rem;
-  height: auto;
-  opacity: 0.85;
-  filter: drop-shadow(0 30px 80px rgba(0, 0, 0, 0.7));
-  animation: mark-float 14s ease-in-out infinite;
-}
-
-@media (min-width: 1024px) and (max-width: 1279px) {
-  .hero-mark {
-    right: -4rem;
-    width: 36rem;
-  }
-}
-
-@media (max-width: 1023px) {
-  .hero-mark {
-    right: -18%;
-    top: 22%;
-    translate: none;
-    width: 80vw;
-    opacity: 0.3;
-  }
-}
-
-@keyframes mark-float {
-  0%, 100% { transform: translateY(0) rotate(-2deg); }
-  50% { transform: translateY(-14px) rotate(1.5deg); }
-}
-
 @keyframes chrome-sweep {
   0%, 55% { background-position: 160% 0, 0 0; }
   100% { background-position: -60% 0, 0 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .hero-mark,
   .hero-heading__line {
     animation: none;
   }
@@ -2282,16 +2229,6 @@ span.chat-panel__input {
   color: var(--amber);
 }
 
-/* ——— CTA watermark ——— */
-.home-cta__panel::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: url("/quantex-chrome-mark-sm-v2.webp") no-repeat right -4rem center / 22rem auto;
-  opacity: 0.12;
-  pointer-events: none;
-}
 
 
 /* ═══════════════ Telemetry layer ═══════════════
@@ -2761,5 +2698,77 @@ body::after {
   }
   .service-card__title {
     transition: none;
+  }
+}
+
+
+/* ═══════════════ Photographic assets ═══════════════
+   The renders have pure-black backgrounds, so `lighten` lets the page colour
+   show through and no rectangle is visible. */
+
+.hero-plate {
+  object-fit: cover;
+  object-position: 78% 40%;
+  opacity: 0.9;
+  pointer-events: none;
+  user-select: none;
+}
+
+@media (max-width: 1023px) {
+  .hero-plate {
+    object-position: 100% 25%;
+    opacity: 0.18;
+  }
+}
+
+.device--lead .device__photo {
+  display: none;
+  width: 100%;
+  height: auto;
+}
+
+@media (min-width: 640px) {
+  .device--lead .device__photo {
+    display: block;
+  }
+  .device--lead .device__face--fallback,
+  .device--lead .device__ears {
+    display: none;
+  }
+}
+
+.process-row-art {
+  width: 100%;
+  height: auto;
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+.home-cta__panel {
+  overflow: hidden;
+}
+
+.home-cta__panel > *:not(.home-cta__art) {
+  position: relative;
+  z-index: 1;
+}
+
+.home-cta__art {
+  object-fit: cover;
+  object-position: right center;
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+@media (min-width: 1024px) {
+  .home-cta__panel {
+    text-align: left;
+    min-height: 26rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .home-cta__art {
+    opacity: 1;
   }
 }

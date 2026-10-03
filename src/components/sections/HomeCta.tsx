@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { CONTACT } from "@/lib/site/contact";
 
@@ -6,14 +7,23 @@ export function HomeCta() {
     <section className="home-cta relative px-4 py-16 sm:px-6 sm:py-20 md:py-24">
       <div className="mx-auto max-w-5xl">
         <div className="home-cta__panel">
-          <h2 className="section-heading mx-auto mt-4 max-w-2xl text-metallic-gradient">
+          <Image
+            src="/visuals/cta-dial.webp"
+            alt=""
+            fill
+            quality={85}
+            sizes="(max-width: 1024px) 100vw, 1024px"
+            className="home-cta__art"
+            aria-hidden
+          />
+          <h2 className="section-heading mx-auto mt-4 max-w-2xl text-metallic-gradient lg:mx-0 lg:max-w-xl">
             How do I start a project with Quantex?
           </h2>
-          <p className="mx-auto mt-4 max-w-lg text-base leading-[1.75] text-foreground/70 sm:text-[1.0625rem]">
+          <p className="mx-auto mt-4 max-w-lg text-base lg:mx-0 leading-[1.75] text-foreground/70 sm:text-[1.0625rem]">
             Share the product, the goal, and the timeline. We&apos;ll come back
             with a scoped first milestone—not a generic pitch.
           </p>
-          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
+          <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row lg:justify-start">
             <Link
               href="/contact"
               data-interactive

@@ -79,8 +79,17 @@ export function SystemShowcase() {
 
         <div className="showcase__grid">
           <article className="device device--lead" data-reveal>
+            <Image
+              src="/visuals/stack-lead.webp"
+              alt="Quantex rack panel with an amber display reading assistant online, knowledge grounded, handoff WhatsApp"
+              width={2000}
+              height={333}
+              quality={85}
+              sizes="(max-width: 1280px) 94vw, 1280px"
+              className="device__photo"
+            />
             <div className="device__ears" aria-hidden />
-            <div className="device__face">
+            <div className="device__face device__face--fallback">
               <div className="device__brand" aria-hidden>
                 <Image
                   src="/quantex-chrome-mark-sm-v2.webp"
