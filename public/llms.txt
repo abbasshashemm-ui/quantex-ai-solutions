@@ -1,10 +1,11 @@
 # Quantex AI Solutions
 
-> Beirut studio (founded 2024). High-converting websites and on-brand AI chatbots—plus custom software, automation, and technical SEO. Stack: Next.js, Vercel, Gemini, WhatsApp, Core Web Vitals, Google Search Console.
+> Beirut AI studio (founded 2024). On-brand AI chatbots and automation, plus websites built search-ready from the first commit—alongside custom software and technical SEO. Stack: Next.js, Vercel, Gemini, WhatsApp, Core Web Vitals, Google Search Console.
 
 ## Company
 
-- Name: Quantex AI Solutions
+- Name: Quantex (legal/SEO name: Quantex AI Solutions)
+- Offer: AI solutions—AI assistants, automation, and search-ready websites and software
 - Founder: Abbas Hachem (Full Stack Developer)
 - Location: Beirut, Lebanon
 - Email: abbas@quantexai.solutions
@@ -31,7 +32,7 @@
 
 ## What we do
 
-Quantex AI Solutions ships production software from Beirut: Next.js marketing sites on Vercel tuned for Core Web Vitals and Google Search Console, Gemini-powered assistants on WhatsApp and the web, bespoke internal apps, workflow automation, and cloud architecture.
+Quantex is an AI studio in Beirut. We build Gemini-powered assistants on WhatsApp and the web with a human handoff, business process automation, and custom software and cloud architecture. Our Next.js sites on Vercel are built search-ready from the first commit—clean structure, fast Core Web Vitals, and measurement in Google Search Console—with technical SEO as a standalone service.
 
 ## Contact
 
