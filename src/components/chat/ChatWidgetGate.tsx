@@ -10,6 +10,6 @@ const ChatWidget = dynamic(
 
 export function ChatWidgetGate() {
   const pathname = usePathname();
-  if (pathname === "/") return null;
+  if (pathname === "/" || pathname === "/prototype") return null;
   return <ChatWidget />;
 }

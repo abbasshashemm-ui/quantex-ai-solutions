@@ -1,0 +1,856 @@
+/*
+ * Design prototype: light brushed aluminium, liquid glass, condensed type.
+ * Everything is scoped to pages that render .alu-root, so the rest of the site
+ * is untouched. Colour tokens are overridden at the body so the shared header,
+ * footer and chat (which all read the tokens) flip to the light theme too.
+ */
+
+html:has(.alu-root) {
+  color-scheme: light;
+  scrollbar-color: #9ca2ad #e6e9ed;
+}
+
+body:has(.alu-root) {
+  --void: #e6e9ed;
+  --surface: #eef0f3;
+  --surface-elevated: #f7f8fa;
+  --border: #c3c8d0;
+  --foreground: #0b0c0f;
+  --muted: #4a505b;
+  --accent: #2a2e36;
+  --accent-dim: #6b717d;
+  --metallic: #4a505b;
+  --metallic-dim: #8a909b;
+  --glow: color-mix(in srgb, #0b0c0f 10%, transparent);
+  --chrome-edge: rgba(255, 255, 255, 0.7);
+
+  background-color: var(--void);
+  color-scheme: light;
+}
+
+body:has(.alu-root) .site-grain,
+body:has(.alu-root) .site-ambient {
+  display: none;
+}
+
+.alu-root {
+  --alu-ink: #0b0c0f;
+  --alu-ink-soft: #2a2e36;
+  --alu-muted: #4a505b;
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+
+  position: relative;
+  color: var(--alu-ink);
+  background: var(--void);
+}
+
+/* ——— Brushed aluminium ——— */
+.alu-surface {
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.22) 0 1px,
+      rgba(20, 24, 32, 0.025) 1px 2px,
+      rgba(255, 255, 255, 0) 2px 3px
+    ),
+    radial-gradient(
+      120% 80% at 72% 0%,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0) 58%
+    ),
+    conic-gradient(
+      from 200deg at 74% 46%,
+      rgba(255, 255, 255, 0) 0 6%,
+      rgba(255, 255, 255, 0.5) 13%,
+      rgba(255, 255, 255, 0) 21%,
+      rgba(20, 26, 36, 0.07) 33%,
+      rgba(255, 255, 255, 0) 45%,
+      rgba(255, 255, 255, 0.4) 62%,
+      rgba(255, 255, 255, 0) 74%,
+      rgba(20, 26, 36, 0.06) 88%,
+      rgba(255, 255, 255, 0) 100%
+    ),
+    linear-gradient(180deg, #edf0f3 0%, #dfe3e8 48%, #d1d6dd 100%);
+}
+
+/* Continues the hero's aluminium below the pinned stage without a visible seam. */
+.alu-after {
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.22) 0 1px,
+      rgba(20, 24, 32, 0.025) 1px 2px,
+      rgba(255, 255, 255, 0) 2px 3px
+    ),
+    radial-gradient(
+      90% 40% at 70% 30%,
+      rgba(255, 255, 255, 0.7) 0%,
+      rgba(255, 255, 255, 0) 70%
+    ),
+    linear-gradient(180deg, #d1d6dd 0%, #e9ecf0 22rem, #dce0e5 100%);
+}
+
+/* ——— Liquid glass ——— */
+.alu-glass {
+  position: relative;
+  isolation: isolate;
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  border-radius: 1.5rem;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.62) 0%,
+    rgba(255, 255, 255, 0.22) 48%,
+    rgba(255, 255, 255, 0.4) 100%
+  );
+  -webkit-backdrop-filter: blur(22px) saturate(170%);
+  backdrop-filter: blur(22px) saturate(170%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(20, 26, 36, 0.07),
+    0 26px 48px -26px rgba(18, 24, 34, 0.4),
+    0 2px 6px rgba(18, 24, 34, 0.06);
+}
+
+.alu-glass::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    linear-gradient(115deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 30%),
+    radial-gradient(110% 55% at 0% 0%, rgba(255, 255, 255, 0.5), transparent 62%);
+}
+
+/* ——— Header, footer and buttons (shared components, light theme) ——— */
+body:has(.alu-root) .site-header {
+  border-bottom-color: rgba(255, 255, 255, 0.6);
+  background: linear-gradient(
+    180deg,
+    rgba(248, 249, 251, 0.74),
+    rgba(232, 235, 239, 0.5)
+  );
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  box-shadow:
+    0 1px 0 rgba(11, 12, 15, 0.06),
+    0 14px 30px -20px rgba(20, 25, 35, 0.4);
+}
+
+/*
+ * The mobile menu is position: fixed inside the header, and a backdrop-filter on
+ * the header turns the header into its containing block, so the panel only
+ * covers the header's own height. Release the filter while the menu is open,
+ * and keep the logo and close button above the panel.
+ */
+body:has(.alu-root) .site-header:has(#mobile-nav) {
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+
+body:has(.alu-root) .site-header nav {
+  position: relative;
+  z-index: 50;
+}
+
+/* The panel lives inside the nav at z-40; lift the logo and toggle above it. */
+body:has(.alu-root) .site-header nav > a,
+body:has(.alu-root) .site-header nav button[aria-controls="mobile-nav"] {
+  position: relative;
+  z-index: 41;
+}
+
+body:has(.alu-root) #mobile-nav {
+  border-top-color: rgba(11, 12, 15, 0.08);
+  background: linear-gradient(
+    180deg,
+    rgba(247, 248, 250, 0.98),
+    rgba(228, 232, 237, 0.98)
+  );
+}
+
+body:has(.alu-root) #mobile-nav :is(a, button) {
+  border-color: rgba(11, 12, 15, 0.1);
+}
+
+body:has(.alu-root) .services-nav-dropdown {
+  border-color: rgba(255, 255, 255, 0.85);
+  background: linear-gradient(
+    145deg,
+    rgba(250, 251, 252, 0.98),
+    rgba(236, 239, 243, 0.97)
+  );
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 28px 60px -20px rgba(18, 24, 34, 0.45);
+}
+
+body:has(.alu-root) .services-nav-dropdown__item:hover {
+  background-color: rgba(11, 12, 15, 0.05);
+}
+
+body:has(.alu-root) .site-header__line {
+  display: none;
+}
+
+body:has(.alu-root) .site-header a:not(.btn-secondary):hover,
+body:has(.alu-root) .site-header button:hover {
+  background-color: rgba(11, 12, 15, 0.06);
+}
+
+body:has(.alu-root) footer {
+  border-top-color: rgba(11, 12, 15, 0.1);
+}
+
+body:has(.alu-root) .footer-social {
+  border-color: rgba(11, 12, 15, 0.22);
+}
+
+body:has(.alu-root) .footer-social:hover {
+  border-color: rgba(11, 12, 15, 0.5);
+  background-color: rgba(11, 12, 15, 0.06);
+}
+
+/* The wordmark artwork is silver for dark backgrounds; darken it here. */
+body:has(.alu-root) img[alt="QUANTEX"] {
+  filter: invert(1) brightness(0.32) contrast(1.35);
+}
+
+body:has(.alu-root) .btn-primary {
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  background:
+    var(--chrome-brush),
+    linear-gradient(180deg, #3b3f48 0%, #16181d 46%, #050607 54%, #1c1f25 100%);
+  color: #f4f6f9;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.38),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.6),
+    0 12px 26px -10px rgba(5, 6, 8, 0.6);
+  transition:
+    transform 0.18s var(--ease-out, ease),
+    filter 0.18s ease;
+}
+
+body:has(.alu-root) .btn-primary:hover {
+  filter: brightness(1.14);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.6),
+    0 16px 30px -10px rgba(5, 6, 8, 0.65);
+}
+
+body:has(.alu-root) .btn-primary:active,
+body:has(.alu-root) .btn-secondary:active {
+  transform: scale(0.97);
+}
+
+body:has(.alu-root) .btn-secondary {
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.66),
+    rgba(255, 255, 255, 0.26)
+  );
+  color: var(--alu-ink);
+  -webkit-backdrop-filter: blur(16px) saturate(170%);
+  backdrop-filter: blur(16px) saturate(170%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(20, 26, 36, 0.08),
+    0 12px 24px -14px rgba(18, 24, 34, 0.45);
+  transition:
+    transform 0.18s var(--ease-out, ease),
+    background-color 0.18s ease;
+}
+
+body:has(.alu-root) .btn-secondary:hover {
+  border-color: rgba(255, 255, 255, 0.95);
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.85),
+    rgba(255, 255, 255, 0.4)
+  );
+}
+
+/* ——— Type ——— */
+.alu-display {
+  font-family: var(--font-condensed), var(--font-outfit), system-ui, sans-serif;
+  font-weight: 800;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: -0.005em;
+  line-height: 0.88;
+  color: var(--alu-ink);
+}
+
+.alu-lede {
+  max-width: 34rem;
+  margin-top: 1.25rem;
+  font-size: clamp(1rem, 1.6vw, 1.1875rem);
+  line-height: 1.6;
+  color: var(--alu-ink-soft);
+  text-wrap: pretty;
+}
+
+.alu-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.75rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--alu-ink);
+}
+
+.alu-link span[aria-hidden] {
+  transition: transform 0.2s var(--ease-out);
+}
+
+a:hover > .alu-link span[aria-hidden],
+.alu-link:hover span[aria-hidden] {
+  transform: translateX(4px);
+}
+
+/* ——— Pinned hero stage ——— */
+.alu-stage {
+  --p: 0;
+  position: relative;
+  height: 320vh;
+  height: 320svh;
+}
+
+.alu-stage__panel {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.alu-stage__backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+}
+
+.alu-stage__shadow {
+  position: absolute;
+  z-index: -2;
+  right: 4%;
+  bottom: 9%;
+  width: min(46vw, 38rem);
+  height: 3.2rem;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgba(14, 18, 26, 0.34),
+    rgba(14, 18, 26, 0)
+  );
+  filter: blur(6px);
+  opacity: calc(0.95 - var(--p) * 0.35);
+  transform: scale(calc(1 + var(--p) * 0.4));
+}
+
+.alu-stage__visual {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.alu-stage__poster {
+  position: absolute;
+  left: 71.5%;
+  top: 50%;
+  width: min(52vw, 80svh);
+  height: auto;
+  aspect-ratio: 1;
+  object-fit: contain;
+  transform: translate(-50%, -50%);
+  transition: opacity 0.6s var(--ease-out);
+}
+
+/* Phones: the sculpture sits above the copy, matching the scene's layout. */
+@media (max-width: 899px) {
+  .alu-stage__poster {
+    left: 50%;
+    top: 27%;
+    width: min(92vw, 24rem);
+  }
+
+  .alu-stage__shadow {
+    right: 50%;
+    bottom: auto;
+    top: 43%;
+    width: 64vw;
+    transform: translateX(50%) scale(calc(1 + var(--p) * 0.4));
+  }
+}
+
+.alu-stage__canvas {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.6s var(--ease-out);
+}
+
+.alu-stage[data-ready="true"] .alu-stage__canvas {
+  opacity: 1;
+}
+
+.alu-stage[data-ready="true"] .alu-stage__poster {
+  opacity: 0;
+}
+
+.alu-stage__content {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-items: end;
+  /* Same left edge as the header: its max-w-7xl inside 1rem / 1.5rem gutters. */
+  width: min(80rem, 100% - 2rem);
+  margin-inline: auto;
+  padding: 5.5rem 0 3.25rem;
+}
+
+@media (min-width: 640px) {
+  .alu-stage__content {
+    width: min(80rem, 100% - 3rem);
+  }
+}
+
+.alu-stage__content > * {
+  grid-area: 1 / 1;
+  max-width: min(54rem, 100%);
+}
+
+@media (min-width: 900px) {
+  .alu-stage__content {
+    align-items: center;
+    padding-top: clamp(5.5rem, 12svh, 7.5rem);
+    padding-bottom: clamp(2.5rem, 7svh, 4rem);
+  }
+}
+
+.alu-stage__progress {
+  position: absolute;
+  left: 50%;
+  bottom: 1.1rem;
+  width: 7rem;
+  height: 2px;
+  border-radius: 2px;
+  background: rgba(11, 12, 15, 0.12);
+  overflow: hidden;
+  transform: translateX(-50%);
+}
+
+.alu-stage__progress span {
+  display: block;
+  height: 100%;
+  background: linear-gradient(90deg, #2a2e36, #0b0c0f);
+  transform-origin: left center;
+  transform: scaleX(var(--p));
+}
+
+/* Hero copy fades and lifts out as the first beat arrives. */
+.alu-hero {
+  opacity: clamp(0, calc(1 - (var(--p) - 0.12) * 8), 1);
+  transform: translate3d(0, calc(var(--p) * -4rem), 0);
+}
+
+.alu-stage:not([data-beat="hero"]) .alu-hero {
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.alu-h1 {
+  margin-top: 1rem;
+  font-size: clamp(3.75rem, 21vw, 5.75rem);
+}
+
+@media (min-width: 640px) {
+  .alu-h1 {
+    font-size: clamp(5rem, 15vw, 8rem);
+  }
+}
+
+@media (min-width: 900px) {
+  .alu-h1 {
+    font-size: clamp(5rem, min(12.2vw, 20svh), 11.5rem);
+  }
+}
+
+.alu-h1__line {
+  display: block;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .alu-h1__line {
+    opacity: 0;
+    animation: alu-rise 0.85s var(--ease-out) forwards;
+    animation-delay: calc(var(--i) * 80ms + 120ms);
+  }
+}
+
+@keyframes alu-rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 0.35em, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.alu-ctas {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.75rem;
+}
+
+.alu-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.alu-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2rem;
+  padding-inline: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.45);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: var(--alu-ink-soft);
+}
+
+.alu-chip__dot {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: var(--alu-ink);
+}
+
+@media (max-width: 639px) {
+  .alu-chip:nth-child(n + 2) {
+    display: none;
+  }
+
+  .alu-ctas > * {
+    flex: 1 1 auto;
+  }
+}
+
+/* Scroll beats: each fades in, holds, then hands over to the next. */
+.alu-beat {
+  --in: 0;
+  --out: 1;
+  opacity: min(var(--in), var(--out));
+  transform: translate3d(0, calc((1 - var(--in)) * 2rem), 0);
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.alu-beat--one {
+  --in: clamp(0, calc((var(--p) - 0.3) * 10), 1);
+  --out: clamp(0, calc((0.64 - var(--p)) * 10), 1);
+}
+
+.alu-beat--two {
+  --in: clamp(0, calc((var(--p) - 0.64) * 10), 1);
+}
+
+.alu-stage[data-beat="one"] .alu-beat--one,
+.alu-stage[data-beat="two"] .alu-beat--two {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.alu-beat__index {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--alu-muted);
+}
+
+.alu-beat__title {
+  margin-top: 0.9rem;
+  font-size: clamp(3.5rem, 15vw, 5.5rem);
+}
+
+@media (min-width: 900px) {
+  .alu-stage__content > .alu-beat {
+    max-width: min(40rem, 100%);
+  }
+
+  .alu-beat__title {
+    font-size: clamp(5rem, min(8.6vw, 16svh), 8rem);
+  }
+}
+
+/* Reduced motion: no pinning, no morph. Beats become ordinary stacked copy. */
+@media (prefers-reduced-motion: reduce) {
+  .alu-stage {
+    height: auto;
+  }
+
+  .alu-stage__panel {
+    position: relative;
+    height: auto;
+    min-height: 100svh;
+    overflow: visible;
+  }
+
+  /* The sculpture and its shadow belong to the first screen only. */
+  .alu-stage__visual {
+    bottom: auto;
+    height: 100svh;
+  }
+
+  .alu-stage__shadow {
+    bottom: auto;
+    top: calc(100svh - 9% - 3.2rem);
+  }
+
+  .alu-stage__content {
+    position: relative;
+    inset: auto;
+    display: block;
+    padding-top: 6rem;
+    padding-bottom: 5rem;
+  }
+
+  .alu-hero {
+    display: flex;
+    min-height: calc(100svh - 11rem);
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .alu-hero,
+  .alu-beat {
+    opacity: 1;
+    transform: none;
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  .alu-beat {
+    margin-top: 6rem;
+  }
+
+  .alu-stage__progress {
+    display: none;
+  }
+}
+
+/* ——— Sections ——— */
+.alu-section {
+  position: relative;
+  padding: clamp(4rem, 9vw, 8rem) 1rem;
+}
+
+@media (min-width: 640px) {
+  .alu-section {
+    padding-inline: 1.5rem;
+  }
+}
+
+.alu-section--last {
+  padding-bottom: clamp(5rem, 10vw, 9rem);
+}
+
+.alu-section__inner {
+  max-width: 80rem;
+  margin-inline: auto;
+}
+
+.alu-section__title {
+  margin-top: 1rem;
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  text-wrap: balance;
+}
+
+.alu-split {
+  display: grid;
+  gap: 2.5rem;
+  align-items: center;
+}
+
+@media (min-width: 960px) {
+  .alu-split {
+    grid-template-columns: 1fr 1.05fr;
+    gap: 4rem;
+  }
+}
+
+/* Chat console as a glass panel */
+.alu-root .hero-chat {
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.28)
+  );
+  -webkit-backdrop-filter: blur(24px) saturate(170%);
+  backdrop-filter: blur(24px) saturate(170%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    0 40px 70px -30px rgba(18, 24, 34, 0.45);
+}
+
+.alu-root .chat-message--user {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: linear-gradient(180deg, #2f333b, #0b0c0f);
+  color: #f4f6f9;
+  box-shadow: 0 6px 14px -8px rgba(5, 6, 8, 0.6);
+}
+
+.alu-root .chat-message--assistant {
+  border-color: rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.72);
+  color: var(--alu-ink);
+}
+
+.alu-root .chat-panel__input {
+  border-color: rgba(11, 12, 15, 0.14);
+  background: rgba(255, 255, 255, 0.8);
+  color: var(--alu-ink);
+}
+
+.alu-root .chat-panel__chip {
+  border-color: rgba(11, 12, 15, 0.14);
+  background: rgba(255, 255, 255, 0.55);
+  color: var(--alu-ink-soft);
+}
+
+.alu-root span.chat-panel__input {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: block;
+  line-height: 1.6;
+}
+
+.alu-root .chat-panel__mark img {
+  filter: brightness(0);
+}
+
+/* Cards */
+.alu-cards {
+  display: grid;
+  gap: 1rem;
+  margin-top: 3rem;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 800px) {
+  .alu-cards {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+.alu-card {
+  display: flex;
+  min-height: 14rem;
+  flex-direction: column;
+  padding: 1.75rem;
+  color: var(--alu-ink);
+  transition: transform 0.25s var(--ease-out);
+}
+
+@media (min-width: 800px) {
+  .alu-card {
+    min-height: 18rem;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .alu-card:hover {
+    transform: translateY(-5px);
+  }
+}
+
+.alu-card:active {
+  transform: scale(0.985);
+}
+
+.alu-card__index {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  color: var(--alu-muted);
+}
+
+.alu-card__title {
+  margin-top: auto;
+  font-size: clamp(2.75rem, 5vw, 3.75rem);
+}
+
+.alu-card__body {
+  margin-top: 0.85rem;
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--alu-ink-soft);
+}
+
+.alu-card .alu-link {
+  margin-top: 1rem;
+}
+
+.alu-promises {
+  display: grid;
+  gap: 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+@media (min-width: 800px) {
+  .alu-promises {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.25rem;
+  }
+}
+
+.alu-promise {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding: 1.5rem 1.75rem;
+}
+
+.alu-promise__title {
+  font-size: clamp(1.9rem, 3vw, 2.4rem);
+}
+
+.alu-promise__body {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--alu-ink-soft);
+}
+
+.alu-final {
+  margin-top: clamp(4rem, 8vw, 7rem);
+}
+
+.alu-final .alu-section__title {
+  font-size: clamp(3.5rem, 11vw, 9rem);
+}
