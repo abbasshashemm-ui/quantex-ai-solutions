@@ -1,4 +1,5 @@
 import { RING_COUNT } from "./chrome-geometry";
+import { SLOT_FILL } from "./motion";
 
 /**
  * The hero's animation rules, shared by the WebGL scene and the 2D canvas
@@ -77,13 +78,6 @@ export type Pose = {
   /** 0 = mirror chrome, 1 = satin aluminium. */
   satin: number;
 };
-
-/**
- * On phones the sculpture spins, and a spinning triangle sweeps a circle, so it
- * is sized by its circumscribed circle (radius = scale) and centred on it.
- * The fraction leaves room for tube thickness, tilt and perspective.
- */
-const SLOT_FILL = 0.86;
 
 export function computePose(input: PoseInput): Pose {
   const {
