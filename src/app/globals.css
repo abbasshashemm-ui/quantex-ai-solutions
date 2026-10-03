@@ -13,9 +13,10 @@
   --metallic-dim: #7a808c;
   --signal: #5ee9a6;
   --glow: color-mix(in srgb, #c9ced8 24%, transparent);
-  --radius: 0.2rem;
+  --radius: 1.25rem;
   --grid-line: rgba(255, 255, 255, 0.16);
-  --font-telemetry: var(--font-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  --font-ui: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --ease-spring: cubic-bezier(0.32, 0.72, 0, 1);
   --amber: #ffa63d;
   --amber-dim: #b9742a;
   /* brushed chrome */
@@ -43,7 +44,7 @@
   --color-metallic: var(--metallic);
   --color-metallic-dim: var(--metallic-dim);
   --color-signal: var(--signal);
-  --font-sans: var(--font-outfit);
+  --font-sans: var(--font-ui);
   --font-display: var(--font-syne);
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --radius-lg: var(--radius);
@@ -53,7 +54,7 @@ html {
   color-scheme: dark;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  scroll-padding-top: 7.5rem;
+  scroll-padding-top: 5.5rem;
   scroll-behavior: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--accent-dim) var(--void);
@@ -62,11 +63,11 @@ html {
 body {
   background-color: var(--void);
   color: var(--foreground);
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-ui);
 }
 
 .font-display {
-  font-family: var(--font-syne), var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-syne), var(--font-ui);
 }
 
 ::selection {
@@ -217,7 +218,7 @@ body {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-ui);
   color: var(--metallic);
 }
 
@@ -246,7 +247,7 @@ body {
 
 .section-heading {
   margin-top: 0.85rem;
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-ui);
   font-size: clamp(1.9rem, 4vw, 3rem);
   font-weight: 600;
   letter-spacing: -0.03em;
@@ -367,7 +368,7 @@ body {
 
 /* Anchored sections clear the fixed header */
 section[id] {
-  scroll-margin-top: 8rem;
+  scroll-margin-top: 6rem;
 }
 
 /* ——— Hero ——— */
@@ -375,7 +376,7 @@ section[id] {
   position: relative;
   isolation: isolate;
   min-height: 100dvh;
-  padding: calc(7.5rem + env(safe-area-inset-top)) 1rem 2.5rem;
+  padding: calc(5.75rem + env(safe-area-inset-top)) 1rem 2.5rem;
   overflow-x: clip;
   overflow-y: visible;
 }
@@ -428,7 +429,7 @@ section[id] {
 .hero-heading {
   margin-top: 1rem;
   overflow: visible;
-  font-family: var(--font-syne), var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-syne), var(--font-ui);
   font-size: clamp(2.6rem, 7vw, 5rem);
   font-weight: 800;
   letter-spacing: -0.04em;
@@ -1891,7 +1892,7 @@ span.chat-panel__input {
 }
 
 .stat-band__value {
-  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-family: var(--font-ui);
   font-size: clamp(2.6rem, 6vw, 4.5rem);
   font-weight: 600;
   letter-spacing: -0.04em;
@@ -2015,286 +2016,6 @@ span.chat-panel__input {
   }
 }
 
-/* ═══════════════ Telemetry layer ═══════════════
-   Grid, mono labels, status bar and numerals borrowed from the industrial
-   telemetry concept. Chrome silver and dark stay; no red accent. */
-
-/* analog grain */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-  z-index: 60;
-  pointer-events: none;
-  opacity: 0.05;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
-}
-
-/* square corners everywhere except knobs/LEDs/dots */
-[class*="rounded"],
-.btn-primary,
-.btn-secondary,
-.hero-meta__chip,
-.chat-panel__chip,
-.chat-panel__send,
-.chat-panel__input,
-.chat-message,
-.chat-panel__whatsapp,
-.chat-panel__error-action,
-.capability-marquee__item {
-  border-radius: 0.2rem !important;
-}
-
-/* status bar + header */
-.status-bar {
-  display: flex;
-  justify-content: space-between;
-  gap: 0.5rem 1.5rem;
-  max-width: 80rem;
-  margin-inline: auto;
-  padding: 0.4rem 0;
-  font-family: var(--font-telemetry);
-  font-size: 0.625rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: color-mix(in srgb, var(--foreground) 72%, transparent);
-  border-bottom: 1px solid var(--grid-line);
-  white-space: nowrap;
-}
-
-.status-bar__live i {
-  display: inline-block;
-  width: 0.45rem;
-  height: 0.45rem;
-  margin-right: 0.35rem;
-  background: var(--signal);
-  vertical-align: 0;
-}
-
-@media (max-width: 760px) {
-  .status-bar__geo,
-  .status-bar__rev {
-    display: none;
-  }
-}
-
-.site-header ul a,
-.site-header ul button,
-.site-header .btn-secondary {
-  font-family: var(--font-telemetry);
-  font-size: 0.72rem;
-  font-weight: 500;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-.brand-descriptor,
-.page-eyebrow,
-.hero-meta__chip,
-.hero-follow,
-.chat-panel__title,
-.chat-panel__subtitle,
-.chat-panel__purpose,
-.chat-panel__chip,
-.chat-panel__footer-whatsapp,
-.explore-band__eyebrow,
-.process-card__code,
-.stat-band__label {
-  font-family: var(--font-telemetry);
-}
-
-.page-eyebrow {
-  font-size: 0.7rem !important;
-  letter-spacing: 0.2em !important;
-}
-
-.page-eyebrow::before,
-.page-eyebrow::after {
-  display: none;
-}
-
-/* buttons: square, mono, chrome kept */
-.btn-primary,
-.btn-secondary {
-  font-family: var(--font-telemetry);
-  font-size: 0.75rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-/* ticker */
-.capability-marquee {
-  background: transparent;
-  border-block: 1px solid var(--grid-line);
-}
-
-.capability-marquee__item {
-  font-family: var(--font-telemetry);
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.18em;
-  gap: 1.25rem;
-  padding: 0.8rem 0.5rem 0.8rem 1rem;
-}
-
-.capability-marquee__dot {
-  width: auto;
-  height: auto;
-  border-radius: 0 !important;
-  background: none;
-  opacity: 0.5;
-  color: var(--metallic);
-}
-
-/* services + process: 1px rule grid, flat cells */
-.services-section__grid,
-.process-section__grid {
-  gap: 1px;
-  background: var(--grid-line);
-  border: 1px solid var(--grid-line);
-}
-
-.card-stack {
-  padding: 0;
-}
-
-.card-stack::before,
-.card-stack::after {
-  display: none;
-}
-
-.service-card,
-.process-card {
-  border: 0;
-  border-radius: 0 !important;
-  box-shadow: none;
-  background: var(--void);
-}
-
-.process-card::after {
-  display: none;
-}
-
-.service-card__top {
-  display: flex;
-  width: 100%;
-  align-items: flex-start;
-  justify-content: space-between;
-}
-
-.service-card__spec {
-  font-family: var(--font-telemetry);
-  font-size: 0.68rem;
-  letter-spacing: 0.16em;
-  color: color-mix(in srgb, var(--foreground) 62%, transparent);
-}
-
-.service-card__icon {
-  border-radius: 0.2rem;
-  box-shadow: none;
-}
-
-.service-card__more {
-  font-family: var(--font-telemetry);
-  font-size: 0.7rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-}
-
-/* giant outlined numerals */
-.process-card {
-  min-height: 21rem;
-}
-
-.process-card__meta {
-  flex-direction: column-reverse;
-  align-items: flex-start;
-  justify-content: flex-end;
-  gap: 0.9rem;
-}
-
-.process-card__n {
-  font-family: var(--font-syne), sans-serif;
-  font-size: clamp(5.5rem, 9vw, 8.5rem);
-  font-weight: 800;
-  line-height: 0.8;
-  letter-spacing: -0.07em;
-  margin-left: -0.05em;
-  color: transparent;
-  -webkit-text-stroke: 1px color-mix(in srgb, var(--metallic) 80%, transparent);
-}
-
-.process-section__grid > li:last-child .process-card__n {
-  -webkit-text-stroke: 0;
-  background-image: linear-gradient(180deg, #ffffff 0%, #dfe3ea 35%, #8e95a2 100%);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.process-card__code {
-  font-size: 0.68rem;
-  letter-spacing: 0.2em;
-}
-
-.process-card__title {
-  margin-top: auto;
-  padding-top: 1.5rem;
-}
-
-/* stats: ruled cells */
-.stat-band {
-  padding-block: 0;
-}
-
-.stat-band__grid {
-  gap: 1px;
-  background: var(--grid-line);
-  border-inline: 1px solid var(--grid-line);
-}
-
-.stat-band__item {
-  padding: 2rem 1.25rem;
-  background: var(--void);
-}
-
-.stat-band__value {
-  font-size: clamp(3rem, 7vw, 6rem);
-}
-
-.stat-band__label {
-  font-size: 0.68rem;
-  letter-spacing: 0.2em;
-}
-
-
-.faq-card {
-  border-radius: 0.2rem !important;
-}
-
-/* footer details */
-.barcode {
-  display: inline-flex;
-  height: 1.25rem;
-  gap: 2px;
-}
-
-.barcode i {
-  display: block;
-  background: var(--metallic);
-  opacity: 0.7;
-}
-
-.barcode i:nth-child(3n + 1) { width: 1px; }
-.barcode i:nth-child(3n + 2) { width: 3px; }
-.barcode i:nth-child(3n) { width: 2px; }
-
-.footer-rev {
-  font-family: var(--font-telemetry);
-  letter-spacing: 0.1em;
-  color: color-mix(in srgb, var(--foreground) 60%, transparent);
-}
-
 /* ═══════════════ Elevation pass ═══════════════ */
 
 /* asymmetric service bento (zig-zag spans) */
@@ -2360,7 +2081,7 @@ body::after {
 /* spec sheet (direct answer) */
 .spec-sheet {
   border-top: 1px solid var(--grid-line);
-  font-family: var(--font-telemetry);
+  font-family: var(--font-ui);
 }
 
 .spec-sheet__row {
@@ -2454,45 +2175,6 @@ body::after {
    The renders have pure-black backgrounds, so `lighten` lets the page colour
    show through and no rectangle is visible. */
 
-.hero-plate-wrap {
-  position: absolute;
-  inset-block: 0;
-  right: 0;
-  width: min(100%, 1400px);
-  pointer-events: none;
-  -webkit-mask-image:
-    linear-gradient(90deg, transparent 0%, #000 34%),
-    linear-gradient(180deg, #000 80%, transparent 100%);
-  mask-image:
-    linear-gradient(90deg, transparent 0%, #000 34%),
-    linear-gradient(180deg, #000 80%, transparent 100%);
-  -webkit-mask-composite: source-in;
-  mask-composite: intersect;
-}
-
-.hero-plate {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 80% 40%;
-  opacity: 0.92;
-  user-select: none;
-}
-
-@media (max-width: 1023px) {
-  .hero-plate-wrap {
-    width: 100%;
-    opacity: 0.2;
-  }
-}
-
-.process-row-art {
-  width: 100%;
-  height: auto;
-  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
-}
-
 .home-cta__panel {
   overflow: hidden;
 }
@@ -2577,5 +2259,444 @@ body::after {
 @media (prefers-reduced-motion: reduce) {
   .service-card--art .service-card__art {
     transition: none;
+  }
+}
+
+/* ═══════════════ Apple layer ═══════════════
+   Soft translucent materials, a system typeface, size-specific tracking,
+   springy but interruptible motion (CSS transitions retarget from the live
+   value), restraint instead of ornament. Chrome silver on dark is the identity. */
+
+body {
+  font-family: var(--font-ui);
+  font-optical-sizing: auto;
+  -webkit-font-smoothing: antialiased;
+  letter-spacing: 0;
+}
+
+/* — type: tighten as it grows, open slightly as it shrinks — */
+.section-heading {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.05;
+  text-wrap: balance;
+}
+
+.page-eyebrow {
+  font-family: var(--font-ui);
+  font-size: 0.9rem !important;
+  font-weight: 600;
+  letter-spacing: 0.01em !important;
+  text-transform: none !important;
+  color: color-mix(in srgb, var(--metallic) 88%, transparent);
+}
+
+.page-eyebrow::before,
+.page-eyebrow::after {
+  display: none;
+}
+
+/* — header: a translucent material over scrolling content — */
+.site-header {
+  background: rgba(12, 12, 15, 0.58) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  border-bottom: 0 !important;
+  box-shadow:
+    inset 0 -1px 0 rgba(255, 255, 255, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.site-header__line {
+  display: none;
+}
+
+.site-header ul a,
+.site-header ul button {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  text-transform: none;
+}
+
+.brand-descriptor {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: color-mix(in srgb, var(--foreground) 68%, transparent);
+}
+
+/* — buttons: pills, instant press, spring release — */
+.btn-primary,
+.btn-secondary {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  border-radius: 999px;
+  transition:
+    transform 0.45s var(--ease-spring),
+    background-color 0.25s ease,
+    box-shadow 0.35s var(--ease-spring);
+}
+
+.btn-primary {
+  background: linear-gradient(180deg, #ffffff 0%, #dfe3ea 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 6px 20px rgba(0, 0, 0, 0.35);
+}
+
+.btn-secondary {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.14);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
+  backdrop-filter: blur(16px) saturate(160%);
+}
+
+.btn-primary:hover,
+.btn-secondary:hover {
+  transform: translateY(-1px);
+}
+
+.btn-primary:active,
+.btn-secondary:active,
+.chat-panel__chip:active,
+.chat-panel__send:active {
+  transform: scale(0.97);
+  transition-duration: 0.1s;
+}
+
+/* — chat + chips — */
+.hero-meta__chip,
+.chat-panel__chip,
+.hero-follow {
+  font-family: var(--font-ui);
+  letter-spacing: 0;
+}
+
+.chat-panel__chip,
+.hero-meta__chip {
+  border-radius: 999px;
+}
+
+.chat-panel__title,
+.chat-panel__subtitle,
+.chat-panel__purpose,
+.chat-panel__footer-whatsapp {
+  font-family: var(--font-ui);
+}
+
+.hero-chat {
+  border-radius: 1.75rem;
+  -webkit-backdrop-filter: blur(24px) saturate(170%);
+  backdrop-filter: blur(24px) saturate(170%);
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    0 30px 80px rgba(0, 0, 0, 0.5);
+}
+
+.chat-message {
+  border-radius: 1.1rem;
+}
+
+.chat-panel__input {
+  border-radius: 0.9rem;
+}
+
+/* — hero triangle: sits across the gap, ~30% behind the headline and
+     ~30% behind the chat panel (width tuned to the column gap) — */
+.hero-studio__inner {
+  --chat-w: 28rem;
+  --tri: 16rem;
+}
+
+@media (min-width: 1280px) {
+  .hero-studio__inner {
+    --chat-w: 32rem;
+    --tri: 18.5rem;
+  }
+}
+
+.hero-triangle {
+  position: absolute;
+  z-index: 0;
+  top: 50%;
+  right: calc(var(--chat-w) - var(--tri) * 0.3);
+  translate: 0 -50%;
+  width: var(--tri);
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.6));
+}
+
+@media (max-width: 1023px) {
+  .hero-triangle {
+    --tri: 15rem;
+    top: 3rem;
+    right: -3rem;
+    translate: none;
+    opacity: 0.4;
+  }
+}
+
+/* — cards: soft translucent material, bigger = thicker — */
+.services-section__grid,
+.process-section__grid {
+  gap: 1rem;
+  background: transparent;
+  border: 0;
+}
+
+.card-stack {
+  padding: 0;
+}
+
+.card-stack::before,
+.card-stack::after,
+.process-card::after {
+  display: none;
+}
+
+.service-card,
+.process-card {
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 1.5rem;
+  background:
+    linear-gradient(160deg, rgba(255, 255, 255, 0.07), rgba(255, 255, 255, 0) 45%),
+    rgba(18, 18, 24, 0.7);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 18px 40px rgba(0, 0, 0, 0.28);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  backdrop-filter: blur(20px) saturate(150%);
+  overflow: hidden;
+}
+
+.service-card {
+  transition:
+    transform 0.6s var(--ease-spring),
+    box-shadow 0.6s var(--ease-spring),
+    border-color 0.3s ease;
+}
+
+.service-card-link:hover .service-card,
+.service-card-link:focus-visible .service-card {
+  transform: translateY(-3px);
+  border-color: rgba(255, 255, 255, 0.2);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 28px 60px rgba(0, 0, 0, 0.42);
+}
+
+.service-card-link:active .service-card {
+  transform: scale(0.985);
+  transition-duration: 0.1s;
+}
+
+.service-card__title,
+.process-card__title {
+  font-family: var(--font-ui);
+  font-size: 1.3rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.service-card__description,
+.process-card__body {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  letter-spacing: 0;
+}
+
+.service-card__more {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.service-card__icon {
+  border-radius: 0.9rem;
+}
+
+/* photo cards: the image blends into the material on the text side */
+.service-card--art .service-card__inner {
+  min-height: 16rem;
+}
+
+/* — process: large, quiet numerals — */
+.process-card {
+  min-height: 17rem;
+}
+
+.process-card__meta {
+  flex-direction: row;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.process-card__n {
+  font-family: var(--font-syne), var(--font-ui);
+  font-size: clamp(3.5rem, 6vw, 4.75rem);
+  line-height: 1;
+  letter-spacing: -0.05em;
+  color: transparent;
+  -webkit-text-stroke: 0;
+  background-image: linear-gradient(180deg, #ffffff 0%, #9aa1ad 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.process-card__code {
+  font-family: var(--font-ui);
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+/* — stats: no rules, just big quiet numbers — */
+.stat-band {
+  border: 0;
+  padding-block: 4rem;
+}
+
+.stat-band__grid {
+  gap: 2rem 1.5rem;
+  background: transparent;
+  border: 0;
+}
+
+.stat-band__item {
+  background: transparent;
+  padding: 0;
+}
+
+.stat-band__value {
+  font-family: var(--font-ui);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+}
+
+.stat-band__label {
+  font-family: var(--font-ui);
+  font-size: 0.9rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+/* — ticker: one dot, sentence case — */
+.capability-marquee {
+  border: 0;
+  background: transparent;
+}
+
+.capability-marquee__item {
+  font-family: var(--font-ui);
+  font-size: 0.95rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
+}
+
+.capability-marquee__dot {
+  font-size: 0;
+  width: 0.3rem;
+  height: 0.3rem;
+  border-radius: 999px;
+  background: var(--metallic);
+  opacity: 0.5;
+}
+
+/* — intro spec sheet, FAQ, CTA — */
+.spec-sheet {
+  font-family: var(--font-ui);
+}
+
+.spec-sheet dt {
+  font-size: 0.8rem;
+  letter-spacing: 0.02em;
+  text-transform: none;
+}
+
+.spec-sheet dd {
+  font-size: 1rem;
+  letter-spacing: 0;
+}
+
+.faq-card {
+  border-radius: 1.25rem;
+}
+
+.home-cta__panel {
+  border-radius: 2rem;
+}
+
+/* — motion: gentle, short travel, spring settle — */
+.js-reveal [data-reveal] {
+  transform: translateY(10px);
+  transition:
+    opacity 0.7s var(--ease-spring),
+    transform 0.8s var(--ease-spring);
+}
+
+.js-reveal [data-reveal].is-revealed {
+  transform: none;
+}
+
+/* — accessibility: gentler, not absent — */
+@media (prefers-reduced-motion: reduce) {
+  .js-reveal [data-reveal] {
+    transform: none;
+    transition: opacity 0.2s ease;
+  }
+  .btn-primary,
+  .btn-secondary,
+  .service-card {
+    transition-duration: 0.01ms;
+  }
+  .btn-primary:hover,
+  .btn-secondary:hover,
+  .service-card-link:hover .service-card {
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .site-header,
+  .hero-chat,
+  .service-card,
+  .process-card,
+  .btn-secondary {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+  }
+  .site-header {
+    background: #0c0c0f !important;
+  }
+  .service-card,
+  .process-card {
+    background: #14141b;
+  }
+  .hero-chat {
+    background: #101015;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .service-card,
+  .process-card,
+  .hero-chat {
+    border-color: rgba(255, 255, 255, 0.5);
   }
 }

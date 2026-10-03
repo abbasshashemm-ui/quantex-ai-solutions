@@ -157,14 +157,8 @@ export function Footer() {
         <div className="mt-6 flex flex-col gap-3 border-t border-white/8 pt-4 text-[0.7rem] text-foreground/70 sm:mt-8 sm:flex-row sm:items-center sm:justify-between sm:pt-5 sm:text-xs">
           <p>
             &copy; {year} {COMPANY.name}
-            <span className="footer-rev" aria-hidden>
-              {" "}
-              / REV 2.6
-            </span>
+
           </p>
-          <span className="barcode" aria-hidden>
-            <i /><i /><i /><i /><i /><i /><i /><i /><i /><i /><i /><i />
-          </span>
           <ul className="flex flex-wrap items-center gap-x-4 gap-y-1">
             {FOOTER_LEGAL.map((item) => (
               <li key={item.href}>

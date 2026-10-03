@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { PROCESS } from "@/lib/site/process";
 
@@ -10,9 +9,9 @@ export function ProcessSection() {
       aria-labelledby="process-heading"
     >
       <div className="mx-auto w-full max-w-7xl">
-        <header className="process-section__header mb-8 grid items-end gap-8 sm:mb-10 lg:grid-cols-[minmax(0,7fr)_minmax(0,5fr)] lg:gap-12" data-reveal>
+        <header className="process-section__header mb-8 sm:mb-10" data-reveal>
           <div>
-          <PageEyebrow>[ 02 / {PROCESS.eyebrow} ]</PageEyebrow>
+          <PageEyebrow>{PROCESS.eyebrow}</PageEyebrow>
           <h2
             id="process-heading"
             className="section-heading mt-3 max-w-2xl text-metallic-gradient"
@@ -23,15 +22,6 @@ export function ProcessSection() {
             {PROCESS.support}
           </p>
           </div>
-          <Image
-            src="/visuals/process-row.webp"
-            alt="Four numbered steel modules with one, two, three and four amber lights lit in turn"
-            width={2000}
-            height={667}
-            quality={92}
-            sizes="(max-width: 1024px) 92vw, 520px"
-            className="process-row-art"
-          />
         </header>
 
         <ol className="process-section__grid">

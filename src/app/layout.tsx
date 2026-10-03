@@ -1,27 +1,13 @@
 import type { Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { JetBrains_Mono, Outfit, Syne } from "next/font/google";
+import { Syne } from "next/font/google";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildGlobalSchemas } from "@/lib/seo/json-ld";
 import { rootMetadata } from "@/lib/seo/metadata";
 import "./globals.css";
-
-const outfit = Outfit({
-  variable: "--font-outfit",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "500", "600"],
-});
-
-const mono = JetBrains_Mono({
-  variable: "--font-mono",
-  subsets: ["latin"],
-  display: "swap",
-  weight: ["400", "500", "700"],
-});
 
 const syne = Syne({
   variable: "--font-syne",
@@ -48,7 +34,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${outfit.variable} ${syne.variable} ${mono.variable} dark h-full antialiased`}
+      className={`${syne.variable} dark h-full antialiased`}
     >
       <head>
         <link rel="llms-txt" href="/llms.txt" />

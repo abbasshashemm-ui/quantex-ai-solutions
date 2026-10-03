@@ -41,10 +41,9 @@ const SERVICE_ART: Record<string, { src: string; alt: string; zoom: number }> = 
 type ServiceCardProps = {
   service: Service;
   index?: number;
-  total?: number;
 };
 
-export function ServiceCard({ service, index, total }: ServiceCardProps) {
+export function ServiceCard({ service, index }: ServiceCardProps) {
   return (
     <Link
       href={`/services/${service.slug}`}
@@ -76,11 +75,7 @@ export function ServiceCard({ service, index, total }: ServiceCardProps) {
             <span className="service-card__icon" aria-hidden>
               <ServiceNavIcon icon={service.nav.icon} className="h-5 w-5" />
             </span>
-            {index ? (
-              <span className="service-card__spec" aria-hidden>
-                {String(index).padStart(2, "0")} / {String(total ?? 0).padStart(2, "0")}
-              </span>
-            ) : null}
+
           </div>
           <h3 className="service-card__title">{service.nav.label}</h3>
           <p className="service-card__description">{service.description}</p>

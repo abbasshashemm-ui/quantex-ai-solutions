@@ -9,9 +9,9 @@ export const metadata: Metadata = {
 
 export default function NotFound() {
   return (
-    <section className="relative min-h-[100dvh] px-4 pb-24 pt-[calc(7.75rem+env(safe-area-inset-top))] sm:px-6 sm:pt-[9.75rem]">
+    <section className="relative min-h-[100dvh] px-4 pb-24 pt-[calc(6rem+env(safe-area-inset-top))] sm:px-6 sm:pt-32">
       <div className="mx-auto max-w-7xl">
-        <PageEyebrow>[ 404 / Not found ]</PageEyebrow>
+        <PageEyebrow>Page not found</PageEyebrow>
         <h1 className="section-heading mt-3 max-w-3xl text-metallic-gradient">
           That page is not on this system.
         </h1>

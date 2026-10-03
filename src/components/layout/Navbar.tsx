@@ -3,7 +3,6 @@ import { CONVERSION_EVENTS } from "@/lib/analytics/events";
 import { SITE_NAV, CONTACT } from "@/lib/site/contact";
 import { BrandLogo } from "./BrandLogo";
 import { MobileNav } from "./MobileNav";
-import { StatusBar } from "./StatusBar";
 import { ServicesNavDropdown } from "./ServicesNavDropdown";
 
 const NAV_LINKS = SITE_NAV.filter(
@@ -13,7 +12,6 @@ const NAV_LINKS = SITE_NAV.filter(
 export function Navbar() {
   return (
     <header className="site-header fixed inset-x-0 top-0 z-50 border-b border-white/8 bg-void/80 px-4 pt-[env(safe-area-inset-top)] backdrop-blur-xl sm:px-6">
-      <StatusBar />
       <nav
         aria-label="Primary"
         className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 py-3 sm:py-3.5"

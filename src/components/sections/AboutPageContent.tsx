@@ -18,7 +18,7 @@ export function AboutPageContent() {
   return (
     <article
       id="about-page"
-      className="about-page relative px-4 pb-24 pt-[calc(7.75rem+env(safe-area-inset-top))] sm:px-6 sm:pt-[9.75rem]"
+      className="about-page relative px-4 pb-24 pt-[calc(6rem+env(safe-area-inset-top))] sm:px-6 sm:pt-32"
     >
       <div className="page-grid-bg absolute inset-0" aria-hidden />
 

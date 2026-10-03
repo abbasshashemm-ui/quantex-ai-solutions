@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { HeroTriangle } from "@/components/sections/HeroTriangle";
 import { HeroChat } from "@/components/chat/HeroChat";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
@@ -12,24 +12,12 @@ export function HeroSection() {
       aria-labelledby="hero-heading"
     >
       <div className="hero-veil" aria-hidden>
-        <div className="hero-plate-wrap">
-          <Image
-            src="/visuals/hero-plate.webp"
-            alt=""
-            width={2000}
-            height={858}
-            priority
-            quality={92}
-            sizes="(max-width: 1023px) 100vw, 1400px"
-            className="hero-plate"
-            aria-hidden
-          />
-        </div>
       </div>
 
       <div className="hero-studio__inner">
+        <HeroTriangle />
         <div className="hero-studio__copy">
-          <PageEyebrow>[ AI Solutions · Beirut ]</PageEyebrow>
+          <PageEyebrow>AI Solutions · Beirut</PageEyebrow>
           <h1 id="hero-heading" className="hero-heading">
             <span className="hero-heading__line">Automate.</span>
             <span className="hero-heading__line">Scale.</span>

@@ -40,7 +40,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
   return (
     <article
       id="service-page"
-      className="service-page relative min-h-[100dvh] px-4 pb-24 pt-[calc(7.75rem+env(safe-area-inset-top))] sm:px-6 sm:pt-[9.75rem]"
+      className="service-page relative min-h-[100dvh] px-4 pb-24 pt-[calc(6rem+env(safe-area-inset-top))] sm:px-6 sm:pt-32"
     >
       <div className="page-grid-bg absolute inset-0" aria-hidden />
       <div className="service-page__glow pointer-events-none absolute inset-0" aria-hidden />
