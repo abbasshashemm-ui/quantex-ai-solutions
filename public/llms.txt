@@ -1,38 +1,45 @@
 # Quantex AI Solutions
 
-> Beirut studio (founded 2024). High-converting websites and on-brand AI chatbots—plus custom software, automation, and technical SEO. Stack: Next.js, Vercel, Gemini, WhatsApp, Core Web Vitals, Google Search Console.
+> Beirut studio (founded 2024) that builds websites that win customers, AI assistants that answer them on your website and WhatsApp, and the custom software, automation and search work behind your business.
 
 ## Company
 
-- Name: Quantex AI Solutions
-- Founder: Abbas Hachem (Full Stack Developer)
+- Name: Quantex AI Solutions (Quantex)
+- Founder: Abbas Hachem (full-stack developer)
 - Location: Beirut, Lebanon
 - Email: abbas@quantexai.solutions
 - WhatsApp: +961 3 642 102
 - LinkedIn: https://www.linkedin.com/company/quantex-ai-solution/
-- Clients: 10+ businesses served
+- Clients: 10+ paying clients
 
 ## Primary pages
 
 - Home: /
 - About: /about
 - Contact: /contact
-- Solutions (services overview): /#solutions
+- Services overview: /#solutions
 - Privacy: /privacy
 
 ## Services
 
-- Custom software development: /services/custom-software-development
-- Business process automation: /services/business-process-automation
-- Custom system architectures: /services/custom-system-architectures
-- High-converting websites: /services/high-converting-websites
+- Websites: /services/high-converting-websites
+- AI assistants and chatbots: /services/custom-intelligent-chatbots
+- Business automation: /services/business-process-automation
+- Custom software: /services/custom-software-development
 - SEO: /services/seo
-- Custom intelligent chatbots: /services/custom-intelligent-chatbots
+- System design: /services/custom-system-architectures
 
 ## What we do
 
-Quantex AI Solutions ships production software from Beirut: Next.js marketing sites on Vercel tuned for Core Web Vitals and Google Search Console, Gemini-powered assistants on WhatsApp and the web, bespoke internal apps, workflow automation, and cloud architecture.
+Quantex builds fast, clear websites that turn visitors into enquiries; AI assistants trained on a business's own information that answer customers on the website and WhatsApp and hand over to a person when needed; automation that removes repetitive work; custom software built around how a business operates; SEO that helps the right customers find you; and system design that plans the technology behind a growing business. The right tools are chosen for each project, and clients own everything that is built.
+
+## How we work
+
+- Plain language from the first call.
+- You own your code, domain, accounts and content.
+- Direct contact with the person doing the work, on WhatsApp or email.
+- Replies within 24 hours.
 
 ## Contact
 
-Preferred contact: /contact or abbas@quantexai.solutions. Typical response within 24 hours.
+Preferred contact: /contact or abbas@quantexai.solutions. We reply within 24 hours.

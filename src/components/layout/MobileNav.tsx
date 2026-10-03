@@ -31,7 +31,7 @@ export function MobileNav() {
     <>
       <button
         type="button"
-        className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-white/15 text-foreground transition-colors hover:border-white/35 hover:bg-white/6 md:hidden"
+        className="relative z-[41] inline-flex min-h-11 min-w-11 items-center justify-center rounded-full border border-line-strong text-foreground transition-colors hover:border-foreground/40 hover:bg-foreground/6 md:hidden"
         aria-expanded={open}
         aria-controls="mobile-nav"
         aria-label={open ? "Close menu" : "Open menu"}
@@ -57,14 +57,14 @@ export function MobileNav() {
       {open ? (
         <div
           id="mobile-nav"
-          className="fixed inset-0 z-40 border-t border-white/10 bg-void/95 backdrop-blur-xl md:hidden"
+          className="fixed inset-0 z-40 border-t border-line bg-void/98 backdrop-blur-xl md:hidden"
           style={{ paddingTop: "calc(4.5rem + env(safe-area-inset-top))" }}
         >
           <ul className="flex flex-col px-4 pb-[env(safe-area-inset-bottom)]">
             <li>
               <Link
                 href="/"
-                className="flex min-h-12 items-center border-b border-white/8 text-sm text-foreground transition-colors hover:bg-white/6 hover:text-foreground"
+                className="flex min-h-12 items-center border-b border-line text-sm text-foreground transition-colors hover:bg-foreground/6 hover:text-foreground"
                 onClick={close}
               >
                 Home
@@ -75,14 +75,23 @@ export function MobileNav() {
               <li key={link.href}>
                 <Link
                   href={link.href}
-                  className="flex min-h-12 items-center border-b border-white/8 text-sm text-foreground transition-colors hover:bg-white/6 hover:text-foreground"
+                  className="flex min-h-12 items-center border-b border-line text-sm text-foreground transition-colors hover:bg-foreground/6 hover:text-foreground"
                   onClick={close}
                 >
                   {link.label}
                 </Link>
               </li>
             ))}
-            <li className="pt-4">
+            <li className="pt-5">
+              <Link
+                href="/contact"
+                className="btn-primary flex w-full"
+                onClick={close}
+              >
+                Start a project
+              </Link>
+            </li>
+            <li className="pt-3">
               <a
                 href={CONTACT.whatsapp}
                 target="_blank"

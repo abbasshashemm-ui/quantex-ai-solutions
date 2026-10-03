@@ -21,11 +21,18 @@ const nextConfig: NextConfig = {
     minimumCacheTTL: 2678400,
     qualities: [70],
   },
+  async redirects() {
+    return [{ source: "/prototype", destination: "/", permanent: false }];
+  },
   async headers() {
     const immutableSources = [
       "/projects/:path*",
       "/quantex-logo.png",
       "/quantex-mark.png",
+      "/quantex-logo-dark.png",
+      "/quantex-mark-dark.png",
+      "/og.png",
+      "/hero/:path*",
       "/favicon-16x16.png",
       "/favicon-32x32.png",
       "/apple-touch-icon.png",

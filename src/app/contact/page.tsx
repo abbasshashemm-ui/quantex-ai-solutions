@@ -11,9 +11,9 @@ export const dynamic = "force-static";
 export const metadata: Metadata = createPageMetadata({
   title: "Contact",
   description:
-    `Contact Quantex AI Solutions about visibility audits, technical SEO, sites, software, and automation. Email ${CONTACT.email} or message on WhatsApp—we respond within 24 hours.`,
+    `Tell Quantex what you need: a website, AI assistant, custom software or automation. Email ${CONTACT.email} or message us on WhatsApp. We reply within 24 hours.`,
   path: "/contact",
-  keywords: ["contact Quantex", "visibility audit", "technical SEO Beirut"],
+  keywords: ["contact Quantex", "web design Beirut", "get a website quote Lebanon"],
 });
 
 export default function ContactPage() {

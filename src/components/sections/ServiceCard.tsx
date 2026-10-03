@@ -8,40 +8,27 @@ type ServiceCardProps = {
 };
 
 export function ServiceCard({ service }: ServiceCardProps) {
+  const index = String(service.index + 1).padStart(2, "0");
+
   return (
     <Link
       href={`/services/${service.slug}`}
       data-interactive
       data-conversion={CONVERSION_EVENTS.SERVICE_CLICK}
       data-conversion-location="services_grid"
-      className="service-card-link card-stack"
+      className="alu-card alu-glass"
     >
-      <article data-service-card className="service-card">
-        <div className="service-card__inner">
-          <span className="service-card__icon" aria-hidden>
-            <ServiceNavIcon icon={service.nav.icon} className="h-5 w-5" />
-          </span>
-          <h3 className="service-card__title">{service.nav.label}</h3>
-          <p className="service-card__description">{service.description}</p>
-          <span className="service-card__more">
-            <span className="service-card__more-label">Learn more</span>
-            <svg
-              className="service-card__more-arrow"
-              viewBox="0 0 24 24"
-              fill="none"
-              aria-hidden
-            >
-              <path
-                d="M5 12h14M13 6l6 6-6 6"
-                stroke="currentColor"
-                strokeWidth="1.75"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </span>
-        </div>
-      </article>
+      <span className="alu-card__top">
+        <span className="alu-card__index">{index}</span>
+        <span className="alu-card__icon" aria-hidden>
+          <ServiceNavIcon icon={service.nav.icon} className="h-5 w-5" />
+        </span>
+      </span>
+      <h3 className="alu-display alu-card__title">{service.nav.label}</h3>
+      <p className="alu-card__body">{service.description}</p>
+      <span className="alu-link">
+        Learn more <span aria-hidden>→</span>
+      </span>
     </Link>
   );
 }

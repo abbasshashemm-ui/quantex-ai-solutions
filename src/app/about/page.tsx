@@ -12,9 +12,9 @@ export const dynamic = "force-static";
 export const metadata: Metadata = createPageMetadata({
   title: "About",
   description:
-    "Beirut-based studio founded in 2024 by full-stack developer Abbas Hachem. Quantex AI Solutions is an AI studio that builds AI assistants, automation, and search-ready websites and software for 10+ businesses.",
+    "Quantex is a Beirut studio founded in 2024 by Abbas Hachem. We build websites, AI assistants, custom software and automation for 10+ paying clients across Lebanon and the region.",
   path: "/about",
-  keywords: ["Abbas Hachem", "Quantex founder", "technical SEO Beirut"],
+  keywords: ["Abbas Hachem", "Quantex founder", "web studio Beirut"],
 });
 
 export default function AboutPage() {

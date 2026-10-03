@@ -1,8 +1,10 @@
-import { CapabilityMarquee } from "@/components/sections/CapabilityMarquee";
-import { DirectAnswer } from "@/components/sections/DirectAnswer";
-import { ExploreBand } from "@/components/sections/ExploreBand";
-import { HeroSection } from "@/components/sections/HeroSection";
-import { HomeCta } from "@/components/sections/HomeCta";
+import { AeoBlock } from "@/components/home/AeoBlock";
+import { AssistantSection } from "@/components/home/AssistantSection";
+import { ClosingCta } from "@/components/home/ClosingCta";
+import { Ticker } from "@/components/home/Ticker";
+import { HeroCopy } from "@/components/hero/HeroCopy";
+import { HeroStage } from "@/components/hero/HeroStage";
+import { FaqSection } from "@/components/sections/FaqSection";
 import { ProcessSection } from "@/components/sections/ProcessSection";
 import { ServicesSection } from "@/components/sections/ServicesSection";
 import { StatBand } from "@/components/sections/StatBand";
@@ -10,14 +12,17 @@ import { StatBand } from "@/components/sections/StatBand";
 export function HomePage() {
   return (
     <>
-      <HeroSection />
-      <DirectAnswer />
-      <CapabilityMarquee />
+      <HeroStage>
+        <HeroCopy />
+      </HeroStage>
+      <Ticker />
+      <AeoBlock />
       <ServicesSection />
+      <AssistantSection />
       <StatBand />
       <ProcessSection />
-      <ExploreBand />
-      <HomeCta />
+      <FaqSection />
+      <ClosingCta />
     </>
   );
 }

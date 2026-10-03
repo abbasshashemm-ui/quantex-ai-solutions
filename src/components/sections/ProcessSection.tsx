@@ -5,33 +5,28 @@ export function ProcessSection() {
   return (
     <section
       id="process"
-      className="process-section relative scroll-mt-24 border-t border-white/8 px-4 py-20 sm:px-6 sm:py-24 md:py-28"
+      className="alu-section"
       aria-labelledby="process-heading"
     >
-      <div className="mx-auto w-full max-w-7xl">
-        <header className="process-section__header mb-8 sm:mb-10" data-reveal>
+      <div className="alu-section__inner">
+        <header data-reveal>
           <PageEyebrow>{PROCESS.eyebrow}</PageEyebrow>
-          <h2
-            id="process-heading"
-            className="section-heading mt-3 max-w-2xl text-metallic-gradient"
-          >
+          <h2 id="process-heading" className="alu-display alu-section__title">
             {PROCESS.heading}
           </h2>
-          <p className="mt-4 text-base leading-[1.75] text-foreground/70 sm:text-[1.0625rem]">
-            {PROCESS.support}
-          </p>
+          <p className="alu-lede">{PROCESS.support}</p>
         </header>
 
-        <ol className="process-section__grid">
+        <ol className="alu-steps">
           {PROCESS.stages.map((stage) => (
-            <li key={stage.n} className="card-stack" data-reveal>
-              <article className="process-card">
-                <p className="process-card__meta">
-                  <span className="process-card__n">{stage.n}</span>
-                  <span className="process-card__code">{stage.code}</span>
+            <li key={stage.n} data-reveal>
+              <article className="alu-step alu-glass h-full">
+                <p className="alu-step__meta">
+                  <span className="alu-step__n">{stage.n}</span>
+                  <span className="alu-step__code">{stage.code}</span>
                 </p>
-                <h3 className="process-card__title">{stage.title}</h3>
-                <p className="process-card__body">{stage.body}</p>
+                <h3 className="alu-display alu-step__title">{stage.title}</h3>
+                <p className="alu-step__body">{stage.body}</p>
               </article>
             </li>
           ))}
