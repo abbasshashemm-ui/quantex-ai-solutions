@@ -10,7 +10,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import type { MotionState } from "./motion";
+import { initialMotionState, type MotionState } from "./motion";
 
 const ChromeScene = dynamic(() => import("./ChromeScene"), { ssr: false });
 const FlatScene = dynamic(() => import("./FlatScene"), { ssr: false });
@@ -25,7 +25,12 @@ type StageMode = "idle" | "webgl" | "flat" | "poster";
 const BEAT_ONE_AT = 0.3;
 const BEAT_TWO_AT = 0.64;
 
-const PAUSE_KEY = "quantex-hero-motion";
+/** Proportions of the triangle inside public/hero/chrome-mark.webp. */
+const POSTER = { heightFrac: 0.713, centreX: 0.5055, centreY: 0.3935 };
+
+/** Breathing room between the sculpture, the header and the headline, in px. */
+const SLOT_GAP = 10;
+const SLOT_MIN = 80;
 
 function supportsWebGL(): boolean {
   try {
@@ -65,7 +70,7 @@ type HeroStageProps = {
 
 export function HeroStage({ children }: HeroStageProps) {
   const stageRef = useRef<HTMLElement>(null);
-  const motion = useRef<MotionState>({ progress: 0, pointerX: 0, pointerY: 0 });
+  const motion = useRef<MotionState>(initialMotionState());
 
   const [mode, setMode] = useState<StageMode>("idle");
   const [ready, setReady] = useState(false);
@@ -73,8 +78,6 @@ export function HeroStage({ children }: HeroStageProps) {
   // Reduced motion keeps the scroll-driven morph (it only moves when the
   // visitor scrolls) but drops autonomous motion and cursor parallax.
   const [calm, setCalm] = useState(false);
-  // The visitor can pause everything with the on-page button.
-  const [paused, setPaused] = useState(false);
 
   const handleReady = useCallback(() => setReady(true), []);
 
@@ -94,19 +97,6 @@ export function HeroStage({ children }: HeroStageProps) {
     );
     setReady(false);
     setMode("poster");
-  }, []);
-
-  const togglePaused = useCallback(() => {
-    setPaused((value) => {
-      const next = !value;
-      try {
-        if (next) window.localStorage.setItem(PAUSE_KEY, "off");
-        else window.localStorage.removeItem(PAUSE_KEY);
-      } catch {
-        // Storage can be blocked; the choice then lasts for this visit only.
-      }
-      return next;
-    });
   }, []);
 
   // Load the animation code after first paint so the headline never waits on it.
@@ -138,18 +128,11 @@ export function HeroStage({ children }: HeroStageProps) {
     };
   }, []);
 
-  // Reduced-motion preference and a saved pause choice.
+  // Reduced-motion preference.
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
     const sync = () => setCalm(reduce.matches);
-    const initial = window.setTimeout(() => {
-      sync();
-      try {
-        if (window.localStorage.getItem(PAUSE_KEY) === "off") setPaused(true);
-      } catch {
-        // Storage can be blocked.
-      }
-    }, 0);
+    const initial = window.setTimeout(sync, 0);
     reduce.addEventListener("change", sync);
     return () => {
       window.clearTimeout(initial);
@@ -174,9 +157,72 @@ export function HeroStage({ children }: HeroStageProps) {
       target = span > 0 ? Math.min(1, Math.max(0, -rect.top / span)) : 0;
     };
 
+    /**
+     * Phones: find the free band between the header and the headline, so the
+     * sculpture always sits clear of both on any screen height.
+     */
+    const measureSlot = () => {
+      const state = motion.current;
+      const visual = stage.querySelector<HTMLElement>(".alu-stage__visual");
+      const content = stage.querySelector<HTMLElement>(".alu-stage__content");
+      const heroBox = stage.querySelector<HTMLElement>(".alu-hero");
+      const eyebrow = stage.querySelector<HTMLElement>(
+        ".alu-hero .page-eyebrow",
+      );
+      const header = document.querySelector<HTMLElement>(".site-header");
+      const phone = window.matchMedia("(max-width: 899px)").matches;
+
+      if (!phone || !visual || !content || !heroBox || !eyebrow || !header) {
+        state.slotSize = 0;
+        state.slotCenter = 0;
+        for (const name of [
+          "--poster-top",
+          "--poster-left",
+          "--poster-width",
+          "--slot-center",
+          "--slot-size",
+        ]) {
+          stage.style.removeProperty(name);
+        }
+        return;
+      }
+
+      const height = visual.clientHeight;
+      const top = header.offsetHeight + SLOT_GAP;
+      // offsetTop is measured from the nearest positioned or transformed
+      // ancestor: the hero for the eyebrow, and the content box for the hero.
+      const bottom =
+        content.offsetTop + heroBox.offsetTop + eyebrow.offsetTop - SLOT_GAP;
+      const size = Math.max(SLOT_MIN, bottom - top);
+      const center = top + size / 2;
+
+      state.slotSize = size / height;
+      state.slotCenter = center / height;
+
+      // The still image uses the same band, so nothing jumps when 3D arrives.
+      // The sculpture's circumscribed circle fills 86% of the band; at rest the
+      // upright triangle is 1.5 radii tall and its box sits 0.25 radii above
+      // the circle's centre.
+      const radius = (size * 0.86) / 2;
+      const posterWidth = (1.5 * radius * 0.95) / POSTER.heightFrac;
+      const boxCentre = center - 0.25 * radius;
+      stage.style.setProperty("--slot-center", `${center}px`);
+      stage.style.setProperty("--slot-size", `${size}px`);
+      stage.style.setProperty("--poster-width", `${posterWidth}px`);
+      stage.style.setProperty(
+        "--poster-top",
+        `${boxCentre + (0.5 - POSTER.centreY) * posterWidth}px`,
+      );
+      stage.style.setProperty(
+        "--poster-left",
+        `${visual.clientWidth / 2 - (POSTER.centreX - 0.5) * posterWidth}px`,
+      );
+    };
+
     const apply = () => {
       stage.style.setProperty("--p", current.toFixed(4));
       motion.current.progress = current;
+      motion.current.activity = Math.min(1, Math.abs(target - current) * 40);
       const beat =
         current < BEAT_ONE_AT ? "hero" : current < BEAT_TWO_AT ? "one" : "two";
       if (stage.dataset.beat !== beat) stage.dataset.beat = beat;
@@ -198,16 +244,16 @@ export function HeroStage({ children }: HeroStageProps) {
 
     const update = () => {
       measure();
-      if (paused) {
-        current = 0;
-        apply();
-        return;
-      }
       if (!running) {
         running = true;
         last = performance.now();
         frame = requestAnimationFrame(tick);
       }
+    };
+
+    const onResize = () => {
+      measureSlot();
+      update();
     };
 
     const onPointerMove = (event: PointerEvent) => {
@@ -223,22 +269,31 @@ export function HeroStage({ children }: HeroStageProps) {
     visibility.observe(stage);
 
     window.addEventListener("scroll", update, { passive: true });
-    window.addEventListener("resize", update);
+    window.addEventListener("resize", onResize);
     window.addEventListener("pointermove", onPointerMove, { passive: true });
+
+    // The headline's height changes when fonts load or the screen rotates.
+    const layout = new ResizeObserver(measureSlot);
+    const hero = stage.querySelector<HTMLElement>(".alu-hero");
+    if (hero) layout.observe(hero);
+    const panel = stage.querySelector<HTMLElement>(".alu-stage__panel");
+    if (panel) layout.observe(panel);
+    measureSlot();
+    void document.fonts?.ready.then(measureSlot);
     update();
 
     return () => {
       cancelAnimationFrame(frame);
       visibility.disconnect();
+      layout.disconnect();
       window.removeEventListener("scroll", update);
-      window.removeEventListener("resize", update);
+      window.removeEventListener("resize", onResize);
       window.removeEventListener("pointermove", onPointerMove);
     };
-  }, [paused]);
+  }, []);
 
-  const heroMode = paused
-    ? "paused"
-    : mode === "webgl"
+  const heroMode =
+    mode === "webgl"
       ? ready
         ? "3d"
         : "loading"
@@ -256,7 +311,6 @@ export function HeroStage({ children }: HeroStageProps) {
       className="alu-stage"
       data-beat="hero"
       data-ready={ready ? "true" : "false"}
-      data-motion={paused ? "off" : "on"}
       data-hero-mode={heroMode}
       aria-label="Quantex AI Solutions"
     >
@@ -281,7 +335,6 @@ export function HeroStage({ children }: HeroStageProps) {
                   motion={motion}
                   active={inView}
                   calm={calm}
-                  paused={paused}
                   onReady={handleReady}
                   onFail={handleWebglFail}
                 />
@@ -295,7 +348,6 @@ export function HeroStage({ children }: HeroStageProps) {
                   motion={motion}
                   active={inView}
                   calm={calm}
-                  paused={paused}
                   onReady={handleReady}
                   onFail={handleFlatFail}
                 />
@@ -309,16 +361,6 @@ export function HeroStage({ children }: HeroStageProps) {
         <div className="alu-stage__progress" aria-hidden>
           <span />
         </div>
-
-        <button
-          type="button"
-          className="alu-motion-toggle"
-          aria-pressed={paused}
-          onClick={togglePaused}
-          data-interactive
-        >
-          {paused ? "Play motion" : "Pause motion"}
-        </button>
       </div>
     </section>
   );

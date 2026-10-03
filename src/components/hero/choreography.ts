@@ -46,11 +46,16 @@ export type PoseInput = {
   settle: number;
   /** 0 removes all autonomous motion (drift, sway, ripple, cursor parallax). */
   ambient: number;
+  /** Accumulated idle spin about the sculpture's own axis, in radians. */
+  spin: number;
   pointerX: number;
   pointerY: number;
   /** Visible world size at the sculpture's distance. */
   viewWidth: number;
   viewHeight: number;
+  /** Phone layout only: the free band above the headline (see MotionState). */
+  slotCenter?: number;
+  slotSize?: number;
 };
 
 export type Pose = {
@@ -73,37 +78,67 @@ export type Pose = {
   satin: number;
 };
 
+/**
+ * On phones the sculpture spins, and a spinning triangle sweeps a circle, so it
+ * is sized by its circumscribed circle (radius = scale) and centred on it.
+ * The fraction leaves room for tube thickness, tilt and perspective.
+ */
+const SLOT_FILL = 0.86;
+
 export function computePose(input: PoseInput): Pose {
   const {
     progress,
     time,
     settle,
     ambient,
+    spin,
     pointerX,
     pointerY,
     viewWidth: width,
     viewHeight: height,
+    slotCenter = 0,
+    slotSize = 0,
   } = input;
 
-  const unsettled = (1 - settle) ** 2;
   const open = smoothstep(0, 0.5, progress);
   const twist = smoothstep(0.45, 1, progress);
-
-  // Sculpture sits right of the copy on wide screens, above it on tall ones.
   const wide = width / height >= 1.15;
-  const fit = wide
-    ? Math.min(height * 0.6, width * 0.36)
-    : Math.min(height * 0.27, width * 0.56);
+
+  // Wide screens keep their original, lively behaviour. The phone layout is
+  // calm: no vertical bobbing, no wild unwinding on load, and it spins gently
+  // only while the page is still.
+  const unsettled = wide ? (1 - settle) ** 2 : 0;
+  const bob = wide ? 1 : 0;
+  const sway = wide ? 1 : 0;
+  const idleSpin = wide ? 0 : spin;
+
+  let fit: number;
+  let y: number;
+  if (wide) {
+    fit = Math.min(height * 0.6, width * 0.36);
+    y = Math.sin(time * 0.9) * height * 0.012 * ambient * bob;
+  } else if (slotSize > 0) {
+    // Fit the sculpture into the measured free band under the header.
+    const slotHeight = slotSize * height;
+    fit = Math.min(slotHeight * SLOT_FILL * 0.75, width * 0.6);
+    y = (0.5 - slotCenter) * height;
+  } else {
+    fit = Math.min(height * 0.27, width * 0.56);
+    y = height * 0.244;
+  }
+  const scale = fit / 1.5;
 
   return {
-    scale: (fit / 1.5) * (0.86 + 0.14 * settle) * (1 + 0.08 * open),
+    scale:
+      scale *
+      (wide ? 0.86 + 0.14 * settle : 0.94 + 0.06 * settle) *
+      (1 + (wide ? 0.08 : 0.04) * open),
     x: wide ? width * (0.215 + 0.03 * open) : 0,
-    y:
-      (wide ? 0 : height * 0.244) +
-      Math.sin(time * 0.9) * height * 0.012 * ambient,
+    y,
     rotationX: 0.06 + 0.2 * open - 0.1 * twist - pointerY * 0.22 * ambient,
     rotationY: -0.12 + 0.8 * open + 0.45 * twist + pointerX * 0.32 * ambient,
-    rotationZ: Math.sin(time * 0.3) * 0.05 * ambient + progress * 0.5,
+    rotationZ:
+      Math.sin(time * 0.3) * 0.05 * ambient * sway + progress * 0.5 + idleSpin,
     spacing: lerp(0.006, wide ? 0.075 : 0.05, open) + unsettled * 0.2,
     twistPerRing: twist * 0.1 + unsettled * 1.7,
     ripple: (0.006 + 0.012 * open) * ambient,
@@ -112,6 +147,9 @@ export function computePose(input: PoseInput): Pose {
     satin: smoothstep(0.55, 1, progress),
   };
 }
+
+/** Idle spin speed in radians per second, easing to zero while the page moves. */
+export const IDLE_SPIN_SPEED = 0.32;
 
 /** Position of one ring along z, including its slow liquid ripple. */
 export function ringZ(index: number, pose: Pose, time: number) {
