@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { CONTACT, SITE_NAV } from "@/lib/site/contact";
 import { ServicesNavDropdown } from "./ServicesNavDropdown";
 
@@ -54,48 +55,51 @@ export function MobileNav() {
         </svg>
       </button>
 
-      {open ? (
-        <div
-          id="mobile-nav"
-          className="fixed inset-0 z-40 border-t border-white/10 bg-void/95 backdrop-blur-xl md:hidden"
-          style={{ paddingTop: "calc(4.5rem + env(safe-area-inset-top))" }}
-        >
-          <ul className="flex flex-col px-4 pb-[env(safe-area-inset-bottom)]">
-            <li>
-              <Link
-                href="/"
-                className="flex min-h-12 items-center border-b border-white/8 text-sm text-foreground transition-colors hover:bg-white/6 hover:text-foreground"
-                onClick={close}
-              >
-                Home
-              </Link>
-            </li>
-            <ServicesNavDropdown variant="mobile" onNavigate={close} />
-            {NAV_LINKS.map((link) => (
-              <li key={link.href}>
-                <Link
-                  href={link.href}
-                  className="flex min-h-12 items-center border-b border-white/8 text-sm text-foreground transition-colors hover:bg-white/6 hover:text-foreground"
-                  onClick={close}
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-            <li className="pt-4">
-              <a
-                href={CONTACT.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-secondary flex w-full"
-                onClick={close}
-              >
-                Chat on WhatsApp
-              </a>
-            </li>
-          </ul>
-        </div>
-      ) : null}
+      {open
+        ? createPortal(
+            <div
+              id="mobile-nav"
+              className="fixed inset-0 z-40 border-t border-white/10 bg-void/95 backdrop-blur-xl md:hidden"
+              style={{ paddingTop: "calc(4.5rem + env(safe-area-inset-top))" }}
+            >
+              <ul className="flex flex-col px-4 pb-[env(safe-area-inset-bottom)]">
+                <li>
+                  <Link
+                    href="/"
+                    className="flex min-h-12 items-center border-b border-white/8 text-sm text-foreground transition-colors hover:bg-white/6 hover:text-foreground"
+                    onClick={close}
+                  >
+                    Home
+                  </Link>
+                </li>
+                <ServicesNavDropdown variant="mobile" onNavigate={close} />
+                {NAV_LINKS.map((link) => (
+                  <li key={link.href}>
+                    <Link
+                      href={link.href}
+                      className="flex min-h-12 items-center border-b border-white/8 text-sm text-foreground transition-colors hover:bg-white/6 hover:text-foreground"
+                      onClick={close}
+                    >
+                      {link.label}
+                    </Link>
+                  </li>
+                ))}
+                <li className="pt-4">
+                  <a
+                    href={CONTACT.whatsapp}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-secondary flex w-full"
+                    onClick={close}
+                  >
+                    Chat on WhatsApp
+                  </a>
+                </li>
+              </ul>
+            </div>,
+            document.body,
+          )
+        : null}
     </>
   );
 }
