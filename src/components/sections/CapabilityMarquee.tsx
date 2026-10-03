@@ -23,7 +23,7 @@ export function CapabilityMarquee() {
             data-interactive
           >
             {item.label}
-            <span className="capability-marquee__dot" />
+            <span className="capability-marquee__dot" aria-hidden>{"///"}</span>
           </Link>
         ))}
       </div>

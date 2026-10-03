@@ -11,7 +11,7 @@ export function ServicesSection() {
     >
       <div className="mx-auto w-full max-w-7xl">
         <header className="services-section__header mb-8 sm:mb-10">
-          <PageEyebrow>Solutions</PageEyebrow>
+          <PageEyebrow>[ 01 / Solutions ]</PageEyebrow>
           <h2
             id="services-heading"
             className="section-heading mt-3 max-w-2xl text-metallic-gradient"
@@ -26,7 +26,7 @@ export function ServicesSection() {
 
         <div className="services-section__grid">
           {SERVICES.map((service) => (
-            <ServiceCard key={service.id} service={service} />
+            <ServiceCard key={service.id} service={service} index={SERVICES.indexOf(service) + 1} total={SERVICES.length} />
           ))}
         </div>
       </div>

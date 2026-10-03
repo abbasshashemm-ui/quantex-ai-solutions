@@ -13,7 +13,9 @@
   --metallic-dim: #7a808c;
   --signal: #5ee9a6;
   --glow: color-mix(in srgb, #c9ced8 24%, transparent);
-  --radius: 0.85rem;
+  --radius: 0.2rem;
+  --grid-line: rgba(255, 255, 255, 0.16);
+  --font-telemetry: var(--font-mono), ui-monospace, "SF Mono", Menlo, Consolas, monospace;
   --amber: #ffa63d;
   --amber-dim: #b9742a;
   /* brushed chrome */
@@ -51,7 +53,7 @@ html {
   color-scheme: dark;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
-  scroll-padding-top: 5.5rem;
+  scroll-padding-top: 7.5rem;
   scroll-behavior: auto;
   scrollbar-width: thin;
   scrollbar-color: var(--accent-dim) var(--void);
@@ -365,7 +367,7 @@ body {
 
 /* Anchored sections clear the fixed header */
 section[id] {
-  scroll-margin-top: 6rem;
+  scroll-margin-top: 8rem;
 }
 
 /* ——— Hero ——— */
@@ -373,7 +375,7 @@ section[id] {
   position: relative;
   isolation: isolate;
   min-height: 100dvh;
-  padding: calc(5.75rem + env(safe-area-inset-top)) 1rem 2.5rem;
+  padding: calc(7.5rem + env(safe-area-inset-top)) 1rem 2.5rem;
   overflow-x: clip;
   overflow-y: visible;
 }
@@ -2264,4 +2266,320 @@ span.chat-panel__input {
   background: url("/quantex-chrome-mark-sm-v2.webp") no-repeat right -4rem center / 22rem auto;
   opacity: 0.12;
   pointer-events: none;
+}
+
+
+/* ═══════════════ Telemetry layer ═══════════════
+   Grid, mono labels, status bar and numerals borrowed from the industrial
+   telemetry concept. Chrome silver and dark stay; no red accent. */
+
+/* analog grain */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  opacity: 0.05;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+}
+
+/* square corners everywhere except knobs/LEDs/dots */
+[class*="rounded"],
+.btn-primary,
+.btn-secondary,
+.hero-meta__chip,
+.chat-panel__chip,
+.chat-panel__send,
+.chat-panel__input,
+.chat-message,
+.chat-panel__whatsapp,
+.chat-panel__error-action,
+.capability-marquee__item {
+  border-radius: 0.2rem !important;
+}
+
+/* status bar + header */
+.status-bar {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem 1.5rem;
+  max-width: 80rem;
+  margin-inline: auto;
+  padding: 0.4rem 0;
+  font-family: var(--font-telemetry);
+  font-size: 0.625rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--foreground) 72%, transparent);
+  border-bottom: 1px solid var(--grid-line);
+  white-space: nowrap;
+}
+
+.status-bar__live i {
+  display: inline-block;
+  width: 0.45rem;
+  height: 0.45rem;
+  margin-right: 0.35rem;
+  background: var(--signal);
+  vertical-align: 0;
+}
+
+@media (max-width: 760px) {
+  .status-bar__geo,
+  .status-bar__rev {
+    display: none;
+  }
+}
+
+.site-header ul a,
+.site-header ul button,
+.site-header .btn-secondary {
+  font-family: var(--font-telemetry);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.brand-descriptor,
+.page-eyebrow,
+.hero-meta__chip,
+.hero-follow,
+.chat-panel__title,
+.chat-panel__subtitle,
+.chat-panel__purpose,
+.chat-panel__chip,
+.chat-panel__footer-whatsapp,
+.explore-band__eyebrow,
+.process-card__code,
+.stat-band__label {
+  font-family: var(--font-telemetry);
+}
+
+.page-eyebrow {
+  font-size: 0.7rem !important;
+  letter-spacing: 0.2em !important;
+}
+
+.page-eyebrow::before,
+.page-eyebrow::after {
+  display: none;
+}
+
+/* buttons: square, mono, chrome kept */
+.btn-primary,
+.btn-secondary {
+  font-family: var(--font-telemetry);
+  font-size: 0.75rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* ticker */
+.capability-marquee {
+  background: transparent;
+  border-block: 1px solid var(--grid-line);
+}
+
+.capability-marquee__item {
+  font-family: var(--font-telemetry);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  gap: 1.25rem;
+  padding: 0.8rem 0.5rem 0.8rem 1rem;
+}
+
+.capability-marquee__dot {
+  width: auto;
+  height: auto;
+  border-radius: 0 !important;
+  background: none;
+  opacity: 0.5;
+  color: var(--metallic);
+}
+
+/* services + process: 1px rule grid, flat cells */
+.services-section__grid,
+.process-section__grid {
+  gap: 1px;
+  background: var(--grid-line);
+  border: 1px solid var(--grid-line);
+}
+
+.card-stack {
+  padding: 0;
+}
+
+.card-stack::before,
+.card-stack::after {
+  display: none;
+}
+
+.service-card,
+.process-card {
+  border: 0;
+  border-radius: 0 !important;
+  box-shadow: none;
+  background: var(--void);
+}
+
+.process-card::after {
+  display: none;
+}
+
+.service-card-link:hover .service-card,
+.service-card-link:focus-visible .service-card {
+  transform: none;
+  box-shadow: none;
+  border-color: transparent;
+  background: linear-gradient(180deg, #f4f5f8 0%, #cfd4dc 100%);
+}
+
+.service-card-link:hover .service-card__title,
+.service-card-link:focus-visible .service-card__title {
+  color: #0b0b0d;
+}
+
+.service-card-link:hover .service-card__description,
+.service-card-link:focus-visible .service-card__description,
+.service-card-link:hover .service-card__spec,
+.service-card-link:focus-visible .service-card__spec {
+  color: #2a2e36;
+}
+
+.service-card-link:hover .service-card__more,
+.service-card-link:focus-visible .service-card__more,
+.service-card-link:hover .service-card__icon,
+.service-card-link:focus-visible .service-card__icon {
+  color: #0b0b0d;
+  border-color: rgba(0, 0, 0, 0.35);
+  background: transparent;
+  box-shadow: none;
+}
+
+.service-card__top {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.service-card__spec {
+  font-family: var(--font-telemetry);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  color: color-mix(in srgb, var(--foreground) 62%, transparent);
+}
+
+.service-card__icon {
+  border-radius: 0.2rem;
+  box-shadow: none;
+}
+
+.service-card__more {
+  font-family: var(--font-telemetry);
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+/* giant outlined numerals */
+.process-card {
+  min-height: 21rem;
+}
+
+.process-card__meta {
+  flex-direction: column-reverse;
+  align-items: flex-start;
+  justify-content: flex-end;
+  gap: 0.9rem;
+}
+
+.process-card__n {
+  font-family: var(--font-syne), sans-serif;
+  font-size: clamp(5.5rem, 9vw, 8.5rem);
+  font-weight: 800;
+  line-height: 0.8;
+  letter-spacing: -0.07em;
+  margin-left: -0.05em;
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--metallic) 80%, transparent);
+}
+
+.process-section__grid > li:last-child .process-card__n {
+  -webkit-text-stroke: 0;
+  background-image: linear-gradient(180deg, #ffffff 0%, #dfe3ea 35%, #8e95a2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.process-card__code {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+}
+
+.process-card__title {
+  margin-top: auto;
+  padding-top: 1.5rem;
+}
+
+/* stats: ruled cells */
+.stat-band {
+  padding-block: 0;
+}
+
+.stat-band__grid {
+  gap: 1px;
+  background: var(--grid-line);
+  border-inline: 1px solid var(--grid-line);
+}
+
+.stat-band__item {
+  padding: 2rem 1.25rem;
+  background: var(--void);
+}
+
+.stat-band__value {
+  font-size: clamp(3rem, 7vw, 6rem);
+}
+
+.stat-band__label {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+}
+
+/* hardware showcase: square it up */
+.device__face,
+.device__screen {
+  border-radius: 0.2rem;
+}
+
+.faq-card {
+  border-radius: 0.2rem !important;
+}
+
+/* footer details */
+.barcode {
+  display: inline-flex;
+  height: 1.25rem;
+  gap: 2px;
+}
+
+.barcode i {
+  display: block;
+  background: var(--metallic);
+  opacity: 0.7;
+}
+
+.barcode i:nth-child(3n + 1) { width: 1px; }
+.barcode i:nth-child(3n + 2) { width: 3px; }
+.barcode i:nth-child(3n) { width: 2px; }
+
+.footer-rev {
+  font-family: var(--font-telemetry);
+  letter-spacing: 0.1em;
+  color: color-mix(in srgb, var(--foreground) 60%, transparent);
 }

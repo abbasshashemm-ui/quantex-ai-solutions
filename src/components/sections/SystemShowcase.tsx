@@ -67,7 +67,7 @@ export function SystemShowcase() {
     >
       <div className="mx-auto max-w-7xl">
         <header className="showcase__header" data-reveal>
-          <PageEyebrow>The stack</PageEyebrow>
+          <PageEyebrow>[ 02 / The stack ]</PageEyebrow>
           <h2
             id="showcase-heading"
             className="section-heading mt-3 max-w-3xl text-metallic-gradient"

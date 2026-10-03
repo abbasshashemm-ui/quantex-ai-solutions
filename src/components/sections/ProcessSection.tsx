@@ -10,7 +10,7 @@ export function ProcessSection() {
     >
       <div className="mx-auto w-full max-w-7xl">
         <header className="process-section__header mb-8 sm:mb-10" data-reveal>
-          <PageEyebrow>{PROCESS.eyebrow}</PageEyebrow>
+          <PageEyebrow>[ 03 / {PROCESS.eyebrow} ]</PageEyebrow>
           <h2
             id="process-heading"
             className="section-heading mt-3 max-w-2xl text-metallic-gradient"
