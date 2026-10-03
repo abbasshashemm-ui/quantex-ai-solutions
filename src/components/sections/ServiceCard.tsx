@@ -6,6 +6,18 @@ import { CONVERSION_EVENTS } from "@/lib/analytics/events";
 import type { Service } from "@/lib/services/data";
 
 const SERVICE_ART: Record<string, { src: string; alt: string }> = {
+  "custom-software-development": {
+    src: "/visuals/svc-01-software.webp",
+    alt: "Steel handheld unit with a screen showing an app wireframe, the Quantex emblem engraved above and four lit navigation buttons",
+  },
+  seo: {
+    src: "/visuals/svc-05-seo.webp",
+    alt: "Steel analysis instrument with a dial gauge, a site-map display in amber and a coiled probe cable",
+  },
+  "custom-intelligent-chatbots": {
+    src: "/visuals/svc-06-chatbots.webp",
+    alt: "Steel cube with the Quantex emblem, an amber signal-bar strip with a knob and a glowing amber side panel",
+  },
   "business-process-automation": {
     src: "/visuals/svc-02-automation.webp",
     alt: "Wall-mounted steel switch box with four orange switches and braided cables",
