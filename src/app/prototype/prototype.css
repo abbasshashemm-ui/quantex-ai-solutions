@@ -119,8 +119,16 @@ body:has(.alu-root) .site-ambient {
   border-radius: inherit;
   pointer-events: none;
   background:
-    linear-gradient(115deg, rgba(255, 255, 255, 0.7) 0%, rgba(255, 255, 255, 0) 30%),
-    radial-gradient(110% 55% at 0% 0%, rgba(255, 255, 255, 0.5), transparent 62%);
+    linear-gradient(
+      115deg,
+      rgba(255, 255, 255, 0.7) 0%,
+      rgba(255, 255, 255, 0) 30%
+    ),
+    radial-gradient(
+      110% 55% at 0% 0%,
+      rgba(255, 255, 255, 0.5),
+      transparent 62%
+    );
 }
 
 /* ——— Header, footer and buttons (shared components, light theme) ——— */
@@ -377,8 +385,8 @@ a:hover > .alu-link span[aria-hidden],
 @media (max-width: 899px) {
   .alu-stage__poster {
     left: 50%;
-    top: 27%;
-    width: min(92vw, 24rem);
+    top: 25.5%;
+    width: min(83vw, 21.6rem);
   }
 
   .alu-stage__shadow {

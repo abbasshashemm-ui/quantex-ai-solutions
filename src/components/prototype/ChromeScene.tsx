@@ -152,7 +152,7 @@ function Sculpture({
     const wide = width / height >= 1.15;
     const fit = wide
       ? Math.min(height * 0.6, width * 0.36)
-      : Math.min(height * 0.3, width * 0.6);
+      : Math.min(height * 0.27, width * 0.56);
     const baseScale = fit / 1.5;
 
     group.scale.setScalar(
@@ -160,7 +160,7 @@ function Sculpture({
     );
     group.position.x = wide ? width * (0.215 + 0.03 * open) : 0;
     group.position.y =
-      (wide ? 0 : height * 0.23) + Math.sin(time * 0.9) * height * 0.012;
+      (wide ? 0 : height * 0.244) + Math.sin(time * 0.9) * height * 0.012;
 
     group.rotation.y =
       -0.12 + 0.8 * open + 0.45 * twist + pointer.current.x * 0.32;
