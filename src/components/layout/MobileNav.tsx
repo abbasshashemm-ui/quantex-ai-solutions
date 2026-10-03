@@ -58,7 +58,7 @@ export function MobileNav() {
         <div
           id="mobile-nav"
           className="fixed inset-0 z-40 border-t border-white/10 bg-void/95 backdrop-blur-xl md:hidden"
-          style={{ paddingTop: "calc(4.5rem + env(safe-area-inset-top))" }}
+          style={{ paddingTop: "calc(3.5rem + env(safe-area-inset-top))" }}
         >
           <ul className="flex flex-col px-4 pb-[env(safe-area-inset-bottom)]">
             <li>
