@@ -1,8 +1,24 @@
 import type { CSSProperties } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { ServiceNavIcon } from "@/components/layout/ServiceNavIcon";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
 import type { Service } from "@/lib/services/data";
+
+const SERVICE_ART: Record<string, { src: string; alt: string }> = {
+  "business-process-automation": {
+    src: "/visuals/svc-02-automation.webp",
+    alt: "Wall-mounted steel switch box with four orange switches and braided cables",
+  },
+  "custom-system-architectures": {
+    src: "/visuals/svc-03-architecture.webp",
+    alt: "Upright steel server blade with a vented side and the engraved Quantex emblem",
+  },
+  "high-converting-websites": {
+    src: "/visuals/svc-04-websites.webp",
+    alt: "Steel desk unit with a screen showing website layout wireframes and three knurled knobs",
+  },
+};
 
 type ServiceCardProps = {
   service: Service;
@@ -21,7 +37,21 @@ export function ServiceCard({ service, index, total }: ServiceCardProps) {
       data-reveal
       style={{ "--i": index ? (index - 1) % 2 : 0 } as CSSProperties}
     >
-      <article data-service-card className="service-card">
+      <article
+        data-service-card
+        className={`service-card${SERVICE_ART[service.slug] ? " service-card--art" : ""}`}
+      >
+        {SERVICE_ART[service.slug] ? (
+          <Image
+            src={SERVICE_ART[service.slug].src}
+            alt={SERVICE_ART[service.slug].alt}
+            width={1400}
+            height={934}
+            quality={85}
+            sizes="(max-width: 640px) 92vw, 560px"
+            className="service-card__art"
+          />
+        ) : null}
         <div className="service-card__inner">
           <div className="service-card__top">
             <span className="service-card__icon" aria-hidden>

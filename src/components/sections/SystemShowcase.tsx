@@ -35,6 +35,17 @@ const DEVICES = [
   },
 ] as const;
 
+const SHOTS: Record<string, { src: string; alt: string }> = {
+  "/services/high-converting-websites": {
+    src: "/visuals/stack-web.webp",
+    alt: "Close-up of a steel device screen showing a minimal website wireframe above four round buttons",
+  },
+  "/services/custom-software-development": {
+    src: "/visuals/stack-software.webp",
+    alt: "Steel control panel with a line chart and amber bar levels on its display, three knurled knobs and the Quantex emblem",
+  },
+};
+
 function Knob() {
   return <span className="device__knob" aria-hidden />;
 }
@@ -121,19 +132,15 @@ export function SystemShowcase() {
 
           {DEVICES.slice(1).map((device) => (
             <article key={device.href} className="device" data-reveal>
-              <div className="device__face">
-                <div className="device__brand device__brand--sm" aria-hidden>
-                  <Image
-                    src="/quantex-chrome-mark-sm-v2.webp"
-                    alt=""
-                    width={64}
-                    height={56}
-                    className="device__mark"
-                  />
-                  <span>QUANTEX</span>
-                </div>
-                <Readout lines={device.lines} />
-              </div>
+              <Image
+                src={SHOTS[device.href].src}
+                alt={SHOTS[device.href].alt}
+                width={1400}
+                height={875}
+                quality={85}
+                sizes="(max-width: 900px) 94vw, 624px"
+                className="device__shot"
+              />
               <div className="device__caption">
                 <h3>{device.title}</h3>
                 <p>{device.body}</p>
