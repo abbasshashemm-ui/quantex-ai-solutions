@@ -40,6 +40,7 @@ Open [http://localhost:3000](http://localhost:3000).
 ## Where things live
 
 - `src/app/globals.css` is the design system: colour tokens, liquid-glass surfaces, buttons, type, and the pinned hero stage.
-- `src/components/hero/` is the 3D hero. `chrome-geometry.ts` rebuilds the logo's triangle spiral as chrome rings, `chrome-environment.ts` builds the studio lighting in code, and `ChromeScene.tsx` drives the scroll morph. `HeroStage.tsx` handles scrolling, loading and fallbacks.
-- `public/hero/chrome-mark.webp` is the still image shown before the 3D loads, and when WebGL is unavailable or reduced motion is on. Regenerate it if the scene's look changes.
+- `src/components/hero/` is the animated hero. `chrome-geometry.ts` rebuilds the logo's triangle spiral as chrome rings, `choreography.ts` holds the animation rules (shared by both renderers), `ChromeScene.tsx` renders them in WebGL, and `FlatScene.tsx` draws the same animation on a 2D canvas for browsers without WebGL. `HeroStage.tsx` handles scrolling, loading, fallbacks and the Pause motion button.
+- Reduced motion keeps the scroll-driven morph (it only moves when the visitor scrolls) but drops autonomous motion and cursor parallax. The Pause motion button stops everything and the choice is remembered.
+- `public/hero/chrome-mark.webp` is the still image shown while the animation loads, and if both renderers fail. Regenerate it if the scene's look changes.
 - Copy lives in `src/lib/` (`services/data.ts`, `site/about.ts`, `site/process.ts`, `seo/faq.ts`) so the chat assistant, metadata and pages stay in sync.

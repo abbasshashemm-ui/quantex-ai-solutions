@@ -10,15 +10,22 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import type { MotionState } from "./ChromeScene";
+import type { MotionState } from "./motion";
 
 const ChromeScene = dynamic(() => import("./ChromeScene"), { ssr: false });
+const FlatScene = dynamic(() => import("./FlatScene"), { ssr: false });
 
-type StageMode = "idle" | "scene" | "fallback";
+/**
+ * webgl: the live 3D scene. flat: the same animation on a 2D canvas, for
+ * browsers without WebGL. poster: a still image, only if both fail.
+ */
+type StageMode = "idle" | "webgl" | "flat" | "poster";
 
 /** Where the scroll progress flips between copy beats. */
 const BEAT_ONE_AT = 0.3;
 const BEAT_TWO_AT = 0.64;
+
+const PAUSE_KEY = "quantex-hero-motion";
 
 function supportsWebGL(): boolean {
   try {
@@ -29,9 +36,12 @@ function supportsWebGL(): boolean {
   }
 }
 
-type BoundaryProps = { onError: () => void; children: ReactNode };
+type BoundaryProps = {
+  onError: (error: unknown) => void;
+  children: ReactNode;
+};
 
-/** A failed WebGL scene should leave the still image, never break the page. */
+/** A failed scene should fall back, never break the page. */
 class SceneBoundary extends Component<BoundaryProps, { failed: boolean }> {
   state = { failed: false };
 
@@ -39,8 +49,8 @@ class SceneBoundary extends Component<BoundaryProps, { failed: boolean }> {
     return { failed: true };
   }
 
-  componentDidCatch() {
-    this.props.onError();
+  componentDidCatch(error: unknown) {
+    this.props.onError(error);
   }
 
   render() {
@@ -60,20 +70,58 @@ export function HeroStage({ children }: HeroStageProps) {
   const [mode, setMode] = useState<StageMode>("idle");
   const [ready, setReady] = useState(false);
   const [inView, setInView] = useState(true);
-  const [reducedMotion, setReducedMotion] = useState(false);
+  // Reduced motion keeps the scroll-driven morph (it only moves when the
+  // visitor scrolls) but drops autonomous motion and cursor parallax.
+  const [calm, setCalm] = useState(false);
+  // The visitor can pause everything with the on-page button.
+  const [paused, setPaused] = useState(false);
 
   const handleReady = useCallback(() => setReady(true), []);
-  const handleFail = useCallback(() => {
+
+  const handleWebglFail = useCallback((reason?: unknown) => {
+    console.warn(
+      "[hero] The 3D scene could not run, so the 2D version is shown.",
+      reason ?? "",
+    );
     setReady(false);
-    setMode("fallback");
+    setMode("flat");
   }, []);
 
-  // Load the 3D code after first paint so the headline is never waiting on it.
+  const handleFlatFail = useCallback((reason?: unknown) => {
+    console.warn(
+      "[hero] The 2D scene could not run, so a still image is shown.",
+      reason ?? "",
+    );
+    setReady(false);
+    setMode("poster");
+  }, []);
+
+  const togglePaused = useCallback(() => {
+    setPaused((value) => {
+      const next = !value;
+      try {
+        if (next) window.localStorage.setItem(PAUSE_KEY, "off");
+        else window.localStorage.removeItem(PAUSE_KEY);
+      } catch {
+        // Storage can be blocked; the choice then lasts for this visit only.
+      }
+      return next;
+    });
+  }, []);
+
+  // Load the animation code after first paint so the headline never waits on it.
   useEffect(() => {
     let cancelled = false;
     const start = () => {
       if (cancelled) return;
-      setMode(supportsWebGL() ? "scene" : "fallback");
+      if (supportsWebGL()) {
+        setMode("webgl");
+        return;
+      }
+      console.warn(
+        "[hero] WebGL is not available in this browser (is hardware acceleration turned off?), so the 2D version is shown.",
+      );
+      setMode("flat");
     };
 
     if (typeof window.requestIdleCallback === "function") {
@@ -90,15 +138,29 @@ export function HeroStage({ children }: HeroStageProps) {
     };
   }, []);
 
-  // Scroll progress, pointer, reduced motion and visibility.
+  // Reduced-motion preference and a saved pause choice.
+  useEffect(() => {
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => setCalm(reduce.matches);
+    const initial = window.setTimeout(() => {
+      sync();
+      try {
+        if (window.localStorage.getItem(PAUSE_KEY) === "off") setPaused(true);
+      } catch {
+        // Storage can be blocked.
+      }
+    }, 0);
+    reduce.addEventListener("change", sync);
+    return () => {
+      window.clearTimeout(initial);
+      reduce.removeEventListener("change", sync);
+    };
+  }, []);
+
+  // Scroll progress, pointer and visibility.
   useEffect(() => {
     const stage = stageRef.current;
     if (!stage) return;
-
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const syncReduced = () => setReducedMotion(reduce.matches);
-    const initialSync = window.setTimeout(syncReduced, 0);
-    reduce.addEventListener("change", syncReduced);
 
     let frame = 0;
     let running = false;
@@ -136,7 +198,7 @@ export function HeroStage({ children }: HeroStageProps) {
 
     const update = () => {
       measure();
-      if (reduce.matches) {
+      if (paused) {
         current = 0;
         apply();
         return;
@@ -167,14 +229,26 @@ export function HeroStage({ children }: HeroStageProps) {
 
     return () => {
       cancelAnimationFrame(frame);
-      window.clearTimeout(initialSync);
-      reduce.removeEventListener("change", syncReduced);
       visibility.disconnect();
       window.removeEventListener("scroll", update);
       window.removeEventListener("resize", update);
       window.removeEventListener("pointermove", onPointerMove);
     };
-  }, []);
+  }, [paused]);
+
+  const heroMode = paused
+    ? "paused"
+    : mode === "webgl"
+      ? ready
+        ? "3d"
+        : "loading"
+      : mode === "flat"
+        ? ready
+          ? "2d"
+          : "loading"
+        : mode === "poster"
+          ? "still"
+          : "loading";
 
   return (
     <section
@@ -182,6 +256,8 @@ export function HeroStage({ children }: HeroStageProps) {
       className="alu-stage"
       data-beat="hero"
       data-ready={ready ? "true" : "false"}
+      data-motion={paused ? "off" : "on"}
+      data-hero-mode={heroMode}
       aria-label="Quantex AI Solutions"
     >
       <div className="alu-stage__panel">
@@ -198,15 +274,30 @@ export function HeroStage({ children }: HeroStageProps) {
             sizes="(max-width: 900px) 80vw, 46vw"
             className="alu-stage__poster"
           />
-          {mode === "scene" ? (
+          {mode === "webgl" ? (
             <div className="alu-stage__canvas">
-              <SceneBoundary onError={handleFail}>
+              <SceneBoundary onError={handleWebglFail}>
                 <ChromeScene
                   motion={motion}
                   active={inView}
-                  reducedMotion={reducedMotion}
+                  calm={calm}
+                  paused={paused}
                   onReady={handleReady}
-                  onFail={handleFail}
+                  onFail={handleWebglFail}
+                />
+              </SceneBoundary>
+            </div>
+          ) : null}
+          {mode === "flat" ? (
+            <div className="alu-stage__canvas">
+              <SceneBoundary onError={handleFlatFail}>
+                <FlatScene
+                  motion={motion}
+                  active={inView}
+                  calm={calm}
+                  paused={paused}
+                  onReady={handleReady}
+                  onFail={handleFlatFail}
                 />
               </SceneBoundary>
             </div>
@@ -218,6 +309,16 @@ export function HeroStage({ children }: HeroStageProps) {
         <div className="alu-stage__progress" aria-hidden>
           <span />
         </div>
+
+        <button
+          type="button"
+          className="alu-motion-toggle"
+          aria-pressed={paused}
+          onClick={togglePaused}
+          data-interactive
+        >
+          {paused ? "Play motion" : "Pause motion"}
+        </button>
       </div>
     </section>
   );

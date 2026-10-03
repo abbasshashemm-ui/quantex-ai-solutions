@@ -18,54 +18,52 @@ import {
   buildRingGeometry,
   buildRingSpecs,
 } from "./chrome-geometry";
-
-/** Values the page writes and the scene reads, without re-rendering React. */
-export type MotionState = {
-  /** Smoothed scroll progress through the pinned stage, 0 to 1. */
-  progress: number;
-  /** Pointer position, -1 to 1 on each axis (y up). */
-  pointerX: number;
-  pointerY: number;
-};
+import {
+  CAMERA_DISTANCE,
+  CAMERA_FOV_DEGREES,
+  REFLECTION_OFFSET,
+  computePose,
+  ringTwist,
+  ringZ,
+} from "./choreography";
+import type { MotionState } from "./motion";
 
 type ChromeSceneProps = {
   motion: RefObject<MotionState>;
   /** Draw frames continuously. When false the loop is paused entirely. */
   active: boolean;
-  /** Visitor prefers reduced motion: one still frame, no scroll morph. */
-  reducedMotion: boolean;
+  /** Reduced motion: keep the scroll-driven morph, drop autonomous motion. */
+  calm: boolean;
+  /** The visitor paused the animation: one still frame in the opening pose. */
+  paused: boolean;
   onReady: () => void;
-  onFail: () => void;
+  onFail: (reason?: unknown) => void;
 };
-
-const MID = (RING_COUNT - 1) / 2;
-
-/** Where the light streaks sit at rest; chosen so the opening pose reads silver. */
-const REFLECTION_OFFSET = 0.9;
 
 const CHROME = new Color("#ffffff");
 const ALUMINIUM = new Color("#d6dae1");
 
-const smoothstep = (edge0: number, edge1: number, value: number) => {
-  const t = MathUtils.clamp((value - edge0) / (edge1 - edge0), 0, 1);
-  return t * t * (3 - 2 * t);
-};
-
 /** Finish settles from mirror chrome to satin aluminium as the tunnel twists. */
 function updateFinish(
   material: MeshStandardMaterial,
-  progress: number,
+  satin: number,
   twist: number,
 ) {
-  material.roughness = MathUtils.lerp(0.07, 0.3, smoothstep(0.55, 1, progress));
+  material.roughness = MathUtils.lerp(0.07, 0.3, satin);
   material.envMapIntensity = MathUtils.lerp(1.1, 0.95, twist);
   material.color.copy(CHROME).lerp(ALUMINIUM, twist);
 }
 
 /** Light streaks slide across the metal; this is most of what reads as liquid. */
-function updateReflections(scene: Scene, time: number, progress: number) {
-  scene.environmentRotation.y = REFLECTION_OFFSET + time * 0.1 + progress * 2.4;
-  scene.environmentRotation.x = Math.sin(time * 0.17) * 0.12;
+function updateReflections(
+  scene: Scene,
+  time: number,
+  progress: number,
+  ambient: number,
+) {
+  scene.environmentRotation.y =
+    REFLECTION_OFFSET + time * 0.1 * ambient + progress * 2.4;
+  scene.environmentRotation.x = Math.sin(time * 0.17) * 0.12 * ambient;
 }
 
 function setEnvironment(scene: Scene, texture: Texture | null) {
@@ -74,16 +72,18 @@ function setEnvironment(scene: Scene, texture: Texture | null) {
 
 function Sculpture({
   motion,
-  reducedMotion,
+  calm,
+  paused,
   onReady,
-}: Pick<ChromeSceneProps, "motion" | "reducedMotion" | "onReady">) {
+}: Pick<ChromeSceneProps, "motion" | "calm" | "paused" | "onReady">) {
   const gl = useThree((state) => state.gl);
   const scene = useThree((state) => state.scene);
   const invalidate = useThree((state) => state.invalidate);
 
   const groupRef = useRef<Group>(null);
   const ringRefs = useRef<(Mesh | null)[]>([]);
-  const intro = useRef(reducedMotion ? 1 : 0);
+  const ambient = calm || paused ? 0 : 1;
+  const intro = useRef(ambient === 0 ? 1 : 0);
   const pointer = useRef({ x: 0, y: 0 });
 
   const geometries = useMemo(() => buildRingSpecs().map(buildRingGeometry), []);
@@ -109,6 +109,11 @@ function Sculpture({
     };
   }, [gl, scene, invalidate, onReady]);
 
+  // Pausing stops the loop, so draw one frame in the still pose.
+  useEffect(() => {
+    invalidate();
+  }, [paused, invalidate]);
+
   useEffect(() => {
     return () => {
       geometries.forEach((geometry) => geometry.dispose());
@@ -127,12 +132,8 @@ function Sculpture({
     if (intro.current < 1) {
       intro.current = Math.min(1, intro.current + dt / 2.1);
     }
-    const settle = 1 - (1 - intro.current) ** 4;
-    const unsettled = (1 - settle) ** 2;
-
-    const progress = reducedMotion ? 0 : input.progress;
-    const open = smoothstep(0, 0.5, progress);
-    const twist = smoothstep(0.45, 1, progress);
+    const settle = ambient === 0 ? 1 : 1 - (1 - intro.current) ** 4;
+    const progress = paused ? 0 : input.progress;
 
     pointer.current.x = MathUtils.damp(
       pointer.current.x,
@@ -147,44 +148,30 @@ function Sculpture({
       dt,
     );
 
-    // Layout: sculpture sits right of the copy on wide screens, above it on tall ones.
-    const { width, height } = state.viewport;
-    const wide = width / height >= 1.15;
-    const fit = wide
-      ? Math.min(height * 0.6, width * 0.36)
-      : Math.min(height * 0.27, width * 0.56);
-    const baseScale = fit / 1.5;
+    const pose = computePose({
+      progress,
+      time,
+      settle,
+      ambient,
+      pointerX: pointer.current.x,
+      pointerY: pointer.current.y,
+      viewWidth: state.viewport.width,
+      viewHeight: state.viewport.height,
+    });
 
-    group.scale.setScalar(
-      baseScale * (0.86 + 0.14 * settle) * (1 + 0.08 * open),
-    );
-    group.position.x = wide ? width * (0.215 + 0.03 * open) : 0;
-    group.position.y =
-      (wide ? 0 : height * 0.244) + Math.sin(time * 0.9) * height * 0.012;
-
-    group.rotation.y =
-      -0.12 + 0.8 * open + 0.45 * twist + pointer.current.x * 0.32;
-    group.rotation.x =
-      0.06 + 0.2 * open - 0.1 * twist - pointer.current.y * 0.22;
-    group.rotation.z = Math.sin(time * 0.3) * 0.05 + progress * 0.5;
-
-    // The morph: a flat logo unfolds into a twisting chrome tunnel.
-    const spacing =
-      MathUtils.lerp(0.006, wide ? 0.075 : 0.05, open) + unsettled * 0.2;
-    const twistPerRing = twist * 0.1 + unsettled * 1.7;
-    const ripple = 0.006 + 0.012 * open;
+    group.scale.setScalar(pose.scale);
+    group.position.set(pose.x, pose.y, 0);
+    group.rotation.set(pose.rotationX, pose.rotationY, pose.rotationZ);
 
     for (let index = 0; index < RING_COUNT; index += 1) {
       const ring = ringRefs.current[index];
       if (!ring) continue;
-      const offset = index - MID;
-      ring.position.z =
-        offset * spacing + Math.sin(time * 0.8 + index * 0.55) * ripple;
-      ring.rotation.z = offset * twistPerRing;
+      ring.position.z = ringZ(index, pose, time);
+      ring.rotation.z = ringTwist(index, pose);
     }
 
-    updateFinish(material, progress, twist);
-    updateReflections(state.scene, time, progress);
+    updateFinish(material, pose.satin, pose.twist);
+    updateReflections(state.scene, time, progress, ambient);
   });
 
   return (
@@ -207,15 +194,21 @@ function Sculpture({
 export default function ChromeScene({
   motion,
   active,
-  reducedMotion,
+  calm,
+  paused,
   onReady,
   onFail,
 }: ChromeSceneProps) {
   return (
     <Canvas
-      frameloop={active ? (reducedMotion ? "demand" : "always") : "never"}
+      frameloop={active ? (paused ? "demand" : "always") : "never"}
       dpr={[1, 1.6]}
-      camera={{ position: [0, 0, 7], fov: 26, near: 0.1, far: 60 }}
+      camera={{
+        position: [0, 0, CAMERA_DISTANCE],
+        fov: CAMERA_FOV_DEGREES,
+        near: 0.1,
+        far: 60,
+      }}
       gl={{
         antialias: true,
         alpha: true,
@@ -226,14 +219,15 @@ export default function ChromeScene({
       onCreated={({ gl }) => {
         gl.domElement.addEventListener("webglcontextlost", (event) => {
           event.preventDefault();
-          onFail();
+          onFail("The graphics context was lost.");
         });
       }}
       aria-hidden
     >
       <Sculpture
         motion={motion}
-        reducedMotion={reducedMotion}
+        calm={calm}
+        paused={paused}
         onReady={onReady}
       />
     </Canvas>

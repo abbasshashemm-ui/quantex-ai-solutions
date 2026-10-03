@@ -22,9 +22,9 @@ const ARC_STEPS = 14;
 const EDGE_STEPS = 4;
 const TUBE_SEGMENTS = 20;
 /** Tube half-width of the outer ring. */
-const TUBE_RADIUS = 0.026;
+export const TUBE_RADIUS = 0.026;
 /** Inner rings thin out slower than they shrink, so they stay visible. */
-const TUBE_FALLOFF = 0.72;
+export const TUBE_FALLOFF = 0.72;
 /** Tube depth relative to its width (1 = round wire). */
 const TUBE_FLATTEN = 0.85;
 
@@ -168,6 +168,11 @@ let cachedLoop: Loop | null = null;
 function getRoundedTriangle(): Loop {
   cachedLoop ??= buildRoundedTriangle();
   return cachedLoop;
+}
+
+/** The unit triangle's outline points, for renderers that draw it directly. */
+export function getUnitLoopPoints(): readonly (readonly [number, number])[] {
+  return getRoundedTriangle().points;
 }
 
 /**
