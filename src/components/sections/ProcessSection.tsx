@@ -28,7 +28,7 @@ export function ProcessSection() {
             alt="Four numbered steel modules with one, two, three and four amber lights lit in turn"
             width={2000}
             height={667}
-            quality={85}
+            quality={92}
             sizes="(max-width: 1024px) 92vw, 520px"
             className="process-row-art"
           />

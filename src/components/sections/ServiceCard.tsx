@@ -5,28 +5,34 @@ import { ServiceNavIcon } from "@/components/layout/ServiceNavIcon";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
 import type { Service } from "@/lib/services/data";
 
-const SERVICE_ART: Record<string, { src: string; alt: string }> = {
+const SERVICE_ART: Record<string, { src: string; alt: string; zoom: number }> = {
   "custom-software-development": {
+    zoom: 1,
     src: "/visuals/svc-01-software.webp",
     alt: "Steel handheld unit with a screen showing an app wireframe, the Quantex emblem engraved above and four lit navigation buttons",
   },
   seo: {
+    zoom: 1,
     src: "/visuals/svc-05-seo.webp",
     alt: "Steel analysis instrument with a dial gauge, a site-map display in amber and a coiled probe cable",
   },
   "custom-intelligent-chatbots": {
+    zoom: 1,
     src: "/visuals/svc-06-chatbots.webp",
     alt: "Steel cube with the Quantex emblem, an amber signal-bar strip with a knob and a glowing amber side panel",
   },
   "business-process-automation": {
+    zoom: 1,
     src: "/visuals/svc-02-automation.webp",
     alt: "Wall-mounted steel switch box with four orange switches and braided cables",
   },
   "custom-system-architectures": {
+    zoom: 1,
     src: "/visuals/svc-03-architecture.webp",
     alt: "Upright steel server blade with a vented side and the engraved Quantex emblem",
   },
   "high-converting-websites": {
+    zoom: 1,
     src: "/visuals/svc-04-websites.webp",
     alt: "Steel desk unit with a screen showing website layout wireframes and three knurled knobs",
   },
@@ -57,11 +63,12 @@ export function ServiceCard({ service, index, total }: ServiceCardProps) {
           <Image
             src={SERVICE_ART[service.slug].src}
             alt={SERVICE_ART[service.slug].alt}
-            width={1400}
-            height={934}
-            quality={85}
+            width={1800}
+            height={1200}
+            quality={92}
             sizes="(max-width: 640px) 92vw, 560px"
             className="service-card__art"
+            style={{ "--zoom": SERVICE_ART[service.slug].zoom } as CSSProperties}
           />
         ) : null}
         <div className="service-card__inner">

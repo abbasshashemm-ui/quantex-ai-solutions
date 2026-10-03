@@ -12,16 +12,19 @@ export function HeroSection() {
       aria-labelledby="hero-heading"
     >
       <div className="hero-veil" aria-hidden>
-        <Image
-          src="/visuals/hero-plate.webp"
-          alt=""
-          fill
-          priority
-          quality={85}
-          sizes="100vw"
-          className="hero-plate"
-          aria-hidden
-        />
+        <div className="hero-plate-wrap">
+          <Image
+            src="/visuals/hero-plate.webp"
+            alt=""
+            width={2000}
+            height={858}
+            priority
+            quality={92}
+            sizes="(max-width: 1023px) 100vw, 1400px"
+            className="hero-plate"
+            aria-hidden
+          />
+        </div>
       </div>
 
       <div className="hero-studio__inner">

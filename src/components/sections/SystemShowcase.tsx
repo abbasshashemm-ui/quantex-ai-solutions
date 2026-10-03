@@ -95,7 +95,7 @@ export function SystemShowcase() {
               alt="Quantex rack panel with an amber display reading assistant online, knowledge grounded, handoff WhatsApp"
               width={2000}
               height={333}
-              quality={85}
+              quality={92}
               sizes="(max-width: 1280px) 94vw, 1280px"
               className="device__photo"
             />
@@ -137,7 +137,7 @@ export function SystemShowcase() {
                 alt={SHOTS[device.href].alt}
                 width={1400}
                 height={875}
-                quality={85}
+                quality={92}
                 sizes="(max-width: 900px) 94vw, 624px"
                 className="device__shot"
               />

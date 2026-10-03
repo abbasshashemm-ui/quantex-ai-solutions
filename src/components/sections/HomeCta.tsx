@@ -11,7 +11,7 @@ export function HomeCta() {
             src="/visuals/cta-dial.webp"
             alt=""
             fill
-            quality={85}
+            quality={92}
             sizes="(max-width: 1024px) 100vw, 1024px"
             className="home-cta__art"
             aria-hidden
