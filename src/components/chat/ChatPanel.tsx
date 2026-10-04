@@ -161,10 +161,8 @@ export function ChatPanel({ variant = "float", onClose }: ChatPanelProps) {
           </div>
         ) : null}
         {showTyping ? (
-          <span className="chat-typing" role="status" aria-label="Typing">
-            <i />
-            <i />
-            <i />
+          <span className="chat-thinking" role="status" aria-label="Typing">
+            <BrandLogo variant="mark" className="h-5 w-auto" />
           </span>
         ) : null}
         {error ? (

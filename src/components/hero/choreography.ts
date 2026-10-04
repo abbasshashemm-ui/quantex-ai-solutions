@@ -57,6 +57,11 @@ export type PoseInput = {
   /** Phone layout only: the free band above the headline (see MotionState). */
   slotCenter?: number;
   slotSize?: number;
+  /**
+   * A small stand-alone sculpture (a section, not the hero): centred in its own
+   * square box, calm like the phone layout, with its own idle spin.
+   */
+  centered?: boolean;
 };
 
 export type Pose = {
@@ -92,11 +97,12 @@ export function computePose(input: PoseInput): Pose {
     viewHeight: height,
     slotCenter = 0,
     slotSize = 0,
+    centered = false,
   } = input;
 
   const open = smoothstep(0, 0.5, progress);
   const twist = smoothstep(0.45, 1, progress);
-  const wide = width / height >= 1.15;
+  const wide = width / height >= 1.15 && !centered;
 
   // Wide screens keep their original, lively behaviour. The phone layout is
   // calm: no vertical bobbing, no wild unwinding on load, and it spins gently
@@ -108,7 +114,11 @@ export function computePose(input: PoseInput): Pose {
 
   let fit: number;
   let y: number;
-  if (wide) {
+  if (centered) {
+    // The circle swept by the spin fills about 82% of the shorter side.
+    fit = Math.min(width, height) * 0.82 * 0.75;
+    y = 0;
+  } else if (wide) {
     fit = Math.min(height * 0.6, width * 0.36);
     y = Math.sin(time * 0.9) * height * 0.012 * ambient * bob;
   } else if (slotSize > 0) {

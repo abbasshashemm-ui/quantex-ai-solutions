@@ -331,6 +331,23 @@ section[id] {
   text-wrap: balance;
 }
 
+.about-page__sculpture {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .about-page__intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 24rem);
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .about-page__sculpture {
+    display: block;
+  }
+}
+
 .page-title--sm {
   font-size: clamp(3rem, 7vw, 5.25rem);
 }
@@ -961,6 +978,44 @@ a:hover > .alu-link span[aria-hidden],
   transform: scale(0.985);
 }
 
+/*
+ * A highlight slides across the glass once on hover, like light moving over the
+ * hero's metal. It sits under the text, and snaps back instantly on leave so it
+ * never sweeps backwards.
+ */
+.alu-card {
+  overflow: hidden;
+}
+
+.alu-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  /* A bright line with a faint dark edge on each side, so it reads on a light card. */
+  background: linear-gradient(
+    105deg,
+    transparent 34%,
+    rgba(11, 12, 15, 0.1) 45%,
+    rgba(255, 255, 255, 0.95) 50%,
+    rgba(11, 12, 15, 0.1) 55%,
+    transparent 66%
+  );
+  transform: translateX(-120%);
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .alu-card:hover::after {
+    opacity: 1;
+    transform: translateX(120%);
+    transition:
+      transform 650ms cubic-bezier(0.77, 0, 0.175, 1),
+      opacity 120ms ease-out;
+  }
+}
+
 .alu-card__top {
   display: flex;
   align-items: center;
@@ -1058,10 +1113,59 @@ a:hover > .alu-link span[aria-hidden],
   }
 }
 
+/* Small stand-alone logo sculptures drawn by MiniSculpture. */
+.mini-sculpture {
+  width: 100%;
+  aspect-ratio: 1;
+}
+
+.alu-process {
+  /* 99 = every step counts as reached; the scroll driver overwrites it. */
+  --step: 99;
+}
+
+.alu-process__sculpture {
+  display: none;
+}
+
 @media (min-width: 1024px) {
-  .alu-steps {
-    grid-template-columns: repeat(4, 1fr);
+  /* Sculpture on the left, steps stacked on the right, so it stays in view. */
+  .alu-process {
+    display: grid;
+    grid-template-columns: minmax(0, 26rem) minmax(0, 1fr);
+    gap: 3.5rem;
+    margin-top: 3rem;
+  }
+
+  .alu-process__sculpture {
+    position: sticky;
+    top: 7.5rem;
+    display: block;
+    align-self: start;
+  }
+
+  .alu-process .alu-steps {
+    grid-template-columns: 1fr;
     gap: 1.25rem;
+    margin-top: 0;
+  }
+
+  .alu-process .alu-step {
+    min-height: 15rem;
+    /* Steps already passed are fully lit; the ones ahead wait quietly. */
+    opacity: clamp(0.55, calc(0.55 + (var(--step) - var(--i) + 1) * 10), 1);
+    transform: translateY(
+      calc((1 - clamp(0, var(--step) - var(--i) + 1, 1)) * 6px)
+    );
+    transition:
+      opacity 240ms var(--ease-out),
+      transform 240ms var(--ease-out);
+  }
+}
+
+@media (min-width: 1024px) and (prefers-reduced-motion: reduce) {
+  .alu-process .alu-step {
+    transform: none;
   }
 }
 
@@ -1586,39 +1690,34 @@ a:hover > .alu-link span[aria-hidden],
   overflow-wrap: anywhere;
 }
 
-.chat-typing {
+.chat-thinking {
   display: inline-flex;
+  width: 1.5rem;
+  height: 1.5rem;
   align-items: center;
-  gap: 0.3rem;
+  justify-content: center;
   padding: 0.25rem 0;
 }
 
-.chat-typing i {
-  width: 0.45rem;
-  height: 0.45rem;
-  border-radius: 50%;
-  background: var(--muted);
-  animation: chat-dot 1.2s ease-in-out infinite;
+.chat-thinking img {
+  width: 1.35rem;
+  height: 1.35rem;
+  animation: chat-spin 1.6s linear infinite;
 }
 
-.chat-typing i:nth-child(2) {
-  animation-delay: 0.15s;
-}
-
-.chat-typing i:nth-child(3) {
-  animation-delay: 0.3s;
-}
-
-@keyframes chat-dot {
+@keyframes chat-pulse {
   0%,
-  60%,
   100% {
-    opacity: 0.3;
-    transform: translateY(0);
+    opacity: 0.4;
   }
-  30% {
+  50% {
     opacity: 1;
-    transform: translateY(-3px);
+  }
+}
+
+@keyframes chat-spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 
@@ -1822,9 +1921,9 @@ span.chat-panel__input {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .chat-typing i {
-    animation: none;
-    opacity: 0.6;
+  /* Reduced motion: the mark pulses softly instead of spinning. */
+  .chat-thinking img {
+    animation: chat-pulse 1.2s ease-in-out infinite;
   }
 }
 
