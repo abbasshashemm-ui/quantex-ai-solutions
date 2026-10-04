@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { MiniSculpture } from "@/components/hero/MiniSculpture";
 import { ServiceNavIcon } from "@/components/layout/ServiceNavIcon";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import {
@@ -24,11 +25,18 @@ export function AboutPageContent() {
           ← Home
         </Link>
 
-        <header className="about-page__hero mt-8 max-w-4xl sm:mt-10">
-          <PageEyebrow>{ABOUT_HERO.eyebrow}</PageEyebrow>
-          <h1 className="alu-display page-title mt-4">{ABOUT_HERO.title}</h1>
-          <p className="alu-lede max-w-2xl">{ABOUT_HERO.lead}</p>
-        </header>
+        <div className="about-page__intro mt-8 sm:mt-10">
+          <header className="about-page__hero">
+            <PageEyebrow>{ABOUT_HERO.eyebrow}</PageEyebrow>
+            <h1 className="alu-display page-title page-title--sm mt-4">
+              {ABOUT_HERO.title}
+            </h1>
+            <p className="alu-lede max-w-2xl">{ABOUT_HERO.lead}</p>
+          </header>
+          <div className="about-page__sculpture">
+            <MiniSculpture mode="idle" />
+          </div>
+        </div>
 
         <section
           className="about-page__story mt-16 sm:mt-24"

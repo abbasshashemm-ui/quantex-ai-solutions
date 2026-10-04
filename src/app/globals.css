@@ -331,6 +331,23 @@ section[id] {
   text-wrap: balance;
 }
 
+.about-page__sculpture {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .about-page__intro {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 24rem);
+    gap: 3rem;
+    align-items: center;
+  }
+
+  .about-page__sculpture {
+    display: block;
+  }
+}
+
 .page-title--sm {
   font-size: clamp(3rem, 7vw, 5.25rem);
 }
@@ -961,6 +978,44 @@ a:hover > .alu-link span[aria-hidden],
   transform: scale(0.985);
 }
 
+/*
+ * A highlight slides across the glass once on hover, like light moving over the
+ * hero's metal. It sits under the text, and snaps back instantly on leave so it
+ * never sweeps backwards.
+ */
+.alu-card {
+  overflow: hidden;
+}
+
+.alu-card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0;
+  /* A bright line with a faint dark edge on each side, so it reads on a light card. */
+  background: linear-gradient(
+    105deg,
+    transparent 34%,
+    rgba(11, 12, 15, 0.1) 45%,
+    rgba(255, 255, 255, 0.95) 50%,
+    rgba(11, 12, 15, 0.1) 55%,
+    transparent 66%
+  );
+  transform: translateX(-120%);
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .alu-card:hover::after {
+    opacity: 1;
+    transform: translateX(120%);
+    transition:
+      transform 650ms cubic-bezier(0.77, 0, 0.175, 1),
+      opacity 120ms ease-out;
+  }
+}
+
 .alu-card__top {
   display: flex;
   align-items: center;
@@ -1058,10 +1113,122 @@ a:hover > .alu-link span[aria-hidden],
   }
 }
 
+/* Small stand-alone logo sculptures drawn by MiniSculpture. */
+.mini-sculpture {
+  width: 100%;
+  aspect-ratio: 1;
+}
+
+.alu-process {
+  /* 99 = every step counts as reached; the scroll driver overwrites it. */
+  --step: 99;
+  --p: 0;
+}
+
+.alu-process__sculpture,
+.alu-process__ticks {
+  display: none;
+}
+
 @media (min-width: 1024px) {
-  .alu-steps {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1.25rem;
+  /* Pinned stage, like the hero: a tall track with a panel that stays in view. */
+  .alu-process-section {
+    padding-block: 0;
+  }
+
+  .alu-process {
+    height: 400vh;
+    height: 400svh;
+  }
+
+  .alu-process__panel {
+    position: sticky;
+    top: 0;
+    display: flex;
+    height: 100vh;
+    height: 100svh;
+    flex-direction: column;
+    justify-content: center;
+    gap: clamp(1.75rem, 6svh, 4rem);
+    padding-block: 5.5rem 2.5rem;
+  }
+
+  .alu-process__panel .alu-section__title {
+    font-size: clamp(2.6rem, min(5.5vw, 9svh), 4.75rem);
+  }
+
+  .alu-process__panel .alu-lede {
+    margin-top: 0.75rem;
+  }
+
+  .alu-process__stage {
+    display: grid;
+    min-height: 0;
+    grid-template-columns: minmax(0, 28rem) minmax(0, 1fr);
+    gap: 3rem;
+    /* Card and triangle share one centre line, side by side. */
+    align-items: center;
+  }
+
+  .alu-process__sculpture {
+    display: block;
+    /* Never taller than the room left under the heading. */
+    width: min(28rem, calc(100svh - 20rem));
+    justify-self: center;
+  }
+
+  /* The steps share one spot and take turns, like the hero's beats. */
+  .alu-process .alu-steps {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin-top: 0;
+  }
+
+  .alu-process .alu-steps__item {
+    grid-area: 1 / 1;
+  }
+
+  .alu-process .alu-step {
+    --u: calc(var(--p) * 4);
+    /* Each step fully fades out before the next fades in, like the hero's beats. */
+    --in: clamp(0, calc((var(--u) - var(--i)) * 5), 1);
+    --out: clamp(0, calc((var(--i) + 1 - var(--u)) * 5), 1);
+    min-height: 15rem;
+    opacity: min(var(--in), var(--out));
+    transform: translateY(
+      calc((1 - var(--in)) * 2rem - (1 - var(--out)) * 2rem)
+    );
+  }
+
+  .alu-process .alu-steps__item:first-child .alu-step {
+    --in: 1;
+  }
+
+  .alu-process .alu-steps__item:last-child .alu-step {
+    --out: 1;
+  }
+
+  /* Four small ticks show where you are, like the hero's progress line. */
+  .alu-process__ticks {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .alu-process__ticks span {
+    width: 2.25rem;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--foreground);
+    opacity: clamp(0.18, calc(0.18 + (var(--step) - var(--i) + 1) * 10), 1);
+    transition: opacity 240ms var(--ease-out);
+  }
+}
+
+@media (min-width: 1024px) and (prefers-reduced-motion: reduce) {
+  .alu-process .alu-step {
+    transform: none;
   }
 }
 
@@ -1586,39 +1753,34 @@ a:hover > .alu-link span[aria-hidden],
   overflow-wrap: anywhere;
 }
 
-.chat-typing {
+.chat-thinking {
   display: inline-flex;
+  width: 1.5rem;
+  height: 1.5rem;
   align-items: center;
-  gap: 0.3rem;
+  justify-content: center;
   padding: 0.25rem 0;
 }
 
-.chat-typing i {
-  width: 0.45rem;
-  height: 0.45rem;
-  border-radius: 50%;
-  background: var(--muted);
-  animation: chat-dot 1.2s ease-in-out infinite;
+.chat-thinking img {
+  width: 1.35rem;
+  height: 1.35rem;
+  animation: chat-spin 1.6s linear infinite;
 }
 
-.chat-typing i:nth-child(2) {
-  animation-delay: 0.15s;
-}
-
-.chat-typing i:nth-child(3) {
-  animation-delay: 0.3s;
-}
-
-@keyframes chat-dot {
+@keyframes chat-pulse {
   0%,
-  60%,
   100% {
-    opacity: 0.3;
-    transform: translateY(0);
+    opacity: 0.4;
   }
-  30% {
+  50% {
     opacity: 1;
-    transform: translateY(-3px);
+  }
+}
+
+@keyframes chat-spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 
@@ -1822,9 +1984,9 @@ span.chat-panel__input {
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .chat-typing i {
-    animation: none;
-    opacity: 0.6;
+  /* Reduced motion: the mark pulses softly instead of spinning. */
+  .chat-thinking img {
+    animation: chat-pulse 1.2s ease-in-out infinite;
   }
 }
 

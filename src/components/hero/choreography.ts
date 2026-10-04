@@ -57,6 +57,11 @@ export type PoseInput = {
   /** Phone layout only: the free band above the headline (see MotionState). */
   slotCenter?: number;
   slotSize?: number;
+  /**
+   * A small stand-alone sculpture (a section, not the hero): centred in its own
+   * square box, calm like the phone layout, with its own idle spin.
+   */
+  centered?: boolean;
 };
 
 export type Pose = {
@@ -92,11 +97,22 @@ export function computePose(input: PoseInput): Pose {
     viewHeight: height,
     slotCenter = 0,
     slotSize = 0,
+    centered = false,
   } = input;
 
-  const open = smoothstep(0, 0.5, progress);
-  const twist = smoothstep(0.45, 1, progress);
-  const wide = width / height >= 1.15;
+  // The hero has three beats, so its morph is front-loaded. A stand-alone
+  // sculpture (the four process steps) spreads its changes over the whole
+  // progress range, so each quarter is a clearly different shape.
+  const open = centered
+    ? smoothstep(0, 0.8, progress)
+    : smoothstep(0, 0.5, progress);
+  const twist = centered
+    ? smoothstep(0.2, 1, progress)
+    : smoothstep(0.45, 1, progress);
+  const satin = centered
+    ? smoothstep(0.4, 1, progress)
+    : smoothstep(0.55, 1, progress);
+  const wide = width / height >= 1.15 && !centered;
 
   // Wide screens keep their original, lively behaviour. The phone layout is
   // calm: no vertical bobbing, no wild unwinding on load, and it spins gently
@@ -108,7 +124,11 @@ export function computePose(input: PoseInput): Pose {
 
   let fit: number;
   let y: number;
-  if (wide) {
+  if (centered) {
+    // The circle swept by the spin fills about 82% of the shorter side.
+    fit = Math.min(width, height) * 0.82 * 0.75;
+    y = 0;
+  } else if (wide) {
     fit = Math.min(height * 0.6, width * 0.36);
     y = Math.sin(time * 0.9) * height * 0.012 * ambient * bob;
   } else if (slotSize > 0) {
@@ -132,13 +152,15 @@ export function computePose(input: PoseInput): Pose {
     rotationX: 0.06 + 0.2 * open - 0.1 * twist - pointerY * 0.22 * ambient,
     rotationY: -0.12 + 0.8 * open + 0.45 * twist + pointerX * 0.32 * ambient,
     rotationZ:
-      Math.sin(time * 0.3) * 0.05 * ambient * sway + progress * 0.5 + idleSpin,
+      Math.sin(time * 0.3) * 0.05 * ambient * sway +
+      progress * (centered ? 5.2 : 0.5) +
+      idleSpin,
     spacing: lerp(0.006, wide ? 0.075 : 0.05, open) + unsettled * 0.2,
     twistPerRing: twist * 0.1 + unsettled * 1.7,
     ripple: (0.006 + 0.012 * open) * ambient,
     open,
     twist,
-    satin: smoothstep(0.55, 1, progress),
+    satin,
   };
 }
 

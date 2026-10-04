@@ -31,6 +31,8 @@ type FlatSceneProps = {
   motion: RefObject<MotionState>;
   active: boolean;
   calm: boolean;
+  /** "centered" draws a small stand-alone sculpture instead of the hero layout. */
+  layout?: "hero" | "centered";
   onReady: () => void;
   onFail: (reason?: unknown) => void;
 };
@@ -92,6 +94,7 @@ export default function FlatScene({
   motion,
   active,
   calm,
+  layout = "hero",
   onReady,
   onFail,
 }: FlatSceneProps) {
@@ -167,6 +170,7 @@ export default function FlatScene({
         settle,
         ambient,
         spin: state.spinAngle,
+        centered: layout === "centered",
         slotCenter: input.slotCenter,
         slotSize: input.slotSize,
         pointerX: state.pointerX,
@@ -282,7 +286,7 @@ export default function FlatScene({
       cancelAnimationFrame(frame);
       observer.disconnect();
     };
-  }, [active, calm, motion, onReady, onFail]);
+  }, [active, calm, layout, motion, onReady, onFail]);
 
   return <canvas ref={canvasRef} className="alu-flat" aria-hidden />;
 }
