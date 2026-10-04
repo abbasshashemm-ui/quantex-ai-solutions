@@ -160,7 +160,7 @@ export function ContactSection() {
             <div className="alu-glass page-panel">
               <div className="flex gap-3">
                 <span
-                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-signal/40 bg-white/60 text-sm text-signal"
+                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-signal/40 bg-surface-elevated/60 text-sm text-signal"
                   aria-hidden
                 >
                   ✓
