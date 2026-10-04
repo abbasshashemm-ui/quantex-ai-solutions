@@ -100,8 +100,18 @@ export function computePose(input: PoseInput): Pose {
     centered = false,
   } = input;
 
-  const open = smoothstep(0, 0.5, progress);
-  const twist = smoothstep(0.45, 1, progress);
+  // The hero has three beats, so its morph is front-loaded. A stand-alone
+  // sculpture (the four process steps) spreads its changes over the whole
+  // progress range, so each quarter is a clearly different shape.
+  const open = centered
+    ? smoothstep(0, 0.8, progress)
+    : smoothstep(0, 0.5, progress);
+  const twist = centered
+    ? smoothstep(0.2, 1, progress)
+    : smoothstep(0.45, 1, progress);
+  const satin = centered
+    ? smoothstep(0.4, 1, progress)
+    : smoothstep(0.55, 1, progress);
   const wide = width / height >= 1.15 && !centered;
 
   // Wide screens keep their original, lively behaviour. The phone layout is
@@ -142,13 +152,15 @@ export function computePose(input: PoseInput): Pose {
     rotationX: 0.06 + 0.2 * open - 0.1 * twist - pointerY * 0.22 * ambient,
     rotationY: -0.12 + 0.8 * open + 0.45 * twist + pointerX * 0.32 * ambient,
     rotationZ:
-      Math.sin(time * 0.3) * 0.05 * ambient * sway + progress * 0.5 + idleSpin,
+      Math.sin(time * 0.3) * 0.05 * ambient * sway +
+      progress * (centered ? 5.2 : 0.5) +
+      idleSpin,
     spacing: lerp(0.006, wide ? 0.075 : 0.05, open) + unsettled * 0.2,
     twistPerRing: twist * 0.1 + unsettled * 1.7,
     ripple: (0.006 + 0.012 * open) * ambient,
     open,
     twist,
-    satin: smoothstep(0.55, 1, progress),
+    satin,
   };
 }
 

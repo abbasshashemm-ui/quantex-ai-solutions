@@ -1149,7 +1149,7 @@ a:hover > .alu-link span[aria-hidden],
     height: 100svh;
     flex-direction: column;
     justify-content: center;
-    gap: clamp(1rem, 3svh, 2.5rem);
+    gap: clamp(1.75rem, 6svh, 4rem);
     padding-block: 5.5rem 2.5rem;
   }
 
@@ -1166,6 +1166,7 @@ a:hover > .alu-link span[aria-hidden],
     min-height: 0;
     grid-template-columns: minmax(0, 28rem) minmax(0, 1fr);
     gap: 3rem;
+    /* Card and triangle share one centre line, side by side. */
     align-items: center;
   }
 
@@ -1184,10 +1185,8 @@ a:hover > .alu-link span[aria-hidden],
     margin-top: 0;
   }
 
-  html.js-reveal .alu-process .alu-steps__item {
+  .alu-process .alu-steps__item {
     grid-area: 1 / 1;
-    opacity: 1;
-    transform: none;
   }
 
   .alu-process .alu-step {

@@ -41,7 +41,6 @@ export function ProcessSection() {
                 {PROCESS.stages.map((stage, index) => (
                   <li
                     key={stage.n}
-                    data-reveal
                     className="alu-steps__item"
                     style={{ "--i": index } as React.CSSProperties}
                   >
