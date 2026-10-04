@@ -1122,44 +1122,108 @@ a:hover > .alu-link span[aria-hidden],
 .alu-process {
   /* 99 = every step counts as reached; the scroll driver overwrites it. */
   --step: 99;
+  --p: 0;
 }
 
-.alu-process__sculpture {
+.alu-process__sculpture,
+.alu-process__ticks {
   display: none;
 }
 
 @media (min-width: 1024px) {
-  /* Sculpture on the left, steps stacked on the right, so it stays in view. */
+  /* Pinned stage, like the hero: a tall track with a panel that stays in view. */
+  .alu-process-section {
+    padding-block: 0;
+  }
+
   .alu-process {
+    height: 400vh;
+    height: 400svh;
+  }
+
+  .alu-process__panel {
+    position: sticky;
+    top: 0;
+    display: flex;
+    height: 100vh;
+    height: 100svh;
+    flex-direction: column;
+    justify-content: center;
+    gap: clamp(1rem, 3svh, 2.5rem);
+    padding-block: 5.5rem 2.5rem;
+  }
+
+  .alu-process__panel .alu-section__title {
+    font-size: clamp(2.6rem, min(5.5vw, 9svh), 4.75rem);
+  }
+
+  .alu-process__panel .alu-lede {
+    margin-top: 0.75rem;
+  }
+
+  .alu-process__stage {
     display: grid;
-    grid-template-columns: minmax(0, 26rem) minmax(0, 1fr);
-    gap: 3.5rem;
-    margin-top: 3rem;
+    min-height: 0;
+    grid-template-columns: minmax(0, 28rem) minmax(0, 1fr);
+    gap: 3rem;
+    align-items: center;
   }
 
   .alu-process__sculpture {
-    position: sticky;
-    top: 7.5rem;
     display: block;
-    align-self: start;
+    /* Never taller than the room left under the heading. */
+    width: min(28rem, calc(100svh - 20rem));
+    justify-self: center;
   }
 
+  /* The steps share one spot and take turns, like the hero's beats. */
   .alu-process .alu-steps {
+    display: grid;
     grid-template-columns: 1fr;
-    gap: 1.25rem;
+    gap: 0;
     margin-top: 0;
   }
 
+  html.js-reveal .alu-process .alu-steps__item {
+    grid-area: 1 / 1;
+    opacity: 1;
+    transform: none;
+  }
+
   .alu-process .alu-step {
+    --u: calc(var(--p) * 4);
+    /* Each step fully fades out before the next fades in, like the hero's beats. */
+    --in: clamp(0, calc((var(--u) - var(--i)) * 5), 1);
+    --out: clamp(0, calc((var(--i) + 1 - var(--u)) * 5), 1);
     min-height: 15rem;
-    /* Steps already passed are fully lit; the ones ahead wait quietly. */
-    opacity: clamp(0.55, calc(0.55 + (var(--step) - var(--i) + 1) * 10), 1);
+    opacity: min(var(--in), var(--out));
     transform: translateY(
-      calc((1 - clamp(0, var(--step) - var(--i) + 1, 1)) * 6px)
+      calc((1 - var(--in)) * 2rem - (1 - var(--out)) * 2rem)
     );
-    transition:
-      opacity 240ms var(--ease-out),
-      transform 240ms var(--ease-out);
+  }
+
+  .alu-process .alu-steps__item:first-child .alu-step {
+    --in: 1;
+  }
+
+  .alu-process .alu-steps__item:last-child .alu-step {
+    --out: 1;
+  }
+
+  /* Four small ticks show where you are, like the hero's progress line. */
+  .alu-process__ticks {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .alu-process__ticks span {
+    width: 2.25rem;
+    height: 2px;
+    border-radius: 2px;
+    background: var(--foreground);
+    opacity: clamp(0.18, calc(0.18 + (var(--step) - var(--i) + 1) * 10), 1);
+    transition: opacity 240ms var(--ease-out);
   }
 }
 

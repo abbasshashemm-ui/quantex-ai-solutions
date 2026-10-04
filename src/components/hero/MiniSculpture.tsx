@@ -17,6 +17,11 @@ type MiniSculptureProps = {
   minWidth?: number;
   /** Scroll mode: how many steps the track has. Sets --step on the track. */
   steps?: number;
+  /**
+   * Scroll mode: the track is a tall pinned stage, like the hero. Progress runs
+   * from 0 to 1 while it is pinned, and is also written to the track as --p.
+   */
+  pinned?: boolean;
   className?: string;
 };
 
@@ -28,6 +33,7 @@ export function MiniSculpture({
   mode,
   minWidth = 1024,
   steps = 0,
+  pinned = false,
   className = "",
 }: MiniSculptureProps) {
   const boxRef = useRef<HTMLDivElement>(null);
@@ -86,6 +92,11 @@ export function MiniSculpture({
     const measure = () => {
       const rect = track.getBoundingClientRect();
       const viewport = window.innerHeight;
+      if (pinned) {
+        const pinnedSpan = Math.max(1, rect.height - viewport);
+        target = Math.min(1, Math.max(0, -rect.top / pinnedSpan));
+        return;
+      }
       // 0 as the track's top reaches 60% of the screen, 1 as its bottom
       // reaches 80%, so every step has been passed by the end.
       const span = Math.max(1, rect.height - viewport * 0.2);
@@ -95,6 +106,7 @@ export function MiniSculpture({
     const apply = () => {
       motion.current.progress = current;
       motion.current.activity = Math.min(1, Math.abs(target - current) * 40);
+      if (pinned) track.style.setProperty("--p", current.toFixed(4));
       if (steps > 0) {
         const step = Math.min(steps - 1, Math.floor(current * steps));
         if (step !== lastStep) {
@@ -137,8 +149,9 @@ export function MiniSculpture({
       window.removeEventListener("scroll", update);
       window.removeEventListener("resize", update);
       track.style.removeProperty("--step");
+      track.style.removeProperty("--p");
     };
-  }, [enabled, mode, steps]);
+  }, [enabled, mode, steps, pinned]);
 
   return (
     <div ref={boxRef} className={`mini-sculpture ${className}`} aria-hidden>
