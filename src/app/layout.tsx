@@ -7,6 +7,7 @@ import { MainLayout } from "@/components/layout/MainLayout";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { buildGlobalSchemas } from "@/lib/seo/json-ld";
 import { rootMetadata } from "@/lib/seo/metadata";
+import { THEME_COLOR, THEME_INIT_SCRIPT } from "@/lib/theme/theme";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -29,8 +30,8 @@ export const viewport: Viewport = {
   initialScale: 1,
   viewportFit: "cover",
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#e6e9ed" },
-    { media: "(prefers-color-scheme: dark)", color: "#0c0e12" },
+    { media: "(prefers-color-scheme: light)", color: THEME_COLOR.light },
+    { media: "(prefers-color-scheme: dark)", color: THEME_COLOR.dark },
   ],
 };
 
@@ -48,6 +49,7 @@ export default function RootLayout({
       className={`${outfit.variable} ${condensed.variable} h-full antialiased`}
     >
       <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <link rel="llms-txt" href="/llms.txt" />
       </head>
       <body

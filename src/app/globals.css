@@ -2012,40 +2012,38 @@ span.chat-panel__input {
 
 /*
  * ——— Dark theme ———
- * Follows the device setting only. Light is the default, so anything that does
- * not ask for dark (or cannot say) keeps the light aluminium above. This block
- * sits last on purpose: it re-skins the same classes with graphite metal and
+ * Applied when <html data-theme="dark">. An inline script in the document head
+ * sets that attribute before first paint: the visitor's saved choice if there
+ * is one, otherwise the device setting. Light is the default, so anything that
+ * does not ask for dark keeps the light aluminium above. This block sits last
+ * on purpose: it re-skins the same classes with graphite metal and
  * light-on-dark glass, and changes nothing else.
  */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --void: #0c0e12;
-    --surface: #13161b;
-    --surface-elevated: #1a1e25;
-    --border: #2b313a;
-    --foreground: #eef0f4;
-    --muted: #a3abb7;
-    --accent: #d9dde4;
-    --accent-dim: #8d95a1;
-    --metallic: #a3abb7;
-    --metallic-dim: #6b727e;
-    --signal: #47c99a;
-    --glow: color-mix(in srgb, #eef0f4 10%, transparent);
-    --line: rgba(238, 240, 244, 0.12);
-    --line-strong: rgba(238, 240, 244, 0.24);
-    --ink-soft: #d3d8e0;
-    /* the brush grain is much finer on the bright silver button */
-    --chrome-brush: repeating-linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.1) 0 1px,
-      rgba(0, 0, 0, 0.015) 1px 2px,
-      transparent 2px 4px
-    );
-  }
+:root[data-theme="dark"] {
+  --void: #0c0e12;
+  --surface: #13161b;
+  --surface-elevated: #1a1e25;
+  --border: #2b313a;
+  --foreground: #eef0f4;
+  --muted: #a3abb7;
+  --accent: #d9dde4;
+  --accent-dim: #8d95a1;
+  --metallic: #a3abb7;
+  --metallic-dim: #6b727e;
+  --signal: #47c99a;
+  --glow: color-mix(in srgb, #eef0f4 10%, transparent);
+  --line: rgba(238, 240, 244, 0.12);
+  --line-strong: rgba(238, 240, 244, 0.24);
+  --ink-soft: #d3d8e0;
+  /* the brush grain is much finer on the bright silver button */
+  --chrome-brush: repeating-linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.1) 0 1px,
+    rgba(0, 0, 0, 0.015) 1px 2px,
+    transparent 2px 4px
+  );
 
-  html {
-    color-scheme: dark;
-  }
+  color-scheme: dark;
 
   body::before {
     background:
@@ -2322,4 +2320,52 @@ span.chat-panel__input {
       inset 0 1px 0 rgba(255, 255, 255, 0.18),
       0 28px 60px -20px rgba(0, 0, 0, 0.9) !important;
   }
+}
+
+/* Logo artwork: the dark-ink file in light, the chrome file in dark. */
+.brand-logo-dark {
+  display: none;
+}
+
+:root[data-theme="dark"] .brand-logo-light {
+  display: none;
+}
+
+:root[data-theme="dark"] .brand-logo-dark {
+  display: block;
+}
+
+/* Light / dark switch in the header. */
+.theme-toggle {
+  display: inline-flex;
+  min-width: 2.75rem;
+  min-height: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background: transparent;
+  color: var(--foreground);
+  cursor: pointer;
+  transition:
+    transform 0.18s var(--ease-out),
+    background-color 0.18s ease,
+    border-color 0.18s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.theme-toggle:active {
+  transform: scale(0.94);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .theme-toggle:hover {
+    border-color: color-mix(in srgb, var(--foreground) 40%, transparent);
+    background: color-mix(in srgb, var(--foreground) 6%, transparent);
+  }
+}
+
+.theme-toggle__icon {
+  width: 1.2rem;
+  height: 1.2rem;
 }

@@ -42,17 +42,24 @@ export function BrandLogo({
     quality: 70,
     priority,
   };
-  const { props: dark } = getImageProps({ ...shared, src: art.dark });
+  const { props: dark } = getImageProps({
+    ...shared,
+    priority: false,
+    src: art.dark,
+  });
   const { props: light } = getImageProps({ ...shared, src: art.light });
+  const size = className ?? art.className;
 
+  // Both are in the page and CSS shows the one for the current theme (the
+  // theme can change without a reload, which <picture> could not follow).
+  // Only the light file is preloaded; the dark one is lazy, so it is fetched
+  // only once it is shown.
+  /* eslint-disable @next/next/no-img-element -- props come from getImageProps */
   return (
-    <picture>
-      <source
-        media="(prefers-color-scheme: dark)"
-        srcSet={dark.srcSet}
-        sizes={dark.sizes}
-      />
-      <img {...light} alt={art.alt} className={className ?? art.className} />
-    </picture>
+    <>
+      <img {...light} alt={art.alt} className={`${size} brand-logo-light`} />
+      <img {...dark} alt="" className={`${size} brand-logo-dark`} />
+    </>
   );
+  /* eslint-enable @next/next/no-img-element */
 }
