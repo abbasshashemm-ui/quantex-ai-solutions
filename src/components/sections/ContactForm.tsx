@@ -25,7 +25,7 @@ const initialState: ContactFormFields = {
 const MAX_WHATSAPP_URL_LENGTH = 2048;
 
 const inputClassName =
-  "mt-1.5 block w-full rounded-xl border border-line-strong bg-white/70 px-3.5 py-2.5 text-sm text-foreground outline-none transition placeholder:text-foreground/55 focus:border-foreground focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--foreground)_12%,transparent)]";
+  "mt-1.5 block w-full rounded-xl border border-line-strong bg-surface-elevated/70 px-3.5 py-2.5 text-sm text-foreground outline-none transition placeholder:text-foreground/55 focus:border-foreground focus:shadow-[0_0_0_3px_color-mix(in_srgb,var(--foreground)_12%,transparent)]";
 
 function buildWhatsAppBody(data: ContactFormFields) {
   return [

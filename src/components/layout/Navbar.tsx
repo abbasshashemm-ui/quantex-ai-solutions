@@ -3,6 +3,7 @@ import { CONVERSION_EVENTS } from "@/lib/analytics/events";
 import { SITE_NAV } from "@/lib/site/contact";
 import { BrandLogo } from "./BrandLogo";
 import { MobileNav } from "./MobileNav";
+import { ThemeToggle } from "./ThemeToggle";
 import { ServicesNavDropdown } from "./ServicesNavDropdown";
 
 const NAV_LINKS = SITE_NAV.filter(
@@ -51,6 +52,7 @@ export function Navbar() {
           >
             Start a project
           </Link>
+          <ThemeToggle />
           <MobileNav />
         </div>
       </nav>
