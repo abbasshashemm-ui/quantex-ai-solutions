@@ -155,8 +155,6 @@ section[id] {
     rgba(255, 255, 255, 0.22) 48%,
     rgba(255, 255, 255, 0.4) 100%
   );
-  -webkit-backdrop-filter: blur(22px) saturate(170%);
-  backdrop-filter: blur(22px) saturate(170%);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.95),
     inset 0 -1px 0 rgba(20, 26, 36, 0.07),
@@ -186,29 +184,19 @@ section[id] {
 }
 
 /*
- * Backdrop blur is the expensive part of glass. On phones and touch screens it
- * is swapped for a slightly more opaque tint, which looks nearly identical on
- * the static aluminium behind and keeps scrolling smooth on mid-range devices.
+ * Glass cards sit on the static aluminium, so a backdrop blur adds almost
+ * nothing there, but the browser re-blurs every one of them on every scrolled
+ * frame. They use a slightly more opaque tint instead. Blur is kept only on the
+ * header and the chat widget, which overlap moving content.
  */
-@media (hover: none), (max-width: 767px) {
-  .alu-glass,
-  .glass-panel,
-  .alu-chip,
-  .btn-secondary,
-  .hero-chat {
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-  }
-
-  .alu-glass,
-  .glass-panel {
-    background: linear-gradient(
-      135deg,
-      rgba(255, 255, 255, 0.78) 0%,
-      rgba(255, 255, 255, 0.5) 48%,
-      rgba(255, 255, 255, 0.64) 100%
-    );
-  }
+.alu-glass,
+.glass-panel {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.78) 0%,
+    rgba(255, 255, 255, 0.5) 48%,
+    rgba(255, 255, 255, 0.64) 100%
+  );
 }
 
 /* ——— Header ——— */
@@ -279,8 +267,6 @@ section[id] {
     rgba(255, 255, 255, 0.26)
   );
   color: var(--foreground);
-  -webkit-backdrop-filter: blur(16px) saturate(170%);
-  backdrop-filter: blur(16px) saturate(170%);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.95),
     inset 0 -1px 0 rgba(20, 26, 36, 0.08),
@@ -675,8 +661,6 @@ a:hover > .alu-link span[aria-hidden],
   border: 1px solid rgba(255, 255, 255, 0.75);
   border-radius: 999px;
   background: rgba(255, 255, 255, 0.45);
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
   font-size: 0.75rem;
   font-weight: 500;
   letter-spacing: 0.02em;
@@ -1929,11 +1913,9 @@ span.chat-panel__input {
   border: 1px solid rgba(255, 255, 255, 0.75);
   background: linear-gradient(
     145deg,
-    rgba(255, 255, 255, 0.7),
-    rgba(255, 255, 255, 0.28)
+    rgba(255, 255, 255, 0.88),
+    rgba(244, 246, 249, 0.8)
   );
-  -webkit-backdrop-filter: blur(24px) saturate(170%);
-  backdrop-filter: blur(24px) saturate(170%);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.95),
     0 40px 70px -30px rgba(18, 24, 34, 0.45);
@@ -1966,20 +1948,11 @@ span.chat-panel__input {
   box-shadow: none;
 }
 
-/* Blur is costly on phones and the card sits on a flat surface. */
+/* On phones the floating chat panel drops its blur too. */
 @media (hover: none), (max-width: 767px) {
-  .hero-chat,
   .chat-panel {
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
-  }
-
-  .hero-chat {
-    background: linear-gradient(
-      145deg,
-      rgba(255, 255, 255, 0.88),
-      rgba(244, 246, 249, 0.8)
-    );
   }
 }
 
