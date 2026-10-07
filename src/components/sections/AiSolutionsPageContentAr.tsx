@@ -1,53 +1,62 @@
 import Link from "next/link";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import {
-  AI_BENEFITS,
-  AI_LEBANON,
-  AI_SOLUTIONS_ANSWER,
-  AI_SOLUTIONS_CTA,
-  AI_SOLUTIONS_FAQ,
-  AI_SOLUTIONS_HERO,
-  AI_STEPS,
-  AI_USE_CASES,
-  AI_WORLDWIDE,
-} from "@/lib/site/ai-solutions";
+  AR_ANSWER,
+  AR_BENEFITS,
+  AR_CTA,
+  AR_FAQ,
+  AR_HERO,
+  AR_LEBANON,
+  AR_STEPS,
+  AR_USE_CASES,
+  AR_WORLDWIDE,
+} from "@/lib/site/ai-solutions-ar";
+import { AI_ARTICLE_AR_PATH } from "@/lib/site/ai-in-lebanon-ar";
 import { CONTACT } from "@/lib/site/contact";
 
-export function AiSolutionsPageContent() {
+const BODY =
+  "text-base leading-relaxed text-foreground/85 sm:text-[1.0625rem] sm:leading-[1.9]";
+
+export function AiSolutionsPageContentAr() {
   return (
-    <article id="ai-solutions-page" className="about-page page-shell">
+    <article
+      id="ai-solutions-page-ar"
+      lang="ar"
+      dir="rtl"
+      className="about-page page-shell rtl-page"
+    >
       <div className="page-grid-bg absolute inset-0" aria-hidden />
 
       <div className="relative mx-auto max-w-7xl">
         <div className="flex items-center justify-between gap-4">
           <Link href="/" data-interactive className="page-back">
-            ← Home
+            → الرئيسية
           </Link>
           <Link
-            href="/ar/ai-solutions"
-            hrefLang="ar"
-            lang="ar"
-            dir="rtl"
+            href="/ai-solutions"
+            hrefLang="en"
+            lang="en"
+            dir="ltr"
             data-interactive
             className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
           >
-            العربية
+            English
           </Link>
         </div>
 
         <header className="mt-8 sm:mt-10">
-          <PageEyebrow>{AI_SOLUTIONS_HERO.eyebrow}</PageEyebrow>
+          <PageEyebrow>{AR_HERO.eyebrow}</PageEyebrow>
           <h1 className="alu-display page-title page-title--sm mt-4 max-w-4xl">
-            {AI_SOLUTIONS_HERO.title}
+            {AR_HERO.title}
           </h1>
-          <p className="alu-lede max-w-2xl">{AI_SOLUTIONS_HERO.lead}</p>
+          <p className="alu-lede max-w-2xl">{AR_HERO.lead}</p>
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <Link
               href="/contact"
               data-interactive
               className="btn-primary w-full max-w-xs sm:w-auto"
             >
-              Start a project
+              ابدأ مشروعك
             </Link>
             <a
               href={CONTACT.whatsapp}
@@ -56,81 +65,65 @@ export function AiSolutionsPageContent() {
               data-interactive
               className="btn-secondary w-full max-w-xs sm:w-auto"
             >
-              Chat on WhatsApp
+              راسلنا على واتساب
             </a>
           </div>
         </header>
 
         <section
           className="aeo-answer alu-glass page-panel mt-14 sm:mt-20"
-          aria-labelledby="ai-answer-heading"
+          aria-labelledby="ar-answer-heading"
         >
           <h2
-            id="ai-answer-heading"
+            id="ar-answer-heading"
             className="text-lg font-semibold text-foreground sm:text-xl"
           >
-            {AI_SOLUTIONS_ANSWER.question}
+            {AR_ANSWER.question}
           </h2>
-          <p className="mt-3 max-w-3xl text-base leading-relaxed text-foreground/85 sm:text-[1.0625rem] sm:leading-[1.75]">
-            {AI_SOLUTIONS_ANSWER.answer}
-          </p>
+          <p className={`mt-3 max-w-3xl ${BODY}`}>{AR_ANSWER.answer}</p>
         </section>
 
-        <section
-          className="mt-20 sm:mt-28"
-          aria-labelledby="ai-use-cases-heading"
-        >
-          <PageEyebrow>What AI can do</PageEyebrow>
-          <h2
-            id="ai-use-cases-heading"
-            className="alu-display page-h2 mt-3 max-w-2xl"
-          >
-            Where can AI help your business?
+        <section className="mt-20 sm:mt-28" aria-labelledby="ar-use-cases">
+          <PageEyebrow>ما يستطيعه الذكاء الاصطناعي</PageEyebrow>
+          <h2 id="ar-use-cases" className="alu-display page-h2 mt-3 max-w-2xl">
+            أين يمكن للذكاء الاصطناعي أن يساعد عملك؟
           </h2>
           <ul className="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
-            {AI_USE_CASES.map((item) => (
+            {AR_USE_CASES.map((item) => (
               <li key={item.title} className="alu-glass page-panel">
                 <h3 className="text-lg font-semibold text-foreground">
                   {item.title}
                 </h3>
-                <p className="mt-3 text-[0.95rem] leading-relaxed text-foreground/80">
+                <p className="mt-3 text-[0.95rem] leading-[1.9] text-foreground/80">
                   {item.body}
                 </p>
-                {item.href ? (
-                  <Link
-                    href={item.href}
-                    data-interactive
-                    className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
-                  >
-                    Learn more
-                  </Link>
-                ) : null}
+                <Link
+                  href={item.href}
+                  data-interactive
+                  className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
+                >
+                  اعرف المزيد
+                </Link>
               </li>
             ))}
           </ul>
         </section>
 
-        <section
-          className="mt-20 sm:mt-28"
-          aria-labelledby="ai-benefits-heading"
-        >
-          <PageEyebrow>The payoff</PageEyebrow>
-          <h2
-            id="ai-benefits-heading"
-            className="alu-display page-h2 mt-3 max-w-2xl"
-          >
-            How does AI elevate the way you work?
+        <section className="mt-20 sm:mt-28" aria-labelledby="ar-benefits">
+          <PageEyebrow>العائد</PageEyebrow>
+          <h2 id="ar-benefits" className="alu-display page-h2 mt-3 max-w-2xl">
+            كيف يرتقي الذكاء الاصطناعي بطريقة عملك؟
           </h2>
           <ol className="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5">
-            {AI_BENEFITS.map((item, index) => (
+            {AR_BENEFITS.map((item, index) => (
               <li key={item.title} className="alu-glass page-panel">
                 <span className="page-label">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <h3 className="alu-display mt-3 text-[1.6rem] sm:text-[2rem]">
+                <h3 className="alu-display mt-3 text-[1.5rem] sm:text-[1.8rem]">
                   {item.title}
                 </h3>
-                <p className="mt-3 text-[0.95rem] leading-relaxed text-foreground/80">
+                <p className="mt-3 text-[0.95rem] leading-[1.9] text-foreground/80">
                   {item.body}
                 </p>
               </li>
@@ -138,25 +131,19 @@ export function AiSolutionsPageContent() {
           </ol>
         </section>
 
-        <section
-          className="mt-20 sm:mt-28"
-          aria-labelledby="ai-lebanon-heading"
-        >
-          <PageEyebrow>{AI_LEBANON.eyebrow}</PageEyebrow>
-          <h2
-            id="ai-lebanon-heading"
-            className="alu-display page-h2 mt-3 max-w-3xl"
-          >
-            {AI_LEBANON.title}
+        <section className="mt-20 sm:mt-28" aria-labelledby="ar-lebanon">
+          <PageEyebrow>{AR_LEBANON.eyebrow}</PageEyebrow>
+          <h2 id="ar-lebanon" className="alu-display page-h2 mt-3 max-w-3xl">
+            {AR_LEBANON.title}
           </h2>
-          <p className="alu-lede max-w-2xl">{AI_LEBANON.lead}</p>
+          <p className="alu-lede max-w-2xl">{AR_LEBANON.lead}</p>
           <ul className="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5">
-            {AI_LEBANON.points.map((item) => (
+            {AR_LEBANON.points.map((item) => (
               <li key={item.title} className="alu-glass page-panel">
                 <h3 className="text-lg font-semibold text-foreground">
                   {item.title}
                 </h3>
-                <p className="mt-3 text-[0.95rem] leading-relaxed text-foreground/80">
+                <p className="mt-3 text-[0.95rem] leading-[1.9] text-foreground/80">
                   {item.body}
                 </p>
               </li>
@@ -164,44 +151,30 @@ export function AiSolutionsPageContent() {
           </ul>
         </section>
 
-        <section
-          className="mt-20 sm:mt-28"
-          aria-labelledby="ai-worldwide-heading"
-        >
-          <PageEyebrow>{AI_WORLDWIDE.eyebrow}</PageEyebrow>
-          <h2
-            id="ai-worldwide-heading"
-            className="alu-display page-h2 mt-3 max-w-3xl"
-          >
-            {AI_WORLDWIDE.title}
+        <section className="mt-20 sm:mt-28" aria-labelledby="ar-worldwide">
+          <PageEyebrow>{AR_WORLDWIDE.eyebrow}</PageEyebrow>
+          <h2 id="ar-worldwide" className="alu-display page-h2 mt-3 max-w-3xl">
+            {AR_WORLDWIDE.title}
           </h2>
-          <p className="mt-6 max-w-3xl text-base leading-relaxed text-foreground/85 sm:text-[1.0625rem] sm:leading-[1.75]">
-            {AI_WORLDWIDE.body}
-          </p>
+          <p className={`mt-6 max-w-3xl ${BODY}`}>{AR_WORLDWIDE.body}</p>
           <p className="mt-6">
             <Link
-              href="/insights/ai-in-lebanon"
+              href={AI_ARTICLE_AR_PATH}
               data-interactive
               className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
             >
-              Read: AI in Lebanon, a practical guide for businesses →
+              اقرأ: الذكاء الاصطناعي في لبنان، دليل عملي للشركات ←
             </Link>
           </p>
         </section>
 
-        <section
-          className="mt-20 sm:mt-28"
-          aria-labelledby="ai-process-heading"
-        >
-          <PageEyebrow>How it works</PageEyebrow>
-          <h2
-            id="ai-process-heading"
-            className="alu-display page-h2 mt-3 max-w-2xl"
-          >
-            How do we start?
+        <section className="mt-20 sm:mt-28" aria-labelledby="ar-process">
+          <PageEyebrow>كيف نعمل</PageEyebrow>
+          <h2 id="ar-process" className="alu-display page-h2 mt-3 max-w-2xl">
+            كيف نبدأ؟
           </h2>
           <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {AI_STEPS.map((step, index) => (
+            {AR_STEPS.map((step, index) => (
               <li key={step.label} className="alu-glass page-panel">
                 <span className="page-label">
                   {String(index + 1).padStart(2, "0")}
@@ -209,7 +182,7 @@ export function AiSolutionsPageContent() {
                 <h3 className="mt-3 text-lg font-semibold text-foreground">
                   {step.label}
                 </h3>
-                <p className="mt-2 text-[0.95rem] leading-relaxed text-foreground/80">
+                <p className="mt-2 text-[0.95rem] leading-[1.9] text-foreground/80">
                   {step.detail}
                 </p>
               </li>
@@ -219,17 +192,14 @@ export function AiSolutionsPageContent() {
 
         <section
           className="faq-section mt-20 sm:mt-28"
-          aria-labelledby="ai-faq-heading"
+          aria-labelledby="ar-faq"
         >
-          <PageEyebrow>Questions</PageEyebrow>
-          <h2
-            id="ai-faq-heading"
-            className="alu-display page-h2 mt-3 max-w-2xl"
-          >
-            AI solutions: common questions
+          <PageEyebrow>أسئلة</PageEyebrow>
+          <h2 id="ar-faq" className="alu-display page-h2 mt-3 max-w-2xl">
+            حلول الذكاء الاصطناعي: أسئلة شائعة
           </h2>
           <ul className="mt-8 max-w-3xl space-y-3">
-            {AI_SOLUTIONS_FAQ.map((item) => (
+            {AR_FAQ.map((item) => (
               <li key={item.question}>
                 <details className="faq-item faq-card alu-glass group">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-4 marker:content-none sm:px-5 [&::-webkit-details-marker]:hidden">
@@ -243,7 +213,9 @@ export function AiSolutionsPageContent() {
                       +
                     </span>
                   </summary>
-                  <div className="faq-card__answer px-4 pb-4 pt-3 text-base leading-[1.7] sm:px-5 sm:pb-5">
+                  <div
+                    className={`faq-card__answer px-4 pb-4 pt-3 sm:px-5 sm:pb-5 ${BODY}`}
+                  >
                     {item.answer}
                   </div>
                 </details>
@@ -253,12 +225,12 @@ export function AiSolutionsPageContent() {
         </section>
 
         <section className="about-page__cta alu-glass mt-20 px-5 py-12 text-center sm:mt-28 sm:px-10 sm:py-16">
-          <p className="page-label">{AI_SOLUTIONS_CTA.eyebrow}</p>
-          <h2 className="alu-display mx-auto mt-3 max-w-3xl text-[clamp(2.4rem,6vw,4.5rem)]">
-            {AI_SOLUTIONS_CTA.title}
+          <p className="page-label">{AR_CTA.eyebrow}</p>
+          <h2 className="alu-display page-h2 mx-auto mt-3 max-w-3xl">
+            {AR_CTA.title}
           </h2>
-          <p className="mx-auto mt-4 max-w-lg text-base text-foreground/80">
-            {AI_SOLUTIONS_CTA.lead}
+          <p className="mx-auto mt-4 max-w-lg text-base leading-[1.9] text-foreground/80">
+            {AR_CTA.lead}
           </p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link
@@ -266,7 +238,7 @@ export function AiSolutionsPageContent() {
               data-interactive
               className="btn-primary w-full max-w-xs sm:w-auto"
             >
-              Start a project
+              ابدأ مشروعك
             </Link>
             <a
               href={CONTACT.whatsapp}
@@ -275,7 +247,7 @@ export function AiSolutionsPageContent() {
               data-interactive
               className="btn-secondary w-full max-w-xs sm:w-auto"
             >
-              Message us on WhatsApp
+              راسلنا على واتساب
             </a>
           </div>
         </section>

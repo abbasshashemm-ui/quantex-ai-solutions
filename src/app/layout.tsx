@@ -1,7 +1,7 @@
 import type { Viewport } from "next";
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
-import { Barlow_Condensed, Outfit } from "next/font/google";
+import { Barlow_Condensed, Cairo, Outfit } from "next/font/google";
 import { AppProviders } from "@/components/providers/AppProviders";
 import { MainLayout } from "@/components/layout/MainLayout";
 import { JsonLd } from "@/components/seo/JsonLd";
@@ -25,6 +25,16 @@ const condensed = Barlow_Condensed({
   style: ["normal", "italic"],
 });
 
+// Arabic pages only: not preloaded, and the browser fetches it only when
+// Arabic glyphs are actually rendered.
+const arabic = Cairo({
+  variable: "--font-arabic",
+  subsets: ["arabic"],
+  display: "swap",
+  preload: false,
+  weight: ["400", "600", "700"],
+});
+
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
@@ -46,7 +56,7 @@ export default function RootLayout({
     <html
       lang="en"
       suppressHydrationWarning
-      className={`${outfit.variable} ${condensed.variable} h-full antialiased`}
+      className={`${outfit.variable} ${condensed.variable} ${arabic.variable} h-full antialiased`}
     >
       <head>
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />

@@ -11,6 +11,7 @@ import {
   AI_ARTICLE_PATH,
   AI_ARTICLE_SECTIONS,
 } from "@/lib/site/ai-in-lebanon";
+import { AI_ARTICLE_AR_PATH } from "@/lib/site/ai-in-lebanon-ar";
 import { AI_SOLUTIONS_PATH } from "@/lib/site/ai-solutions";
 import { CONTACT } from "@/lib/site/contact";
 
@@ -21,6 +22,11 @@ export const metadata: Metadata = {
     title: AI_ARTICLE.seoTitle,
     description: AI_ARTICLE.description,
     path: AI_ARTICLE_PATH,
+    languages: {
+      en: absoluteUrl(AI_ARTICLE_PATH),
+      ar: absoluteUrl(AI_ARTICLE_AR_PATH),
+      "x-default": absoluteUrl(AI_ARTICLE_PATH),
+    },
     keywords: [
       "AI in Lebanon",
       "AI Lebanon",
@@ -77,9 +83,21 @@ export default function AiInLebanonArticle() {
       <article className="about-page page-shell">
         <div className="page-grid-bg absolute inset-0" aria-hidden />
         <div className="relative mx-auto max-w-3xl">
-          <Link href={AI_SOLUTIONS_PATH} data-interactive className="page-back">
-            ← AI Solutions
-          </Link>
+          <div className="flex items-center justify-between gap-4">
+            <Link href={AI_SOLUTIONS_PATH} data-interactive className="page-back">
+              ← AI Solutions
+            </Link>
+            <Link
+              href={AI_ARTICLE_AR_PATH}
+              hrefLang="ar"
+              lang="ar"
+              dir="rtl"
+              data-interactive
+              className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
+            >
+              العربية
+            </Link>
+          </div>
 
           <header className="mt-8 sm:mt-10">
             <PageEyebrow>Guide</PageEyebrow>

@@ -8,6 +8,8 @@ type PageMetadataOptions = {
   ogImage?: string;
   noIndex?: boolean;
   keywords?: string[];
+  locale?: string;
+  languages?: Record<string, string>;
 };
 
 export function absoluteUrl(path: string): string {
@@ -23,6 +25,8 @@ export function createPageMetadata({
   ogImage = DEFAULT_OG_IMAGE,
   noIndex = false,
   keywords = [],
+  locale = SITE.locale,
+  languages,
 }: PageMetadataOptions): Metadata {
   const canonical = absoluteUrl(path);
   const imageUrl = absoluteUrl(ogImage);
@@ -41,10 +45,10 @@ export function createPageMetadata({
       "SEO Lebanon",
       ...keywords,
     ],
-    alternates: { canonical },
+    alternates: { canonical, ...(languages ? { languages } : {}) },
     openGraph: {
       type: "website",
-      locale: SITE.locale,
+      locale,
       url: canonical,
       siteName: SITE.name,
       title: pageTitle,

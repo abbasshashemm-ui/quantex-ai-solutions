@@ -7,6 +7,7 @@ import {
   buildFaqPageSchema,
 } from "@/lib/seo/json-ld";
 import { getSiteUrl } from "@/lib/seo/site";
+import { AI_SOLUTIONS_AR_PATH } from "@/lib/site/ai-solutions-ar";
 import {
   AI_SOLUTIONS_ANSWER,
   AI_SOLUTIONS_FAQ,
@@ -22,6 +23,11 @@ export const metadata: Metadata = createPageMetadata({
   description:
     "AI solutions for business: AI chatbots, WhatsApp assistants, automation and custom AI systems. Built by Quantex in Beirut for companies in Lebanon and worldwide.",
   path: AI_SOLUTIONS_PATH,
+  languages: {
+    en: absoluteUrl(AI_SOLUTIONS_PATH),
+    ar: absoluteUrl(AI_SOLUTIONS_AR_PATH),
+    "x-default": absoluteUrl(AI_SOLUTIONS_PATH),
+  },
   keywords: [
     "AI solutions",
     "AI solutions Lebanon",
