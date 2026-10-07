@@ -19,6 +19,10 @@
 - Guide, AI in Lebanon for businesses: /insights/ai-in-lebanon
 - AI solutions, Arabic (حلول الذكاء الاصطناعي في لبنان): /ar/ai-solutions
 - Guide, AI in Lebanon, Arabic: /ar/insights/ai-in-lebanon
+- Guides index: /insights (Arabic: /ar/insights)
+- AI for restaurants in Lebanon: /insights/ai-for-restaurants-lebanon
+- AI for clinics in Lebanon: /insights/ai-for-clinics-lebanon
+- AI for real estate in Lebanon: /insights/ai-for-real-estate-lebanon
 - About: /about
 - Contact: /contact
 - Services overview: /#solutions

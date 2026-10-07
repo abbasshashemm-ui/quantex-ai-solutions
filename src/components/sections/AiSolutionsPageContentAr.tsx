@@ -165,6 +165,14 @@ export function AiSolutionsPageContentAr() {
             >
               اقرأ: الذكاء الاصطناعي في لبنان، دليل عملي للشركات ←
             </Link>
+            {" · "}
+            <Link
+              href="/ar/insights"
+              data-interactive
+              className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
+            >
+              كل الأدلة
+            </Link>
           </p>
         </section>
 
