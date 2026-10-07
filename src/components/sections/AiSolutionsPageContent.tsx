@@ -186,6 +186,14 @@ export function AiSolutionsPageContent() {
             >
               Read: AI in Lebanon, a practical guide for businesses →
             </Link>
+            {" · "}
+            <Link
+              href="/insights"
+              data-interactive
+              className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
+            >
+              All guides
+            </Link>
           </p>
         </section>
 

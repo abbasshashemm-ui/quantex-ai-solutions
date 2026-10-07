@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getAllServiceSlugs } from "@/lib/services/data";
+import { articlePath, getArticleSlugs } from "@/lib/articles";
 import { absoluteUrl } from "@/lib/seo/metadata";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -11,6 +12,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl("/insights/ai-in-lebanon"), lastModified, changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/ar/ai-solutions"), lastModified, changeFrequency: "monthly", priority: 0.9 },
     { url: absoluteUrl("/ar/insights/ai-in-lebanon"), lastModified, changeFrequency: "monthly", priority: 0.75 },
+    { url: absoluteUrl("/insights"), lastModified, changeFrequency: "weekly", priority: 0.8 },
+    { url: absoluteUrl("/ar/insights"), lastModified, changeFrequency: "weekly", priority: 0.75 },
     { url: absoluteUrl("/about"), lastModified, changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/contact"), lastModified, changeFrequency: "monthly", priority: 0.9 },
     { url: absoluteUrl("/privacy"), lastModified, changeFrequency: "yearly", priority: 0.3 },
@@ -23,5 +26,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }));
 
-  return [...staticRoutes, ...serviceRoutes];
+  const articleRoutes: MetadataRoute.Sitemap = getArticleSlugs().flatMap((slug) =>
+    (["en", "ar"] as const).map((lang) => ({
+      url: absoluteUrl(articlePath(lang, slug)),
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: lang === "en" ? 0.75 : 0.7,
+    })),
+  );
+
+  return [...staticRoutes, ...serviceRoutes, ...articleRoutes];
 }
