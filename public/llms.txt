@@ -16,6 +16,7 @@
 
 - Home: /
 - AI solutions (Lebanon and worldwide): /ai-solutions
+- Guide, AI in Lebanon for businesses: /insights/ai-in-lebanon
 - About: /about
 - Contact: /contact
 - Services overview: /#solutions

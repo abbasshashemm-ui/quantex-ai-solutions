@@ -166,6 +166,15 @@ export function AiSolutionsPageContent() {
           <p className="mt-6 max-w-3xl text-base leading-relaxed text-foreground/85 sm:text-[1.0625rem] sm:leading-[1.75]">
             {AI_WORLDWIDE.body}
           </p>
+          <p className="mt-6">
+            <Link
+              href="/insights/ai-in-lebanon"
+              data-interactive
+              className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
+            >
+              Read: AI in Lebanon, a practical guide for businesses →
+            </Link>
+          </p>
         </section>
 
         <section
