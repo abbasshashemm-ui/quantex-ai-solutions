@@ -14,6 +14,7 @@ import {
 import { AI_ARTICLE_AR_PATH } from "@/lib/site/ai-in-lebanon-ar";
 import { AI_SOLUTIONS_PATH } from "@/lib/site/ai-solutions";
 import { CONTACT } from "@/lib/site/contact";
+import { LEBANON_PATH } from "@/lib/site/lebanon";
 
 export const dynamic = "force-static";
 
@@ -205,6 +206,10 @@ export default function AiInLebanonArticle() {
               Or see our{" "}
               <Link href={AI_SOLUTIONS_PATH} className="font-semibold underline underline-offset-4">
                 AI solutions
+              </Link>{" "}
+              and how we work with{" "}
+              <Link href={LEBANON_PATH.en} className="font-semibold underline underline-offset-4">
+                businesses in Lebanon
               </Link>
               .
             </p>

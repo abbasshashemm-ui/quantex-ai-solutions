@@ -11,6 +11,7 @@ import type { Article } from "@/lib/articles/types";
 import { AI_SOLUTIONS_PATH } from "@/lib/site/ai-solutions";
 import { AI_SOLUTIONS_AR_PATH } from "@/lib/site/ai-solutions-ar";
 import { CONTACT } from "@/lib/site/contact";
+import { LEBANON_PATH } from "@/lib/site/lebanon";
 
 const UI = {
   en: {
@@ -25,6 +26,8 @@ const UI = {
     ctaLead: "Tell us what slows your business down. We reply within 24 hours.",
     start: "Start a project",
     whatsapp: "Chat on WhatsApp",
+    lebanonLead: "Or see our",
+    lebanon: "AI solutions for businesses in Lebanon",
     more: "More guides",
     all: "All guides",
     body: "sm:leading-[1.75]",
@@ -41,6 +44,8 @@ const UI = {
     ctaLead: "أخبرنا ما الذي يُبطئ عملك. نردّ خلال 24 ساعة.",
     start: "ابدأ مشروعك",
     whatsapp: "راسلنا على واتساب",
+    lebanonLead: "أو تعرّف على",
+    lebanon: "حلول الذكاء الاصطناعي للشركات في لبنان",
     more: "أدلة أخرى",
     all: "كل الأدلة",
     body: "sm:leading-[1.9]",
@@ -197,6 +202,16 @@ export function ArticleView({ lang, article }: Props) {
               {t.whatsapp}
             </a>
           </div>
+          <p className="mt-5 text-sm text-foreground/70">
+            {t.lebanonLead}{" "}
+            <Link
+              href={LEBANON_PATH[lang]}
+              className="font-semibold underline underline-offset-4"
+            >
+              {t.lebanon}
+            </Link>
+            .
+          </p>
         </section>
 
         <section className="mt-14" aria-labelledby="more-guides">
