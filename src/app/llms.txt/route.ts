@@ -2,6 +2,7 @@ import { getArticleListing, INSIGHTS_PATH } from "@/lib/articles";
 import { absoluteUrl } from "@/lib/seo/metadata";
 import { SERVICES } from "@/lib/services/data";
 import { FOUNDER } from "@/lib/site/about";
+import { EACML, EACML_PATH } from "@/lib/projects/eacml";
 import { LEBANON_PATH } from "@/lib/site/lebanon";
 import { COMPANY, CONTACT } from "@/lib/site/contact";
 
@@ -36,6 +37,7 @@ function buildLlmsTxt(): string {
     link("AI solutions", "/ai-solutions", "AI assistants, automation and custom AI software for businesses in Lebanon and worldwide"),
     link("AI solutions in Lebanon", LEBANON_PATH.en, "AI chatbots, automation and custom AI for businesses across Lebanon, with the cities served"),
     link("About", "/about", "The studio, its founder and how it works with clients"),
+    link(EACML.title, EACML_PATH, EACML.pitch),
     link("Contact", "/contact", "Start a project; replies within 24 hours"),
     "",
     "## Services",

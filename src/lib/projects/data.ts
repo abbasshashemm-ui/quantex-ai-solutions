@@ -8,10 +8,14 @@ export type Project = {
   url: string;
   href?: string;
   tags: ProjectTag[];
-  imageSrc: string;
-  imageAlt: string;
-  imageWidth: number;
-  imageHeight: number;
+  /** Defaults to live work. "in-progress" projects are shown with a status tag. */
+  status?: "live" | "in-progress";
+  /** Short facts shown on a lead card. */
+  highlights?: string[];
+  imageSrc?: string;
+  imageAlt?: string;
+  imageWidth?: number;
+  imageHeight?: number;
 };
 
 export const FEATURED_PROJECT_IDS = [
@@ -21,6 +25,22 @@ export const FEATURED_PROJECT_IDS = [
 ] as const;
 
 export const PROJECTS: Project[] = [
+  {
+    id: "eacml-copilot",
+    slug: "eacml-copilot",
+    title: "EACML Copilot",
+    description:
+      "An on-premises AI platform that checks concept drawing packages against planning and building regulations, and helps case officers review the results.",
+    url: "On-premises · in development",
+    tags: ["AI PLATFORM", "REGULATION", "ON-PREMISES"],
+    status: "in-progress",
+    highlights: [
+      "Reads drawing packages of 30 to 50 sheets (PDF, DXF and DWG) and measures the geometry.",
+      "Checks 92 regulation rules, each with its clause and page, and shows the evidence on the drawing.",
+      "A rules engine decides every pass or fail. The AI explains and asks questions, and never decides.",
+      "Runs entirely on-premises, with an audit log of every officer decision.",
+    ],
+  },
   {
     id: "chandelier-solderie",
     slug: "chandelier-solderie",
