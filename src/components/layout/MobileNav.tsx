@@ -31,7 +31,7 @@ export function MobileNav() {
     <>
       <button
         type="button"
-        className="relative z-[41] inline-flex min-h-11 min-w-11 items-center justify-center rounded-control border border-line-strong text-foreground transition-colors hover:border-foreground/40 hover:bg-foreground/6 md:hidden"
+        className="relative z-[41] inline-flex min-h-11 min-w-11 items-center justify-center rounded-control border border-line-strong text-foreground transition-colors hover:border-foreground/40 hover:bg-foreground/6 lg:hidden"
         aria-expanded={open}
         aria-controls="mobile-nav"
         aria-label={open ? "Close menu" : "Open menu"}
@@ -57,7 +57,7 @@ export function MobileNav() {
       {open ? (
         <div
           id="mobile-nav"
-          className="fixed inset-0 z-40 border-t border-line bg-void/98 backdrop-blur-xl md:hidden"
+          className="fixed inset-0 z-40 border-t border-line bg-void/98 backdrop-blur-xl lg:hidden"
           style={{ paddingTop: "calc(4.5rem + env(safe-area-inset-top))" }}
         >
           <ul className="flex flex-col px-4 pb-[env(safe-area-inset-bottom)]">
