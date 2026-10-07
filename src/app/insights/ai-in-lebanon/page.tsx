@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ArticleFigure } from "@/components/figures/ArticleFigure";
 import { JsonLd } from "@/components/seo/JsonLd";
+import { getArticleFigure } from "@/lib/figures/data";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { absoluteUrl, createPageMetadata } from "@/lib/seo/metadata";
 import { buildBreadcrumbSchema, buildFaqPageSchema } from "@/lib/seo/json-ld";
@@ -50,6 +52,7 @@ export const metadata: Metadata = {
 };
 
 export default function AiInLebanonArticle() {
+  const figure = getArticleFigure("en", "ai-in-lebanon");
   return (
     <>
       <JsonLd
@@ -133,8 +136,8 @@ export default function AiInLebanonArticle() {
           </nav>
 
           {AI_ARTICLE_SECTIONS.map((section) => (
+            <div key={section.id}>
             <section
-              key={section.id}
               id={section.id}
               className="mt-14 scroll-mt-24 sm:mt-16"
               aria-labelledby={`${section.id}-h`}
@@ -165,6 +168,12 @@ export default function AiInLebanonArticle() {
                 </ul>
               ) : null}
             </section>
+            {figure?.after === section.id ? (
+              <div className="mt-8">
+                <ArticleFigure lang="en" data={figure.data} />
+              </div>
+            ) : null}
+            </div>
           ))}
 
           <section className="faq-section mt-14 sm:mt-16" aria-labelledby="art-faq">

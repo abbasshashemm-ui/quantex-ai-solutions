@@ -1,5 +1,7 @@
 import Link from "next/link";
+import { ArticleFigure } from "@/components/figures/ArticleFigure";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
+import { getArticleFigure } from "@/lib/figures/data";
 import { SITE } from "@/lib/seo/site";
 import {
   articlePath,
@@ -59,6 +61,7 @@ export function ArticleView({ lang, article }: Props) {
   const rtl = lang === "ar";
   const other: Lang = rtl ? "en" : "ar";
   const bodyClass = `text-base leading-relaxed text-foreground/85 sm:text-[1.0625rem] ${t.body}`;
+  const figure = getArticleFigure(lang, article.slug);
   const related = getArticleListing(lang).filter(
     (item) => item.href !== articlePath(lang, article.slug),
   );
@@ -110,7 +113,13 @@ export function ArticleView({ lang, article }: Props) {
         <nav aria-label={t.contents} className="mt-8">
           <p className="page-label">{t.inGuide}</p>
           <ol className="mt-3 space-y-1 text-sm">
-            {article.sections.map((section) => (
+            {figure?.after === "top" ? (
+          <div className="mt-10">
+            <ArticleFigure lang={lang} data={figure.data} />
+          </div>
+        ) : null}
+
+        {article.sections.map((section) => (
               <li key={section.id}>
                 <a
                   href={`#${section.id}`}
@@ -124,8 +133,8 @@ export function ArticleView({ lang, article }: Props) {
         </nav>
 
         {article.sections.map((section) => (
+          <div key={section.id}>
           <section
-            key={section.id}
             id={section.id}
             className="mt-14 scroll-mt-24 sm:mt-16"
             aria-labelledby={`${section.id}-h`}
@@ -158,6 +167,12 @@ export function ArticleView({ lang, article }: Props) {
               </ul>
             ) : null}
           </section>
+          {figure?.after === section.id ? (
+            <div className="mt-8">
+              <ArticleFigure lang={lang} data={figure.data} />
+            </div>
+          ) : null}
+          </div>
         ))}
 
         <section className="faq-section mt-14 sm:mt-16" aria-labelledby="art-faq">

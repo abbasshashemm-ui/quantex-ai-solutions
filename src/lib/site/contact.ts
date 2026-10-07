@@ -85,6 +85,7 @@ export const SITE_NAV = [
   { label: "Home", href: "/" },
   { label: "Solutions", href: "/#solutions" },
   { label: "AI Solutions", href: "/ai-solutions" },
+  { label: "Guides", href: "/insights" },
   { label: "About", href: "/about" },
   { label: "Contact", href: "/contact" },
 ] as const;
