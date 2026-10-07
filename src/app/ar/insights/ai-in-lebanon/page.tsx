@@ -14,6 +14,7 @@ import {
 } from "@/lib/site/ai-in-lebanon-ar";
 import { AI_SOLUTIONS_AR_PATH } from "@/lib/site/ai-solutions-ar";
 import { CONTACT } from "@/lib/site/contact";
+import { LEBANON_PATH } from "@/lib/site/lebanon";
 
 export const dynamic = "force-static";
 
@@ -191,6 +192,13 @@ export default function AiInLebanonArticleAr() {
                 راسلنا على واتساب
               </a>
             </div>
+            <p className="mt-5 text-sm text-foreground/70">
+              أو تعرّف على{" "}
+              <Link href={LEBANON_PATH.ar} className="font-semibold underline underline-offset-4">
+                حلول الذكاء الاصطناعي للشركات في لبنان
+              </Link>
+              .
+            </p>
           </section>
         </div>
       </article>

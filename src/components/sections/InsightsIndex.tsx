@@ -3,8 +3,8 @@ import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { getArticleListing, INSIGHTS_PATH, type Lang } from "@/lib/articles";
 
 const UI = {
-  en: { back: "← Home", eyebrow: "Guides", title: "AI guides for businesses in Lebanon", lead: "Practical, plain-language guides on using AI in your business, from the Quantex team in Beirut.", read: "Read the guide", other: "العربية" },
-  ar: { back: "→ الرئيسية", eyebrow: "أدلة", title: "أدلة الذكاء الاصطناعي للشركات في لبنان", lead: "أدلة عملية وبلغة بسيطة عن استخدام الذكاء الاصطناعي في عملك، من فريق كوانتكس في بيروت.", read: "اقرأ الدليل", other: "English" },
+  en: { back: "← Home", eyebrow: "Guides", title: "AI guides for businesses in Lebanon", lead: "Practical, plain-language guides on using AI in your business, from the Quantex team in Beirut.", other: "العربية" },
+  ar: { back: "→ الرئيسية", eyebrow: "أدلة", title: "أدلة الذكاء الاصطناعي للشركات في لبنان", lead: "أدلة عملية وبلغة بسيطة عن استخدام الذكاء الاصطناعي في عملك، من فريق كوانتكس في بيروت.", other: "English" },
 } as const;
 
 export function InsightsIndex({ lang }: { lang: Lang }) {
@@ -44,18 +44,17 @@ export function InsightsIndex({ lang }: { lang: Lang }) {
           {getArticleListing(lang).map((item) => (
             <li key={item.href} className="alu-glass page-panel">
               <h2 className="text-lg font-semibold text-foreground sm:text-xl">
-                {item.title}
+                <Link
+                  href={item.href}
+                  data-interactive
+                  className="underline underline-offset-4 hover:text-foreground/80"
+                >
+                  {item.title}
+                </Link>
               </h2>
               <p className="mt-2 text-[0.95rem] leading-relaxed text-foreground/80">
                 {item.description}
               </p>
-              <Link
-                href={item.href}
-                data-interactive
-                className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
-              >
-                {t.read}
-              </Link>
             </li>
           ))}
         </ul>

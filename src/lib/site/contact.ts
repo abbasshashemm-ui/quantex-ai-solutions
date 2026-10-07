@@ -89,7 +89,10 @@ export const SITE_NAV = [
   { label: "Contact", href: "/contact" },
 ] as const;
 
-export const FOOTER_NAV = SITE_NAV.filter((item) => item.href !== "/");
+export const FOOTER_NAV = [
+  ...SITE_NAV.filter((item) => item.href !== "/"),
+  { label: "AI Solutions in Lebanon", href: "/ai-solutions-lebanon" },
+] as const;
 
 export const FOOTER_LEGAL = [
   { label: "Privacy Policy", href: "/privacy" },
