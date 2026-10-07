@@ -32,10 +32,27 @@ const POSTER = { heightFrac: 0.713, centreX: 0.5055, centreY: 0.3935 };
 const SLOT_GAP = 10;
 const SLOT_MIN = 80;
 
+/** Renderer names that mean the GPU is not doing the work. */
+const SOFTWARE_RENDERER = /swiftshader|llvmpipe|softpipe|software|basic render/i;
+
+/**
+ * True only for a real, hardware-accelerated WebGL context. Software rendering
+ * (hardware acceleration off, headless test browsers) can run the scene, but
+ * so slowly that it freezes the page, so those browsers get the 2D version.
+ */
 function supportsWebGL(): boolean {
   try {
     const canvas = document.createElement("canvas");
-    return Boolean(canvas.getContext("webgl2") ?? canvas.getContext("webgl"));
+    const gl = (canvas.getContext("webgl2") ??
+      canvas.getContext("webgl")) as WebGLRenderingContext | null;
+    if (!gl) return false;
+
+    const info = gl.getExtension("WEBGL_debug_renderer_info");
+    const renderer = info
+      ? String(gl.getParameter(info.UNMASKED_RENDERER_WEBGL))
+      : "";
+    gl.getExtension("WEBGL_lose_context")?.loseContext();
+    return !SOFTWARE_RENDERER.test(renderer);
   } catch {
     return false;
   }
@@ -109,7 +126,7 @@ export function HeroStage({ children }: HeroStageProps) {
         return;
       }
       console.warn(
-        "[hero] WebGL is not available in this browser (is hardware acceleration turned off?), so the 2D version is shown.",
+        "[hero] Hardware-accelerated WebGL is not available (is hardware acceleration turned off?), so the 2D version is shown.",
       );
       setMode("flat");
     };
