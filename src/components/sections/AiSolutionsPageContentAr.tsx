@@ -160,6 +160,14 @@ export function AiSolutionsPageContentAr() {
           <p className={`mt-6 max-w-3xl ${BODY}`}>{AR_WORLDWIDE.body}</p>
           <p className="mt-6">
             <Link
+              href="/ar/ai-solutions-lebanon"
+              data-interactive
+              className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
+            >
+              حلول الذكاء الاصطناعي في لبنان
+            </Link>
+            {" · "}
+            <Link
               href={AI_ARTICLE_AR_PATH}
               data-interactive
               className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"

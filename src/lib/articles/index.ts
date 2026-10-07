@@ -1,5 +1,7 @@
 import { AI_ARTICLE, AI_ARTICLE_PATH } from "@/lib/site/ai-in-lebanon";
 import { AR_ARTICLE, AI_ARTICLE_AR_PATH } from "@/lib/site/ai-in-lebanon-ar";
+import { CHOOSE_ARTICLE_AR } from "./choose-ar";
+import { CHOOSE_ARTICLE_EN } from "./choose-en";
 import { INDUSTRY_ARTICLES_AR } from "./industry-ar";
 import { INDUSTRY_ARTICLES_EN } from "./industry-en";
 import { SEARCH_ARTICLES_AR } from "./search-ar";
@@ -16,8 +18,8 @@ export function articlePath(lang: Lang, slug: string): string {
 
 export function getArticles(lang: Lang): Article[] {
   return lang === "ar"
-    ? [...INDUSTRY_ARTICLES_AR, ...SEARCH_ARTICLES_AR]
-    : [...INDUSTRY_ARTICLES_EN, ...SEARCH_ARTICLES_EN];
+    ? [CHOOSE_ARTICLE_AR, ...INDUSTRY_ARTICLES_AR, ...SEARCH_ARTICLES_AR]
+    : [CHOOSE_ARTICLE_EN, ...INDUSTRY_ARTICLES_EN, ...SEARCH_ARTICLES_EN];
 }
 
 export function getArticle(lang: Lang, slug: string): Article | undefined {

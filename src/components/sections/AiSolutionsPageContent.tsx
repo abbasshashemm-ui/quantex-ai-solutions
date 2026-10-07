@@ -181,6 +181,14 @@ export function AiSolutionsPageContent() {
           </p>
           <p className="mt-6">
             <Link
+              href="/ai-solutions-lebanon"
+              data-interactive
+              className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
+            >
+              AI solutions in Lebanon
+            </Link>
+            {" · "}
+            <Link
               href="/insights/ai-in-lebanon"
               data-interactive
               className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"

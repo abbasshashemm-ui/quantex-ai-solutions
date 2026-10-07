@@ -26,6 +26,8 @@
 - SEO, AEO and GEO explained: /insights/seo-aeo-geo-explained
 - How to get recommended by ChatGPT and AI search: /insights/get-recommended-by-chatgpt-and-ai-search
 - Search visibility checklist: /insights/search-visibility-checklist
+- AI solutions in Lebanon: /ai-solutions-lebanon (Arabic: /ar/ai-solutions-lebanon)
+- How to choose an AI solutions provider in Lebanon: /insights/how-to-choose-ai-solutions-provider-lebanon
 - About: /about
 - Contact: /contact
 - Services overview: /#solutions
