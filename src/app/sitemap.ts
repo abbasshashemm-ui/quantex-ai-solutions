@@ -14,6 +14,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl("/ar/insights/ai-in-lebanon"), lastModified, changeFrequency: "monthly", priority: 0.75 },
     { url: absoluteUrl("/insights"), lastModified, changeFrequency: "weekly", priority: 0.8 },
     { url: absoluteUrl("/ar/insights"), lastModified, changeFrequency: "weekly", priority: 0.75 },
+    { url: absoluteUrl("/ai-solutions-lebanon"), lastModified, changeFrequency: "monthly", priority: 0.95 },
+    { url: absoluteUrl("/ar/ai-solutions-lebanon"), lastModified, changeFrequency: "monthly", priority: 0.9 },
     { url: absoluteUrl("/about"), lastModified, changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/contact"), lastModified, changeFrequency: "monthly", priority: 0.9 },
     { url: absoluteUrl("/privacy"), lastModified, changeFrequency: "yearly", priority: 0.3 },
