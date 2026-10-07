@@ -7,6 +7,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const staticRoutes: MetadataRoute.Sitemap = [
     { url: absoluteUrl("/"), lastModified, changeFrequency: "weekly", priority: 1 },
+    { url: absoluteUrl("/ai-solutions"), lastModified, changeFrequency: "monthly", priority: 0.95 },
+    { url: absoluteUrl("/insights/ai-in-lebanon"), lastModified, changeFrequency: "monthly", priority: 0.8 },
+    { url: absoluteUrl("/ar/ai-solutions"), lastModified, changeFrequency: "monthly", priority: 0.9 },
+    { url: absoluteUrl("/ar/insights/ai-in-lebanon"), lastModified, changeFrequency: "monthly", priority: 0.75 },
     { url: absoluteUrl("/about"), lastModified, changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/contact"), lastModified, changeFrequency: "monthly", priority: 0.9 },
     { url: absoluteUrl("/privacy"), lastModified, changeFrequency: "yearly", priority: 0.3 },

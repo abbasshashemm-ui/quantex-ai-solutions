@@ -2369,3 +2369,35 @@ span.chat-panel__input {
   width: 1.2rem;
   height: 1.2rem;
 }
+
+/* ——— Arabic (right-to-left) pages ——— */
+.rtl-page,
+.rtl-page .alu-display,
+.rtl-page .page-eyebrow,
+.rtl-page .page-label {
+  font-family: var(--font-arabic), system-ui, sans-serif;
+}
+
+.rtl-page .alu-display,
+.rtl-page .page-title,
+.rtl-page .page-h2 {
+  font-style: normal;
+  font-weight: 700;
+  text-transform: none;
+  letter-spacing: 0;
+  line-height: 1.3;
+}
+
+.rtl-page .page-eyebrow,
+.rtl-page .page-label {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.rtl-page .page-title--sm {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+}
+
+.rtl-page .page-h2 {
+  font-size: clamp(1.75rem, 4vw, 2.75rem);
+}
