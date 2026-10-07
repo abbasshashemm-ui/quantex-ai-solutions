@@ -1,12 +1,7 @@
-import Image from "next/image";
 import Link from "next/link";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { EACML, EACML_PATH } from "@/lib/projects/eacml";
-import {
-  PROJECTS,
-  getFeaturedProjects,
-  type Project,
-} from "@/lib/projects/data";
+import { PROJECTS, type Project } from "@/lib/projects/data";
 
 function Tags({ project }: { project: Project }) {
   return (
@@ -75,55 +70,8 @@ function LeadCard({ project }: { project: Project }) {
   );
 }
 
-function ProjectCard({ project }: { project: Project }) {
-  const body = (
-    <>
-      {project.imageSrc && project.imageWidth && project.imageHeight ? (
-        <Image
-          src={project.imageSrc}
-          alt={project.imageAlt ?? ""}
-          width={project.imageWidth}
-          height={project.imageHeight}
-          sizes="(max-width: 768px) 92vw, 30vw"
-          className="h-auto w-full"
-        />
-      ) : null}
-      <div className="p-5 sm:p-6">
-        <Tags project={project} />
-        <h3 className="alu-display mt-4 text-[clamp(1.9rem,3vw,2.4rem)]">
-          {project.title}
-        </h3>
-        <p className="mt-3 text-[0.95rem] leading-relaxed text-foreground/80">
-          {project.description}
-        </p>
-        <p className="mt-3 text-sm text-foreground/65">{project.url}</p>
-      </div>
-    </>
-  );
-
-  return (
-    <li data-reveal>
-      {project.href ? (
-        <a
-          href={project.href}
-          target="_blank"
-          rel="noopener noreferrer"
-          data-interactive
-          className="alu-glass block h-full overflow-hidden"
-          aria-label={`${project.title}: visit ${project.url}`}
-        >
-          {body}
-        </a>
-      ) : (
-        <div className="alu-glass h-full overflow-hidden">{body}</div>
-      )}
-    </li>
-  );
-}
-
 export function WorkSection() {
   const lead = PROJECTS.find((project) => project.status === "in-progress");
-  const featured = getFeaturedProjects();
 
   return (
     <section id="work" className="alu-section" aria-labelledby="work-heading">
@@ -134,8 +82,7 @@ export function WorkSection() {
             What we are building.
           </h2>
           <p className="alu-lede max-w-2xl">
-            From websites that win customers to AI platforms for regulated
-            work.
+            Our flagship project: an AI platform for regulated work.
           </p>
         </div>
 
@@ -144,12 +91,6 @@ export function WorkSection() {
             <LeadCard project={lead} />
           </div>
         ) : null}
-
-        <ul className="mt-5 grid gap-4 sm:gap-5 md:grid-cols-3">
-          {featured.map((project) => (
-            <ProjectCard key={project.id} project={project} />
-          ))}
-        </ul>
       </div>
     </section>
   );
