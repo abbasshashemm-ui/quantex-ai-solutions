@@ -7,7 +7,7 @@ import {
   TUBE_RADIUS,
   buildRingSpecs,
   getUnitLoopPoints,
-} from "./chrome-geometry";
+} from "./ring-math";
 import {
   CAMERA_DISTANCE,
   IDLE_SPIN_SPEED,
@@ -20,6 +20,9 @@ import {
   type Pose,
 } from "./choreography";
 import type { MotionState } from "./motion";
+
+/** Minimum time between drawn frames on phones (about 30 per second). */
+const PHONE_FRAME_MS = 1000 / 30 - 2;
 
 /**
  * The same rings drawn with the browser's 2D canvas. It is used when WebGL is
@@ -267,8 +270,17 @@ export default function FlatScene({
       }
     };
 
+    // Phones: 30 frames a second looks the same for this slow, smooth motion
+    // and halves the work on weaker processors. The animation is driven by
+    // elapsed time, so skipping frames never changes its speed.
+    const capped = window.matchMedia("(max-width: 899px)").matches;
+    let lastDrawn = 0;
+
     const tick = (now: number) => {
-      draw(now);
+      if (!capped || now - lastDrawn >= PHONE_FRAME_MS) {
+        lastDrawn = now;
+        draw(now);
+      }
       frame = requestAnimationFrame(tick);
     };
 

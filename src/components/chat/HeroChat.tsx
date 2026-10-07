@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { BrandLogo } from "@/components/layout/BrandLogo";
 import { CONTACT } from "@/lib/site/contact";
 
@@ -71,24 +71,37 @@ const ChatPanel = dynamic(
 
 export function HeroChat() {
   const [ready, setReady] = useState(false);
+  const asideRef = useRef<HTMLElement>(null);
   const load = useCallback(() => setReady(true), []);
 
+  // The chat library is large and only matters once the visitor can see or
+  // touch the chat, so load it when the section is about to scroll into view.
   useEffect(() => {
-    if (ready) return;
+    const node = asideRef.current;
+    if (ready || !node) return;
 
-    const onIdle = () => setReady(true);
-
-    if (typeof window.requestIdleCallback === "function") {
-      const idleId = window.requestIdleCallback(onIdle, { timeout: 2500 });
-      return () => window.cancelIdleCallback(idleId);
+    if (typeof IntersectionObserver === "undefined") {
+      const timeoutId = window.setTimeout(load, 3000);
+      return () => window.clearTimeout(timeoutId);
     }
 
-    const timeoutId = window.setTimeout(onIdle, 1800);
-    return () => window.clearTimeout(timeoutId);
-  }, [ready]);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) load();
+      },
+      { rootMargin: "400px 0px" },
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [ready, load]);
 
   return (
-    <aside className="hero-chat" onPointerDown={load} onFocusCapture={load}>
+    <aside
+      ref={asideRef}
+      className="hero-chat"
+      onPointerDown={load}
+      onFocusCapture={load}
+    >
       {ready ? <ChatPanel variant="terminal" /> : <HeroChatShell />}
     </aside>
   );
