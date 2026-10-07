@@ -1,4 +1,4 @@
-import { RING_COUNT } from "./chrome-geometry";
+import { RING_COUNT } from "./ring-math";
 import { SLOT_FILL } from "./motion";
 
 /**
