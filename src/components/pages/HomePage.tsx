@@ -1,6 +1,7 @@
 import { AeoBlock } from "@/components/home/AeoBlock";
 import { AssistantSection } from "@/components/home/AssistantSection";
 import { ClosingCta } from "@/components/home/ClosingCta";
+import { GuidesSection } from "@/components/home/GuidesSection";
 import { Ticker } from "@/components/home/Ticker";
 import { HeroCopy } from "@/components/hero/HeroCopy";
 import { HeroStage } from "@/components/hero/HeroStage";
@@ -21,6 +22,7 @@ export function HomePage() {
       <ServicesSection />
       <StatBand />
       <ProcessSection />
+      <GuidesSection />
       <FaqSection />
       <ClosingCta />
     </>
