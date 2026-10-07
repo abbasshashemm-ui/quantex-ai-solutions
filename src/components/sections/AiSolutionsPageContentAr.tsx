@@ -103,6 +103,7 @@ export function AiSolutionsPageContentAr() {
                   className="mt-4 inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
                 >
                   اعرف المزيد
+                  <span className="sr-only">: {item.title}</span>
                 </Link>
               </li>
             ))}
