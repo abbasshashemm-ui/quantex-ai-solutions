@@ -116,7 +116,7 @@ export function ServicesNavDropdown({
       <button
         type="button"
         data-interactive
-        className={`inline-flex min-h-12 items-center gap-1.5 rounded-full border px-4 text-sm transition-colors ${
+        className={`inline-flex min-h-12 items-center gap-1.5 rounded-control border px-4 text-sm transition-colors ${
           open
             ? "border-line-strong bg-foreground/6 text-foreground"
             : "border-transparent text-foreground/80 hover:border-foreground/40 hover:bg-foreground/6 hover:text-foreground"

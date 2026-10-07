@@ -20,7 +20,7 @@ export function Footer() {
       <div className="mx-auto max-w-7xl py-8 pb-[calc(2rem+env(safe-area-inset-bottom))] sm:py-10">
         <div className="grid grid-cols-2 gap-4 sm:gap-5 md:gap-6 lg:grid-cols-3 lg:gap-8">
           <div className="col-span-2 lg:col-span-1">
-            <BrandLogo className="h-5 w-auto max-w-[10rem] sm:h-6" />
+            <BrandLogo className="text-[1.5rem] sm:text-[1.75rem]" />
             <p className="mt-3 max-w-sm text-xs leading-relaxed text-foreground/75 sm:text-sm">
               {COMPANY.tagline}
             </p>
@@ -31,7 +31,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram"
-                  className="footer-social inline-flex h-11 w-11 items-center justify-center rounded-full border border-line-strong text-foreground/85 transition-colors hover:border-foreground/40 hover:bg-foreground/6 hover:text-foreground"
+                  className="footer-social inline-flex h-11 w-11 items-center justify-center rounded-control border border-line-strong text-foreground/85 transition-colors hover:border-foreground/40 hover:bg-foreground/6 hover:text-foreground"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -65,7 +65,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="LinkedIn"
-                  className="footer-social inline-flex h-11 w-11 items-center justify-center rounded-full border border-line-strong text-foreground/85 transition-colors hover:border-foreground/40 hover:bg-foreground/6 hover:text-foreground"
+                  className="footer-social inline-flex h-11 w-11 items-center justify-center rounded-control border border-line-strong text-foreground/85 transition-colors hover:border-foreground/40 hover:bg-foreground/6 hover:text-foreground"
                 >
                   <svg
                     viewBox="0 0 24 24"
@@ -89,7 +89,7 @@ export function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="WhatsApp"
-                  className="footer-social inline-flex h-11 w-11 items-center justify-center rounded-full border border-line-strong text-foreground/85 transition-colors hover:border-foreground/40 hover:bg-foreground/6 hover:text-foreground"
+                  className="footer-social inline-flex h-11 w-11 items-center justify-center rounded-control border border-line-strong text-foreground/85 transition-colors hover:border-foreground/40 hover:bg-foreground/6 hover:text-foreground"
                 >
                   <svg
                     viewBox="0 0 24 24"

@@ -51,6 +51,8 @@
   --font-display: var(--font-condensed);
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --radius-lg: var(--radius);
+  /* Buttons, chips, links and icon buttons: softly squared, not capsules. */
+  --radius-control: 0.5rem;
 }
 
 html {
@@ -231,7 +233,7 @@ section[id] {
   min-height: 3.25rem;
   align-items: center;
   justify-content: center;
-  border-radius: 999px;
+  border-radius: var(--radius-control);
   padding-inline: 1.65rem;
   font-size: 0.9375rem;
   font-weight: 600;
@@ -659,7 +661,7 @@ a:hover > .alu-link span[aria-hidden],
   min-height: 2rem;
   padding-inline: 0.85rem;
   border: 1px solid rgba(255, 255, 255, 0.75);
-  border-radius: 999px;
+  border-radius: var(--radius-control);
   background: rgba(255, 255, 255, 0.45);
   font-size: 0.75rem;
   font-weight: 500;
@@ -1504,7 +1506,7 @@ a:hover > .alu-link span[aria-hidden],
   min-height: 3rem;
   min-width: 0;
   padding: 0.6rem 1.15rem;
-  border-radius: 999px;
+  border-radius: var(--radius-control);
   font-size: 0.8rem;
   font-weight: 600;
   color: var(--foreground);
@@ -1646,7 +1648,7 @@ a:hover > .alu-link span[aria-hidden],
   display: inline-flex;
   min-height: 2.25rem;
   align-items: center;
-  border-radius: 999px;
+  border-radius: var(--radius-control);
   border: 1px solid var(--line-strong);
   background: rgba(255, 255, 255, 0.7);
   padding: 0 0.85rem;
@@ -1663,7 +1665,7 @@ a:hover > .alu-link span[aria-hidden],
   height: 2.5rem;
   align-items: center;
   justify-content: center;
-  border-radius: 999px;
+  border-radius: var(--radius-control);
   border: 0;
   background: transparent;
   color: var(--foreground);
@@ -1779,7 +1781,7 @@ a:hover > .alu-link span[aria-hidden],
 
 .chat-panel__error-action {
   min-height: 2.25rem;
-  border-radius: 999px;
+  border-radius: var(--radius-control);
   border: 1px solid var(--line-strong);
   background: rgba(255, 255, 255, 0.7);
   padding: 0 0.8rem;
@@ -1800,7 +1802,7 @@ a:hover > .alu-link span[aria-hidden],
   display: inline-flex;
   min-height: 2.5rem;
   align-items: center;
-  border-radius: 999px;
+  border-radius: var(--radius-control);
   border: 1px solid var(--line-strong);
   background: rgba(255, 255, 255, 0.75);
   padding: 0 1rem;
@@ -1872,7 +1874,7 @@ span.chat-panel__input {
   align-items: center;
   justify-content: center;
   border: 0;
-  border-radius: 50%;
+  border-radius: var(--radius-control);
   background: var(--foreground);
   color: #f4f6f9;
   cursor: pointer;
@@ -2343,7 +2345,7 @@ span.chat-panel__input {
   align-items: center;
   justify-content: center;
   border: 1px solid var(--line-strong);
-  border-radius: 999px;
+  border-radius: var(--radius-control);
   background: transparent;
   color: var(--foreground);
   cursor: pointer;
@@ -2400,4 +2402,17 @@ span.chat-panel__input {
 
 .rtl-page .page-h2 {
   font-size: clamp(1.75rem, 4vw, 2.75rem);
+}
+
+/* ——— Wordmark ——— */
+.brand-wordmark {
+  display: inline-block;
+  font-family: var(--font-condensed), var(--font-outfit), system-ui, sans-serif;
+  font-weight: 800;
+  font-style: italic;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  line-height: 1;
+  color: var(--foreground);
+  white-space: nowrap;
 }
