@@ -34,7 +34,6 @@ export function buildOrganizationSchema(): JsonLd {
     description: SITE.description,
     email: SITE.email,
     telephone: SITE.phone,
-    foundingDate: SITE.foundingDate,
     founder: { "@id": `${getSiteUrl()}/#founder` },
     address: {
       "@type": "PostalAddress",

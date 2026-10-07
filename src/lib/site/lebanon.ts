@@ -44,7 +44,7 @@ export const LEBANON_EN: LebanonContent = {
   answer: {
     question: "Who builds AI solutions in Lebanon?",
     answer:
-      "Lebanon has local software houses, agencies and independent studios that build AI solutions: chatbots, AI agents, automation and custom software. Quantex is a Beirut studio founded in 2024 that builds AI assistants for WhatsApp and websites in Arabic, French and English, automates repetitive business work, and builds custom AI software. We work with businesses across Lebanon and abroad, and you speak directly with the founder.",
+      "Lebanon has local software houses, agencies and independent studios that build AI solutions: chatbots, AI agents, automation and custom software. Quantex is a Beirut studio that builds AI assistants for WhatsApp and websites in Arabic, French and English, automates repetitive business work, and builds custom AI software. We work with businesses across Lebanon and abroad, and you speak directly with the founder.",
   },
   services: {
     eyebrow: "What we build",
@@ -138,7 +138,7 @@ export const LEBANON_AR: LebanonContent = {
   answer: {
     question: "من يبني حلول الذكاء الاصطناعي في لبنان؟",
     answer:
-      "في لبنان شركات برمجيات ووكالات واستوديوهات مستقلة تبني حلول الذكاء الاصطناعي: روبوتات الدردشة ووكلاء الذكاء الاصطناعي والأتمتة والبرمجيات المخصصة. كوانتكس استوديو في بيروت تأسس عام 2024، يبني مساعدين أذكياء لواتساب والمواقع بالعربية والفرنسية والإنكليزية، ويؤتمت العمل التجاري المتكرر، ويبني برمجيات ذكاء اصطناعي مخصصة. نعمل مع شركات في لبنان وخارجه، وتتحدث مباشرة مع المؤسس.",
+      "في لبنان شركات برمجيات ووكالات واستوديوهات مستقلة تبني حلول الذكاء الاصطناعي: روبوتات الدردشة ووكلاء الذكاء الاصطناعي والأتمتة والبرمجيات المخصصة. كوانتكس استوديو في بيروت يبني مساعدين أذكياء لواتساب والمواقع بالعربية والفرنسية والإنكليزية، ويؤتمت العمل التجاري المتكرر، ويبني برمجيات ذكاء اصطناعي مخصصة. نعمل مع شركات في لبنان وخارجه، وتتحدث مباشرة مع المؤسس.",
   },
   services: {
     eyebrow: "ما نبنيه",
