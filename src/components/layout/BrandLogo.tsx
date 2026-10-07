@@ -7,25 +7,14 @@ type BrandLogoProps = {
 };
 
 /** Dark artwork for the light theme, light artwork for the dark theme. */
-const ARTWORK = {
-  full: {
-    light: "/quantex-logo-dark.png",
-    dark: "/quantex-logo.png",
-    alt: "QUANTEX",
-    width: 360,
-    height: 72,
-    sizes: "(max-width: 768px) 200px, 260px",
-    className: "h-8 w-auto max-w-[min(260px,58vw)]",
-  },
-  mark: {
-    light: "/quantex-mark-dark.png",
-    dark: "/quantex-mark.png",
-    alt: "Quantex",
-    width: 40,
-    height: 40,
-    sizes: "40px",
-    className: "h-9 w-auto",
-  },
+const MARK = {
+  light: "/quantex-mark-dark.png",
+  dark: "/quantex-mark.png",
+  alt: "Quantex",
+  width: 40,
+  height: 40,
+  sizes: "40px",
+  className: "h-9 w-auto",
 } as const;
 
 export function BrandLogo({
@@ -33,22 +22,31 @@ export function BrandLogo({
   priority = false,
   variant = "full",
 }: BrandLogoProps) {
-  const art = ARTWORK[variant];
+  // The wordmark is live text in the same condensed italic as the headlines,
+  // so it needs no image and always matches the theme.
+  if (variant === "full") {
+    return (
+      <span className={`brand-wordmark ${className ?? "text-[1.75rem]"}`}>
+        Quantex
+      </span>
+    );
+  }
+
   const shared = {
-    alt: art.alt,
-    width: art.width,
-    height: art.height,
-    sizes: art.sizes,
+    alt: MARK.alt,
+    width: MARK.width,
+    height: MARK.height,
+    sizes: MARK.sizes,
     quality: 70,
     priority,
   };
   const { props: dark } = getImageProps({
     ...shared,
     priority: false,
-    src: art.dark,
+    src: MARK.dark,
   });
-  const { props: light } = getImageProps({ ...shared, src: art.light });
-  const size = className ?? art.className;
+  const { props: light } = getImageProps({ ...shared, src: MARK.light });
+  const size = className ?? MARK.className;
 
   // Both are in the page and CSS shows the one for the current theme (the
   // theme can change without a reload, which <picture> could not follow).
@@ -57,7 +55,7 @@ export function BrandLogo({
   /* eslint-disable @next/next/no-img-element -- props come from getImageProps */
   return (
     <>
-      <img {...light} alt={art.alt} className={`${size} brand-logo-light`} />
+      <img {...light} alt={MARK.alt} className={`${size} brand-logo-light`} />
       <img {...dark} alt="" className={`${size} brand-logo-dark`} />
     </>
   );
