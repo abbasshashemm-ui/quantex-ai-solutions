@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { getAllServiceSlugs } from "@/lib/services/data";
-import { articlePath, getIndustrySlugs } from "@/lib/articles";
+import { articlePath, getArticleSlugs } from "@/lib/articles";
 import { absoluteUrl } from "@/lib/seo/metadata";
 
 export default function sitemap(): MetadataRoute.Sitemap {
@@ -26,7 +26,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.85,
   }));
 
-  const articleRoutes: MetadataRoute.Sitemap = getIndustrySlugs().flatMap((slug) =>
+  const articleRoutes: MetadataRoute.Sitemap = getArticleSlugs().flatMap((slug) =>
     (["en", "ar"] as const).map((lang) => ({
       url: absoluteUrl(articlePath(lang, slug)),
       lastModified,

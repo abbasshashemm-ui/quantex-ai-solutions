@@ -6,7 +6,7 @@ import {
   buildArticleMetadata,
   buildArticleSchemas,
 } from "@/components/seo/articleMetadata";
-import { getIndustryArticle, getIndustrySlugs } from "@/lib/articles";
+import { getArticle, getArticleSlugs } from "@/lib/articles";
 
 const LANG = "ar" as const;
 
@@ -16,18 +16,18 @@ export const dynamicParams = false;
 type PageProps = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
-  return getIndustrySlugs().map((slug) => ({ slug }));
+  return getArticleSlugs().map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const article = getIndustryArticle(LANG, slug);
+  const article = getArticle(LANG, slug);
   return article ? buildArticleMetadata(LANG, article) : {};
 }
 
 export default async function Page({ params }: PageProps) {
   const { slug } = await params;
-  const article = getIndustryArticle(LANG, slug);
+  const article = getArticle(LANG, slug);
   if (!article) notFound();
 
   return (
