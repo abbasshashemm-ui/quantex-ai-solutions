@@ -9,12 +9,12 @@ export const SITE_FAQ: FaqItem[] = [
   {
     question: "What does Quantex do?",
     answer:
-      "Quantex is a Beirut studio founded in 2024. We build websites that turn visitors into customers, AI assistants that answer customer questions on your website and WhatsApp, and the custom software, automation and search work behind your business. We work with companies in Lebanon and abroad.",
+      "Quantex is a Beirut studio. We build websites that turn visitors into customers, AI assistants that answer customer questions on your website and WhatsApp, and the custom software, automation and search work behind your business. We work with companies in Lebanon and abroad.",
   },
   {
     question: "Who is behind Quantex?",
     answer:
-      "Quantex was founded in 2024 by Abbas Hachem, a full-stack developer. When you get in touch, you speak directly with him throughout the project.",
+      "Quantex is led by its founder, Abbas Hachem, a full-stack developer. When you get in touch, you speak directly with him throughout the project.",
   },
   {
     question: "What services does Quantex offer?",

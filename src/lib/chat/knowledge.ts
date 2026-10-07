@@ -54,7 +54,7 @@ export function buildSiteKnowledge(): string {
     "## About",
     ABOUT_HERO.lead,
     formatStory(),
-    `Founder: ${FOUNDER.name} (${FOUNDER.role}, ${FOUNDER.title}, founded 2024).`,
+    `Founder: ${FOUNDER.name} (${FOUNDER.role}, ${FOUNDER.title}).`,
     "",
     "## Services",
     formatServices(),

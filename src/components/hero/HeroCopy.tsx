@@ -44,7 +44,6 @@ export function HeroCopy() {
             <span className="alu-chip__dot" aria-hidden />
             10+ paying clients
           </li>
-          <li className="alu-chip">Founded 2024</li>
           <li className="alu-chip">Replies within 24 hours</li>
         </ul>
       </div>

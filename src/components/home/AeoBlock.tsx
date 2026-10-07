@@ -22,7 +22,7 @@ export function AeoBlock() {
         <div>
           <div className="aeo-answer space-y-4 text-base leading-[1.75] text-foreground/85 sm:text-[1.0625rem]">
             <p>
-              Quantex is a Beirut studio founded in 2024. We build websites that
+              Quantex is a Beirut studio. We build websites that
               turn visitors into customers, and AI assistants that answer
               customer questions on your website and WhatsApp—plus the custom
               software, automation and search work behind your business.

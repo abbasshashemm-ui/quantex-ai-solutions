@@ -19,7 +19,6 @@ export const SITE = {
   email: CONTACT.email,
   phone: CONTACT.phoneDisplay,
   location: CONTACT.location,
-  foundingDate: "2024",
   founder: "Abbas Hachem",
   logoPath: "/quantex-logo-dark.png",
   markPath: "/quantex-mark-dark.png",

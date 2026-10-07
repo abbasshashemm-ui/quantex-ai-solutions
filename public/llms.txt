@@ -1,6 +1,6 @@
 # Quantex AI Solutions
 
-> Beirut studio (founded 2024) that builds websites that win customers, AI assistants that answer them on your website and WhatsApp, and the custom software, automation and search work behind your business.
+> Beirut studio that builds websites that win customers, AI assistants that answer them on your website and WhatsApp, and the custom software, automation and search work behind your business.
 
 ## Company
 

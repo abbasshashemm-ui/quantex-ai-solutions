@@ -7,17 +7,17 @@ export const FOUNDER = {
 export const ABOUT_HERO = {
   eyebrow: "About Quantex",
   title: "A Beirut studio that builds what it promises.",
-  lead: "Quantex is a Beirut studio founded in 2024. We build websites that win customers, AI assistants that answer them, and the software and automation behind your business—and we explain everything in plain language, from the first call.",
+  lead: "Quantex is a Beirut studio. We build websites that win customers, AI assistants that answer them, and the software and automation behind your business—and we explain everything in plain language, from the first call.",
 } as const;
 
 export const ABOUT_STORY = {
   eyebrow: "Background",
   title: "Who is behind Quantex?",
   paragraphs: [
-    "Abbas Hachem started Quantex in 2024 after years of building software for startups and businesses. The pattern was always the same: plenty of talk about growth, but slow websites, chatbots that gave wrong answers, and systems that were hard to change once the builders had left.",
+    "Abbas Hachem started Quantex after years of building software for startups and businesses. The pattern was always the same: plenty of talk about growth, but slow websites, chatbots that gave wrong answers, and systems that were hard to change once the builders had left.",
     "Quantex is built to break that pattern. We explain things in plain language, test the risky parts early, and hand over work your team can actually run. We choose the right tools for each project instead of forcing every client into the same template.",
     {
-      before: "Since 2024 we have worked with ",
+      before: "We have worked with ",
       highlight: "10+ paying clients",
       after:
         " across Lebanon and the wider region, on websites, AI assistants, custom software and automation. When you get in touch, you speak directly with Abbas, the person leading the work.",
@@ -26,7 +26,6 @@ export const ABOUT_STORY = {
 } as const;
 
 export const ABOUT_STATS = [
-  { value: "2024", label: "Year founded" },
   { value: "10+", label: "Paying clients" },
   { value: "6", label: "Services" },
   { value: "24h", label: "Reply time" },

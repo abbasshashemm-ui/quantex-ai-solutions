@@ -1062,13 +1062,12 @@ a:hover > .alu-link span[aria-hidden],
 /* Stats */
 .alu-stats {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.75rem;
 }
 
 @media (min-width: 800px) {
   .alu-stats {
-    grid-template-columns: repeat(4, 1fr);
     gap: 1.25rem;
   }
 }
@@ -1093,6 +1092,27 @@ a:hover > .alu-link span[aria-hidden],
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--muted);
+}
+
+/* Phones: three stats share one row, so they tighten up. */
+@media (max-width: 639px) {
+  .alu-stats > * {
+    min-width: 0;
+  }
+
+  .alu-stat {
+    padding: 1rem 0.75rem;
+  }
+
+  .alu-stat__value {
+    font-size: 2.6rem;
+  }
+
+  .alu-stat__label {
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    overflow-wrap: anywhere;
+  }
 }
 
 /* Process */
