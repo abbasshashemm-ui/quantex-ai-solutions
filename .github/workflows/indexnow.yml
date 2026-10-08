@@ -1,0 +1,14 @@
+name: IndexNow
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+jobs:
+  notify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Wait for the deployment to go live
+        if: github.event_name == 'push'
+        run: sleep 240
+      - run: node scripts/indexnow.mjs
