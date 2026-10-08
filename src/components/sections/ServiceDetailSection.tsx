@@ -6,6 +6,8 @@ import {
   SOLUTIONS_OVERVIEW_HREF,
   getRelatedNavServices,
 } from "@/lib/services/nav";
+import { PricingPlans } from "@/components/sections/PricingPlans";
+import { CUSTOM_SCOPES, PRICE_GROUPS } from "@/lib/pricing/data";
 import { CONTACT } from "@/lib/site/contact";
 
 type ServiceDetailSectionProps = {
@@ -41,6 +43,8 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
   const indexLabel = String(service.index + 1).padStart(2, "0");
   const { nav: navMeta, overview, detail } = service;
   const related = getRelatedNavServices(service.slug);
+  const priceGroup = PRICE_GROUPS.find((g) => g.serviceSlug === service.slug);
+  const customScope = CUSTOM_SCOPES.find((c) => c.slug === service.slug);
   const spokePages = [
     { href: "/about", label: "About the studio", tagline: "Who builds this" },
     {
@@ -181,6 +185,33 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
             </ol>
           </section>
         </div>
+
+        {priceGroup ? (
+          <div className="mt-14 sm:mt-20">
+            <PricingPlans group={{ ...priceGroup, title: "Pricing" }} />
+            <p className="mt-4 text-sm">
+              <Link href="/pricing" data-interactive className="underline underline-offset-4">
+                See all pricing
+              </Link>
+            </p>
+          </div>
+        ) : null}
+
+        {customScope ? (
+          <section className="service-page__panel alu-glass page-panel mt-14 sm:mt-20 sm:p-8">
+            <p className="page-label">Pricing</p>
+            <h2 className="alu-display mt-3 text-[2.4rem] sm:text-[3rem]">
+              Scoped per project
+            </h2>
+            <p className="mt-3 max-w-2xl text-base text-foreground/85">
+              {customScope.text} Tell us the problem and we reply within 24
+              hours.
+            </p>
+            <Link href="/contact" data-interactive className="btn-primary mt-6 inline-flex">
+              Get a quote
+            </Link>
+          </section>
+        ) : null}
 
         <section className="mt-14 sm:mt-20">
           <h2 className="alu-display page-h2">What else do we offer?</h2>

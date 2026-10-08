@@ -1,6 +1,5 @@
 export const SITE_URL = "https://www.quantexai.solutions";
 export const SITE_HOST = "quantexai.solutions";
-export const LEGACY_SITE_URL = "https://www.quantexai.info";
 
 export const COMPANY = {
   name: "Quantex AI Solutions",
@@ -92,6 +91,7 @@ export const SITE_NAV = [
 
 export const FOOTER_NAV = [
   ...SITE_NAV.filter((item) => item.href !== "/"),
+  { label: "Pricing", href: "/pricing" },
   { label: "AI Solutions in Lebanon", href: "/ai-solutions-lebanon" },
 ] as const;
 
