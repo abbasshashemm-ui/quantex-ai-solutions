@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { useEffect, useId, useRef, useState } from "react";
 import { NAV_SERVICE_ITEMS, SOLUTIONS_OVERVIEW_HREF } from "@/lib/services/nav";
-import { LEGACY_SITE_URL } from "@/lib/site/contact";
 import { ServiceNavIcon } from "./ServiceNavIcon";
 
 type ServicesNavDropdownProps = {
@@ -203,52 +202,6 @@ export function ServicesNavDropdown({
                 </span>
               </span>
             </Link>
-
-            <a
-              href={LEGACY_SITE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              role="menuitem"
-              data-interactive
-              className="services-nav-dropdown__item group flex gap-3 rounded-xl px-3 py-2.5 transition-colors hover:bg-foreground/6"
-              onClick={close}
-            >
-              <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-line bg-void text-metallic">
-                <svg
-                  className="h-[1.125rem] w-[1.125rem]"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="1.5"
-                  aria-hidden
-                >
-                  <path d="M5 7h14v10H5z" strokeLinejoin="round" />
-                  <path d="M8 11h8M8 14h5" strokeLinecap="round" />
-                </svg>
-              </span>
-              <span className="min-w-0 pt-0.5">
-                <span className="flex items-center gap-1.5 text-sm font-semibold text-foreground">
-                  quantexai.info
-                  <svg
-                    className="h-3 w-3 text-foreground/70"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    aria-hidden
-                  >
-                    <path
-                      d="M14 5h5v5M10 14L19 5M19 14v5H5V5h5"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    />
-                  </svg>
-                </span>
-                <span className="mt-0.5 block text-xs text-foreground/70">
-                  Previous site & portfolio
-                </span>
-              </span>
-            </a>
           </div>
         </div>
       ) : null}

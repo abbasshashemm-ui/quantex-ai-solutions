@@ -1,6 +1,5 @@
 export const SITE_URL = "https://www.quantexai.solutions";
 export const SITE_HOST = "quantexai.solutions";
-export const LEGACY_SITE_URL = "https://www.quantexai.info";
 
 export const COMPANY = {
   name: "Quantex AI Solutions",
