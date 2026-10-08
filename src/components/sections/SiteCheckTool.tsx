@@ -16,7 +16,7 @@ const GROUP_LABEL: Record<CheckGroup, string> = {
   trust: "Trust and technical",
 };
 
-const STATUS_LABEL = { pass: "Good", warn: "Improve", fail: "Fix" } as const;
+const STATUS_LABEL = { pass: "Good, can be better", warn: "Needs work", fail: "Fix now" } as const;
 const STATUS_CLASS = {
   pass: "text-signal",
   warn: "text-[var(--status-warn)]",
@@ -24,9 +24,9 @@ const STATUS_CLASS = {
 } as const;
 
 function verdict(score: number): string {
-  if (score >= 85) return "Strong. A few details left to polish.";
-  if (score >= 60) return "Decent foundation, but customers and AI assistants are still missing you.";
-  if (score >= 35) return "Your site is hard to find. The fixes below are the fastest wins.";
+  if (score >= 80) return "A solid base, but competitors who fix the items below will outrank you.";
+  if (score >= 55) return "Customers and AI assistants are still missing you. Each item below is lost enquiries.";
+  if (score >= 30) return "Your site is hard to find. The fixes below are the fastest wins.";
   return "Search engines and AI assistants can barely see this site. Good news: it is fixable.";
 }
 
@@ -92,6 +92,7 @@ export function SiteCheckTool() {
   }
 
   const failing = report?.checks.filter((c) => c.status !== "pass") ?? [];
+  const improvable = report ? report.checks.filter((c) => c.status === "pass" && c.next).length : 0;
   const whatsapp = report
     ? `${CONTACT.whatsapp}?text=${encodeURIComponent(
         `Hi QUANTEX, I ran the free site check on ${report.finalUrl} (score ${report.score}/100). Can you help me fix it?`,
@@ -187,6 +188,11 @@ export function SiteCheckTool() {
                             <strong className="font-semibold">How to fix: </strong>
                             {c.fix}
                           </p>
+                        ) : c.next ? (
+                          <p className="mt-2 text-sm text-foreground/90">
+                            <strong className="font-semibold">Next level: </strong>
+                            {c.next}
+                          </p>
                         ) : null}
                       </li>
                     ))}
@@ -197,8 +203,8 @@ export function SiteCheckTool() {
             <div className="alu-glass mt-12 px-5 py-10 text-center sm:px-10 sm:py-14">
               <h3 className="alu-display mx-auto max-w-3xl text-[clamp(2.4rem,6vw,4.5rem)]">
                 {failing.length > 0
-                  ? `${failing.length} thing${failing.length === 1 ? "" : "s"} to fix. Want us to do it?`
-                  : "Looking good. Want to go further?"}
+                  ? `${failing.length} thing${failing.length === 1 ? "" : "s"} to fix, ${improvable} more to improve. Want us to do it?`
+                  : `${improvable} ways to pull ahead of competitors. Want us to do it?`}
               </h3>
               <p className="mx-auto mt-4 max-w-lg text-base text-foreground/80">
                 We build and fix sites to rank on Google and get recommended by AI assistants.

@@ -8,6 +8,7 @@ export type CheckResult = {
   status: CheckStatus;
   detail: string;
   fix?: string;
+  next?: string;
 };
 
 export type SiteCheckReport = {

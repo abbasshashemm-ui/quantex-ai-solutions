@@ -62,6 +62,29 @@ function blockedBots(robots: string): string[] {
   });
 }
 
+// Honest "next level" advice shown even on passing checks.
+const NEXT: Record<string, string> = {
+  indexable: "Being allowed is the baseline. Make sure every service page is linked from the menu so Google finds them all.",
+  title: "Test titles that include your city and a clear benefit. Small wording changes can lift clicks noticeably.",
+  description: "Add a reason to choose you (price, speed, guarantee) and a call to action to lift clicks from search results.",
+  h1: "Use the words your customers actually search for in the main heading.",
+  content: "Top-ranking pages usually go deeper: pricing, process, FAQs, case studies and location details.",
+  canonical: "Check every page, not only the home page, has the right canonical.",
+  sitemap: "Submit it in Google Search Console and Bing Webmaster Tools, and keep real last-modified dates.",
+  "ai-bots": "Allowed is not the same as recommended. AI assistants need clear, quotable answers to pick you.",
+  llms: "Keep it updated, and link your best pages with a one-line description each.",
+  schema: "Add service, pricing, review and FAQ schema so AI and Google can quote more facts about you.",
+  faq: "Add a dedicated FAQ for each service and your city, written the way customers ask.",
+  https: "Add security headers and make sure every page and image loads securely.",
+  mobile: "Mobile-ready is not mobile-fast. Check real phone speed and tap targets.",
+  lang: "Offer an Arabic version with matching hreflang to reach a second audience.",
+  alt: "Write alt text that describes the image and, where natural, your service.",
+  social: "Use a branded share image so links stand out when sent on WhatsApp.",
+  headings: "Structure each page with questions as headings so AI can lift answers directly.",
+  arabic: "Make sure Arabic pages are as complete as the English ones, with proper hreflang.",
+  contact: "Make the phone or WhatsApp button visible on every page, not only the contact page.",
+};
+
 function check(
   id: string,
   group: CheckGroup,
@@ -70,7 +93,15 @@ function check(
   detail: string,
   fix?: string,
 ): CheckResult {
-  return { id, group, label, status, detail, ...(status !== "pass" && fix ? { fix } : {}) };
+  return {
+    id,
+    group,
+    label,
+    status,
+    detail,
+    ...(status !== "pass" && fix ? { fix } : {}),
+    ...(status === "pass" && NEXT[id] ? { next: NEXT[id] } : {}),
+  };
 }
 
 async function tryFetch(url: URL): Promise<FetchedPage | null> {
@@ -154,16 +185,16 @@ export async function analyzeSite(start: URL): Promise<SiteCheckReport> {
   checks.push(
     title.length === 0
       ? check("title", "search", "Page title", "fail", "No title found.", "Add a clear title with your service and city, about 30 to 60 characters.")
-      : check("title", "search", "Page title", title.length >= 20 && title.length <= 65 ? "pass" : "warn",
+      : check("title", "search", "Page title", title.length >= 30 && title.length <= 60 && /[|\-–—:·]/.test(title) ? "pass" : "warn",
           `“${title.slice(0, 80)}” (${title.length} characters)`,
-          "Aim for about 30 to 60 characters, naming what you do and where."),
+          "Aim for 30 to 60 characters with your service, your city and your brand, separated by a dash or bar."),
   );
   checks.push(
     description.length === 0
       ? check("description", "search", "Search description", "fail", "No meta description found.", "Write a 70 to 160 character summary that makes people want to click.")
-      : check("description", "search", "Search description", description.length >= 70 && description.length <= 170 ? "pass" : "warn",
+      : check("description", "search", "Search description", description.length >= 110 && description.length <= 165 ? "pass" : "warn",
           `${description.length} characters`,
-          "Aim for 70 to 160 characters that say what you offer and why to choose you."),
+          "Aim for 110 to 160 characters that say what you offer and why to choose you."),
   );
   checks.push(
     check("h1", "search", "Main heading", h1Count === 1 ? "pass" : h1Count === 0 ? "fail" : "warn",
@@ -171,12 +202,12 @@ export async function analyzeSite(start: URL): Promise<SiteCheckReport> {
       "Use exactly one H1 that states what the page is about."),
   );
   checks.push(
-    check("content", "search", "Enough readable text", words >= 300 ? "pass" : words >= 120 ? "warn" : "fail",
+    check("content", "search", "Enough readable text", words >= 700 ? "pass" : words >= 250 ? "warn" : "fail",
       `About ${words} words of text on the page.`,
       "Add clear, useful text about your services, prices, location and answers to common questions. Pages with very little text rarely rank."),
   );
   checks.push(
-    check("canonical", "search", "Canonical link", canonical ? "pass" : "warn",
+    check("canonical", "search", "Canonical link", canonical && canonical.replace(/\/$/, "") === finalUrl.toString().split("?")[0].replace(/\/$/, "") ? "pass" : "warn",
       canonical ? "Set." : "Not found.",
       "Add a canonical link so Google knows the one true address of the page."),
   );
@@ -201,7 +232,7 @@ export async function analyzeSite(start: URL): Promise<SiteCheckReport> {
   );
   const hasBusiness = types.some((t) => /Organization|LocalBusiness|ProfessionalService|Store|Restaurant/i.test(t));
   checks.push(
-    check("schema", "ai", "Structured data (schema)", types.length === 0 ? "fail" : hasBusiness ? "pass" : "warn",
+    check("schema", "ai", "Structured data (schema)", types.length === 0 ? "fail" : hasBusiness && types.length >= 3 ? "pass" : "warn",
       types.length ? `Found: ${types.slice(0, 6).join(", ")}.` : "No structured data found.",
       "Add Organization or LocalBusiness schema with your name, address, phone and services, so search and AI can state facts about you correctly."),
   );
@@ -228,9 +259,9 @@ export async function analyzeSite(start: URL): Promise<SiteCheckReport> {
       "Set the page language (for example en or ar) so search engines serve it to the right people."),
   );
   checks.push(
-    check("alt", "trust", "Image descriptions", imgs.length === 0 || missingAlt === 0 ? "pass" : missingAlt / imgs.length > 0.5 ? "fail" : "warn",
+    check("alt", "trust", "Image descriptions", imgs.length > 0 && missingAlt === 0 ? "pass" : imgs.length === 0 ? "warn" : missingAlt / imgs.length > 0.5 ? "fail" : "warn",
       imgs.length === 0 ? "No images found." : `${missingAlt} of ${imgs.length} images have no description.`,
-      "Describe each meaningful image in its alt text. It helps accessibility and image search."),
+      imgs.length === 0 ? "Add real photos or graphics of your work, team or product, each with a short description. Pages with no visuals feel thin to visitors and to search." : "Describe each meaningful image in its alt text. It helps accessibility and image search."),
   );
   checks.push(
     check("social", "trust", "Link previews (Open Graph)", og ? "pass" : "warn",
@@ -238,7 +269,26 @@ export async function analyzeSite(start: URL): Promise<SiteCheckReport> {
       "Add Open Graph title, description and image so links look good on WhatsApp, LinkedIn and Facebook."),
   );
 
-  const points = (s: CheckStatus) => (s === "pass" ? 1 : s === "warn" ? 0.5 : 0);
+  const h2Count = (html.match(/<h2\b/gi) ?? []).length;
+  checks.push(
+    check("headings", "search", "Heading structure", h2Count >= 4 ? "pass" : h2Count >= 2 ? "warn" : "fail",
+      `${h2Count} section headings found.`,
+      "Break the page into clear sections with descriptive headings (at least 4). It helps readers, Google and AI assistants find answers."),
+  );
+  const hasArabic = /hreflang\s*=\s*["']?ar/i.test(html) || /\blang\s*=\s*["']ar/i.test(html) || /href\s*=\s*["'][^"']*\/ar\//i.test(html);
+  checks.push(
+    check("arabic", "trust", "Arabic version", hasArabic ? "pass" : "warn",
+      hasArabic ? "An Arabic version was detected." : "No Arabic version detected.",
+      "Many customers in Lebanon and the Gulf search in Arabic. An Arabic version with hreflang opens a second audience your competitors may be missing."),
+  );
+  const hasContact = /wa\.me|api\.whatsapp|tel:|mailto:/i.test(html);
+  checks.push(
+    check("contact", "trust", "Easy ways to reach you", hasContact ? "pass" : "fail",
+      hasContact ? "A call, WhatsApp or email link was found." : "No phone, WhatsApp or email link found on the page.",
+      "Put a tap-to-call or WhatsApp button where visitors can see it. No easy contact means lost enquiries."),
+  );
+
+  const points = (s: CheckStatus) => (s === "pass" ? 0.85 : s === "warn" ? 0.35 : 0);
   const score = (items: CheckResult[]) =>
     items.length ? Math.round((items.reduce((n, c) => n + points(c.status), 0) / items.length) * 100) : 0;
   const by = (g: CheckGroup) => checks.filter((c) => c.group === g);
@@ -246,7 +296,7 @@ export async function analyzeSite(start: URL): Promise<SiteCheckReport> {
   return {
     url: start.toString(),
     finalUrl: finalUrl.toString(),
-    score: score(checks),
+    score: Math.min(score(checks), 90),
     groups: { search: score(by("search")), ai: score(by("ai")), trust: score(by("trust")) },
     checks,
   };
