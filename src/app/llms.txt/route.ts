@@ -58,6 +58,7 @@ function buildLlmsTxt(): string {
     "",
     link("حلول الذكاء الاصطناعي", "/ar/ai-solutions", "AI solutions, Arabic version"),
     link("حلول الذكاء الاصطناعي في لبنان", LEBANON_PATH.ar, "AI solutions in Lebanon, Arabic version"),
+    link("الأسعار", "/ar/pricing", "Pricing, Arabic version"),
     link("كل الأدلة", INSIGHTS_PATH.ar, "Index of the Arabic guides"),
     ...getArticleListing("ar").map((guide) =>
       link(guide.title, guide.href, guide.description),
