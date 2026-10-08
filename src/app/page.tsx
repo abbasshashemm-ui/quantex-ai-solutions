@@ -1,6 +1,6 @@
 import { HomePage } from "@/components/pages/HomePage";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { createPageMetadata } from "@/lib/seo/metadata";
+import { absoluteUrl, createPageMetadata } from "@/lib/seo/metadata";
 import { buildHomePageSchemas } from "@/lib/seo/json-ld";
 import { SITE } from "@/lib/seo/site";
 
@@ -11,6 +11,12 @@ export const metadata = createPageMetadata({
   description:
     "Quantex builds websites that win customers and AI assistants that answer them, plus software, automation and search, for businesses in Lebanon and beyond. We reply within 24 hours.",
   path: "/",
+  languages: {
+    en: absoluteUrl("/"),
+    ar: absoluteUrl("/ar"),
+    fr: absoluteUrl("/fr"),
+    "x-default": absoluteUrl("/"),
+  },
   keywords: [
     "web development Lebanon",
     "AI chatbots Beirut",

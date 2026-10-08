@@ -24,6 +24,8 @@ export function SiteCheckBand() {
           <Link
             href="/site-check"
             data-interactive
+            data-conversion="cta_click"
+            data-conversion-location="site_check_band"
             className="btn-primary w-full shrink-0 sm:w-auto"
           >
             Check my site free

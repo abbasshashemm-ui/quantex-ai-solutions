@@ -7,6 +7,11 @@ import {
   PRICING_FAQ,
 } from "@/lib/pricing/data";
 import {
+  CUSTOM_SCOPES_FR,
+  PRICE_GROUPS_FR,
+  PRICING_FAQ_FR,
+} from "@/lib/i18n/pricing-fr";
+import {
   CUSTOM_SCOPES_AR,
   PRICE_GROUPS_AR,
   PRICING_FAQ_AR,
@@ -28,6 +33,7 @@ const COPY = {
     ctaText: "Tell us what you need. We reply within 24 hours and recommend the smallest plan that does the job.",
     start: "Start a project",
     wa: "Message us on WhatsApp",
+    book: "Book a 15-minute call",
   },
   ar: {
     back: "→ الرئيسية",
@@ -44,20 +50,39 @@ const COPY = {
     ctaText: "أخبرنا بما تحتاجه. نردّ خلال 24 ساعة ونقترح أصغر باقة تؤدي الغرض.",
     start: "ابدأ مشروعك",
     wa: "راسلنا على واتساب",
+    book: "احجز مكالمة 15 دقيقة",
+  },
+  fr: {
+    back: "← Accueil",
+    other: { href: "/pricing", label: "English", lang: "en" },
+    eyebrow: "Tarifs",
+    title: "Des prix clairs, en dollars",
+    lead: "Les sites web, le référencement et les assistants IA ont un prix de départ affiché. Les projets sur mesure sont chiffrés après un court appel. Tout est conçu et suivi par le fondateur, donc chaque projet reçoit une attention personnelle.",
+    customTitle: "Sur mesure, chiffré projet par projet",
+    customLead: "Décrivez-nous le problème. Nous répondons sous 24 heures avec un devis ferme.",
+    scoped: "Défini selon le projet",
+    see: "Voir ce que cela couvre",
+    faq: "Questions sur les tarifs",
+    ctaTitle: "Vous hésitez sur la formule ?",
+    ctaText: "Dites-nous ce dont vous avez besoin. Nous répondons sous 24 heures et recommandons la plus petite formule qui fait le travail.",
+    start: "Démarrer un projet",
+    wa: "Écrivez-nous sur WhatsApp",
+    book: "Réserver un appel de 15 minutes",
   },
 } as const;
-import { CONTACT } from "@/lib/site/contact";
+import { CONVERSION_EVENTS } from "@/lib/analytics/events";
+import { bookCallHref, CONTACT } from "@/lib/site/contact";
 
-export function PricingPageContent({ lang = "en" }: { lang?: "en" | "ar" }) {
+export function PricingPageContent({ lang = "en" }: { lang?: "en" | "ar" | "fr" }) {
   const ar = lang === "ar";
   const t = COPY[lang];
-  const groups = ar ? PRICE_GROUPS_AR : PRICE_GROUPS;
-  const scopes = ar ? CUSTOM_SCOPES_AR : CUSTOM_SCOPES;
-  const faq = ar ? PRICING_FAQ_AR : PRICING_FAQ;
+  const groups = ar ? PRICE_GROUPS_AR : lang === "fr" ? PRICE_GROUPS_FR : PRICE_GROUPS;
+  const scopes = ar ? CUSTOM_SCOPES_AR : lang === "fr" ? CUSTOM_SCOPES_FR : CUSTOM_SCOPES;
+  const faq = ar ? PRICING_FAQ_AR : lang === "fr" ? PRICING_FAQ_FR : PRICING_FAQ;
   return (
     <article
       id="pricing-page"
-      lang={ar ? "ar" : undefined}
+      lang={ar ? "ar" : lang === "fr" ? "fr" : undefined}
       dir={ar ? "rtl" : undefined}
       className={`page-shell min-h-[100dvh]${ar ? " rtl-page" : ""}`}
     >
@@ -71,7 +96,7 @@ export function PricingPageContent({ lang = "en" }: { lang?: "en" | "ar" }) {
             href={t.other.href}
             hrefLang={t.other.lang}
             lang={t.other.lang}
-            dir={ar ? "ltr" : "rtl"}
+            dir={t.other.lang === "ar" ? "rtl" : "ltr"}
             data-interactive
             className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
           >
@@ -158,6 +183,17 @@ export function PricingPageContent({ lang = "en" }: { lang?: "en" | "ar" }) {
               className="btn-secondary w-full max-w-xs sm:w-auto"
             >
               {t.wa}
+            </a>
+            <a
+              href={bookCallHref(ar ? "مرحباً كوانتكس، أود حجز مكالمة مدتها 15 دقيقة." : lang === "fr" ? "Bonjour QUANTEX, je souhaite réserver un appel de 15 minutes." : undefined)}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-interactive
+              data-conversion={CONVERSION_EVENTS.BOOK_CALL_CLICK}
+              data-conversion-location="pricing_cta"
+              className="btn-secondary w-full max-w-xs sm:w-auto"
+            >
+              {t.book}
             </a>
           </div>
         </div>

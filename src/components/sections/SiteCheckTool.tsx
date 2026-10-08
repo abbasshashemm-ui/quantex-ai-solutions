@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
-import { CONTACT } from "@/lib/site/contact";
+import { CONVERSION_EVENTS, trackConversion } from "@/lib/analytics/events";
+import { bookCallHref, CONTACT } from "@/lib/site/contact";
 import type {
   CheckGroup,
   CheckResult,
@@ -96,6 +97,7 @@ export function SiteCheckTool() {
     event.preventDefault();
     if (busy) return;
     setBusy(true);
+    trackConversion(CONVERSION_EVENTS.SITE_CHECK_RUN, { location: "site_check" });
     setError(null);
     setReport(null);
     setSpeed("loading");
@@ -257,8 +259,19 @@ export function SiteCheckTool() {
                 Send us this report and we reply within 24 hours with a plan and a price.
               </p>
               <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-                <a href={whatsapp} target="_blank" rel="noopener noreferrer" data-interactive className="btn-primary w-full max-w-xs sm:w-auto">
+                <a href={whatsapp} target="_blank" rel="noopener noreferrer" data-interactive data-conversion={CONVERSION_EVENTS.SITE_CHECK_REPORT_SENT} data-conversion-location="site_check_report" className="btn-primary w-full max-w-xs sm:w-auto">
                   Send this report on WhatsApp
+                </a>
+                <a
+                  href={bookCallHref(`Hi QUANTEX, I ran the free site check on ${report.finalUrl} and would like to book a 15-minute call.`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-interactive
+                  data-conversion={CONVERSION_EVENTS.BOOK_CALL_CLICK}
+                  data-conversion-location="site_check_report"
+                  className="btn-secondary w-full max-w-xs sm:w-auto"
+                >
+                  Book a 15-minute call
                 </a>
                 <Link href="/pricing" data-interactive className="btn-secondary w-full max-w-xs sm:w-auto">
                   See pricing

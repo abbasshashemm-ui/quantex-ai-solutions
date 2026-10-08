@@ -7,32 +7,30 @@ import { absoluteUrl, createPageMetadata } from "@/lib/seo/metadata";
 import { getSiteUrl } from "@/lib/seo/site";
 import { CONTACT } from "@/lib/site/contact";
 import { ArticleFigure } from "@/components/figures/ArticleFigure";
-import { EACML, EACML_FIGURE, EACML_PATH } from "@/lib/projects/eacml";
+import { EACML_PATH } from "@/lib/projects/eacml";
+import { EACML_AR as EACML, EACML_FIGURE_AR as EACML_FIGURE } from "@/lib/i18n/eacml-ar";
+
+const AR_PATH = "/ar/work/eacml-copilot";
 
 export const dynamic = "force-static";
 
 export const metadata: Metadata = createPageMetadata({
   title: EACML.seoTitle,
   description: EACML.description,
-  path: EACML_PATH,
+  path: AR_PATH,
+  locale: "ar_LB",
   languages: {
     en: absoluteUrl(EACML_PATH),
-    ar: absoluteUrl("/ar/work/eacml-copilot"),
+    ar: absoluteUrl(AR_PATH),
     "x-default": absoluteUrl(EACML_PATH),
   },
-  keywords: [
-    "AI regulation checking",
-    "AI building code compliance",
-    "AI drawing review",
-    "on-premises AI",
-    "AI planning permit review",
-  ],
+  keywords: ["فحص الأنظمة بالذكاء الاصطناعي", "مراجعة المخططات الهندسية", "ذكاء اصطناعي داخل المقر"],
 });
 
 const BODY =
   "text-base leading-relaxed text-foreground/85 sm:text-[1.0625rem] sm:leading-[1.75]";
 
-export default function EacmlCopilotPage() {
+export default function EacmlCopilotArPage() {
   return (
     <>
       <JsonLd
@@ -40,34 +38,40 @@ export default function EacmlCopilotPage() {
           {
             "@context": "https://schema.org",
             "@type": "WebPage",
-            "@id": `${absoluteUrl(EACML_PATH)}#webpage`,
-            url: absoluteUrl(EACML_PATH),
+            "@id": `${absoluteUrl(AR_PATH)}#webpage`,
+            url: absoluteUrl(AR_PATH),
+            inLanguage: "ar",
             name: EACML.seoTitle,
             description: EACML.description,
             isPartOf: { "@id": `${getSiteUrl()}/#website` },
             about: { "@id": `${getSiteUrl()}/#organization` },
           },
           buildBreadcrumbSchema([
-            { name: "Home", path: "/" },
-            { name: "Work", path: "/#work" },
-            { name: EACML.title, path: EACML_PATH },
+            { name: "الرئيسية", path: "/ar" },
+            { name: "أعمالنا", path: "/ar#work" },
+            { name: EACML.title, path: AR_PATH },
           ]),
         ]}
       />
-      <article className="about-page page-shell">
+      <article lang="ar" dir="rtl" className="about-page page-shell rtl-page">
         <div className="page-grid-bg absolute inset-0" aria-hidden />
         <div className="relative mx-auto max-w-7xl">
-          <Link href="/#work" data-interactive className="page-back">
-            ← Work
-          </Link>
+          <div className="flex items-center justify-between gap-4">
+            <Link href="/ar#work" data-interactive className="page-back">
+              → أعمالنا
+            </Link>
+            <Link href={EACML_PATH} hrefLang="en" lang="en" dir="ltr" data-interactive className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4">
+              English
+            </Link>
+          </div>
 
           <header className="mt-8 sm:mt-10">
             <PageEyebrow>{EACML.eyebrow}</PageEyebrow>
-            <h1 className="alu-display page-title mt-4">{EACML.title}</h1>
+            <h1 className="alu-display page-title mt-4" dir="ltr">{EACML.title}</h1>
             <p className="alu-lede max-w-3xl">{EACML.pitch}</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="/contact" data-interactive className="btn-primary w-full max-w-xs sm:w-auto">
-                Talk to us
+              <Link href="/ar/contact" data-interactive className="btn-primary w-full max-w-xs sm:w-auto">
+                تواصل معنا
               </Link>
               <a
                 href={CONTACT.whatsapp}
@@ -76,12 +80,12 @@ export default function EacmlCopilotPage() {
                 data-interactive
                 className="btn-secondary w-full max-w-xs sm:w-auto"
               >
-                WhatsApp
+                واتساب
               </a>
             </div>
           </header>
 
-          <dl className="mt-14 grid grid-cols-2 gap-3 sm:mt-20 sm:gap-5 lg:grid-cols-4" aria-label="Project at a glance">
+          <dl className="mt-14 grid grid-cols-2 gap-3 sm:mt-20 sm:gap-5 lg:grid-cols-4" aria-label="المشروع في لمحة">
             {EACML.stats.map((stat) => (
               <div key={stat.label} className="alu-stat alu-glass">
                 <dd className="alu-stat__value">{stat.value}</dd>
@@ -91,7 +95,7 @@ export default function EacmlCopilotPage() {
           </dl>
 
           <section className="mt-20 sm:mt-28" aria-labelledby="eacml-problem">
-            <PageEyebrow>The problem</PageEyebrow>
+            <PageEyebrow>المشكلة</PageEyebrow>
             <h2 id="eacml-problem" className="alu-display page-h2 mt-3 max-w-3xl">
               {EACML.problem.title}
             </h2>
@@ -103,12 +107,12 @@ export default function EacmlCopilotPage() {
           </section>
 
           <section className="mt-20 sm:mt-28" aria-labelledby="eacml-how">
-            <PageEyebrow>How it works</PageEyebrow>
+            <PageEyebrow>كيف يعمل</PageEyebrow>
             <h2 id="eacml-how" className="alu-display page-h2 mt-3 max-w-3xl">
-              From upload to a reviewed result.
+              من الرفع إلى نتيجة تمت مراجعتها.
             </h2>
             <div className="mt-8">
-              <ArticleFigure lang="en" data={EACML_FIGURE} />
+              <ArticleFigure lang="ar" data={EACML_FIGURE} />
             </div>
             <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
               {EACML.steps.map((step, index) => (
@@ -137,9 +141,9 @@ export default function EacmlCopilotPage() {
             </ul>
           </section>
 
-          <section className="mt-20 grid gap-5 sm:mt-28 lg:grid-cols-2" aria-label="What it does and does not do">
+          <section className="mt-20 grid gap-5 sm:mt-28 lg:grid-cols-2" aria-label="ما يفعله وما لا يفعله">
             <div className="alu-glass page-panel">
-              <h2 className="alu-display text-[2.2rem]">What it does</h2>
+              <h2 className="alu-display text-[2.2rem]">ما يفعله</h2>
               <ul className="mt-5 space-y-3">
                 {EACML.does.map((item) => (
                   <li key={item} className="flex gap-3 text-[0.95rem] leading-relaxed text-foreground/85">
@@ -150,7 +154,7 @@ export default function EacmlCopilotPage() {
               </ul>
             </div>
             <div className="alu-glass page-panel">
-              <h2 className="alu-display text-[2.2rem]">What it does not do</h2>
+              <h2 className="alu-display text-[2.2rem]">ما لا يفعله</h2>
               <ul className="mt-5 space-y-3">
                 {EACML.doesNot.map((item) => (
                   <li key={item} className="flex gap-3 text-[0.95rem] leading-relaxed text-foreground/85">
@@ -163,7 +167,7 @@ export default function EacmlCopilotPage() {
           </section>
 
           <section className="mt-20 sm:mt-28" aria-labelledby="eacml-secure">
-            <PageEyebrow>Trust</PageEyebrow>
+            <PageEyebrow>الثقة</PageEyebrow>
             <h2 id="eacml-secure" className="alu-display page-h2 mt-3 max-w-3xl">
               {EACML.secure.title}
             </h2>
@@ -178,7 +182,7 @@ export default function EacmlCopilotPage() {
           </section>
 
           <section className="mt-20 sm:mt-28" aria-labelledby="eacml-build">
-            <PageEyebrow>Under the hood</PageEyebrow>
+            <PageEyebrow>خلف الكواليس</PageEyebrow>
             <h2 id="eacml-build" className="alu-display page-h2 mt-3 max-w-3xl">
               {EACML.build.title}
             </h2>
@@ -193,7 +197,7 @@ export default function EacmlCopilotPage() {
           </section>
 
           <section className="mt-20 sm:mt-28" aria-labelledby="eacml-status">
-            <PageEyebrow>Status</PageEyebrow>
+            <PageEyebrow>الحالة</PageEyebrow>
             <h2 id="eacml-status" className="alu-display page-h2 mt-3 max-w-3xl">
               {EACML.status.title}
             </h2>
@@ -206,8 +210,8 @@ export default function EacmlCopilotPage() {
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-foreground/80">{EACML.cta.lead}</p>
             <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-              <Link href="/contact" data-interactive className="btn-primary w-full max-w-xs sm:w-auto">
-                Start a project
+              <Link href="/ar/contact" data-interactive className="btn-primary w-full max-w-xs sm:w-auto">
+                ابدأ مشروعك
               </Link>
               <a
                 href={CONTACT.whatsapp}
@@ -216,7 +220,7 @@ export default function EacmlCopilotPage() {
                 data-interactive
                 className="btn-secondary w-full max-w-xs sm:w-auto"
               >
-                Message us on WhatsApp
+                راسلنا على واتساب
               </a>
             </div>
           </section>

@@ -2371,6 +2371,41 @@ span.chat-panel__input {
 }
 
 /* ——— Arabic (right-to-left) pages ——— */
+/* Arabic hero: calmer type, and the sculpture mirrored to the start side. */
+.rtl-page .alu-display.alu-h1 {
+  font-size: clamp(3rem, min(13vw, 11svh), 5rem);
+  line-height: 1.02;
+  font-weight: 800;
+}
+
+@media (min-width: 640px) {
+  .rtl-page .alu-display.alu-h1 {
+    font-size: clamp(4rem, 10vw, 6rem);
+  }
+}
+
+@media (min-width: 900px) {
+  .rtl-page .alu-display.alu-h1 {
+    font-size: clamp(4rem, min(8.5vw, 14svh), 7.25rem);
+  }
+}
+
+.rtl-page .alu-stage__visual {
+  transform: scaleX(-1);
+}
+
+.rtl-page .alu-stage__shadow {
+  right: auto;
+  left: 4%;
+}
+
+.rtl-page .alu-chip,
+.rtl-page .alu-step__code,
+.rtl-page .alu-card__index {
+  text-transform: none;
+  letter-spacing: 0;
+}
+
 .rtl-page,
 .rtl-page .alu-display,
 .rtl-page .page-eyebrow,

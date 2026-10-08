@@ -8,7 +8,8 @@ import {
 } from "@/lib/services/nav";
 import { PricingPlans } from "@/components/sections/PricingPlans";
 import { CUSTOM_SCOPES, PRICE_GROUPS } from "@/lib/pricing/data";
-import { CONTACT } from "@/lib/site/contact";
+import { CONVERSION_EVENTS } from "@/lib/analytics/events";
+import { bookCallHref, CONTACT } from "@/lib/site/contact";
 
 type ServiceDetailSectionProps = {
   service: Service;
@@ -282,6 +283,17 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
               className="btn-secondary w-full max-w-xs sm:w-auto"
             >
               Message us on WhatsApp
+            </a>
+            <a
+              href={bookCallHref()}
+              target="_blank"
+              rel="noopener noreferrer"
+              data-interactive
+              data-conversion={CONVERSION_EVENTS.BOOK_CALL_CLICK}
+              data-conversion-location="service_cta"
+              className="btn-secondary w-full max-w-xs sm:w-auto"
+            >
+              Book a 15-minute call
             </a>
           </div>
         </div>
