@@ -1,3 +1,4 @@
+import { formatPricingForAssistants } from "@/lib/pricing/data";
 import { SERVICES } from "@/lib/services/data";
 import { SITE_FAQ } from "@/lib/seo/faq";
 import { ABOUT_HERO, ABOUT_STORY, FOUNDER } from "@/lib/site/about";
@@ -68,9 +69,12 @@ export function buildSiteKnowledge(): string {
     `Location: ${CONTACT.location}`,
     `Typical first response: within 24 hours.`,
     "",
+    "## Pricing (page: /pricing)",
+    formatPricingForAssistants(),
+    "Quote only the prices listed here. Final price is confirmed after a short call; never invent other prices.",
+    "",
     "## Budget ranges (indicative — confirm on WhatsApp)",
     formatBudgetRanges(),
-    "Exact pricing depends on scope; the assistant must not invent fixed prices.",
   ];
 
   const context = sections.join("\n");
