@@ -37,6 +37,7 @@ function buildLlmsTxt(): string {
     link("AI solutions", "/ai-solutions", "AI assistants, automation and custom AI software for businesses in Lebanon and worldwide"),
     link("AI solutions in Lebanon", LEBANON_PATH.en, "AI chatbots, automation and custom AI for businesses across Lebanon, with the cities served"),
     link("Pricing", "/pricing", "Starting prices in USD: websites from $700, SEO from $250 a month, AI assistants on subscription; custom work is quoted per project"),
+    link("Free site check", "/site-check", "Free tool that scores a website on Google and AI search visibility and mobile speed"),
     link("About", "/about", "The studio, its founder and how it works with clients"),
     link(EACML.title, EACML_PATH, EACML.pitch),
     link("Contact", "/contact", "Start a project; replies within 24 hours"),
@@ -58,6 +59,7 @@ function buildLlmsTxt(): string {
     "",
     link("حلول الذكاء الاصطناعي", "/ar/ai-solutions", "AI solutions, Arabic version"),
     link("حلول الذكاء الاصطناعي في لبنان", LEBANON_PATH.ar, "AI solutions in Lebanon, Arabic version"),
+    link("الأسعار", "/ar/pricing", "Pricing, Arabic version"),
     link("كل الأدلة", INSIGHTS_PATH.ar, "Index of the Arabic guides"),
     ...getArticleListing("ar").map((guide) =>
       link(guide.title, guide.href, guide.description),

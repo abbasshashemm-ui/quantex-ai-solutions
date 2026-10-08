@@ -92,6 +92,7 @@ export const SITE_NAV = [
 export const FOOTER_NAV = [
   ...SITE_NAV.filter((item) => item.href !== "/"),
   { label: "Pricing", href: "/pricing" },
+  { label: "Free Site Check", href: "/site-check" },
   { label: "AI Solutions in Lebanon", href: "/ai-solutions-lebanon" },
 ] as const;
 

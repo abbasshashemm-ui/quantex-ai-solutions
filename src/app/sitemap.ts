@@ -22,6 +22,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl("/ar/ai-solutions-lebanon"), lastModified, changeFrequency: "monthly", priority: 0.9 },
     { url: absoluteUrl("/work/eacml-copilot"), lastModified, changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/pricing"), lastModified, changeFrequency: "monthly", priority: 0.9 },
+    { url: absoluteUrl("/ar/pricing"), lastModified, changeFrequency: "monthly", priority: 0.85 },
+    { url: absoluteUrl("/site-check"), lastModified, changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/about"), lastModified, changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/contact"), lastModified, changeFrequency: "monthly", priority: 0.9 },
     { url: absoluteUrl("/privacy"), lastModified, changeFrequency: "yearly", priority: 0.3 },

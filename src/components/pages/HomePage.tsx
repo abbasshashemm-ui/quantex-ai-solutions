@@ -3,6 +3,7 @@ import { AssistantSection } from "@/components/home/AssistantSection";
 import { ClosingCta } from "@/components/home/ClosingCta";
 import { GuidesSection } from "@/components/home/GuidesSection";
 import { WorkSection } from "@/components/home/WorkSection";
+import { SiteCheckBand } from "@/components/home/SiteCheckBand";
 import { Ticker } from "@/components/home/Ticker";
 import { HeroCopy } from "@/components/hero/HeroCopy";
 import { HeroStage } from "@/components/hero/HeroStage";
@@ -18,6 +19,7 @@ export function HomePage() {
         <HeroCopy />
       </HeroStage>
       <Ticker />
+      <SiteCheckBand />
       <AeoBlock />
       <AssistantSection />
       <ServicesSection />
