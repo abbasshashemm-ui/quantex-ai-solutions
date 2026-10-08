@@ -10,7 +10,7 @@ export const dynamic = "force-static";
 export const metadata: Metadata = createPageMetadata({
   title: "Pricing: websites, SEO and AI assistants in Lebanon",
   description:
-    "Starting prices for websites from $700, SEO from $450 a month and AI assistants on subscription. Custom software and automation are quoted per project.",
+    "Starting prices for websites from $700, SEO from $300 a month and AI assistants on subscription. Custom software and automation are quoted per project.",
   path: "/pricing",
   keywords: ["website cost Lebanon", "SEO price Lebanon", "AI chatbot cost Lebanon"],
 });
