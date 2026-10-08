@@ -24,6 +24,9 @@ export function Footer() {
             <p className="mt-3 max-w-sm text-xs leading-relaxed text-foreground/75 sm:text-sm">
               {COMPANY.tagline}
             </p>
+            <p className="mt-2 text-[0.7rem] font-semibold tracking-[0.16em] text-foreground/60 uppercase">
+              Beirut, Lebanon · 33.89° N 35.50° E
+            </p>
             <ul className="mt-4 flex flex-wrap items-center gap-2">
               <li>
                 <a

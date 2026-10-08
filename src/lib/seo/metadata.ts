@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { DEFAULT_OG_IMAGE, SITE, getSiteUrl } from "./site";
+import { ogImageForPath } from "./og-pages";
 
 type PageMetadataOptions = {
   title: string;
@@ -22,14 +23,17 @@ export function createPageMetadata({
   title,
   description,
   path,
-  ogImage = DEFAULT_OG_IMAGE,
+  ogImage,
   noIndex = false,
   keywords = [],
   locale = SITE.locale,
   languages,
 }: PageMetadataOptions): Metadata {
   const canonical = absoluteUrl(path);
-  const imageUrl = absoluteUrl(ogImage);
+  // Arabic pages keep the default card: the generated cards have no Arabic font.
+  const imageUrl = absoluteUrl(
+    ogImage ?? (locale === "ar_LB" ? DEFAULT_OG_IMAGE : ogImageForPath(path)),
+  );
   const pageTitle = path === "/" ? SITE.name : `${title} | ${SITE.name}`;
 
   return {

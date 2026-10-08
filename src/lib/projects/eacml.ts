@@ -3,7 +3,23 @@
  * report, keeping to what is safe to publish: what it does and how it is
  * built, not the client's open issues or internal status.
  */
+import type { PathFigure } from "@/lib/figures/types";
+
 export const EACML_PATH = "/work/eacml-copilot";
+
+/** Who does what between the drawing and the decision. */
+export const EACML_FIGURE: PathFigure = {
+  kind: "path",
+  title: "From drawing to decision",
+  caption: "The engine measures, the AI explains, and a person decides.",
+  steps: [
+    { label: "Drawings in", detail: "A package of 30 to 50 sheets: PDF, DXF or DWG." },
+    { label: "Rules engine", detail: "Measures the geometry and produces every pass and fail." },
+    { label: "AI assistant", detail: "Explains the findings and asks questions. It never decides." },
+    { label: "Officer", detail: "Reviews the evidence, resolves or waives each item." },
+  ],
+  result: "Every action logged",
+};
 
 export const EACML = {
   title: "EACML Copilot",

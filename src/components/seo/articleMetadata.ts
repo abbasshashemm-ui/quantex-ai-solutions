@@ -3,6 +3,7 @@ import { articlePath, type Lang } from "@/lib/articles";
 import type { Article } from "@/lib/articles/types";
 import { absoluteUrl, createPageMetadata } from "@/lib/seo/metadata";
 import { SITE, getSiteUrl } from "@/lib/seo/site";
+import { ogImageForPath } from "@/lib/seo/og-pages";
 import { AI_SOLUTIONS_PATH } from "@/lib/site/ai-solutions";
 import { AI_SOLUTIONS_AR_PATH } from "@/lib/site/ai-solutions-ar";
 import { buildBreadcrumbSchema, buildFaqPageSchema } from "@/lib/seo/json-ld";
@@ -32,7 +33,7 @@ export function buildArticleMetadata(lang: Lang, article: Article): Metadata {
       publishedTime: article.datePublished,
       modifiedTime: article.dateModified,
       authors: [SITE.founder],
-      images: [{ url: absoluteUrl("/og.png"), width: 1200, height: 630 }],
+      images: [{ url: absoluteUrl(lang === "ar" ? "/og.png" : ogImageForPath(path)), width: 1200, height: 630 }],
     },
   };
 }

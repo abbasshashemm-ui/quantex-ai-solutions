@@ -1,3 +1,4 @@
+import { ogImageForPath } from "@/lib/seo/og-pages";
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ArticleFigure } from "@/components/figures/ArticleFigure";
@@ -47,7 +48,7 @@ export const metadata: Metadata = {
     publishedTime: AI_ARTICLE.datePublished,
     modifiedTime: AI_ARTICLE.dateModified,
     authors: [SITE.founder],
-    images: [{ url: absoluteUrl("/og.png"), width: 1200, height: 630 }],
+    images: [{ url: absoluteUrl(ogImageForPath(AI_ARTICLE_PATH)), width: 1200, height: 630 }],
   },
 };
 

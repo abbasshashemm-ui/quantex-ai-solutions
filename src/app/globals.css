@@ -58,6 +58,10 @@
   --radius-lg: var(--radius);
   /* Buttons, chips, links and icon buttons: softly squared, not capsules. */
   --radius-control: 0.2rem;
+  /* Cards and panels: a tight corner that matches the sharp controls. */
+  --radius-card: 0.4rem;
+  --radius-xl: 0.4rem;
+  --radius-2xl: 0.4rem;
 }
 
 html {
@@ -155,7 +159,7 @@ section[id] {
   position: relative;
   isolation: isolate;
   border: 1px solid rgba(255, 255, 255, 0.7);
-  border-radius: 1.5rem;
+  border-radius: var(--radius-card);
   background: linear-gradient(
     135deg,
     rgba(255, 255, 255, 0.62) 0%,
@@ -1338,7 +1342,7 @@ a:hover > .alu-link span[aria-hidden],
 /* FAQ */
 .faq-card {
   padding: 0;
-  border-radius: 1.1rem;
+  border-radius: var(--radius-card);
 }
 
 .faq-card summary h3 {
@@ -1411,7 +1415,7 @@ a:hover > .alu-link span[aria-hidden],
   display: flex;
   gap: 1rem;
   border: 1px solid rgba(255, 255, 255, 0.75);
-  border-radius: 1.1rem;
+  border-radius: var(--radius-card);
   background: rgba(255, 255, 255, 0.45);
   padding: 1rem 1.1rem;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9);
@@ -1437,7 +1441,7 @@ a:hover > .alu-link span[aria-hidden],
   align-items: center;
   justify-content: center;
   border: 1px solid rgba(255, 255, 255, 0.85);
-  border-radius: 0.85rem;
+  border-radius: var(--radius-card);
   background: rgba(255, 255, 255, 0.6);
   color: var(--foreground);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95);
@@ -1445,7 +1449,7 @@ a:hover > .alu-link span[aria-hidden],
 
 /* Contact form */
 .contact-form-card {
-  border-radius: 1.5rem;
+  border-radius: var(--radius-card);
 }
 
 .contact-form__label {
@@ -1467,7 +1471,7 @@ a:hover > .alu-link span[aria-hidden],
 .contact-form__field select,
 .contact-form__field textarea {
   min-height: 2.75rem;
-  border-radius: 0.8rem !important;
+  border-radius: var(--radius-card) !important;
 }
 
 .contact-form__field textarea {
@@ -1594,7 +1598,7 @@ a:hover > .alu-link span[aria-hidden],
   flex-direction: column;
   width: 100%;
   max-height: min(88dvh, 40rem);
-  border-radius: 1.5rem;
+  border-radius: var(--radius-card);
   border: 1px solid rgba(255, 255, 255, 0.85);
   background: linear-gradient(
     160deg,
@@ -1657,7 +1661,7 @@ a:hover > .alu-link span[aria-hidden],
   flex-shrink: 0;
   align-items: center;
   justify-content: center;
-  border-radius: 0.65rem;
+  border-radius: var(--radius-control);
   background: rgba(11, 12, 15, 0.05);
 }
 
@@ -1947,7 +1951,7 @@ span.chat-panel__input {
   width: 100%;
   height: clamp(24rem, calc(100svh - 8rem), 36rem);
   overflow: hidden;
-  border-radius: 1.6rem;
+  border-radius: var(--radius-card);
   border: 1px solid rgba(255, 255, 255, 0.75);
   background: linear-gradient(
     145deg,
