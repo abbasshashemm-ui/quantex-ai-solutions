@@ -5,6 +5,7 @@ import { BrandLogo } from "./BrandLogo";
 import { MobileNav } from "./MobileNav";
 import { ThemeToggle } from "./ThemeToggle";
 import { ServicesNavDropdown } from "./ServicesNavDropdown";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 const NAV_LINKS = SITE_NAV.filter(
   (item) => item.href !== "/" && item.label !== "Solutions",
@@ -49,6 +50,7 @@ export function Navbar() {
           >
             Start a project
           </Link>
+          <LanguageSwitcher className="hidden sm:flex" />
           <ThemeToggle />
           <MobileNav />
         </div>
