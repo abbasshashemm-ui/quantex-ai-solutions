@@ -17,6 +17,13 @@ export const CONTACT = {
   linkedin: "https://www.linkedin.com/company/quantex-ai-solution/",
 } as const;
 
+/** Book a call: opens WhatsApp with a ready message. Swap for a calendar link later. */
+export function bookCallHref(
+  message = "Hi QUANTEX, I would like to book a 15-minute call.",
+): string {
+  return `${CONTACT.whatsapp}?text=${encodeURIComponent(message)}`;
+}
+
 export const BUDGET_RANGES = [
   { value: "", label: "Select a range" },
   { value: "under-5k", label: "Under $5,000" },
@@ -98,4 +105,5 @@ export const FOOTER_NAV = [
 
 export const FOOTER_LEGAL = [
   { label: "Privacy Policy", href: "/privacy" },
+  { label: "Terms of Use", href: "/terms" },
 ] as const;

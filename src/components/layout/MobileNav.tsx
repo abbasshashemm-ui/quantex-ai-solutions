@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { CONTACT, SITE_NAV } from "@/lib/site/contact";
 import { ServicesNavDropdown } from "./ServicesNavDropdown";
+import { LanguageSwitcher } from "./LanguageSwitcher";
 
 const NAV_LINKS = SITE_NAV.filter(
   (item) => item.href !== "/" && item.label !== "Solutions",
@@ -82,6 +83,9 @@ export function MobileNav() {
                 </Link>
               </li>
             ))}
+            <li className="border-b border-line py-1" onClick={close}>
+              <LanguageSwitcher className="gap-2" />
+            </li>
             <li className="pt-5">
               <Link
                 href="/contact"

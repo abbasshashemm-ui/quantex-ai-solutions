@@ -24,10 +24,26 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: absoluteUrl("/pricing"), lastModified, changeFrequency: "monthly", priority: 0.9 },
     { url: absoluteUrl("/ar/pricing"), lastModified, changeFrequency: "monthly", priority: 0.85 },
     { url: absoluteUrl("/site-check"), lastModified, changeFrequency: "monthly", priority: 0.8 },
+    { url: absoluteUrl("/fr/pricing"), lastModified, changeFrequency: "monthly", priority: 0.8 },
+    { url: absoluteUrl("/ar/work/eacml-copilot"), lastModified, changeFrequency: "monthly", priority: 0.7 },
+    { url: absoluteUrl("/terms"), lastModified, changeFrequency: "yearly", priority: 0.2 },
     { url: absoluteUrl("/about"), lastModified, changeFrequency: "monthly", priority: 0.8 },
     { url: absoluteUrl("/contact"), lastModified, changeFrequency: "monthly", priority: 0.9 },
     { url: absoluteUrl("/privacy"), lastModified, changeFrequency: "yearly", priority: 0.3 },
   ];
+
+
+  const localizedRoutes: MetadataRoute.Sitemap = (["ar", "fr"] as const).flatMap((lang) => [
+    { url: absoluteUrl(`/${lang}`), lastModified, changeFrequency: "weekly" as const, priority: 0.9 },
+    { url: absoluteUrl(`/${lang}/about`), lastModified, changeFrequency: "monthly" as const, priority: 0.7 },
+    { url: absoluteUrl(`/${lang}/contact`), lastModified, changeFrequency: "monthly" as const, priority: 0.8 },
+    ...getAllServiceSlugs().map((slug) => ({
+      url: absoluteUrl(`/${lang}/services/${slug}`),
+      lastModified,
+      changeFrequency: "monthly" as const,
+      priority: 0.75,
+    })),
+  ]);
 
   const serviceRoutes: MetadataRoute.Sitemap = getAllServiceSlugs().map((slug) => ({
     url: absoluteUrl(`/services/${slug}`),
@@ -45,5 +61,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
   );
 
-  return [...staticRoutes, ...serviceRoutes, ...articleRoutes];
+  return [...staticRoutes, ...localizedRoutes, ...serviceRoutes, ...articleRoutes];
 }

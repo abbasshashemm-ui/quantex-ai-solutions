@@ -2,7 +2,8 @@
 
 import Link from "next/link";
 import { useState, type FormEvent } from "react";
-import { CONTACT } from "@/lib/site/contact";
+import { CONVERSION_EVENTS, trackConversion } from "@/lib/analytics/events";
+import { bookCallHref, CONTACT } from "@/lib/site/contact";
 import type {
   CheckGroup,
   CheckResult,
@@ -30,6 +31,44 @@ function verdict(score: number): string {
   return "Search engines and AI assistants can barely see this site. Good news: it is fixable.";
 }
 
+function scoreTone(score: number): string {
+  if (score >= 75) return "var(--signal)";
+  if (score >= 45) return "var(--status-warn)";
+  return "#dc2626";
+}
+
+function ScoreRing({ value }: { value: number }) {
+  const r = 52;
+  const c = 2 * Math.PI * r;
+  return (
+    <svg
+      viewBox="0 0 120 120"
+      className="h-36 w-36 shrink-0 sm:h-44 sm:w-44"
+      role="img"
+      aria-label={`Visibility score ${value} out of 100`}
+    >
+      <circle cx="60" cy="60" r={r} fill="none" stroke="currentColor" strokeOpacity="0.14" strokeWidth="10" />
+      <circle
+        cx="60"
+        cy="60"
+        r={r}
+        fill="none"
+        stroke={scoreTone(value)}
+        strokeWidth="10"
+        strokeLinecap="butt"
+        strokeDasharray={`${(value / 100) * c} ${c}`}
+        transform="rotate(-90 60 60)"
+      />
+      <text x="60" y="64" textAnchor="middle" className="alu-display" fontSize="38" fill="currentColor">
+        {value}
+      </text>
+      <text x="60" y="84" textAnchor="middle" fontSize="9" letterSpacing="2" fill="currentColor" fillOpacity="0.6">
+        OUT OF 100
+      </text>
+    </svg>
+  );
+}
+
 function ScoreBlock({ label, value }: { label: string; value: number | null }) {
   return (
     <div className="alu-glass page-panel">
@@ -38,6 +77,11 @@ function ScoreBlock({ label, value }: { label: string; value: number | null }) {
         {value === null ? "-" : value}
         <span className="ml-1 text-base normal-case text-foreground/60">/100</span>
       </p>
+      {value !== null ? (
+        <div className="mt-3 h-1.5 w-full bg-foreground/12" aria-hidden>
+          <div className="h-full" style={{ width: `${value}%`, background: scoreTone(value) }} />
+        </div>
+      ) : null}
     </div>
   );
 }
@@ -53,6 +97,7 @@ export function SiteCheckTool() {
     event.preventDefault();
     if (busy) return;
     setBusy(true);
+    trackConversion(CONVERSION_EVENTS.SITE_CHECK_RUN, { location: "site_check" });
     setError(null);
     setReport(null);
     setSpeed("loading");
@@ -139,10 +184,13 @@ export function SiteCheckTool() {
         {report ? (
           <div className="mt-10">
             <p className="page-label">Report for {report.finalUrl}</p>
-            <h2 className="alu-display mt-2 text-[2.4rem] sm:text-[3rem]">
-              Visibility score: {report.score}/100
-            </h2>
-            <p className="mt-2 max-w-2xl text-base text-foreground/85">{verdict(report.score)}</p>
+            <div className="mt-4 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-8">
+              <ScoreRing value={report.score} />
+              <div>
+                <h2 className="alu-display text-[2.4rem] sm:text-[3rem]">Visibility score</h2>
+                <p className="mt-2 max-w-xl text-base text-foreground/85">{verdict(report.score)}</p>
+              </div>
+            </div>
 
             <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               <ScoreBlock label={GROUP_LABEL.search} value={report.groups.search} />
@@ -211,8 +259,19 @@ export function SiteCheckTool() {
                 Send us this report and we reply within 24 hours with a plan and a price.
               </p>
               <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-                <a href={whatsapp} target="_blank" rel="noopener noreferrer" data-interactive className="btn-primary w-full max-w-xs sm:w-auto">
+                <a href={whatsapp} target="_blank" rel="noopener noreferrer" data-interactive data-conversion={CONVERSION_EVENTS.SITE_CHECK_REPORT_SENT} data-conversion-location="site_check_report" className="btn-primary w-full max-w-xs sm:w-auto">
                   Send this report on WhatsApp
+                </a>
+                <a
+                  href={bookCallHref(`Hi QUANTEX, I ran the free site check on ${report.finalUrl} and would like to book a 15-minute call.`)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-interactive
+                  data-conversion={CONVERSION_EVENTS.BOOK_CALL_CLICK}
+                  data-conversion-location="site_check_report"
+                  className="btn-secondary w-full max-w-xs sm:w-auto"
+                >
+                  Book a 15-minute call
                 </a>
                 <Link href="/pricing" data-interactive className="btn-secondary w-full max-w-xs sm:w-auto">
                   See pricing

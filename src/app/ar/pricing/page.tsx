@@ -16,6 +16,7 @@ export const metadata: Metadata = createPageMetadata({
   languages: {
     en: absoluteUrl("/pricing"),
     ar: absoluteUrl(PRICING_AR_PATH),
+    fr: absoluteUrl("/fr/pricing"),
     "x-default": absoluteUrl("/pricing"),
   },
   keywords: [

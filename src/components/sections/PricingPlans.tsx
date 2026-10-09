@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { CONVERSION_EVENTS } from "@/lib/analytics/events";
 import type { PriceGroup } from "@/lib/pricing/data";
 
 // Keep "$700" reading left-to-right inside Arabic text.
@@ -25,7 +26,7 @@ export function PricingPlans({
 }: {
   group: PriceGroup;
   headingLevel?: 2 | 3;
-  lang?: "en" | "ar";
+  lang?: "en" | "ar" | "fr";
 }) {
   const ar = lang === "ar";
   const Heading = headingLevel === 2 ? "h2" : "h3";
@@ -52,7 +53,7 @@ export function PricingPlans({
           >
             <p className="page-label">
               {plan.name}
-              {plan.featured ? (ar ? " · الأكثر اختياراً" : " · Most chosen") : ""}
+              {plan.featured ? (ar ? " · الأكثر اختياراً" : lang === "fr" ? " · Le plus choisi" : " · Most chosen") : ""}
             </p>
             <p className="alu-display mt-3 text-[2.6rem] leading-none">
               <Money text={plan.price} />
@@ -77,9 +78,11 @@ export function PricingPlans({
             <Link
               href="/contact"
               data-interactive
+              data-conversion={CONVERSION_EVENTS.PRICING_PLAN_CLICK}
+              data-conversion-location={`pricing_${plan.id}`}
               className={`mt-6 w-full text-center ${plan.featured ? "btn-primary" : "btn-secondary"}`}
             >
-              {ar ? "ابدأ الآن" : "Get started"}
+              {ar ? "ابدأ الآن" : lang === "fr" ? "Commencer" : "Get started"}
             </Link>
           </li>
         ))}

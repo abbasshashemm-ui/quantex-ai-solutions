@@ -1,0 +1,45 @@
+import type { LocalizedContact } from "@/lib/i18n/types";
+
+export const CONTACT_EN: LocalizedContact = {
+  metaTitle: "Contact",
+  metaDescription: "Start a project with Quantex.",
+  back: "Home",
+  eyebrow: "Contact",
+  title: "Tell us what you need.",
+  lead: "We reply within 24 hours.",
+  intro:
+    "A website, an AI assistant, custom software or automation: send a short brief and we'll point you to the right next step.",
+  browsing: "Still browsing?",
+  seeBuild: "See what we build",
+  aboutStudio: "About the studio",
+  channels: {
+    email: "Email",
+    phone: "Phone / WhatsApp",
+    location: "Location",
+    instagram: "Instagram",
+  },
+  bookTitle: "Prefer to talk?",
+  bookText: "Book a 15-minute call. We open WhatsApp with a message ready to send.",
+  bookButton: "Book a 15-minute call",
+  form: {
+    title: "Send us a brief",
+    intro: "Name, email, and what you need. Phone is optional.",
+    name: "Name *",
+    namePlaceholder: "Your full name",
+    email: "Email *",
+    emailPlaceholder: "you@company.com",
+    phone: "Phone (optional)",
+    phonePlaceholder: "+961 XX XXX XXX",
+    message: "Message *",
+    messagePlaceholder: "What do you need, and by when?",
+    consent:
+      "By submitting, you agree we may use your name, email, phone number, and message to respond to your inquiry. Sending opens WhatsApp, where their privacy terms also apply. See our",
+    privacy: "Privacy Policy",
+    submit: "Send brief",
+    tooLong: "Message is too long. Please shorten it and try again.",
+    waGreeting: "Hi QUANTEX,",
+    waName: "Name",
+    waEmail: "Email",
+    waPhone: "Phone",
+  },
+};

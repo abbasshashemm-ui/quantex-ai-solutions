@@ -6,7 +6,8 @@ import { buildBreadcrumbSchema } from "@/lib/seo/json-ld";
 import { absoluteUrl, createPageMetadata } from "@/lib/seo/metadata";
 import { getSiteUrl } from "@/lib/seo/site";
 import { CONTACT } from "@/lib/site/contact";
-import { EACML, EACML_PATH } from "@/lib/projects/eacml";
+import { ArticleFigure } from "@/components/figures/ArticleFigure";
+import { EACML, EACML_FIGURE, EACML_PATH } from "@/lib/projects/eacml";
 
 export const dynamic = "force-static";
 
@@ -14,6 +15,11 @@ export const metadata: Metadata = createPageMetadata({
   title: EACML.seoTitle,
   description: EACML.description,
   path: EACML_PATH,
+  languages: {
+    en: absoluteUrl(EACML_PATH),
+    ar: absoluteUrl("/ar/work/eacml-copilot"),
+    "x-default": absoluteUrl(EACML_PATH),
+  },
   keywords: [
     "AI regulation checking",
     "AI building code compliance",
@@ -101,6 +107,9 @@ export default function EacmlCopilotPage() {
             <h2 id="eacml-how" className="alu-display page-h2 mt-3 max-w-3xl">
               From upload to a reviewed result.
             </h2>
+            <div className="mt-8">
+              <ArticleFigure lang="en" data={EACML_FIGURE} />
+            </div>
             <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
               {EACML.steps.map((step, index) => (
                 <li key={step.label} className="alu-glass page-panel">

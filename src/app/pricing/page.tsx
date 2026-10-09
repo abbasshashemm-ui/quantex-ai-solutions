@@ -15,6 +15,7 @@ export const metadata: Metadata = createPageMetadata({
   languages: {
     en: absoluteUrl("/pricing"),
     ar: absoluteUrl("/ar/pricing"),
+    fr: absoluteUrl("/fr/pricing"),
     "x-default": absoluteUrl("/pricing"),
   },
   keywords: ["website cost Lebanon", "SEO price Lebanon", "AI chatbot cost Lebanon"],

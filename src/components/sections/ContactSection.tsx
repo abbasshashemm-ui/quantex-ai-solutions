@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
-import { CONTACT, CONTACT_CHANNELS } from "@/lib/site/contact";
+import { CONVERSION_EVENTS } from "@/lib/analytics/events";
+import { CONTACT_EN } from "@/lib/i18n/contact-en";
+import type { LocalizedContact } from "@/lib/i18n/types";
+import { bookCallHref, CONTACT_CHANNELS } from "@/lib/site/contact";
 import { ContactForm } from "./ContactForm";
 
 function ContactIcon({ id }: { id: string }) {
@@ -73,45 +76,76 @@ function ContactIcon({ id }: { id: string }) {
   }
 }
 
-export function ContactSection() {
+export function ContactSection({
+  copy = CONTACT_EN,
+  rtl = false,
+  bookMessage,
+  homeHref = "/",
+  solutionsHref = "/#solutions",
+  aboutHref = "/about",
+  switchLink,
+}: {
+  copy?: LocalizedContact;
+  rtl?: boolean;
+  bookMessage?: string;
+  homeHref?: string;
+  solutionsHref?: string;
+  aboutHref?: string;
+  switchLink?: { href: string; label: string; lang: string };
+}) {
   return (
     <article
       id="contact-page"
-      className="contact-page page-shell min-h-[100dvh]"
+      lang={rtl ? "ar" : undefined}
+      dir={rtl ? "rtl" : undefined}
+      className={`contact-page page-shell min-h-[100dvh]${rtl ? " rtl-page" : ""}`}
     >
       <div className="page-grid-bg absolute inset-0" aria-hidden />
 
       <div className="relative mx-auto max-w-7xl">
-        <Link href="/" data-interactive className="page-back">
-          ← Home
-        </Link>
+        <div className="flex items-center justify-between gap-4">
+          <Link href={homeHref} data-interactive className="page-back">
+            {rtl ? "→" : "←"} {copy.back}
+          </Link>
+          {switchLink ? (
+            <Link
+              href={switchLink.href}
+              hrefLang={switchLink.lang}
+              lang={switchLink.lang}
+              dir={switchLink.lang === "ar" ? "rtl" : "ltr"}
+              data-interactive
+              className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
+            >
+              {switchLink.label}
+            </Link>
+          ) : null}
+        </div>
 
         <header className="contact-page__header mx-auto mt-8 max-w-3xl text-center sm:mt-10">
-          <PageEyebrow align="center">Contact</PageEyebrow>
+          <PageEyebrow align="center">{copy.eyebrow}</PageEyebrow>
           <h1 className="alu-display page-title page-title--sm mt-4">
-            Tell us what you need.
-            <span className="block text-foreground/55">
-              We reply within 24 hours.
-            </span>
+            {copy.title}
+            <span className="block text-foreground/55">{copy.lead}</span>
           </h1>
-          <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-foreground/80">
-            A website, an AI assistant, custom software or automation: send a
-            short brief and we&apos;ll point you to the right next step.
-          </p>
+          {copy.intro ? (
+            <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-foreground/80">
+              {copy.intro}
+            </p>
+          ) : null}
           <p className="mt-4 text-sm text-foreground/70">
-            Still browsing?{" "}
+            {copy.browsing}{" "}
             <Link
-              href="/#solutions"
+              href={solutionsHref}
               className="font-semibold text-foreground underline underline-offset-4"
             >
-              See what we build
+              {copy.seeBuild}
             </Link>
             {" · "}
             <Link
-              href="/about"
+              href={aboutHref}
               className="font-semibold text-foreground underline underline-offset-4"
             >
-              About the studio
+              {copy.aboutStudio}
             </Link>
           </p>
         </header>
@@ -126,8 +160,8 @@ export function ContactSection() {
                       <ContactIcon id={channel.id} />
                     </span>
                     <span className="min-w-0">
-                      <span className="page-label block">{channel.label}</span>
-                      <span className="mt-1 block text-sm text-foreground sm:text-base">
+                      <span className="page-label block">{copy.channels[channel.id as keyof typeof copy.channels] ?? channel.label}</span>
+                      <span className="mt-1 block text-sm text-foreground sm:text-base" dir={channel.id === "location" ? undefined : "ltr"}>
                         {channel.value}
                       </span>
                     </span>
@@ -158,37 +192,23 @@ export function ContactSection() {
             </ul>
 
             <div className="alu-glass page-panel">
-              <div className="flex gap-3">
-                <span
-                  className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full border border-signal/40 bg-surface-elevated/60 text-sm text-signal"
-                  aria-hidden
-                >
-                  ✓
-                </span>
-                <div>
-                  <p className="text-sm font-semibold text-foreground">
-                    A person replies within 24 hours
-                  </p>
-                  <p className="mt-1.5 text-sm leading-relaxed text-foreground/75">
-                    Share as much as you can and we&apos;ll reply with next
-                    steps. Prefer a quick chat? Message us on{" "}
-                    <a
-                      href={CONTACT.whatsapp}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      data-interactive
-                      className="text-foreground underline-offset-2 hover:underline"
-                    >
-                      WhatsApp
-                    </a>
-                    .
-                  </p>
-                </div>
-              </div>
+              <p className="text-sm font-semibold text-foreground">{copy.bookTitle}</p>
+              <p className="mt-1.5 text-sm leading-relaxed text-foreground/75">{copy.bookText}</p>
+              <a
+                href={bookCallHref(bookMessage)}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-interactive
+                data-conversion={CONVERSION_EVENTS.BOOK_CALL_CLICK}
+                data-conversion-location="contact_page"
+                className="btn-primary mt-4 w-full"
+              >
+                {copy.bookButton}
+              </a>
             </div>
           </aside>
 
-          <ContactForm />
+          <ContactForm copy={copy.form} rtl={rtl} />
         </div>
       </div>
     </article>

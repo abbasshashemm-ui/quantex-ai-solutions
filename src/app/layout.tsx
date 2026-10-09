@@ -59,6 +59,7 @@ export default function RootLayout({
       className={`${outfit.variable} ${condensed.variable} ${arabic.variable} h-full antialiased`}
     >
       <head>
+        <link rel="alternate" type="application/rss+xml" title="Quantex guides" href="/feed.xml" />
         <script dangerouslySetInnerHTML={{ __html: THEME_INIT_SCRIPT }} />
         <link rel="llms-txt" href="/llms.txt" />
       </head>

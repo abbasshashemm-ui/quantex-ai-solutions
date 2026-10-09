@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ServiceDetailSection } from "@/components/sections/ServiceDetailSection";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { createPageMetadata } from "@/lib/seo/metadata";
+import { absoluteUrl, createPageMetadata } from "@/lib/seo/metadata";
 import {
   buildBreadcrumbSchema,
   buildServiceSchema,
@@ -37,6 +37,12 @@ export async function generateMetadata({
     title: formatServiceTitle(service.title),
     description: service.overview,
     path: `/services/${service.slug}`,
+    languages: {
+      en: absoluteUrl(`/services/${service.slug}`),
+      ar: absoluteUrl(`/ar/services/${service.slug}`),
+      fr: absoluteUrl(`/fr/services/${service.slug}`),
+      "x-default": absoluteUrl(`/services/${service.slug}`),
+    },
     keywords: [
       service.nav.label,
       service.nav.tagline,
