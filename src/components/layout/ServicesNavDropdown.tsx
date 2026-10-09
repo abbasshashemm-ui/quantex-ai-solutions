@@ -3,6 +3,7 @@
 import { LocalLink as Link } from "@/components/ui/LocalLink";
 import { useEffect, useId, useRef, useState } from "react";
 import { NAV_SERVICE_ITEMS, SOLUTIONS_OVERVIEW_HREF } from "@/lib/services/nav";
+import { useChrome } from "@/lib/i18n/use-chrome";
 import { ServiceNavIcon } from "./ServiceNavIcon";
 
 type ServicesNavDropdownProps = {
@@ -14,6 +15,7 @@ export function ServicesNavDropdown({
   onNavigate,
   variant = "desktop",
 }: ServicesNavDropdownProps) {
+  const { t } = useChrome();
   const [open, setOpen] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const menuId = useId();
@@ -54,7 +56,7 @@ export function ServicesNavDropdown({
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
         >
-          Solutions
+          {t.nav.solutions}
           <svg
             className={`h-4 w-4 text-foreground/70 transition-transform ${open ? "rotate-180" : ""}`}
             viewBox="0 0 24 24"
@@ -85,10 +87,10 @@ export function ServicesNavDropdown({
                   </span>
                   <span>
                     <span className="block text-sm font-medium text-foreground">
-                      {item.label}
+                      {t.services[item.slug]?.label ?? item.label}
                     </span>
                     <span className="mt-0.5 block text-xs text-foreground/70">
-                      {item.tagline}
+                      {t.services[item.slug]?.tagline ?? item.tagline}
                     </span>
                   </span>
                 </Link>
@@ -125,7 +127,7 @@ export function ServicesNavDropdown({
         aria-controls={menuId}
         onClick={() => setOpen((v) => !v)}
       >
-        Solutions
+        {t.nav.solutions}
         <svg
           className={`h-3.5 w-3.5 text-foreground/70 transition-transform ${open ? "rotate-180" : ""}`}
           viewBox="0 0 24 24"
@@ -162,10 +164,10 @@ export function ServicesNavDropdown({
                   </span>
                   <span className="min-w-0 pt-0.5">
                     <span className="block text-sm font-semibold text-foreground">
-                      {item.label}
+                      {t.services[item.slug]?.label ?? item.label}
                     </span>
                     <span className="mt-0.5 block text-xs leading-snug text-foreground/70">
-                      {item.tagline}
+                      {t.services[item.slug]?.tagline ?? item.tagline}
                     </span>
                   </span>
                 </Link>
@@ -195,10 +197,10 @@ export function ServicesNavDropdown({
               </span>
               <span className="min-w-0 pt-0.5">
                 <span className="block text-sm font-semibold text-foreground">
-                  All solutions
+                  {t.nav.allSolutions}
                 </span>
                 <span className="mt-0.5 block text-xs text-foreground/70">
-                  Overview on the home page
+                  {t.nav.overviewHome}
                 </span>
               </span>
             </Link>

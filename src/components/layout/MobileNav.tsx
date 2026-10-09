@@ -5,12 +5,21 @@ import { useEffect, useState } from "react";
 import { CONTACT, SITE_NAV } from "@/lib/site/contact";
 import { ServicesNavDropdown } from "./ServicesNavDropdown";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import { useChrome } from "@/lib/i18n/use-chrome";
 
 const NAV_LINKS = SITE_NAV.filter(
   (item) => item.href !== "/" && item.label !== "Solutions",
 );
 
+const NAV_KEY = {
+  "/ai-solutions": "aiSolutions",
+  "/insights": "guides",
+  "/about": "about",
+  "/contact": "contact",
+} as const;
+
 export function MobileNav() {
+  const { t, rtl } = useChrome();
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -35,10 +44,10 @@ export function MobileNav() {
         className="relative z-[41] inline-flex min-h-11 min-w-11 items-center justify-center rounded-control border border-line-strong text-foreground transition-colors hover:border-foreground/40 hover:bg-foreground/6 lg:hidden"
         aria-expanded={open}
         aria-controls="mobile-nav"
-        aria-label={open ? "Close menu" : "Open menu"}
+        aria-label={open ? t.nav.closeMenu : t.nav.openMenu}
         onClick={() => setOpen((v) => !v)}
       >
-        <span className="sr-only">Menu</span>
+        <span className="sr-only">{t.nav.menu}</span>
         <svg
           className="h-5 w-5"
           viewBox="0 0 24 24"
@@ -58,7 +67,8 @@ export function MobileNav() {
       {open ? (
         <div
           id="mobile-nav"
-          className="fixed inset-0 z-40 border-t border-line bg-void/98 backdrop-blur-xl lg:hidden"
+          dir={rtl ? "rtl" : undefined}
+          className={`fixed inset-0 z-40 border-t border-line bg-void/98 backdrop-blur-xl lg:hidden${rtl ? " rtl-page" : ""}`}
           style={{ paddingTop: "calc(4.5rem + env(safe-area-inset-top))" }}
         >
           <ul className="flex flex-col px-4 pb-[env(safe-area-inset-bottom)]">
@@ -68,7 +78,7 @@ export function MobileNav() {
                 className="flex min-h-12 items-center border-b border-line text-sm text-foreground transition-colors hover:bg-foreground/6 hover:text-foreground"
                 onClick={close}
               >
-                Home
+                {t.nav.home}
               </Link>
             </li>
             <ServicesNavDropdown variant="mobile" onNavigate={close} />
@@ -79,7 +89,7 @@ export function MobileNav() {
                   className="flex min-h-12 items-center border-b border-line text-sm text-foreground transition-colors hover:bg-foreground/6 hover:text-foreground"
                   onClick={close}
                 >
-                  {link.label}
+                  {t.nav[NAV_KEY[link.href as keyof typeof NAV_KEY]] ?? link.label}
                 </Link>
               </li>
             ))}
@@ -92,7 +102,7 @@ export function MobileNav() {
                 className="btn-primary flex w-full"
                 onClick={close}
               >
-                Start a project
+                {t.nav.startProject}
               </Link>
             </li>
             <li className="pt-3">
@@ -103,7 +113,7 @@ export function MobileNav() {
                 className="btn-secondary flex w-full"
                 onClick={close}
               >
-                Chat on WhatsApp
+                {t.nav.chatWhatsapp}
               </a>
             </li>
           </ul>

@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useChrome } from "@/lib/i18n/use-chrome";
 import { splitLang, translatedPath, type Lang } from "@/lib/i18n/routes";
 
 const LANGS: { code: Lang; label: string; name: string }[] = [
@@ -13,9 +14,10 @@ const LANGS: { code: Lang; label: string; name: string }[] = [
 export function LanguageSwitcher({ className = "" }: { className?: string }) {
   const pathname = usePathname() ?? "/";
   const { lang: current, base } = splitLang(pathname);
+  const { t } = useChrome();
 
   return (
-    <ul className={`flex items-center ${className}`} aria-label="Language">
+    <ul className={`flex items-center ${className}`} aria-label={t.nav.language}>
       {LANGS.map((l) => {
         const href = translatedPath(l.code, base) ?? (l.code === "en" ? "/" : `/${l.code}`);
         const active = l.code === current;

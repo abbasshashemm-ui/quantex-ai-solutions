@@ -1,3 +1,5 @@
+"use client";
+
 import { LocalLink as Link } from "@/components/ui/LocalLink";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
 import { SITE_NAV } from "@/lib/site/contact";
@@ -6,16 +8,25 @@ import { MobileNav } from "./MobileNav";
 import { ThemeToggle } from "./ThemeToggle";
 import { ServicesNavDropdown } from "./ServicesNavDropdown";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import { useChrome } from "@/lib/i18n/use-chrome";
 
 const NAV_LINKS = SITE_NAV.filter(
   (item) => item.href !== "/" && item.label !== "Solutions",
 );
 
+const NAV_KEY = {
+  "/ai-solutions": "aiSolutions",
+  "/insights": "guides",
+  "/about": "about",
+  "/contact": "contact",
+} as const;
+
 export function Navbar() {
+  const { t, rtl } = useChrome();
   return (
-    <header className="site-header fixed inset-x-0 top-0 z-50 px-4 pt-[env(safe-area-inset-top)] sm:px-6">
+    <header dir={rtl ? "rtl" : undefined} className={`site-header fixed inset-x-0 top-0 z-50 px-4 pt-[env(safe-area-inset-top)] sm:px-6${rtl ? " rtl-page" : ""}`}>
       <nav
-        aria-label="Primary"
+        aria-label={t.nav.primary}
         className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 py-3 sm:py-3.5"
       >
         <Link
@@ -35,7 +46,7 @@ export function Navbar() {
                 href={link.href}
                 className="inline-flex min-h-11 items-center rounded-control px-3 text-sm text-foreground/80 transition-colors hover:bg-foreground/6 hover:text-foreground sm:px-4"
               >
-                {link.label}
+                {t.nav[NAV_KEY[link.href as keyof typeof NAV_KEY]] ?? link.label}
               </Link>
             </li>
           ))}
@@ -48,7 +59,7 @@ export function Navbar() {
             data-conversion-location="navbar"
             className="btn-primary site-header__cta min-h-11! whitespace-nowrap sm:px-4 lg:px-5"
           >
-            Start a project
+            {t.nav.startProject}
           </Link>
           <LanguageSwitcher className="hidden sm:flex" />
           <ThemeToggle />

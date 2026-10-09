@@ -1,5 +1,8 @@
+"use client";
+
 import { LocalLink as Link } from "@/components/ui/LocalLink";
 import { BrandLogo } from "./BrandLogo";
+import { useChrome } from "@/lib/i18n/use-chrome";
 import {
   COMPANY,
   CONTACT,
@@ -8,13 +11,26 @@ import {
   FOOTER_NAV,
 } from "@/lib/site/contact";
 
+const FOOTER_KEY: Record<string, "solutions" | "aiSolutions" | "guides" | "about" | "contact" | "pricing" | "siteCheck" | "aiLebanon"> = {
+  "/#solutions": "solutions",
+  "/ai-solutions": "aiSolutions",
+  "/insights": "guides",
+  "/about": "about",
+  "/contact": "contact",
+  "/pricing": "pricing",
+  "/site-check": "siteCheck",
+  "/ai-solutions-lebanon": "aiLebanon",
+};
+
 export function Footer() {
+  const { t, rtl } = useChrome();
   const year = new Date().getFullYear();
 
   return (
     <footer
       id="contact"
-      className="relative z-20 border-t border-line bg-surface/70 px-4 backdrop-blur-xl sm:px-6"
+      dir={rtl ? "rtl" : undefined}
+      className={`relative z-20 border-t border-line bg-surface/70 px-4 backdrop-blur-xl sm:px-6${rtl ? " rtl-page" : ""}`}
       data-reveal
     >
       <div className="mx-auto max-w-7xl py-8 pb-[calc(2rem+env(safe-area-inset-bottom))] sm:py-10">
@@ -22,10 +38,10 @@ export function Footer() {
           <div className="col-span-2 lg:col-span-1">
             <BrandLogo className="text-[1.5rem] sm:text-[1.75rem]" />
             <p className="mt-3 max-w-sm text-xs leading-relaxed text-foreground/75 sm:text-sm">
-              {COMPANY.tagline}
+              {t.footer.tagline}
             </p>
             <p className="mt-2 text-[0.7rem] font-semibold tracking-[0.16em] text-foreground/60 uppercase">
-              Beirut, Lebanon · 33.89° N 35.50° E
+              {t.footer.place} · <bdi dir="ltr">33.89° N 35.50° E</bdi>
             </p>
             <ul className="mt-4 flex flex-wrap items-center gap-2">
               <li>
@@ -119,7 +135,7 @@ export function Footer() {
 
           <div>
             <h2 className="text-[0.7rem] font-semibold tracking-[0.18em] text-metallic uppercase sm:text-xs">
-              Contact
+              {t.footer.contact}
             </h2>
             <ul className="mt-2 space-y-0.5 text-xs sm:text-sm">
               {CONTACT_LINKS.map((item) => (
@@ -131,7 +147,7 @@ export function Footer() {
                       : {})}
                     className="inline-flex min-h-11 items-center py-1 text-foreground/80 transition-colors hover:text-foreground"
                   >
-                    {item.label}
+                    {item.label === "Chat on WhatsApp" ? t.footer.chatOnWhatsapp : item.label === "Start a project on WhatsApp" ? t.footer.startOnWhatsapp : item.label}
                   </a>
                 </li>
               ))}
@@ -140,7 +156,7 @@ export function Footer() {
 
           <div>
             <h2 className="text-[0.7rem] font-semibold tracking-[0.18em] text-metallic uppercase sm:text-xs">
-              Navigate
+              {t.footer.navigate}
             </h2>
             <ul className="mt-2 space-y-0.5 text-xs sm:text-sm">
               {FOOTER_NAV.map((item) => (
@@ -149,7 +165,7 @@ export function Footer() {
                     href={item.href}
                     className="inline-flex min-h-11 items-center py-1 text-foreground/80 transition-colors hover:text-foreground"
                   >
-                    {item.label}
+                    {t.nav[FOOTER_KEY[item.href]] ?? item.label}
                   </Link>
                 </li>
               ))}
@@ -159,7 +175,9 @@ export function Footer() {
 
         <div className="mt-6 flex flex-col gap-3 border-t border-line pt-4 text-[0.7rem] text-foreground/70 sm:mt-8 sm:flex-row sm:items-center sm:justify-between sm:pt-5 sm:text-xs">
           <p>
-            &copy; {year} {COMPANY.name}
+            <bdi dir="ltr">
+              &copy; {year} {COMPANY.name}
+            </bdi>
           </p>
           <ul className="flex flex-wrap items-center gap-x-4 gap-y-1">
             {FOOTER_LEGAL.map((item) => (
@@ -168,13 +186,13 @@ export function Footer() {
                   href={item.href}
                   className="transition-colors hover:text-foreground"
                 >
-                  {item.label}
+                  {item.href === "/privacy" ? t.footer.privacy : t.footer.terms}
                 </Link>
               </li>
             ))}
           </ul>
           <p className="tracking-wide sm:text-right">
-            Websites. Assistants. Software.
+            {t.footer.strap}
           </p>
         </div>
       </div>
