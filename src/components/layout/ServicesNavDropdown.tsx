@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { LocalLink as Link } from "@/components/ui/LocalLink";
 import { useEffect, useId, useRef, useState } from "react";
 import { NAV_SERVICE_ITEMS, SOLUTIONS_OVERVIEW_HREF } from "@/lib/services/nav";
 import { ServiceNavIcon } from "./ServiceNavIcon";

@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { LocalLink as Link } from "@/components/ui/LocalLink";
 import { useState, type ChangeEvent, type FormEvent } from "react";
 import { CONTACT } from "@/lib/site/contact";
 import { CONTACT_EN } from "@/lib/i18n/contact-en";

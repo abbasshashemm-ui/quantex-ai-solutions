@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { LocalLink as Link } from "@/components/ui/LocalLink";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { getArticleListing, getGuideGroups, INSIGHTS_PATH, type Lang } from "@/lib/articles";
 

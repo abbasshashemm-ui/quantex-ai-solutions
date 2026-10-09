@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { LocalLink as Link } from "@/components/ui/LocalLink";
 import { useEffect, useState } from "react";
 import { CONTACT, SITE_NAV } from "@/lib/site/contact";
 import { ServicesNavDropdown } from "./ServicesNavDropdown";

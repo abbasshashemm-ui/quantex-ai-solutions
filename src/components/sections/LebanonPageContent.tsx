@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { LocalLink as Link } from "@/components/ui/LocalLink";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { articlePath, type Lang } from "@/lib/articles";
 import { CHOOSE_SLUG } from "@/lib/articles/choose-slug";
