@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { LocalLink as Link } from "@/components/ui/LocalLink";
 import { BrandLogo } from "./BrandLogo";
 import {
   COMPANY,

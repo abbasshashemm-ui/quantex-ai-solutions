@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { LocalLink as Link } from "@/components/ui/LocalLink";
 import { ArticleFigure } from "@/components/figures/ArticleFigure";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { getArticleFigure } from "@/lib/figures/data";

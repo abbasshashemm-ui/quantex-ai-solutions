@@ -1,4 +1,4 @@
-import Link from "next/link";
+import { LocalLink as Link } from "@/components/ui/LocalLink";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
 import { SITE_NAV } from "@/lib/site/contact";
 import { BrandLogo } from "./BrandLogo";
