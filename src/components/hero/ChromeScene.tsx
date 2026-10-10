@@ -6,9 +6,12 @@ import {
   ACESFilmicToneMapping,
   Color,
   MathUtils,
-  MeshStandardMaterial,
+  CanvasTexture,
+  MeshPhysicalMaterial,
+  RepeatWrapping,
   type Group,
   type Mesh,
+  type MeshStandardMaterial,
   type Scene,
   type Texture,
 } from "three";
@@ -28,6 +31,7 @@ import {
   ringZ,
 } from "./choreography";
 import type { MotionState } from "./motion";
+import { readMarkStyle, type MarkStyle } from "./mark-style";
 
 type ChromeSceneProps = {
   motion: RefObject<MotionState>;
@@ -42,15 +46,51 @@ type ChromeSceneProps = {
 const CHROME = new Color("#ffffff");
 const ALUMINIUM = new Color("#d6dae1");
 
+/** Roughness range per style: polished chrome, polished plates, brushed metal. */
+const ROUGHNESS: Record<MarkStyle, [number, number]> = {
+  tube: [0.07, 0.3],
+  plate: [0.1, 0.3],
+  brushed: [0.42, 0.52],
+};
+
+/** Fine streaks along the length of each plate, like a brushed finish. */
+function createBrushTexture(): CanvasTexture {
+  const size = 256;
+  const canvas = document.createElement("canvas");
+  canvas.width = size;
+  canvas.height = size;
+  const context = canvas.getContext("2d");
+  if (context) {
+    context.fillStyle = "#808080";
+    context.fillRect(0, 0, size, size);
+    for (let y = 0; y < size; y += 1) {
+      const shade = 128 + (Math.random() - 0.5) * 120;
+      context.fillStyle = `rgb(${shade},${shade},${shade})`;
+      context.globalAlpha = 0.55;
+      context.fillRect(0, y, size, 1);
+    }
+    context.globalAlpha = 1;
+  }
+  const texture = new CanvasTexture(canvas);
+  texture.wrapS = RepeatWrapping;
+  texture.wrapT = RepeatWrapping;
+  texture.repeat.set(1, 5);
+  return texture;
+}
+
 /** Finish settles from mirror chrome to satin aluminium as the tunnel twists. */
 function updateFinish(
   material: MeshStandardMaterial,
   satin: number,
   twist: number,
+  style: MarkStyle,
 ) {
-  material.roughness = MathUtils.lerp(0.07, 0.3, satin);
+  const [polished, satinRoughness] = ROUGHNESS[style];
+  material.roughness = MathUtils.lerp(polished, satinRoughness, satin);
   material.envMapIntensity = MathUtils.lerp(1.1, 0.95, twist);
   material.color.copy(CHROME).lerp(ALUMINIUM, twist);
+  // Brushed metal sits a little darker, so it keeps its edge on the light page.
+  if (style === "brushed") material.color.multiplyScalar(0.84);
 }
 
 /** Light streaks slide across the metal; this is most of what reads as liquid. */
@@ -86,17 +126,30 @@ function Sculpture({
   // Idle spin: accumulated angle, and a smoothed 0..1 "page is moving" level.
   const spin = useRef({ angle: 0, speed: 0 });
 
-  const geometries = useMemo(() => buildRingSpecs().map(buildRingGeometry), []);
-  const material = useMemo(
-    () =>
-      new MeshStandardMaterial({
-        color: CHROME,
-        metalness: 1,
-        roughness: 0.07,
-        envMapIntensity: 1.1,
-      }),
-    [],
+  const style = useMemo(() => readMarkStyle(), []);
+  const geometries = useMemo(
+    () => buildRingSpecs().map((spec) => buildRingGeometry(spec, style)),
+    [style],
   );
+  const material = useMemo(() => {
+    const brushed = style === "brushed";
+    const brush = brushed ? createBrushTexture() : null;
+    return new MeshPhysicalMaterial({
+      color: CHROME,
+      metalness: brushed ? 0.82 : 1,
+      roughness: ROUGHNESS[style][0],
+      envMapIntensity: brushed ? 1.7 : 1.1,
+      ...(brush
+        ? {
+            roughnessMap: brush,
+            bumpMap: brush,
+            bumpScale: 0.25,
+            anisotropy: 0.2,
+            anisotropyRotation: 0,
+          }
+        : {}),
+    });
+  }, [style]);
 
   useEffect(() => {
     const environment = createStudioEnvironment(gl);
@@ -176,7 +229,7 @@ function Sculpture({
       ring.rotation.z = ringTwist(index, pose);
     }
 
-    updateFinish(material, pose.satin, pose.twist);
+    updateFinish(material, pose.satin, pose.twist, style);
     updateReflections(state.scene, time, progress, ambient);
   });
 

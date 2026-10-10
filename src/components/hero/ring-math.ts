@@ -174,11 +174,16 @@ export function getUnitLoopPoints(): readonly (readonly [number, number])[] {
  * rotated into its place in the spiral. Stacking rings along z (and twisting
  * them) is what the scroll animation drives.
  */
-export function buildRingBuffers(spec: RingSpec): {
+export function buildRingBuffers(
+  spec: RingSpec,
+  style: "tube" | "plate" | "brushed" = "tube",
+): {
   positions: Float32Array;
   normals: Float32Array;
   indices: Uint32Array;
+  uvs: Float32Array;
 } {
+  if (style !== "tube") return buildPlateBuffers(spec);
   const { points, normals } = getRoundedTriangle();
   const loopLength = points.length;
 
@@ -239,5 +244,95 @@ export function buildRingBuffers(spec: RingSpec): {
     }
   }
 
-  return { positions, normals: vertexNormals, indices };
+  return {
+    positions,
+    normals: vertexNormals,
+    indices,
+    uvs: new Float32Array(loopLength * TUBE_SEGMENTS * 2),
+  };
+}
+
+/** Plate proportions, relative to the tube width at the same ring. */
+const PLATE_HALF_WIDTH = 1.08;
+const PLATE_HALF_DEPTH = 0.5;
+const PLATE_CHAMFER = 0.22;
+
+/**
+ * The same triangle loop swept with a flat, chamfered rectangle instead of a
+ * circle: front and back faces, flat sides and four 45 degree edges. Each face
+ * has its own vertices so the edges stay crisp.
+ */
+function buildPlateBuffers(spec: RingSpec) {
+  const { points, normals } = getRoundedTriangle();
+  const loopLength = points.length;
+  const W = PLATE_HALF_WIDTH;
+  const D = PLATE_HALF_DEPTH;
+  const C = PLATE_CHAMFER;
+  const k = Math.SQRT1_2;
+
+  // [startU, startZ, endU, endZ, normalU, normalZ], walked clockwise.
+  const faces: number[][] = [
+    [-(W - C), D, W - C, D, 0, 1],
+    [W - C, D, W, D - C, k, k],
+    [W, D - C, W, -(D - C), 1, 0],
+    [W, -(D - C), W - C, -D, k, -k],
+    [W - C, -D, -(W - C), -D, 0, -1],
+    [-(W - C), -D, -W, -(D - C), -k, -k],
+    [-W, -(D - C), -W, D - C, -1, 0],
+    [-W, D - C, -(W - C), D, -k, k],
+  ];
+  const perLoop = faces.length * 2;
+
+  const cos = Math.cos(spec.rotation);
+  const sin = Math.sin(spec.rotation);
+  const width = TUBE_RADIUS * spec.scale ** TUBE_FALLOFF;
+
+  const positions = new Float32Array(loopLength * perLoop * 3);
+  const vertexNormals = new Float32Array(loopLength * perLoop * 3);
+  const uvs = new Float32Array(loopLength * perLoop * 2);
+
+  for (let i = 0; i < loopLength; i += 1) {
+    const [px, py] = points[i];
+    const [nx0, ny0] = normals[i];
+    const baseX = px * spec.scale * cos - py * spec.scale * sin;
+    const baseY = px * spec.scale * sin + py * spec.scale * cos;
+    const nx = nx0 * cos - ny0 * sin;
+    const ny = nx0 * sin + ny0 * cos;
+
+    faces.forEach((face, f) => {
+      for (let end = 0; end < 2; end += 1) {
+        const u = face[end * 2];
+        const z = face[end * 2 + 1];
+        const index = i * perLoop + f * 2 + end;
+        positions[index * 3] = baseX + width * u * nx;
+        positions[index * 3 + 1] = baseY + width * u * ny;
+        positions[index * 3 + 2] = width * z;
+        vertexNormals[index * 3] = face[4] * nx;
+        vertexNormals[index * 3 + 1] = face[4] * ny;
+        vertexNormals[index * 3 + 2] = face[5];
+        uvs[index * 2] = (i / loopLength) * 6;
+        uvs[index * 2 + 1] = (f * 2 + end) / perLoop;
+      }
+    });
+  }
+
+  const indices = new Uint32Array(loopLength * faces.length * 6);
+  let cursor = 0;
+  for (let i = 0; i < loopLength; i += 1) {
+    const nextI = (i + 1) % loopLength;
+    for (let f = 0; f < faces.length; f += 1) {
+      const a = i * perLoop + f * 2;
+      const b = a + 1;
+      const c = nextI * perLoop + f * 2;
+      const d = c + 1;
+      indices[cursor++] = a;
+      indices[cursor++] = c;
+      indices[cursor++] = b;
+      indices[cursor++] = b;
+      indices[cursor++] = c;
+      indices[cursor++] = d;
+    }
+  }
+
+  return { positions, normals: vertexNormals, indices, uvs };
 }
