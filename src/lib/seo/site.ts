@@ -28,7 +28,7 @@ export const SITE = {
   name: COMPANY.name,
   tagline: COMPANY.tagline,
   description:
-    "Quantex is a Beirut studio that builds websites that win customers, AI assistants that answer them on your website and WhatsApp, and the software and automation behind your business.",
+    "Quantex is a Beirut studio building websites that win customers, AI assistants for your website and WhatsApp, and the software behind your business.",
   locale: "en_US",
   email: CONTACT.email,
   phone: CONTACT.phoneDisplay,
