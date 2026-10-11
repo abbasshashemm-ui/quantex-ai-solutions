@@ -228,8 +228,8 @@ export default function FlatScene({
       rings.sort((a, b) => a.depth - b.depth);
 
       context.clearRect(0, 0, width, height);
-      context.lineJoin = "miter";
-      context.lineCap = "butt";
+      context.lineJoin = "round";
+      context.lineCap = "round";
 
       for (const ring of rings) {
         const path = new Path2D();

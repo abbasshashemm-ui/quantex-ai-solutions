@@ -48,7 +48,7 @@ function updateFinish(
   satin: number,
   twist: number,
 ) {
-  material.roughness = MathUtils.lerp(0.1, 0.3, satin);
+  material.roughness = MathUtils.lerp(0.07, 0.3, satin);
   material.envMapIntensity = MathUtils.lerp(1.1, 0.95, twist);
   material.color.copy(CHROME).lerp(ALUMINIUM, twist);
 }
@@ -92,7 +92,7 @@ function Sculpture({
       new MeshStandardMaterial({
         color: CHROME,
         metalness: 1,
-        roughness: 0.1,
+        roughness: 0.07,
         envMapIntensity: 1.1,
       }),
     [],
