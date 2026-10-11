@@ -16,7 +16,7 @@ export {
   type RingSpec,
 } from "./ring-math";
 
-/** One chrome plate as three.js geometry, built from the plain vertex data. */
+/** One chrome ring as three.js geometry, built from the plain vertex data. */
 export function buildRingGeometry(spec: RingSpec): BufferGeometry {
   const { positions, normals, indices } = buildRingBuffers(spec);
   const geometry = new BufferGeometry();
