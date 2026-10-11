@@ -2,7 +2,7 @@
  * The Quantex mark is a spiral of nested triangle outlines. Each triangle's
  * corners sit a fixed fraction of the way along the edges of the one before,
  * which is what makes the mark twist inward. These helpers rebuild that spiral
- * as smooth tube geometry, so it can be rendered as polished chrome in 3D.
+ * as flat, chamfered metal plates, so it can be rendered as polished chrome in 3D.
  *
  * All sizes are in units where the outermost triangle has circumradius 1.
  */
@@ -14,13 +14,10 @@ const SPIRAL_T = 0.078;
 const CORNER_RADIUS = 0.07;
 const ARC_STEPS = 14;
 const EDGE_STEPS = 4;
-const TUBE_SEGMENTS = 20;
-/** Tube half-width of the outer ring. */
+/** Plate half-width of the outer ring. */
 export const TUBE_RADIUS = 0.026;
 /** Inner rings thin out slower than they shrink, so they stay visible. */
 export const TUBE_FALLOFF = 0.72;
-/** Tube depth relative to its width (1 = round wire). */
-const TUBE_FLATTEN = 0.85;
 
 type Vec2 = readonly [number, number];
 
@@ -169,100 +166,19 @@ export function getUnitLoopPoints(): readonly (readonly [number, number])[] {
   return getRoundedTriangle().points;
 }
 
-/**
- * The vertex data for one chrome ring: a tube swept around a rounded triangle, already scaled and
- * rotated into its place in the spiral. Stacking rings along z (and twisting
- * them) is what the scroll animation drives.
- */
-export function buildRingBuffers(
-  spec: RingSpec,
-  style: "tube" | "plate" | "brushed" = "tube",
-): {
-  positions: Float32Array;
-  normals: Float32Array;
-  indices: Uint32Array;
-  uvs: Float32Array;
-} {
-  if (style !== "tube") return buildPlateBuffers(spec);
-  const { points, normals } = getRoundedTriangle();
-  const loopLength = points.length;
-
-  const cos = Math.cos(spec.rotation);
-  const sin = Math.sin(spec.rotation);
-  const width = TUBE_RADIUS * spec.scale ** TUBE_FALLOFF;
-  const depth = width * TUBE_FLATTEN;
-
-  const positions = new Float32Array(loopLength * TUBE_SEGMENTS * 3);
-  const vertexNormals = new Float32Array(loopLength * TUBE_SEGMENTS * 3);
-
-  for (let i = 0; i < loopLength; i += 1) {
-    const [px, py] = points[i];
-    const [nx0, ny0] = normals[i];
-
-    const baseX = px * spec.scale * cos - py * spec.scale * sin;
-    const baseY = px * spec.scale * sin + py * spec.scale * cos;
-    const nx = nx0 * cos - ny0 * sin;
-    const ny = nx0 * sin + ny0 * cos;
-
-    for (let j = 0; j < TUBE_SEGMENTS; j += 1) {
-      const phi = (j / TUBE_SEGMENTS) * Math.PI * 2;
-      const c = Math.cos(phi);
-      const s = Math.sin(phi);
-      const offset = (i * TUBE_SEGMENTS + j) * 3;
-
-      positions[offset] = baseX + width * c * nx;
-      positions[offset + 1] = baseY + width * c * ny;
-      positions[offset + 2] = depth * s;
-
-      // Normal of an elliptical cross-section.
-      const normalX = (c / width) * nx;
-      const normalY = (c / width) * ny;
-      const normalZ = s / depth;
-      const normalLength = Math.hypot(normalX, normalY, normalZ) || 1;
-      vertexNormals[offset] = normalX / normalLength;
-      vertexNormals[offset + 1] = normalY / normalLength;
-      vertexNormals[offset + 2] = normalZ / normalLength;
-    }
-  }
-
-  const indices = new Uint32Array(loopLength * TUBE_SEGMENTS * 6);
-  let cursor = 0;
-  for (let i = 0; i < loopLength; i += 1) {
-    const nextI = (i + 1) % loopLength;
-    for (let j = 0; j < TUBE_SEGMENTS; j += 1) {
-      const nextJ = (j + 1) % TUBE_SEGMENTS;
-      const a = i * TUBE_SEGMENTS + j;
-      const b = i * TUBE_SEGMENTS + nextJ;
-      const c = nextI * TUBE_SEGMENTS + j;
-      const d = nextI * TUBE_SEGMENTS + nextJ;
-      indices[cursor++] = a;
-      indices[cursor++] = b;
-      indices[cursor++] = c;
-      indices[cursor++] = b;
-      indices[cursor++] = d;
-      indices[cursor++] = c;
-    }
-  }
-
-  return {
-    positions,
-    normals: vertexNormals,
-    indices,
-    uvs: new Float32Array(loopLength * TUBE_SEGMENTS * 2),
-  };
-}
-
-/** Plate proportions, relative to the tube width at the same ring. */
+/** Plate proportions, relative to the plate width at the same ring. */
 const PLATE_HALF_WIDTH = 1.08;
 const PLATE_HALF_DEPTH = 0.5;
 const PLATE_CHAMFER = 0.22;
 
 /**
- * The same triangle loop swept with a flat, chamfered rectangle instead of a
- * circle: front and back faces, flat sides and four 45 degree edges. Each face
- * has its own vertices so the edges stay crisp.
+ * The vertex data for one chrome ring: the triangle loop swept with a flat,
+ * chamfered rectangle: front and back faces, flat sides and four 45 degree
+ * edges. Each face has its own vertices so the edges stay crisp. The ring is
+ * already scaled and rotated into its place in the spiral; stacking rings along
+ * z (and twisting them) is what the scroll animation drives.
  */
-function buildPlateBuffers(spec: RingSpec) {
+export function buildRingBuffers(spec: RingSpec) {
   const { points, normals } = getRoundedTriangle();
   const loopLength = points.length;
   const W = PLATE_HALF_WIDTH;
@@ -289,7 +205,6 @@ function buildPlateBuffers(spec: RingSpec) {
 
   const positions = new Float32Array(loopLength * perLoop * 3);
   const vertexNormals = new Float32Array(loopLength * perLoop * 3);
-  const uvs = new Float32Array(loopLength * perLoop * 2);
 
   for (let i = 0; i < loopLength; i += 1) {
     const [px, py] = points[i];
@@ -310,9 +225,7 @@ function buildPlateBuffers(spec: RingSpec) {
         vertexNormals[index * 3] = face[4] * nx;
         vertexNormals[index * 3 + 1] = face[4] * ny;
         vertexNormals[index * 3 + 2] = face[5];
-        uvs[index * 2] = (i / loopLength) * 6;
-        uvs[index * 2 + 1] = (f * 2 + end) / perLoop;
-      }
+            }
     });
   }
 
@@ -334,5 +247,5 @@ function buildPlateBuffers(spec: RingSpec) {
     }
   }
 
-  return { positions, normals: vertexNormals, indices, uvs };
+  return { positions, normals: vertexNormals, indices };
 }
