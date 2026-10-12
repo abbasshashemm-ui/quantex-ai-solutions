@@ -8,7 +8,7 @@ export type LegalSection = {
 export const PRIVACY_POLICY = {
   path: "/privacy",
   title: "Privacy Policy",
-  lastUpdated: "May 26, 2026",
+  lastUpdated: "October 10, 2026",
   intro:
     "This Privacy Policy explains how Quantex AI Solutions (“Quantex,” “we,” “us”) collects, uses, and protects personal information when you visit our website or contact us about our services.",
   sections: [
@@ -42,6 +42,7 @@ export const PRIVACY_POLICY = {
         "We collect information when you submit our contact form, email us, message us on WhatsApp, use our on-site chat assistant, or otherwise reach out. Our contact form prepares a message that you send through WhatsApp—we do not store form submissions on our own servers.",
         "When you use the chat assistant, your messages are sent to our servers and processed by Google’s Gemini API to generate replies. We do not store full chat transcripts on our own servers in the current version of the site; conversation history exists only in your browser session unless we add logging later (this policy would be updated).",
         "We also receive limited usage data through Vercel Analytics to understand how visitors use the site (for example, page views, referrers, and conversion events such as contact form submissions, chat opens, or WhatsApp button clicks). This helps us improve performance and content.",
+        "Cookies: this site does not set advertising or tracking cookies and shows no cookie banner. Vercel Analytics is cookieless, and any cookies or local storage used are limited to what the site needs to work, such as remembering your light or dark theme choice in your browser. If we add cookies or tools that need your consent (for example under GDPR), we will ask first and update this policy.",
       ],
     },
     {
