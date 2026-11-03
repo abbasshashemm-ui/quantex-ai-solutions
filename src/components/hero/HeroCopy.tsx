@@ -30,12 +30,13 @@ export function HeroCopy() {
             See what we build
           </a>
         </div>
-        <HeroFacts
-          label="The studio"
-          ariaLabel="Studio facts"
-          items={["10+ paying clients", "Replies within 24 hours", "Beirut, Lebanon"]}
-        />
       </div>
+
+      <HeroFacts
+        label="The studio"
+        ariaLabel="Studio facts"
+        items={["10+ paying clients", "Replies within 24 hours", "Beirut, Lebanon"]}
+      />
 
       <p className="sr-only">
         Websites that convert: fast, clear, and built around one goal, turning

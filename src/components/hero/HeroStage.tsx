@@ -376,6 +376,7 @@ export function HeroStage({ children }: HeroStageProps) {
           ) : null}
         </div>
 
+        <div className="alu-stage__light" aria-hidden />
         <div className="alu-stage__floor" aria-hidden />
 
         <div className="alu-stage__glass" aria-hidden>

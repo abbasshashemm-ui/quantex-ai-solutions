@@ -52,12 +52,13 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
               {h.hero.secondary}
             </a>
           </div>
-          <HeroFacts
-            label={h.hero.factsLabel}
-            ariaLabel={h.hero.factsLabel}
-            items={h.hero.chips}
-          />
         </div>
+
+        <HeroFacts
+          label={h.hero.factsLabel}
+          ariaLabel={h.hero.factsLabel}
+          items={h.hero.chips}
+        />
 
         {h.beats.map((beat, i) => (
           <div key={beat.slug} className={`alu-beat alu-beat--${i === 0 ? "one" : "two"}`}>

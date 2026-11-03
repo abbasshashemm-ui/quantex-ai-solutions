@@ -7,8 +7,8 @@ type HeroHeadlineProps = {
 
 /**
  * The hero headline as a two-tier lockup: every line but the last runs
- * together in a light, upright weight, and the last line sits below it,
- * large, in the brand's condensed italic.
+ * together in a light, upright weight, and the last line sits below it at
+ * the same size, bold and italic.
  */
 export function HeroHeadline({ lines }: HeroHeadlineProps) {
   const light = lines.slice(0, -1);
@@ -32,7 +32,7 @@ export function HeroHeadline({ lines }: HeroHeadlineProps) {
         </span>
       ) : null}
       <span
-        className="alu-display alu-h1__line alu-h1__strong"
+        className="alu-h1__line alu-h1__strong"
         style={{ "--i": light.length } as CSSProperties}
       >
         {strong}
@@ -49,10 +49,10 @@ type HeroFactsProps = {
   items: readonly string[];
 };
 
-/** A quiet row of proof points under the hero copy, in place of chips. */
+/** A row of proof points pinned to the foot of the hero stage. */
 export function HeroFacts({ label, ariaLabel, items }: HeroFactsProps) {
   return (
-    <div className="alu-facts">
+    <div className="alu-facts alu-stage__foot">
       <p className="alu-facts__label">{label}</p>
       <ul className="alu-facts__list" aria-label={ariaLabel}>
         {items.map((item) => (
