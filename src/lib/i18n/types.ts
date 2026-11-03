@@ -46,6 +46,8 @@ export type LocalizedHome = {
     primary: string;
     secondary: string;
     chips: [string, string];
+    /** Label over the row of chips, e.g. "The studio". */
+    factsLabel: string;
   };
   beats: { index: string; title: string; lede: string; link: string; slug: string }[]; // 2
   siteCheck: { label: string; title: string; text: string; button: string };

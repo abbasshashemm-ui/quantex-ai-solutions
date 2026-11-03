@@ -18,6 +18,7 @@ export const AR: LocaleContent = {
       primary: "ابدأ مشروعاً",
       secondary: "شاهد ما نبنيه",
       chips: ["أكثر من 10 عملاء", "رد خلال 24 ساعة"],
+      factsLabel: "الاستوديو",
     },
     beats: [
       {

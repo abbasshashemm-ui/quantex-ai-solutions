@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
+import { HeroFacts, HeroHeadline } from "./HeroHeadline";
 
 const HEADLINE = ["Automate.", "Scale.", "Dominate."] as const;
 
@@ -10,17 +11,7 @@ export function HeroCopy() {
     <>
       <div className="alu-hero">
         <PageEyebrow>Beirut · AI studio</PageEyebrow>
-        <h1 className="alu-display alu-h1">
-          {HEADLINE.map((line, index) => (
-            <span
-              key={line}
-              className="alu-h1__line"
-              style={{ "--i": index } as React.CSSProperties}
-            >
-              {line}
-            </span>
-          ))}
-        </h1>
+        <HeroHeadline lines={HEADLINE} />
         <p className="alu-lede">
           Websites that win customers and AI assistants that answer them. Built
           by a Beirut studio you can message directly.
@@ -39,13 +30,11 @@ export function HeroCopy() {
             See what we build
           </a>
         </div>
-        <ul className="alu-chips" aria-label="Studio facts">
-          <li className="alu-chip">
-            <span className="alu-chip__dot" aria-hidden />
-            10+ paying clients
-          </li>
-          <li className="alu-chip">Replies within 24 hours</li>
-        </ul>
+        <HeroFacts
+          label="The studio"
+          ariaLabel="Studio facts"
+          items={["10+ paying clients", "Replies within 24 hours", "Beirut, Lebanon"]}
+        />
       </div>
 
       <p className="sr-only">
