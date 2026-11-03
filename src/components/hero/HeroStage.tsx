@@ -28,6 +28,9 @@ const BEAT_TWO_AT = 0.64;
 /** Proportions of the triangle inside public/hero/chrome-mark.webp. */
 const POSTER = { heightFrac: 0.713, centreX: 0.5055, centreY: 0.3935 };
 
+/** Ribs in the fluted glass slab that stands in front of the sculpture. */
+const RIBS = [0, 1, 2, 3, 4, 5] as const;
+
 /** Breathing room between the sculpture, the header and the headline, in px. */
 const SLOT_GAP = 10;
 const SLOT_MIN = 80;
@@ -371,6 +374,15 @@ export function HeroStage({ children }: HeroStageProps) {
               </SceneBoundary>
             </div>
           ) : null}
+        </div>
+
+        <div className="alu-stage__light" aria-hidden />
+        <div className="alu-stage__floor" aria-hidden />
+
+        <div className="alu-stage__glass" aria-hidden>
+          {RIBS.map((rib) => (
+            <span key={rib} className="alu-stage__rib" />
+          ))}
         </div>
 
         <div className="alu-stage__content">{children}</div>

@@ -538,6 +538,130 @@ a:hover > .alu-link span[aria-hidden],
   }
 }
 
+/*
+ * Fluted glass: a tall slab of vertical ribs standing in front of the
+ * sculpture. Each rib blurs what is behind it and carries its own highlight
+ * and shadow, so the mark reads as refracted through ridged glass while its
+ * far side stays sharp. The blur is kept to this one slab, over the moving
+ * scene, where it earns its cost.
+ */
+.alu-stage__glass {
+  position: absolute;
+  z-index: 0;
+  top: 0;
+  bottom: 0;
+  left: 49%;
+  display: flex;
+  width: 23%;
+  pointer-events: none;
+  box-shadow:
+    -1px 0 0 rgba(255, 255, 255, 0.55),
+    1px 0 0 rgba(255, 255, 255, 0.4),
+    0 0 60px rgba(255, 255, 255, 0.35);
+}
+
+.alu-stage__rib {
+  flex: 1 1 0;
+  min-width: 0;
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.55) 0%,
+      rgba(255, 255, 255, 0.08) 22%,
+      rgba(255, 255, 255, 0) 48%,
+      rgba(20, 26, 36, 0.1) 76%,
+      rgba(20, 26, 36, 0.16) 92%,
+      rgba(255, 255, 255, 0.35) 100%
+    ),
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.28) 0%,
+      rgba(255, 255, 255, 0.04) 30%,
+      rgba(255, 255, 255, 0.04) 70%,
+      rgba(20, 26, 36, 0.08) 100%
+    );
+  box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.7);
+  -webkit-backdrop-filter: blur(7px) contrast(1.06) brightness(1.03);
+  backdrop-filter: blur(7px) contrast(1.06) brightness(1.03);
+}
+
+/* The 3D scene carries its own refracting glass; the CSS ribs stand in for it. */
+.alu-stage[data-hero-mode="3d"] .alu-stage__glass {
+  display: none;
+}
+
+/* The two outer ribs are wider, like the edges of a cast slab. */
+.alu-stage__rib:first-child,
+.alu-stage__rib:last-child {
+  flex-grow: 1.6;
+}
+
+/* Phones: the slab stands only through the sculpture's band, never the copy. */
+@media (max-width: 899px) {
+  .alu-stage__glass {
+    top: calc(var(--slot-center, 25.5%) - var(--slot-size, 12rem) / 2);
+    bottom: auto;
+    left: 52%;
+    width: 30%;
+    height: var(--slot-size, 12rem);
+  }
+
+  .alu-stage__rib {
+    -webkit-backdrop-filter: blur(5px) contrast(1.06);
+    backdrop-filter: blur(5px) contrast(1.06);
+  }
+}
+
+/*
+ * Lighting: a bright haze behind the copy and over the top of the stage,
+ * a deeper tone on the far side, and a dark floor the scene grounds on.
+ */
+.alu-stage__light {
+  position: absolute;
+  z-index: -2;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(
+      70% 90% at 18% 38%,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(255, 255, 255, 0.45) 35%,
+      rgba(255, 255, 255, 0) 70%
+    ),
+    radial-gradient(
+      60% 50% at 50% -10%,
+      rgba(255, 255, 255, 0.8) 0%,
+      rgba(255, 255, 255, 0) 70%
+    ),
+    radial-gradient(
+      55% 80% at 100% 60%,
+      rgba(20, 26, 36, 0.14) 0%,
+      rgba(20, 26, 36, 0) 70%
+    );
+}
+
+.alu-stage__floor {
+  position: absolute;
+  z-index: -1;
+  inset: auto 0 0;
+  height: 48%;
+  pointer-events: none;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 26, 36, 0) 0%,
+    rgba(20, 26, 36, 0.08) 40%,
+    rgba(20, 26, 36, 0.3) 100%
+  );
+}
+
+@media (prefers-reduced-transparency: reduce) {
+  .alu-stage__rib {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: rgba(255, 255, 255, 0.35);
+  }
+}
+
 .alu-stage__canvas {
   position: absolute;
   inset: 0;
@@ -563,6 +687,7 @@ a:hover > .alu-link span[aria-hidden],
   position: absolute;
   inset: 0;
   display: grid;
+  grid-template-rows: minmax(0, 1fr) auto;
   align-items: end;
   /* Same left edge as the header: its max-w-7xl inside 1rem / 1.5rem gutters. */
   width: min(80rem, 100% - 2rem);
@@ -588,11 +713,20 @@ a:hover > .alu-link span[aria-hidden],
   max-width: min(54rem, 100%);
 }
 
+.alu-stage__content > .alu-stage__foot {
+  grid-area: 2 / 1;
+  max-width: none;
+}
+
 @media (min-width: 900px) {
   .alu-stage__content {
     align-items: center;
     padding-top: clamp(5.5rem, 12svh, 7.5rem);
     padding-bottom: clamp(2.5rem, 7svh, 4rem);
+  }
+
+  .alu-stage__content > * {
+    max-width: min(54rem, 50%);
   }
 }
 
@@ -627,26 +761,47 @@ a:hover > .alu-link span[aria-hidden],
   pointer-events: none;
 }
 
+/*
+ * Headline lockup: the opening words run together in a light, upright
+ * weight; the last word sits below them at the same size, bold and italic.
+ * The size is set by width so the first line fits the copy column.
+ */
 .alu-h1 {
-  margin-top: 0.75rem;
-  /* Sized by height as well as width, so short phones keep room for the logo. */
-  font-size: clamp(2.6rem, min(17vw, 8.6svh), 5.25rem);
+  --h1: clamp(2.2rem, 11vw, 3.4rem);
+  margin-top: 0.85rem;
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  font-weight: 300;
+  font-size: var(--h1);
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  color: var(--foreground);
 }
 
 @media (min-width: 640px) {
   .alu-h1 {
-    font-size: clamp(5rem, 15vw, 8rem);
+    --h1: clamp(3.4rem, 8.2vw, 5rem);
   }
 }
 
 @media (min-width: 900px) {
   .alu-h1 {
-    font-size: clamp(5rem, min(12.2vw, 20svh), 11.5rem);
+    --h1: clamp(4rem, min(6.3vw, 11svh), 6.4rem);
   }
 }
 
-.alu-h1__line {
+.alu-h1__light {
   display: block;
+}
+
+.alu-h1__line {
+  display: inline-block;
+}
+
+.alu-h1__strong {
+  display: block;
+  font-weight: 600;
+  font-style: italic;
+  letter-spacing: -0.035em;
 }
 
 @media (prefers-reduced-motion: no-preference) {
@@ -726,6 +881,48 @@ a:hover > .alu-link span[aria-hidden],
   transform: scale(0.97);
 }
 
+/* Proof points at the foot of the stage: a small label over a spaced row. */
+.alu-facts {
+  padding-top: 1.5rem;
+}
+
+.alu-facts__label {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.alu-facts__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem 2.4rem;
+  margin-top: 0.8rem;
+  padding: 0;
+  list-style: none;
+}
+
+.alu-facts__item {
+  position: relative;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--foreground);
+}
+
+.alu-facts__item + .alu-facts__item::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  inset-inline-start: -1.4rem;
+  width: 0.3rem;
+  height: 0.3rem;
+  border-radius: 50%;
+  background: var(--metallic-dim);
+  transform: translateY(-50%);
+}
+
 @media (max-width: 899px) {
   .alu-hero .alu-lede {
     margin-top: 0.9rem;
@@ -742,8 +939,16 @@ a:hover > .alu-link span[aria-hidden],
     min-height: 3rem;
   }
 
-  .alu-hero .alu-chips {
-    margin-top: 1rem;
+  .alu-facts {
+    padding-top: 1rem;
+  }
+
+  .alu-facts__list {
+    gap: 0.25rem 1.8rem;
+  }
+
+  .alu-facts__item {
+    font-size: 0.9rem;
   }
 }
 
@@ -754,15 +959,15 @@ a:hover > .alu-link span[aria-hidden],
   }
 }
 
-/* On short phones, the logo gets the space the chip row would take. */
+/* On short phones, the logo gets the space the facts row would take. */
 @media (max-width: 899px) and (max-height: 780px) {
-  .alu-hero .alu-chips {
+  .alu-facts {
     display: none;
   }
 }
 
 @media (max-width: 639px) {
-  .alu-chips .alu-chip:nth-child(n + 2) {
+  .alu-facts__item:nth-child(n + 3) {
     display: none;
   }
 
@@ -2180,6 +2385,58 @@ span.chat-panel__input {
     );
   }
 
+  .alu-stage__glass {
+    box-shadow:
+      -1px 0 0 rgba(255, 255, 255, 0.22),
+      1px 0 0 rgba(255, 255, 255, 0.14),
+      0 0 60px rgba(255, 255, 255, 0.06);
+  }
+
+  .alu-stage__rib {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0.2) 0%,
+        rgba(255, 255, 255, 0.04) 22%,
+        rgba(255, 255, 255, 0) 48%,
+        rgba(0, 0, 0, 0.22) 76%,
+        rgba(0, 0, 0, 0.34) 92%,
+        rgba(255, 255, 255, 0.12) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.08) 0%,
+        rgba(255, 255, 255, 0.02) 30%,
+        rgba(255, 255, 255, 0.02) 70%,
+        rgba(0, 0, 0, 0.2) 100%
+      );
+    box-shadow: inset 1px 0 0 rgba(255, 255, 255, 0.28);
+  }
+
+  .alu-stage__light {
+    background:
+      radial-gradient(
+        70% 90% at 18% 38%,
+        rgba(255, 255, 255, 0.09) 0%,
+        rgba(255, 255, 255, 0.04) 35%,
+        rgba(255, 255, 255, 0) 70%
+      ),
+      radial-gradient(
+        60% 50% at 50% -10%,
+        rgba(255, 255, 255, 0.1) 0%,
+        rgba(255, 255, 255, 0) 70%
+      );
+  }
+
+  .alu-stage__floor {
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0) 0%,
+      rgba(0, 0, 0, 0.2) 40%,
+      rgba(0, 0, 0, 0.6) 100%
+    );
+  }
+
   .alu-stage__progress {
     background: rgba(255, 255, 255, 0.14);
   }
@@ -2372,22 +2629,30 @@ span.chat-panel__input {
 
 /* ——— Arabic (right-to-left) pages ——— */
 /* Arabic hero: calmer type, and the sculpture mirrored to the start side. */
-.rtl-page .alu-display.alu-h1 {
-  font-size: clamp(3rem, min(13vw, 11svh), 5rem);
-  line-height: 1.02;
-  font-weight: 800;
+.rtl-page .alu-h1 {
+  --h1: clamp(2.4rem, 11vw, 3.4rem);
+  font-family: var(--font-arabic), system-ui, sans-serif;
+  font-weight: 400;
+  line-height: 1.25;
+  letter-spacing: 0;
 }
 
 @media (min-width: 640px) {
-  .rtl-page .alu-display.alu-h1 {
-    font-size: clamp(4rem, 10vw, 6rem);
+  .rtl-page .alu-h1 {
+    --h1: clamp(3.4rem, 7.5vw, 4.5rem);
   }
 }
 
 @media (min-width: 900px) {
-  .rtl-page .alu-display.alu-h1 {
-    font-size: clamp(4rem, min(8.5vw, 14svh), 7.25rem);
+  .rtl-page .alu-h1 {
+    --h1: clamp(3.5rem, min(5vw, 9.5svh), 5rem);
   }
+}
+
+.rtl-page .alu-h1 .alu-h1__strong {
+  font-weight: 800;
+  font-style: normal;
+  letter-spacing: 0;
 }
 
 .rtl-page .alu-stage__visual {
@@ -2397,6 +2662,17 @@ span.chat-panel__input {
 .rtl-page .alu-stage__shadow {
   right: auto;
   left: 4%;
+}
+
+.rtl-page .alu-stage__glass {
+  left: auto;
+  right: 49%;
+}
+
+@media (max-width: 899px) {
+  .rtl-page .alu-stage__glass {
+    right: 52%;
+  }
 }
 
 .rtl-page .alu-chip,

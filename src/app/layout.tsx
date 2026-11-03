@@ -14,7 +14,7 @@ const outfit = Outfit({
   variable: "--font-outfit",
   subsets: ["latin"],
   display: "swap",
-  weight: ["400", "500", "600"],
+  weight: ["300", "400", "500", "600"],
 });
 
 const condensed = Barlow_Condensed({

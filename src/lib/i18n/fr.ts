@@ -19,6 +19,7 @@ export const FR: LocaleContent = {
       primary: "Lancer un projet",
       secondary: "Voir ce que nous créons",
       chips: ["Plus de 10 clients payants", "Réponse sous 24 heures"],
+      factsLabel: "Le studio",
     },
     beats: [
       {

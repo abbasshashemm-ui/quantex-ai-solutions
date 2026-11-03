@@ -13,6 +13,7 @@ import {
   type Texture,
 } from "three";
 import { createStudioEnvironment } from "./chrome-environment";
+import { GlassFlutes } from "./GlassFlutes";
 import {
   RING_COUNT,
   buildRingGeometry,
@@ -222,6 +223,8 @@ export default function ChromeScene({
         toneMappingExposure: 1,
       }}
       onCreated={({ gl }) => {
+        // The glass refracts a copy of the scene; half resolution is plenty.
+        gl.transmissionResolutionScale = 0.6;
         gl.domElement.addEventListener("webglcontextlost", (event) => {
           event.preventDefault();
           onFail("The graphics context was lost.");
@@ -230,6 +233,7 @@ export default function ChromeScene({
       aria-hidden
     >
       <Sculpture motion={motion} calm={calm} onReady={onReady} />
+      <GlassFlutes motion={motion} />
     </Canvas>
   );
 }

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Ticker } from "@/components/home/Ticker";
+import { HeroFacts, HeroHeadline } from "@/components/hero/HeroHeadline";
 import { HeroStage } from "@/components/hero/HeroStage";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
@@ -35,13 +36,7 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
       <HeroStage>
         <div className="alu-hero">
           <PageEyebrow>{h.hero.eyebrow}</PageEyebrow>
-          <h1 className="alu-display alu-h1">
-            {h.hero.headline.map((line, index) => (
-              <span key={line} className="alu-h1__line" style={{ "--i": index } as React.CSSProperties}>
-                {line}
-              </span>
-            ))}
-          </h1>
+          <HeroHeadline lines={h.hero.headline} />
           <p className="alu-lede">{h.hero.lede}</p>
           <div className="alu-ctas">
             <Link
@@ -57,14 +52,13 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
               {h.hero.secondary}
             </a>
           </div>
-          <ul className="alu-chips" aria-label={h.hero.eyebrow}>
-            <li className="alu-chip">
-              <span className="alu-chip__dot" aria-hidden />
-              {h.hero.chips[0]}
-            </li>
-            <li className="alu-chip">{h.hero.chips[1]}</li>
-          </ul>
         </div>
+
+        <HeroFacts
+          label={h.hero.factsLabel}
+          ariaLabel={h.hero.factsLabel}
+          items={h.hero.chips}
+        />
 
         {h.beats.map((beat, i) => (
           <div key={beat.slug} className={`alu-beat alu-beat--${i === 0 ? "one" : "two"}`}>
