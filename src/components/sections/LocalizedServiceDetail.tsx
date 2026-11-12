@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { ServiceNavIcon } from "@/components/layout/ServiceNavIcon";
+import { ServiceMock } from "@/components/services/ServiceMock";
+import { SERVICE_MOCKS } from "@/lib/services/mocks";
 import { ProjectGallery } from "@/components/work/ProjectGallery";
 import { SERVICE_PROJECT_IDS } from "@/lib/projects/data";
 import { PricingPlans } from "@/components/sections/PricingPlans";
@@ -43,6 +45,7 @@ export function LocalizedServiceDetail({
   const priceGroup = groups.find((g) => g.serviceSlug === service.slug);
   const related = getRelatedNavServices(service.slug);
   const workIds = SERVICE_PROJECT_IDS[service.slug];
+  const mockKind = SERVICE_MOCKS[service.slug];
   const unpriced = !priceGroup;
   const arrow = rtl ? "←" : "→";
   const other = locale === "ar" ? { href: `/services/${service.slug}`, label: c.switcher.en, lang: "en" } : { href: `/services/${service.slug}`, label: c.switcher.en, lang: "en" };
@@ -158,6 +161,8 @@ export function LocalizedServiceDetail({
             </ol>
           </section>
         </div>
+
+        {mockKind ? <ServiceMock kind={mockKind} locale={locale} /> : null}
 
         {workIds ? (
           <section className="mt-14 sm:mt-20" aria-labelledby="service-work">

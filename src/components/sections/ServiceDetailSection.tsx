@@ -6,6 +6,8 @@ import {
   SOLUTIONS_OVERVIEW_HREF,
   getRelatedNavServices,
 } from "@/lib/services/nav";
+import { ServiceMock } from "@/components/services/ServiceMock";
+import { SERVICE_MOCKS } from "@/lib/services/mocks";
 import { ProjectGallery } from "@/components/work/ProjectGallery";
 import { SERVICE_PROJECT_IDS } from "@/lib/projects/data";
 import { PricingPlans } from "@/components/sections/PricingPlans";
@@ -48,6 +50,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
   const related = getRelatedNavServices(service.slug);
   const priceGroup = PRICE_GROUPS.find((g) => g.serviceSlug === service.slug);
   const workIds = SERVICE_PROJECT_IDS[service.slug];
+  const mockKind = SERVICE_MOCKS[service.slug];
   const customScope = CUSTOM_SCOPES.find((c) => c.slug === service.slug);
   const spokePages = [
     { href: "/about", label: "About the studio", tagline: "Who builds this" },
@@ -189,6 +192,8 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
             </ol>
           </section>
         </div>
+
+        {mockKind ? <ServiceMock kind={mockKind} /> : null}
 
         {workIds ? (
           <section className="mt-14 sm:mt-20" aria-labelledby="service-work">
