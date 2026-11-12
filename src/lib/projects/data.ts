@@ -5,7 +5,9 @@ export type Project = {
   slug: string;
   title: string;
   description: string;
+  /** Shown in the preview frame: a domain, or a short label when there is no public address. */
   url: string;
+  /** Set only when the live site can be linked. */
   href?: string;
   tags: ProjectTag[];
   /** Defaults to live work. "in-progress" projects are shown with a status tag. */
@@ -18,9 +20,15 @@ export type Project = {
   imageHeight?: number;
 };
 
-export const FEATURED_PROJECT_IDS = [
+/**
+ * Client work shown on the home page, in this order. Hmayed is left out while
+ * its site is being redesigned: add "hmayed" back here once the new screenshot
+ * is in public/projects.
+ */
+export const GALLERY_PROJECT_IDS = [
   "almanya",
   "chandelier-solderie",
+  "trago",
   "shop-pro",
 ] as const;
 
@@ -47,8 +55,8 @@ export const PROJECTS: Project[] = [
     title: "Chandelier Solderie",
     description:
       "Luxury lighting atelier site for a Lebanon-based brand—curated chandeliers, pendants, and sculptural lighting.",
-    url: "chandelier-solderie.vercel.app",
-    href: "https://chandelier-solderie.vercel.app/",
+    // No public address is shown or linked for this project.
+    url: "Luxury lighting · Lebanon",
     tags: ["WEBSITE", "LUXURY"],
     imageSrc: "/projects/chandelier-solderie.png",
     imageAlt: "Chandelier Solderie luxury lighting website preview",
@@ -111,13 +119,8 @@ export const PROJECTS: Project[] = [
   },
 ];
 
-export function getFeaturedProjects(): Project[] {
-  return FEATURED_PROJECT_IDS.flatMap((id) =>
+export function getGalleryProjects(): Project[] {
+  return GALLERY_PROJECT_IDS.flatMap((id) =>
     PROJECTS.filter((project) => project.id === id),
   );
-}
-
-export function getAdditionalProjects(): Project[] {
-  const featured = new Set<string>(FEATURED_PROJECT_IDS);
-  return PROJECTS.filter((project) => !featured.has(project.id));
 }

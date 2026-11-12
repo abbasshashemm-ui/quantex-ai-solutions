@@ -25,7 +25,7 @@ export function ClosingCta() {
           {PROMISES.map((promise) => (
             <li
               key={promise.title}
-              className="alu-promise alu-glass"
+              className="alu-promise rule-item"
               data-reveal
             >
               <span className="alu-display alu-promise__title">

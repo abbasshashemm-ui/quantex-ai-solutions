@@ -19,14 +19,14 @@ export function HomePage() {
         <HeroCopy />
       </HeroStage>
       <Ticker />
-      <SiteCheckBand />
-      <AeoBlock />
-      <AssistantSection />
-      <ServicesSection />
-      <StatBand />
       <WorkSection />
+      <ServicesSection />
+      <AssistantSection />
+      <StatBand />
       <ProcessSection />
+      <SiteCheckBand />
       <GuidesSection />
+      <AeoBlock />
       <FaqSection />
       <ClosingCta />
     </>

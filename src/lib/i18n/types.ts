@@ -56,6 +56,7 @@ export type LocalizedHome = {
     pillars: { label: string; slug: string | null; path: string | null }[]; // 4: Websites, AI assistants, SEO (service slugs), About (path)
   };
   services: { eyebrow: string; title: string; lede: string; learnMore: string };
+  work: { eyebrow: string; title: string; lede: string; visit: string };
   stats: { value: string; label: string }[]; // 3
   process: {
     eyebrow: string;

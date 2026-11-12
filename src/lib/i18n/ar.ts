@@ -62,9 +62,15 @@ export const AR: LocaleContent = {
       lede: "ابدأ بموقع ومساعد، أو اختر ما تحتاجه بالضبط. كل شيء مصمم ليعمل معاً.",
       learnMore: "اعرف المزيد",
     },
+    work: {
+      eyebrow: "أعمال مختارة",
+      title: "أعمال نفّذناها لعملائنا.",
+      lede: "مواقع وتطبيقات تعمل اليوم لدى شركات في لبنان والمنطقة.",
+      visit: "زيارة الموقع",
+    },
     stats: [
       { value: "10+", label: "عملاء يدفعون" },
-      { value: "6", label: "خدمات" },
+      { value: "3", label: "لغات" },
       { value: "24h", label: "مدة الرد" },
     ],
     process: {
@@ -446,7 +452,7 @@ export const AR: LocaleContent = {
     },
     stats: [
       { value: "10+", label: "عملاء يدفعون" },
-      { value: "6", label: "خدمات" },
+      { value: "3", label: "لغات" },
       { value: "24h", label: "مدة الرد" },
     ],
     values: [
