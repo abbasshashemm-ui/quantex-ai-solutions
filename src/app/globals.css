@@ -89,38 +89,18 @@ body {
   font-family: var(--font-outfit), system-ui, sans-serif;
 }
 
-/* Brushed aluminium, fixed behind everything so long pages never seam. */
+/*
+ * A calm, light surface behind every page. The full brushed-metal treatment is
+ * kept for the home hero alone (see .alu-stage__panel::before), where it reads
+ * as light on metal instead of a streak behind body text.
+ */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background:
-    repeating-linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.07) 0 1px,
-      rgba(20, 24, 32, 0.008) 1px 2px,
-      rgba(255, 255, 255, 0) 2px 4px
-    ),
-    radial-gradient(
-      120% 80% at 72% 0%,
-      rgba(255, 255, 255, 0.95) 0%,
-      rgba(255, 255, 255, 0) 58%
-    ),
-    conic-gradient(
-      from 200deg at 74% 46%,
-      rgba(255, 255, 255, 0) 0 6%,
-      rgba(255, 255, 255, 0.5) 13%,
-      rgba(255, 255, 255, 0) 21%,
-      rgba(20, 26, 36, 0.07) 33%,
-      rgba(255, 255, 255, 0) 45%,
-      rgba(255, 255, 255, 0.4) 62%,
-      rgba(255, 255, 255, 0) 74%,
-      rgba(20, 26, 36, 0.06) 88%,
-      rgba(255, 255, 255, 0) 100%
-    ),
-    linear-gradient(180deg, #edf0f3 0%, #dfe3e8 48%, #d1d6dd 100%);
+  background: linear-gradient(180deg, #f1f3f5 0%, #eaedf0 100%);
 }
 
 .font-display {
@@ -485,6 +465,39 @@ a:hover > .alu-link span[aria-hidden],
   height: 100svh;
   overflow: hidden;
   isolation: isolate;
+}
+
+.alu-stage__panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -3;
+  pointer-events: none;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.07) 0 1px,
+      rgba(20, 24, 32, 0.008) 1px 2px,
+      rgba(255, 255, 255, 0) 2px 4px
+    ),
+    radial-gradient(
+      120% 80% at 72% 0%,
+      rgba(255, 255, 255, 0.95) 0%,
+      rgba(255, 255, 255, 0) 58%
+    ),
+    conic-gradient(
+      from 200deg at 74% 46%,
+      rgba(255, 255, 255, 0) 0 6%,
+      rgba(255, 255, 255, 0.5) 13%,
+      rgba(255, 255, 255, 0) 21%,
+      rgba(20, 26, 36, 0.07) 33%,
+      rgba(255, 255, 255, 0) 45%,
+      rgba(255, 255, 255, 0.4) 62%,
+      rgba(255, 255, 255, 0) 74%,
+      rgba(20, 26, 36, 0.06) 88%,
+      rgba(255, 255, 255, 0) 100%
+    ),
+    linear-gradient(180deg, #edf0f3 0%, #dfe3e8 48%, #d1d6dd 100%);
 }
 
 .alu-stage__shadow {
@@ -2781,6 +2794,10 @@ span.chat-panel__input {
   color-scheme: dark;
 
   body::before {
+    background: linear-gradient(180deg, #14171c 0%, #0e1014 100%);
+  }
+
+  .alu-stage__panel::before {
     background:
       repeating-linear-gradient(
         90deg,
