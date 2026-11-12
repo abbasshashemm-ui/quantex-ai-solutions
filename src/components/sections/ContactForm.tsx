@@ -90,7 +90,7 @@ export function ContactForm({
 
   return (
     <div className="contact-form-card alu-glass p-5 sm:p-7 md:p-8">
-      <h2 className="alu-display text-[2.4rem] sm:text-[3rem]">
+      <h2 className="alu-display text-[1.9rem] sm:text-[2.4rem]">
         {copy.title}
       </h2>
       <p className="mt-2 text-sm leading-relaxed text-foreground/75">

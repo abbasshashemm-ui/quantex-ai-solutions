@@ -86,7 +86,7 @@ export function AboutPageContent() {
           aria-label="Company highlights"
         >
           {ABOUT_STATS.map((stat) => (
-            <div key={stat.label} className="alu-stat alu-glass">
+            <div key={stat.label} className="alu-stat alu-stat--plain">
               <dd className="alu-stat__value">{stat.value}</dd>
               <dt className="alu-stat__label">{stat.label}</dt>
             </div>
@@ -108,7 +108,7 @@ export function AboutPageContent() {
             {ABOUT_VALUES.map((item) => (
               <li
                 key={item.index}
-                className="about-page__value alu-glass page-panel"
+                className="about-page__value rule-item pb-2"
               >
                 <span className="page-label">{item.index}</span>
                 <h3 className="alu-display mt-3 text-[2rem] sm:text-[2.4rem]">
@@ -164,7 +164,7 @@ export function AboutPageContent() {
 
         <section className="about-page__cta alu-glass mt-20 px-5 py-12 text-center sm:mt-28 sm:px-10 sm:py-16">
           <p className="page-label">{ABOUT_CTA.eyebrow}</p>
-          <h2 className="alu-display mx-auto mt-3 max-w-3xl text-[clamp(3rem,7vw,5.5rem)]">
+          <h2 className="alu-display mx-auto mt-3 max-w-3xl text-[clamp(2.25rem,4.4vw,3.75rem)]">
             {ABOUT_CTA.title}
           </h2>
           <p className="mx-auto mt-4 max-w-lg text-base text-foreground/80">

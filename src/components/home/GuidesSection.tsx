@@ -35,15 +35,15 @@ export function GuidesSection() {
           </p>
         </div>
 
-        <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <ul className="rule-grid rule-grid--3">
           {guides.map((guide) => (
             <li key={guide.href} data-reveal>
               <Link
                 href={guide.href}
                 data-interactive
-                className="alu-glass page-panel flex h-full flex-col"
+                className="rule-item rule-item--link flex h-full flex-col"
               >
-                <h3 className="text-lg font-semibold text-foreground">
+                <h3 className="rule-item__title">
                   {guide.title}
                 </h3>
                 <p className="mt-2 flex-1 text-[0.95rem] leading-relaxed text-foreground/80">

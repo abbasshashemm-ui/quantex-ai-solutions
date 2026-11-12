@@ -34,7 +34,7 @@ export function PricingPlans({
     <section aria-labelledby={`price-${group.id}`}>
       <Heading
         id={`price-${group.id}`}
-        className="alu-display text-[2.4rem] sm:text-[3rem]"
+        className="alu-display text-[1.9rem] sm:text-[2.4rem]"
       >
         {group.title}
       </Heading>

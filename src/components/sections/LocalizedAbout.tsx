@@ -77,7 +77,7 @@ export function LocalizedAbout({ locale }: { locale: Locale }) {
 
         <dl className="alu-stats mt-16 sm:mt-20">
           {a.stats.map((stat) => (
-            <div key={stat.label} className="alu-stat alu-glass">
+            <div key={stat.label} className="alu-stat alu-stat--plain">
               <dd className="alu-stat__value">{stat.value}</dd>
               <dt className="alu-stat__label">{stat.label}</dt>
             </div>
@@ -87,7 +87,7 @@ export function LocalizedAbout({ locale }: { locale: Locale }) {
         <section className="mt-20 sm:mt-28" aria-label={a.hero.title}>
           <ol className="grid gap-4 sm:grid-cols-2 sm:gap-5">
             {a.values.map((item) => (
-              <li key={item.index} className="alu-glass page-panel">
+              <li key={item.index} className="rule-item pb-2">
                 <span className="page-label">{item.index}</span>
                 <h3 className="alu-display mt-3 text-[2rem] sm:text-[2.4rem]">{item.title}</h3>
                 <p className="mt-3 text-[0.95rem] leading-relaxed text-foreground/80">{item.body}</p>
@@ -124,7 +124,7 @@ export function LocalizedAbout({ locale }: { locale: Locale }) {
 
         <section className="alu-glass mt-20 px-5 py-12 text-center sm:mt-28 sm:px-10 sm:py-16">
           <p className="page-label">{a.cta.eyebrow}</p>
-          <h2 className="alu-display mx-auto mt-3 max-w-3xl text-[clamp(3rem,7vw,5.5rem)]">{a.cta.title}</h2>
+          <h2 className="alu-display mx-auto mt-3 max-w-3xl text-[clamp(2.25rem,4.4vw,3.75rem)]">{a.cta.title}</h2>
           <p className="mx-auto mt-4 max-w-lg text-base text-foreground/80">{a.cta.lead}</p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link href={localePath(locale, "/contact")} data-interactive className="btn-primary w-full max-w-xs sm:w-auto">

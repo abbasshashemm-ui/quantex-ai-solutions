@@ -6,6 +6,10 @@ import {
   SOLUTIONS_OVERVIEW_HREF,
   getRelatedNavServices,
 } from "@/lib/services/nav";
+import { ServiceMock } from "@/components/services/ServiceMock";
+import { SERVICE_MOCKS } from "@/lib/services/mocks";
+import { ProjectGallery } from "@/components/work/ProjectGallery";
+import { SERVICE_PROJECT_IDS } from "@/lib/projects/data";
 import { PricingPlans } from "@/components/sections/PricingPlans";
 import { CUSTOM_SCOPES, PRICE_GROUPS } from "@/lib/pricing/data";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
@@ -45,6 +49,8 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
   const { nav: navMeta, overview, detail } = service;
   const related = getRelatedNavServices(service.slug);
   const priceGroup = PRICE_GROUPS.find((g) => g.serviceSlug === service.slug);
+  const workIds = SERVICE_PROJECT_IDS[service.slug];
+  const mockKind = SERVICE_MOCKS[service.slug];
   const customScope = CUSTOM_SCOPES.find((c) => c.slug === service.slug);
   const spokePages = [
     { href: "/about", label: "About the studio", tagline: "Who builds this" },
@@ -130,16 +136,16 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
           </aside>
         </header>
 
-        <section className="service-page__overview alu-glass page-panel mt-10 sm:mt-14 sm:p-8">
+        <section className="service-page__overview rule-item mt-10 sm:mt-14">
           <h2 className="page-label">In plain words</h2>
           <p className="mt-4 max-w-3xl text-base leading-relaxed text-foreground/90 sm:text-lg sm:leading-[1.7]">
             {overview}
           </p>
         </section>
 
-        <div className="service-page__panels mt-6 grid gap-6 lg:mt-8 lg:grid-cols-2 lg:gap-8">
-          <section className="service-page__panel alu-glass page-panel sm:p-8">
-            <h2 className="alu-display text-[2.4rem] sm:text-[3rem]">
+        <div className="service-page__panels mt-12 grid gap-10 lg:mt-14 lg:grid-cols-2 lg:gap-12">
+          <section className="service-page__panel rule-item">
+            <h2 className="alu-display text-[1.9rem] sm:text-[2.4rem]">
               What you get
             </h2>
             <ul className="mt-6 space-y-3.5">
@@ -155,8 +161,8 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
             </ul>
           </section>
 
-          <section className="service-page__panel alu-glass page-panel sm:p-8">
-            <h2 className="alu-display text-[2.4rem] sm:text-[3rem]">
+          <section className="service-page__panel rule-item">
+            <h2 className="alu-display text-[1.9rem] sm:text-[2.4rem]">
               How it works
             </h2>
             <ol className="service-page__timeline mt-6 space-y-0">
@@ -187,6 +193,17 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
           </section>
         </div>
 
+        {mockKind ? <ServiceMock kind={mockKind} /> : null}
+
+        {workIds ? (
+          <section className="mt-14 sm:mt-20" aria-labelledby="service-work">
+            <h2 id="service-work" className="alu-display text-[1.9rem] sm:text-[2.4rem]">
+              Recent work
+            </h2>
+            <ProjectGallery only={workIds} />
+          </section>
+        ) : null}
+
         {priceGroup ? (
           <div className="mt-14 sm:mt-20">
             <PricingPlans group={{ ...priceGroup, title: "Pricing" }} />
@@ -201,7 +218,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
         {customScope ? (
           <section className="service-page__panel alu-glass page-panel mt-14 sm:mt-20 sm:p-8">
             <p className="page-label">Pricing</p>
-            <h2 className="alu-display mt-3 text-[2.4rem] sm:text-[3rem]">
+            <h2 className="alu-display mt-3 text-[1.9rem] sm:text-[2.4rem]">
               Scoped per project
             </h2>
             <p className="mt-3 max-w-2xl text-base text-foreground/85">
@@ -260,7 +277,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
         </section>
 
         <div className="service-page__cta alu-glass mt-14 px-5 py-12 text-center sm:mt-20 sm:px-10 sm:py-16">
-          <h2 className="alu-display mx-auto max-w-3xl text-[clamp(3rem,7vw,5.5rem)]">
+          <h2 className="alu-display mx-auto max-w-3xl text-[clamp(2.25rem,4.4vw,3.75rem)]">
             Ready to start?
           </h2>
           <p className="mx-auto mt-4 max-w-lg text-base text-foreground/80">

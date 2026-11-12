@@ -5,22 +5,34 @@ export type Project = {
   slug: string;
   title: string;
   description: string;
+  /** Shown in the preview frame: a domain, or a short label when there is no public address. */
   url: string;
+  /** Set only when the live site can be linked. */
   href?: string;
   tags: ProjectTag[];
   /** Defaults to live work. "in-progress" projects are shown with a status tag. */
   status?: "live" | "in-progress";
   /** Short facts shown on a lead card. */
   highlights?: string[];
+  /** The screenshot shows sample figures, not the client's own. Labelled on the page. */
+  sampleData?: boolean;
   imageSrc?: string;
   imageAlt?: string;
   imageWidth?: number;
   imageHeight?: number;
 };
 
-export const FEATURED_PROJECT_IDS = [
+/**
+ * Client work shown on the home page, in this order. The first one is shown
+ * full width, so it should have a screenshot at least 1900px wide. Hmayed is left out while
+ * its site is being redesigned: add "hmayed" back here once the new screenshot
+ * is in public/projects.
+ */
+export const GALLERY_PROJECT_IDS = [
+  "bahira",
   "almanya",
   "chandelier-solderie",
+  "trago",
   "shop-pro",
 ] as const;
 
@@ -42,13 +54,27 @@ export const PROJECTS: Project[] = [
     ],
   },
   {
+    id: "bahira",
+    slug: "bahira-expeditions",
+    title: "Bahira Expeditions",
+    description:
+      "An interactive 3D trip site for a Beirut expedition company. Visitors travel the route from Kathmandu to Annapurna Base Camp as they scroll, with the altitude tracked live, then reserve a seat.",
+    url: "bahiralb.com",
+    href: "https://www.bahiralb.com/",
+    tags: ["WEBSITE", "INTERACTIVE 3D"],
+    imageSrc: "/projects/bahira.webp",
+    imageAlt: "Bahira Expeditions website: a 3D mountain landscape with the trip summary and an altitude gauge",
+    imageWidth: 1902,
+    imageHeight: 867,
+  },
+  {
     id: "chandelier-solderie",
     slug: "chandelier-solderie",
     title: "Chandelier Solderie",
     description:
       "Luxury lighting atelier site for a Lebanon-based brand—curated chandeliers, pendants, and sculptural lighting.",
-    url: "chandelier-solderie.vercel.app",
-    href: "https://chandelier-solderie.vercel.app/",
+    // No public address is shown or linked for this project.
+    url: "Luxury lighting · Lebanon",
     tags: ["WEBSITE", "LUXURY"],
     imageSrc: "/projects/chandelier-solderie.png",
     imageAlt: "Chandelier Solderie luxury lighting website preview",
@@ -77,10 +103,11 @@ export const PROJECTS: Project[] = [
       "Custom sales and stock app built for Hachem Services—orders, inventory, dashboards, and day-to-day operations.",
     url: "Hachem Services · internal",
     tags: ["CUSTOM APP", "SALES & STOCK"],
-    imageSrc: "/projects/shop-pro.png",
-    imageAlt: "Shop Pro sales and stock dashboard preview",
-    imageWidth: 1024,
-    imageHeight: 524,
+    sampleData: true,
+    imageSrc: "/projects/shop-pro.webp",
+    imageAlt: "Shop Pro dashboard with sales totals, a revenue chart, sales by category and recent orders",
+    imageWidth: 1920,
+    imageHeight: 914,
   },
   {
     id: "almanya",
@@ -111,13 +138,14 @@ export const PROJECTS: Project[] = [
   },
 ];
 
-export function getFeaturedProjects(): Project[] {
-  return FEATURED_PROJECT_IDS.flatMap((id) =>
+export function getGalleryProjects(): Project[] {
+  return GALLERY_PROJECT_IDS.flatMap((id) =>
     PROJECTS.filter((project) => project.id === id),
   );
 }
 
-export function getAdditionalProjects(): Project[] {
-  const featured = new Set<string>(FEATURED_PROJECT_IDS);
-  return PROJECTS.filter((project) => !featured.has(project.id));
-}
+/** Client work shown on a service page, by service slug. */
+export const SERVICE_PROJECT_IDS: Record<string, readonly string[]> = {
+  "high-converting-websites": ["bahira", "almanya", "chandelier-solderie"],
+  "custom-software-development": ["shop-pro"],
+};

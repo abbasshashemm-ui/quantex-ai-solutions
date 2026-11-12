@@ -63,9 +63,15 @@ export const FR: LocaleContent = {
       lede: "Commencez par un site et un assistant, ou choisissez exactement ce dont vous avez besoin. Tout est conçu pour fonctionner ensemble.",
       learnMore: "En savoir plus",
     },
+    work: {
+      eyebrow: "Réalisations",
+      title: "Ce que nous avons livré.",
+      lede: "Des sites et des applications en service chez des entreprises au Liban et dans la région.",
+      visit: "Voir le site",
+    },
     stats: [
       { value: "10+", label: "Clients payants" },
-      { value: "6", label: "Services" },
+      { value: "3", label: "Langues" },
       { value: "24h", label: "Délai de réponse" },
     ],
     process: {
@@ -489,7 +495,7 @@ export const FR: LocaleContent = {
     },
     stats: [
       { value: "10+", label: "Clients payants" },
-      { value: "6", label: "Services" },
+      { value: "3", label: "Langues" },
       { value: "24h", label: "Délai de réponse" },
     ],
     values: [

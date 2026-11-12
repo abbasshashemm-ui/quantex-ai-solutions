@@ -8,6 +8,8 @@ import { getLocaleContent, localePath } from "@/lib/i18n";
 import { EACML_AR } from "@/lib/i18n/eacml-ar";
 import type { Locale } from "@/lib/i18n/types";
 import { SERVICES } from "@/lib/services/data";
+import { ServiceCard } from "@/components/sections/ServiceCard";
+import { ProjectGallery } from "@/components/work/ProjectGallery";
 import { CONTACT } from "@/lib/site/contact";
 
 const FEATURED = [
@@ -80,6 +82,19 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
 
       <Ticker />
 
+      <section id="work" className="alu-section" aria-labelledby="work-heading">
+        <div className="alu-section__inner">
+          <div data-reveal>
+            <PageEyebrow>{h.work.eyebrow}</PageEyebrow>
+            <h2 id="work-heading" className="alu-display alu-section__title">
+              {h.work.title}
+            </h2>
+            <p className="alu-lede max-w-2xl">{h.work.lede}</p>
+          </div>
+          <ProjectGallery visitLabel={h.work.visit} showDescriptions={false} locale={locale} />
+        </div>
+      </section>
+
       <section className="alu-section !py-8 sm:!py-10">
         <div className="alu-section__inner">
           <div data-reveal className="alu-glass flex flex-col gap-5 px-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:px-8 sm:py-7">
@@ -146,22 +161,15 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
               const t = c.services[service.slug];
               return (
                 <li key={service.id} data-reveal>
-                  <Link
+                  <ServiceCard
+                    service={service}
                     href={localePath(locale, `/services/${service.slug}`)}
-                    data-interactive
-                    data-conversion={CONVERSION_EVENTS.SERVICE_CLICK}
-                    data-conversion-location="services_grid"
-                    className="alu-card alu-glass"
-                  >
-                    <span className="alu-card__top">
-                      <span className="alu-card__index">{String(service.index + 1).padStart(2, "0")}</span>
-                    </span>
-                    <h3 className="alu-display alu-card__title">{t.label}</h3>
-                    <p className="alu-card__body">{t.description}</p>
-                    <span className="alu-link">
-                      {h.services.learnMore} <span aria-hidden>{arrow}</span>
-                    </span>
-                  </Link>
+                    label={t.label}
+                    description={t.description}
+                    learnMore={h.services.learnMore}
+                    arrow={arrow}
+                    locale={locale}
+                  />
                 </li>
               );
             })}
@@ -170,9 +178,9 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
       </section>
 
       <section className="alu-section alu-section--tight" aria-label={h.aeo.title}>
-        <dl className="alu-section__inner alu-stats">
+        <dl className="alu-section__inner alu-stats alu-stats--plain">
           {h.stats.map((stat) => (
-            <div key={stat.label} className="alu-stat alu-glass" data-reveal>
+            <div key={stat.label} className="alu-stat" data-reveal>
               <dd className="alu-stat__value">{stat.value}</dd>
               <dt className="alu-stat__label">{stat.label}</dt>
             </div>
@@ -181,11 +189,11 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
       </section>
 
       {locale === "ar" ? (
-        <section id="work" className="alu-section" aria-labelledby="work-heading">
+        <section id="flagship" className="alu-section" aria-labelledby="flagship-heading">
           <div className="alu-section__inner">
             <article className="alu-glass px-5 py-10 sm:px-10 sm:py-14 lg:px-14" data-reveal>
               <p className="page-label">{EACML_AR.eyebrow}</p>
-              <h2 id="work-heading" className="alu-display mt-4 text-[clamp(3rem,9vw,7rem)]" dir="ltr">
+              <h2 id="flagship-heading" className="alu-display mt-4 text-[clamp(2.5rem,6vw,4.5rem)]" dir="ltr">
                 {EACML_AR.title}
               </h2>
               <p className="mt-6 max-w-3xl text-lg leading-relaxed text-foreground/90">{EACML_AR.pitch}</p>
@@ -214,10 +222,10 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
             </h2>
             <p className="alu-lede">{h.process.support}</p>
           </header>
-          <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          <ol className="rule-grid rule-grid--4">
             {h.process.stages.map((stage) => (
               <li key={stage.n}>
-                <article className="alu-step alu-glass h-full" data-reveal>
+                <article className="alu-step rule-item h-full" data-reveal>
                   <p className="alu-step__meta">
                     <span className="alu-step__n">{stage.n}</span>
                     <span className="alu-step__code">{stage.code}</span>
@@ -241,11 +249,11 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
             <p className="alu-lede max-w-2xl">{h.guides.lede}</p>
           </div>
           {guides.length > 0 ? (
-            <ul className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="rule-grid rule-grid--3">
               {guides.map((guide) => (
                 <li key={guide.href} data-reveal>
-                  <Link href={guide.href} data-interactive className="alu-glass page-panel flex h-full flex-col">
-                    <h3 className="text-lg font-semibold text-foreground">{guide.title}</h3>
+                  <Link href={guide.href} data-interactive className="rule-item rule-item--link flex h-full flex-col">
+                    <h3 className="rule-item__title">{guide.title}</h3>
                     <p className="mt-2 flex-1 text-[0.95rem] leading-relaxed text-foreground/80">{guide.description}</p>
                     <span className="mt-4 text-sm font-semibold text-foreground underline underline-offset-4">
                       {h.guides.readGuide}
@@ -281,17 +289,17 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
               </Link>
             </p>
           </div>
-          <ul className="space-y-3">
+          <ul className="faq-list">
             {h.faq.items.map((item) => (
               <li key={item.question}>
-                <details className="faq-item faq-card alu-glass group">
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-4 marker:content-none sm:px-5 [&::-webkit-details-marker]:hidden">
+                <details className="faq-item faq-card faq-card--plain group">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 marker:content-none [&::-webkit-details-marker]:hidden">
                     <h3 className="text-base font-semibold sm:text-[1.0625rem]">{item.question}</h3>
                     <span className="text-xl leading-none transition-transform group-open:rotate-45" aria-hidden>
                       +
                     </span>
                   </summary>
-                  <div className="faq-card__answer px-4 pb-4 pt-3 text-base leading-[1.8] sm:px-5 sm:pb-5">{item.answer}</div>
+                  <div className="faq-card__answer pb-5 text-base leading-[1.8]">{item.answer}</div>
                 </details>
               </li>
             ))}
@@ -303,7 +311,7 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
         <div className="alu-section__inner">
           <ul className="alu-promises">
             {h.closing.promises.map((promise) => (
-              <li key={promise.title} className="alu-promise alu-glass" data-reveal>
+              <li key={promise.title} className="alu-promise rule-item" data-reveal>
                 <span className="alu-display alu-promise__title">{promise.title}</span>
                 <span className="alu-promise__body">{promise.body}</span>
               </li>

@@ -187,7 +187,7 @@ export function SiteCheckTool() {
             <div className="mt-4 flex flex-col items-start gap-5 sm:flex-row sm:items-center sm:gap-8">
               <ScoreRing value={report.score} />
               <div>
-                <h2 className="alu-display text-[2.4rem] sm:text-[3rem]">Visibility score</h2>
+                <h2 className="alu-display text-[1.9rem] sm:text-[2.4rem]">Visibility score</h2>
                 <p className="mt-2 max-w-xl text-base text-foreground/85">{verdict(report.score)}</p>
               </div>
             </div>
@@ -223,7 +223,7 @@ export function SiteCheckTool() {
                   {report.checks
                     .filter((c: CheckResult) => c.group === group)
                     .map((c) => (
-                      <li key={c.id} className="alu-glass page-panel">
+                      <li key={c.id} className="rule-item pb-2">
                         <div className="flex flex-wrap items-baseline justify-between gap-2">
                           <p className="text-base font-semibold text-foreground">{c.label}</p>
                           <p className={`text-xs font-bold tracking-[0.14em] uppercase ${STATUS_CLASS[c.status]}`}>
@@ -249,7 +249,7 @@ export function SiteCheckTool() {
             ))}
 
             <div className="alu-glass mt-12 px-5 py-10 text-center sm:px-10 sm:py-14">
-              <h3 className="alu-display mx-auto max-w-3xl text-[clamp(2.4rem,6vw,4.5rem)]">
+              <h3 className="alu-display mx-auto max-w-3xl text-[clamp(2.25rem,4.4vw,3.75rem)]">
                 {failing.length > 0
                   ? `${failing.length} thing${failing.length === 1 ? "" : "s"} to fix, ${improvable} more to improve. Want us to do it?`
                   : `${improvable} ways to pull ahead of competitors. Want us to do it?`}

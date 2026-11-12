@@ -27,7 +27,7 @@ export const ABOUT_STORY = {
 
 export const ABOUT_STATS = [
   { value: "10+", label: "Paying clients" },
-  { value: "6", label: "Services" },
+  { value: "3", label: "Languages" },
   { value: "24h", label: "Reply time" },
 ] as const;
 
