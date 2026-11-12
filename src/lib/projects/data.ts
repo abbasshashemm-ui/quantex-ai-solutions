@@ -21,11 +21,13 @@ export type Project = {
 };
 
 /**
- * Client work shown on the home page, in this order. Hmayed is left out while
+ * Client work shown on the home page, in this order. The first one is shown
+ * full width, so it should have a screenshot at least 1900px wide. Hmayed is left out while
  * its site is being redesigned: add "hmayed" back here once the new screenshot
  * is in public/projects.
  */
 export const GALLERY_PROJECT_IDS = [
+  "bahira",
   "almanya",
   "chandelier-solderie",
   "trago",
@@ -48,6 +50,20 @@ export const PROJECTS: Project[] = [
       "A rules engine decides every pass or fail. The AI explains and asks questions, and never decides.",
       "Runs entirely on-premises, with an audit log of every officer decision.",
     ],
+  },
+  {
+    id: "bahira",
+    slug: "bahira-expeditions",
+    title: "Bahira Expeditions",
+    description:
+      "An interactive 3D trip site for a Beirut expedition company. Visitors travel the route from Kathmandu to Annapurna Base Camp as they scroll, with the altitude tracked live, then reserve a seat.",
+    url: "bahiralb.com",
+    href: "https://www.bahiralb.com/",
+    tags: ["WEBSITE", "INTERACTIVE 3D"],
+    imageSrc: "/projects/bahira.webp",
+    imageAlt: "Bahira Expeditions website: a 3D mountain landscape with the trip summary and an altitude gauge",
+    imageWidth: 1902,
+    imageHeight: 867,
   },
   {
     id: "chandelier-solderie",
@@ -127,6 +143,6 @@ export function getGalleryProjects(): Project[] {
 
 /** Client work shown on a service page, by service slug. */
 export const SERVICE_PROJECT_IDS: Record<string, readonly string[]> = {
-  "high-converting-websites": ["almanya", "chandelier-solderie"],
+  "high-converting-websites": ["bahira", "almanya", "chandelier-solderie"],
   "custom-software-development": ["shop-pro"],
 };

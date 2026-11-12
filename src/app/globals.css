@@ -1219,6 +1219,19 @@ a:hover > .alu-link span[aria-hidden],
   }
 }
 
+.work-card--lead {
+  grid-column: 1 / -1;
+}
+
+/* The lead screenshot is shown whole, at its own proportions. */
+.work-card--lead .work-frame__shot {
+  aspect-ratio: auto;
+}
+
+.work-card--lead .work-frame__shot img {
+  height: auto;
+}
+
 .work-grid > :only-child {
   grid-column: 1 / -1;
   max-width: 46rem;

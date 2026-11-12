@@ -10,7 +10,7 @@ type ProjectGalleryProps = {
   only?: readonly string[];
 };
 
-function Frame({ project }: { project: Project }) {
+function Frame({ project, lead }: { project: Project; lead: boolean }) {
   if (!project.imageSrc) return null;
   return (
     <div className="work-frame">
@@ -31,7 +31,11 @@ function Frame({ project }: { project: Project }) {
           width={project.imageWidth ?? 1024}
           height={project.imageHeight ?? 487}
           quality={70}
-          sizes="(max-width: 799px) 100vw, (max-width: 1360px) 50vw, 640px"
+          sizes={
+            lead
+              ? "(max-width: 1360px) 100vw, 1280px"
+              : "(max-width: 799px) 100vw, (max-width: 1360px) 50vw, 640px"
+          }
         />
       </div>
     </div>
@@ -40,11 +44,14 @@ function Frame({ project }: { project: Project }) {
 
 function Card({
   project,
+  lead,
   visitLabel,
   showDescriptions,
-}: { project: Project } & Required<Omit<ProjectGalleryProps, "only">>) {
+}: { project: Project; lead: boolean } & Required<
+  Omit<ProjectGalleryProps, "only">
+>) {
   return (
-    <article className="work-card" data-reveal>
+    <article className={lead ? "work-card work-card--lead" : "work-card"} data-reveal>
       {project.href ? (
         <a
           href={project.href}
@@ -54,10 +61,10 @@ function Card({
           className="work-card__link"
           aria-label={`${project.title}: ${visitLabel}`}
         >
-          <Frame project={project} />
+          <Frame project={project} lead={lead} />
         </a>
       ) : (
-        <Frame project={project} />
+        <Frame project={project} lead={lead} />
       )}
       <div className="work-card__meta">
         <h3 className="work-card__title" dir="ltr">
@@ -85,9 +92,11 @@ export function ProjectGallery({
   );
   return (
     <div className="work-grid">
-      {projects.map((project) => (
+      {projects.map((project, index) => (
         <Card
           key={project.id}
+          // An odd count leaves the first project a row to itself.
+          lead={index === 0 && projects.length % 2 === 1 && projects.length > 1}
           project={project}
           visitLabel={visitLabel}
           showDescriptions={showDescriptions}
