@@ -350,12 +350,12 @@ section[id] {
 
 .section-heading {
   margin-top: 0.85rem;
-  font-size: clamp(2.75rem, 6.5vw, 5rem);
+  font-size: var(--text-title);
   text-wrap: balance;
 }
 
 .page-title {
-  font-size: clamp(3.25rem, 9vw, 7rem);
+  font-size: clamp(2.75rem, 6vw, 4.75rem);
   text-wrap: balance;
 }
 
@@ -377,7 +377,7 @@ section[id] {
 }
 
 .page-title--sm {
-  font-size: clamp(3rem, 7vw, 5.25rem);
+  font-size: clamp(2.5rem, 5vw, 4rem);
 }
 
 .page-eyebrow {
@@ -1219,6 +1219,11 @@ a:hover > .alu-link span[aria-hidden],
   }
 }
 
+.work-grid > :only-child {
+  grid-column: 1 / -1;
+  max-width: 46rem;
+}
+
 .work-card__link {
   display: block;
 }
@@ -1391,7 +1396,8 @@ a:hover > .alu-link span[aria-hidden],
   padding: 1.5rem 1.5rem 1.35rem;
 }
 
-.alu-stats--plain .alu-stat {
+.alu-stats--plain .alu-stat,
+.alu-stat--plain {
   border-inline-start: 1px solid var(--line-strong);
   padding: 0.25rem 0 0.25rem 1.25rem;
   padding-inline: 1.25rem 0;
@@ -1548,9 +1554,12 @@ a:hover > .alu-link span[aria-hidden],
 }
 
 .faq-list {
-  border-top: 1px solid var(--line-strong);
   padding: 0;
   list-style: none;
+}
+
+li:first-child > .faq-card--plain {
+  border-top: 1px solid var(--line-strong);
 }
 
 .faq-card--plain {
@@ -1625,7 +1634,7 @@ a:hover > .alu-link span[aria-hidden],
 }
 
 .page-h2 {
-  font-size: clamp(2.2rem, 4.5vw, 3.25rem);
+  font-size: clamp(1.9rem, 3.2vw, 2.6rem);
   text-wrap: balance;
 }
 

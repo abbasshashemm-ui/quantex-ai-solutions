@@ -148,7 +148,7 @@ export default function AiInLebanonArticleAr() {
               {section.list ? (
                 <ul className="mt-6 space-y-4">
                   {section.list.map((item) => (
-                    <li key={item.title} className="alu-glass page-panel">
+                    <li key={item.title} className="rule-item pb-2">
                       <h3 className="text-lg font-semibold text-foreground">
                         {item.title}
                       </h3>

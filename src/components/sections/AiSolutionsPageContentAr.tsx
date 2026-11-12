@@ -90,7 +90,7 @@ export function AiSolutionsPageContentAr() {
           </h2>
           <ul className="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
             {AR_USE_CASES.map((item) => (
-              <li key={item.title} className="alu-glass page-panel">
+              <li key={item.title} className="rule-item pb-2">
                 <h3 className="text-lg font-semibold text-foreground">
                   {item.title}
                 </h3>
@@ -117,7 +117,7 @@ export function AiSolutionsPageContentAr() {
           </h2>
           <ol className="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5">
             {AR_BENEFITS.map((item, index) => (
-              <li key={item.title} className="alu-glass page-panel">
+              <li key={item.title} className="rule-item pb-2">
                 <span className="page-label">
                   {String(index + 1).padStart(2, "0")}
                 </span>
@@ -140,7 +140,7 @@ export function AiSolutionsPageContentAr() {
           <p className="alu-lede max-w-2xl">{AR_LEBANON.lead}</p>
           <ul className="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5">
             {AR_LEBANON.points.map((item) => (
-              <li key={item.title} className="alu-glass page-panel">
+              <li key={item.title} className="rule-item pb-2">
                 <h3 className="text-lg font-semibold text-foreground">
                   {item.title}
                 </h3>
@@ -192,7 +192,7 @@ export function AiSolutionsPageContentAr() {
           </h2>
           <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {AR_STEPS.map((step, index) => (
-              <li key={step.label} className="alu-glass page-panel">
+              <li key={step.label} className="rule-item pb-2">
                 <span className="page-label">
                   {String(index + 1).padStart(2, "0")}
                 </span>
@@ -215,11 +215,11 @@ export function AiSolutionsPageContentAr() {
           <h2 id="ar-faq" className="alu-display page-h2 mt-3 max-w-2xl">
             حلول الذكاء الاصطناعي: أسئلة شائعة
           </h2>
-          <ul className="mt-8 max-w-3xl space-y-3">
+          <ul className="mt-8 max-w-3xl">
             {AR_FAQ.map((item) => (
               <li key={item.question}>
-                <details className="faq-item faq-card alu-glass group">
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-4 marker:content-none sm:px-5 [&::-webkit-details-marker]:hidden">
+                <details className="faq-item faq-card faq-card--plain group">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 marker:content-none [&::-webkit-details-marker]:hidden">
                     <h3 className="text-base font-semibold sm:text-[1.0625rem]">
                       {item.question}
                     </h3>
@@ -231,7 +231,7 @@ export function AiSolutionsPageContentAr() {
                     </span>
                   </summary>
                   <div
-                    className={`faq-card__answer px-4 pb-4 pt-3 sm:px-5 sm:pb-5 ${BODY}`}
+                    className={`faq-card__answer pb-5 ${BODY}`}
                   >
                     {item.answer}
                   </div>

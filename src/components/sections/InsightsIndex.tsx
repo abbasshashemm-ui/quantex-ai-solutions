@@ -102,7 +102,7 @@ export function InsightsIndex({ lang }: { lang: Lang }) {
                   <Link
                     href={item.href}
                     data-interactive
-                    className="alu-glass page-panel group flex h-full flex-col"
+                    className="rule-item rule-item--link group flex h-full flex-col"
                   >
                     <span className="page-label">{item.readingTime}</span>
                     <h3 className="mt-3 text-lg font-semibold leading-snug text-foreground">

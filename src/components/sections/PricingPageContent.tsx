@@ -121,7 +121,7 @@ export function PricingPageContent({ lang = "en" }: { lang?: "en" | "ar" | "fr" 
         <section className="mt-16 sm:mt-24" aria-labelledby="price-custom">
           <h2
             id="price-custom"
-            className="alu-display text-[2.4rem] sm:text-[3rem]"
+            className="alu-display text-[1.9rem] sm:text-[2.4rem]"
           >
             {t.customTitle}
           </h2>
@@ -130,7 +130,7 @@ export function PricingPageContent({ lang = "en" }: { lang?: "en" | "ar" | "fr" 
           </p>
           <ul className="mt-6 grid gap-4 md:grid-cols-3">
             {scopes.map((item) => (
-              <li key={item.slug} className="alu-glass page-panel">
+              <li key={item.slug} className="rule-item pb-2">
                 <p className="page-label">{t.scoped}</p>
                 <h3 className="alu-display mt-3 text-[1.9rem]">{item.title}</h3>
                 <p className="mt-3 text-sm text-foreground/85">{item.text}</p>
@@ -147,12 +147,12 @@ export function PricingPageContent({ lang = "en" }: { lang?: "en" | "ar" | "fr" 
         </section>
 
         <section className="mt-16 sm:mt-24" aria-labelledby="price-faq">
-          <h2 id="price-faq" className="alu-display text-[2.4rem] sm:text-[3rem]">
+          <h2 id="price-faq" className="alu-display text-[1.9rem] sm:text-[2.4rem]">
             {t.faq}
           </h2>
           <dl className="mt-6 grid gap-4 md:grid-cols-2">
             {faq.map((item) => (
-              <div key={item.question} className="alu-glass page-panel">
+              <div key={item.question} className="rule-item pb-2">
                 <dt className="text-base font-semibold text-foreground">
                   {item.question}
                 </dt>
@@ -165,7 +165,7 @@ export function PricingPageContent({ lang = "en" }: { lang?: "en" | "ar" | "fr" 
         </section>
 
         <div className="alu-glass mt-16 px-5 py-12 text-center sm:mt-24 sm:px-10 sm:py-16">
-          <h2 className="alu-display mx-auto max-w-3xl text-[clamp(3rem,7vw,5.5rem)]">
+          <h2 className="alu-display mx-auto max-w-3xl text-[clamp(2.25rem,4.4vw,3.75rem)]">
             {t.ctaTitle}
           </h2>
           <p className="mx-auto mt-4 max-w-lg text-base text-foreground/80">

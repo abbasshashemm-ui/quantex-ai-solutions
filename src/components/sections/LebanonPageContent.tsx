@@ -75,7 +75,7 @@ export function LebanonPageContent({ lang }: { lang: Lang }) {
           </h2>
           <ul className="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
             {c.services.items.map((item) => (
-              <li key={item.title} className="alu-glass page-panel">
+              <li key={item.title} className="rule-item pb-2">
                 <h3 className="text-lg font-semibold text-foreground">{item.title}</h3>
                 <p className="mt-3 text-[0.95rem] leading-relaxed text-foreground/80">{item.body}</p>
                 <Link href={item.href} data-interactive className={`mt-4 ${LINK}`}>
@@ -95,7 +95,7 @@ export function LebanonPageContent({ lang }: { lang: Lang }) {
           <p className={`mt-6 max-w-3xl ${BODY}`}>{c.cities.body}</p>
           <ul className="mt-5 flex flex-wrap gap-2">
             {c.cities.list.map((city) => (
-              <li key={city} className="alu-glass rounded-control px-4 py-2 text-sm font-semibold text-foreground">
+              <li key={city} className="rounded-control border border-line-strong px-4 py-2 text-sm font-semibold text-foreground">
                 {city}
               </li>
             ))}
@@ -110,7 +110,7 @@ export function LebanonPageContent({ lang }: { lang: Lang }) {
           </h2>
           <ul className="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5">
             {c.fit.items.map((item) => (
-              <li key={item.title} className="alu-glass page-panel">
+              <li key={item.title} className="rule-item pb-2">
                 <h3 className="text-lg font-semibold text-foreground">{item.title}</h3>
                 <p className="mt-3 text-[0.95rem] leading-relaxed text-foreground/80">{item.body}</p>
               </li>
@@ -141,7 +141,7 @@ export function LebanonPageContent({ lang }: { lang: Lang }) {
           </h2>
           <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {c.steps.items.map((step, index) => (
-              <li key={step.label} className="alu-glass page-panel">
+              <li key={step.label} className="rule-item pb-2">
                 <span className="page-label">{String(index + 1).padStart(2, "0")}</span>
                 <h3 className="mt-3 text-lg font-semibold text-foreground">{step.label}</h3>
                 <p className="mt-2 text-[0.95rem] leading-relaxed text-foreground/80">{step.detail}</p>
@@ -168,17 +168,17 @@ export function LebanonPageContent({ lang }: { lang: Lang }) {
           <h2 id="leb-faq" className="alu-display page-h2 mt-3 max-w-3xl">
             {c.faqHeading}
           </h2>
-          <ul className="mt-8 max-w-3xl space-y-3">
+          <ul className="mt-8 max-w-3xl">
             {c.faq.map((item) => (
               <li key={item.question}>
-                <details className="faq-item faq-card alu-glass group">
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-4 marker:content-none sm:px-5 [&::-webkit-details-marker]:hidden">
+                <details className="faq-item faq-card faq-card--plain group">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 marker:content-none [&::-webkit-details-marker]:hidden">
                     <h3 className="text-base font-semibold sm:text-[1.0625rem]">{item.question}</h3>
                     <span className="text-xl leading-none transition-transform group-open:rotate-45" aria-hidden>
                       +
                     </span>
                   </summary>
-                  <div className={`faq-card__answer px-4 pb-4 pt-3 sm:px-5 sm:pb-5 ${BODY}`}>
+                  <div className={`faq-card__answer pb-5 ${BODY}`}>
                     {item.answer}
                   </div>
                 </details>

@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { ServiceNavIcon } from "@/components/layout/ServiceNavIcon";
+import { ProjectGallery } from "@/components/work/ProjectGallery";
+import { SERVICE_PROJECT_IDS } from "@/lib/projects/data";
 import { PricingPlans } from "@/components/sections/PricingPlans";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
@@ -40,6 +42,7 @@ export function LocalizedServiceDetail({
   const groups = locale === "ar" ? PRICE_GROUPS_AR : PRICE_GROUPS_FR;
   const priceGroup = groups.find((g) => g.serviceSlug === service.slug);
   const related = getRelatedNavServices(service.slug);
+  const workIds = SERVICE_PROJECT_IDS[service.slug];
   const unpriced = !priceGroup;
   const arrow = rtl ? "←" : "→";
   const other = locale === "ar" ? { href: `/services/${service.slug}`, label: c.switcher.en, lang: "en" } : { href: `/services/${service.slug}`, label: c.switcher.en, lang: "en" };
@@ -113,16 +116,16 @@ export function LocalizedServiceDetail({
           </aside>
         </header>
 
-        <section className="alu-glass page-panel mt-10 sm:mt-14 sm:p-8">
+        <section className="rule-item mt-10 sm:mt-14">
           <h2 className="page-label">{ui.inPlainWords}</h2>
           <p className="mt-4 max-w-3xl text-base leading-relaxed text-foreground/90 sm:text-lg sm:leading-[1.8]">
             {t.overview}
           </p>
         </section>
 
-        <div className="mt-6 grid gap-6 lg:mt-8 lg:grid-cols-2 lg:gap-8">
-          <section className="alu-glass page-panel sm:p-8">
-            <h2 className="alu-display text-[2.4rem] sm:text-[3rem]">{ui.whatYouGet}</h2>
+        <div className="mt-12 grid gap-10 lg:mt-14 lg:grid-cols-2 lg:gap-12">
+          <section className="rule-item">
+            <h2 className="alu-display text-[1.9rem] sm:text-[2.4rem]">{ui.whatYouGet}</h2>
             <ul className="mt-6 space-y-3.5">
               {t.deliverables.map((item) => (
                 <li key={item} className="flex gap-3 text-[0.95rem] leading-relaxed text-foreground/88">
@@ -133,8 +136,8 @@ export function LocalizedServiceDetail({
             </ul>
           </section>
 
-          <section className="alu-glass page-panel sm:p-8">
-            <h2 className="alu-display text-[2.4rem] sm:text-[3rem]">{ui.howItWorks}</h2>
+          <section className="rule-item">
+            <h2 className="alu-display text-[1.9rem] sm:text-[2.4rem]">{ui.howItWorks}</h2>
             <ol className="mt-6 space-y-0">
               {t.steps.map((step, i) => (
                 <li key={step.label} className="relative flex gap-4 pb-6 last:pb-0">
@@ -156,6 +159,15 @@ export function LocalizedServiceDetail({
           </section>
         </div>
 
+        {workIds ? (
+          <section className="mt-14 sm:mt-20" aria-labelledby="service-work">
+            <h2 id="service-work" className="alu-display text-[1.9rem] sm:text-[2.4rem]">
+              {c.home.work.eyebrow}
+            </h2>
+            <ProjectGallery only={workIds} visitLabel={c.home.work.visit} showDescriptions={false} />
+          </section>
+        ) : null}
+
         {priceGroup ? (
           <div className="mt-14 sm:mt-20">
             <PricingPlans group={{ ...priceGroup, title: ui.pricingTitle }} lang={locale} />
@@ -170,7 +182,7 @@ export function LocalizedServiceDetail({
         {unpriced ? (
           <section className="alu-glass page-panel mt-14 sm:mt-20 sm:p-8">
             <p className="page-label">{ui.pricingTitle}</p>
-            <h2 className="alu-display mt-3 text-[2.4rem] sm:text-[3rem]">{ui.scopedTitle}</h2>
+            <h2 className="alu-display mt-3 text-[1.9rem] sm:text-[2.4rem]">{ui.scopedTitle}</h2>
             <Link href={localePath(locale, "/contact")} data-interactive className="btn-primary mt-6 inline-flex">
               {ui.getQuote}
             </Link>
@@ -215,7 +227,7 @@ export function LocalizedServiceDetail({
         </section>
 
         <div className="alu-glass mt-14 px-5 py-12 text-center sm:mt-20 sm:px-10 sm:py-16">
-          <h2 className="alu-display mx-auto max-w-3xl text-[clamp(3rem,7vw,5.5rem)]">{ui.readyTitle}</h2>
+          <h2 className="alu-display mx-auto max-w-3xl text-[clamp(2.25rem,4.4vw,3.75rem)]">{ui.readyTitle}</h2>
           <p className="mx-auto mt-4 max-w-lg text-base text-foreground/80">{ui.readyLead}</p>
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <Link href={localePath(locale, "/contact")} data-interactive className="btn-primary w-full max-w-xs sm:w-auto">

@@ -6,6 +6,8 @@ type ProjectGalleryProps = {
   visitLabel?: string;
   /** Hide the English descriptions on translated pages. */
   showDescriptions?: boolean;
+  /** Show only these projects, in gallery order. Defaults to all of them. */
+  only?: readonly string[];
 };
 
 function Frame({ project }: { project: Project }) {
@@ -40,7 +42,7 @@ function Card({
   project,
   visitLabel,
   showDescriptions,
-}: { project: Project } & Required<ProjectGalleryProps>) {
+}: { project: Project } & Required<Omit<ProjectGalleryProps, "only">>) {
   return (
     <article className="work-card" data-reveal>
       {project.href ? (
@@ -76,10 +78,14 @@ function Card({
 export function ProjectGallery({
   visitLabel = "Visit the site",
   showDescriptions = true,
+  only,
 }: ProjectGalleryProps) {
+  const projects = getGalleryProjects().filter(
+    (project) => !only || only.includes(project.id),
+  );
   return (
     <div className="work-grid">
-      {getGalleryProjects().map((project) => (
+      {projects.map((project) => (
         <Card
           key={project.id}
           project={project}

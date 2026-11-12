@@ -124,3 +124,9 @@ export function getGalleryProjects(): Project[] {
     PROJECTS.filter((project) => project.id === id),
   );
 }
+
+/** Client work shown on a service page, by service slug. */
+export const SERVICE_PROJECT_IDS: Record<string, readonly string[]> = {
+  "high-converting-websites": ["almanya", "chandelier-solderie"],
+  "custom-software-development": ["shop-pro"],
+};
