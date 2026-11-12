@@ -8,9 +8,24 @@ type ProjectGalleryProps = {
   showDescriptions?: boolean;
   /** Show only these projects, in gallery order. Defaults to all of them. */
   only?: readonly string[];
+  locale?: keyof typeof SAMPLE_LABEL;
 };
 
-function Frame({ project, lead }: { project: Project; lead: boolean }) {
+const SAMPLE_LABEL = {
+  en: "Sample data",
+  ar: "بيانات تجريبية",
+  fr: "Données d'exemple",
+} as const;
+
+function Frame({
+  project,
+  lead,
+  sampleLabel,
+}: {
+  project: Project;
+  lead: boolean;
+  sampleLabel: string;
+}) {
   if (!project.imageSrc) return null;
   return (
     <div className="work-frame">
@@ -37,6 +52,9 @@ function Frame({ project, lead }: { project: Project; lead: boolean }) {
               : "(max-width: 799px) 100vw, (max-width: 1360px) 50vw, 640px"
           }
         />
+        {project.sampleData ? (
+          <span className="work-frame__note">{sampleLabel}</span>
+        ) : null}
       </div>
     </div>
   );
@@ -47,8 +65,9 @@ function Card({
   lead,
   visitLabel,
   showDescriptions,
-}: { project: Project; lead: boolean } & Required<
-  Omit<ProjectGalleryProps, "only">
+  sampleLabel,
+}: { project: Project; lead: boolean; sampleLabel: string } & Required<
+  Omit<ProjectGalleryProps, "only" | "locale">
 >) {
   return (
     <article className={lead ? "work-card work-card--lead" : "work-card"} data-reveal>
@@ -61,10 +80,10 @@ function Card({
           className="work-card__link"
           aria-label={`${project.title}: ${visitLabel}`}
         >
-          <Frame project={project} lead={lead} />
+          <Frame project={project} lead={lead} sampleLabel={sampleLabel} />
         </a>
       ) : (
-        <Frame project={project} lead={lead} />
+        <Frame project={project} lead={lead} sampleLabel={sampleLabel} />
       )}
       <div className="work-card__meta">
         <h3 className="work-card__title" dir="ltr">
@@ -86,6 +105,7 @@ export function ProjectGallery({
   visitLabel = "Visit the site",
   showDescriptions = true,
   only,
+  locale = "en",
 }: ProjectGalleryProps) {
   const projects = getGalleryProjects().filter(
     (project) => !only || only.includes(project.id),
@@ -100,6 +120,7 @@ export function ProjectGallery({
           project={project}
           visitLabel={visitLabel}
           showDescriptions={showDescriptions}
+          sampleLabel={SAMPLE_LABEL[locale]}
         />
       ))}
     </div>

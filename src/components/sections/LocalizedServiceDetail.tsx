@@ -169,7 +169,7 @@ export function LocalizedServiceDetail({
             <h2 id="service-work" className="alu-display text-[1.9rem] sm:text-[2.4rem]">
               {c.home.work.eyebrow}
             </h2>
-            <ProjectGallery only={workIds} visitLabel={c.home.work.visit} showDescriptions={false} />
+            <ProjectGallery only={workIds} visitLabel={c.home.work.visit} showDescriptions={false} locale={locale} />
           </section>
         ) : null}
 

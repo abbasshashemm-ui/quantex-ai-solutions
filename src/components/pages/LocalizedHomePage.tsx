@@ -91,7 +91,7 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
             </h2>
             <p className="alu-lede max-w-2xl">{h.work.lede}</p>
           </div>
-          <ProjectGallery visitLabel={h.work.visit} showDescriptions={false} />
+          <ProjectGallery visitLabel={h.work.visit} showDescriptions={false} locale={locale} />
         </div>
       </section>
 

@@ -14,6 +14,8 @@ export type Project = {
   status?: "live" | "in-progress";
   /** Short facts shown on a lead card. */
   highlights?: string[];
+  /** The screenshot shows sample figures, not the client's own. Labelled on the page. */
+  sampleData?: boolean;
   imageSrc?: string;
   imageAlt?: string;
   imageWidth?: number;
@@ -101,6 +103,7 @@ export const PROJECTS: Project[] = [
       "Custom sales and stock app built for Hachem Services—orders, inventory, dashboards, and day-to-day operations.",
     url: "Hachem Services · internal",
     tags: ["CUSTOM APP", "SALES & STOCK"],
+    sampleData: true,
     imageSrc: "/projects/shop-pro.webp",
     imageAlt: "Shop Pro dashboard with sales totals, a revenue chart, sales by category and recent orders",
     imageWidth: 1920,

@@ -1282,6 +1282,7 @@ a:hover > .alu-link span[aria-hidden],
 }
 
 .work-frame__shot {
+  position: relative;
   overflow: hidden;
   aspect-ratio: 2.1 / 1;
 }
@@ -1298,6 +1299,20 @@ a:hover > .alu-link span[aria-hidden],
   .work-card__link:hover .work-frame__shot img {
     transform: scale(1.03);
   }
+}
+
+/* Marks a screenshot that shows sample figures rather than a client's own. */
+.work-frame__note {
+  position: absolute;
+  inset-inline-start: 0.6rem;
+  bottom: 0.6rem;
+  border-radius: 999px;
+  padding: 0.2rem 0.65rem;
+  background: rgba(11, 12, 15, 0.82);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #fff;
 }
 
 .work-card__meta {
