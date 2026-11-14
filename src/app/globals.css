@@ -99,7 +99,7 @@ body::before {
       rgba(255, 255, 255, 0) 58%
     ),
     conic-gradient(
-      from 200deg at 74% 46%,
+      from 200deg at 128% -22%,
       rgba(255, 255, 255, 0) 0 6%,
       rgba(255, 255, 255, 0.5) 13%,
       rgba(255, 255, 255, 0) 21%,
@@ -641,7 +641,25 @@ a:hover > .alu-link span[aria-hidden],
 
 @media (min-width: 900px) {
   .alu-h1 {
-    font-size: clamp(5rem, min(12.2vw, 20svh), 11.5rem);
+    /*
+     * The third limit keeps the longest line (about 3.95em wide) clear of the
+     * sculpture: the space from the copy's left edge to the sculpture's left
+     * edge, less a 2.5rem gap. The sculpture is centred at 71.5% and is about
+     * 0.82 of the still image's width across.
+     */
+    font-size: clamp(
+      4rem,
+      min(
+        12.2vw,
+        20svh,
+        (
+            71.5vw - 0.41 * min(52vw, 80svh) -
+              max(1.5rem, (100vw - 80rem) / 2) - 2.5rem
+          ) /
+          3.95
+      ),
+      11.5rem
+    );
   }
 }
 
@@ -751,6 +769,13 @@ a:hover > .alu-link span[aria-hidden],
 @media (max-width: 899px) and (max-height: 620px) {
   .alu-hero .alu-lede {
     display: none;
+  }
+}
+
+/* Beside the sculpture, the hero paragraph stays inside the headline's column. */
+@media (min-width: 900px) {
+  .alu-hero .alu-lede {
+    max-width: min(34rem, 42vw);
   }
 }
 
@@ -1049,7 +1074,8 @@ a:hover > .alu-link span[aria-hidden],
 }
 
 .alu-card__title {
-  margin-top: auto;
+  /* Fixed gap under the number, so titles line up across a row. */
+  margin-top: 1.5rem;
   font-size: clamp(2.6rem, 4.5vw, 3.5rem);
 }
 
@@ -1065,7 +1091,9 @@ a:hover > .alu-link span[aria-hidden],
 }
 
 .alu-card .alu-link {
-  margin-top: 0.75rem;
+  /* The spare height sits above the link, which stays on the bottom edge. */
+  margin-top: auto;
+  padding-top: 0.75rem;
 }
 
 /* Stats */
@@ -1297,6 +1325,22 @@ a:hover > .alu-link span[aria-hidden],
   font-size: 0.95rem;
   line-height: 1.55;
   color: var(--ink-soft);
+}
+
+/* Stacked steps (phones and tablets) only need the height of their text. */
+@media (max-width: 1023px) {
+  .alu-step {
+    min-height: 0;
+    padding: 1.25rem 1.35rem 1.4rem;
+  }
+
+  .alu-step__n {
+    font-size: 2.75rem;
+  }
+
+  .alu-step__title {
+    margin-top: 1rem;
+  }
 }
 
 /* Promises and closing call to action */
@@ -1949,7 +1993,7 @@ span.chat-panel__input {
   display: flex;
   justify-self: end;
   width: 100%;
-  height: clamp(24rem, calc(100svh - 8rem), 36rem);
+  height: clamp(22rem, calc(100svh - 8rem), 27rem);
   overflow: hidden;
   border-radius: var(--radius-card);
   border: 1px solid rgba(255, 255, 255, 0.75);
@@ -1974,6 +2018,11 @@ span.chat-panel__input {
   .hero-chat {
     min-width: 22rem;
   }
+}
+
+/* Like a messaging app: a short conversation rests on the input, not the top. */
+.hero-chat .chat-panel__messages > :first-child {
+  margin-top: auto;
 }
 
 .hero-chat .chat-panel {
@@ -2105,7 +2154,7 @@ span.chat-panel__input {
         rgba(255, 255, 255, 0) 58%
       ),
       conic-gradient(
-        from 200deg at 74% 46%,
+        from 200deg at 128% -22%,
         rgba(255, 255, 255, 0) 0 6%,
         rgba(255, 255, 255, 0.07) 13%,
         rgba(255, 255, 255, 0) 21%,
