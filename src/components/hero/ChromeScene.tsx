@@ -1,16 +1,16 @@
 "use client";
 
-import { Canvas, useFrame, useThree } from "@react-three/fiber";
-import { useEffect, useMemo, useRef, type RefObject } from "react";
+import { useEffect, useRef, type RefObject } from "react";
 import {
   ACESFilmicToneMapping,
   Color,
+  Group,
   MathUtils,
+  Mesh,
   MeshStandardMaterial,
-  type Group,
-  type Mesh,
-  type Scene,
-  type Texture,
+  PerspectiveCamera,
+  Scene,
+  WebGLRenderer,
 } from "three";
 import { createStudioEnvironment } from "./chrome-environment";
 import {
@@ -26,8 +26,12 @@ import {
   computePose,
   ringTwist,
   ringZ,
+  visibleWorldHeight,
 } from "./choreography";
 import type { MotionState } from "./motion";
+
+// This file drives three.js directly, with named imports only, so the bundler
+// can leave out the parts of three.js the hero never uses.
 
 type ChromeSceneProps = {
   motion: RefObject<MotionState>;
@@ -38,6 +42,9 @@ type ChromeSceneProps = {
   onReady: () => void;
   onFail: (reason?: unknown) => void;
 };
+
+/** Sharp enough on dense screens without drawing more pixels than needed. */
+const MAX_PIXEL_RATIO = 1.6;
 
 const CHROME = new Color("#ffffff");
 const ALUMINIUM = new Color("#d6dae1");
@@ -65,160 +72,6 @@ function updateReflections(
   scene.environmentRotation.x = Math.sin(time * 0.17) * 0.12 * ambient;
 }
 
-function setEnvironment(scene: Scene, texture: Texture | null) {
-  scene.environment = texture;
-}
-
-function Sculpture({
-  motion,
-  calm,
-  onReady,
-}: Pick<ChromeSceneProps, "motion" | "calm" | "onReady">) {
-  const gl = useThree((state) => state.gl);
-  const scene = useThree((state) => state.scene);
-  const camera = useThree((state) => state.camera);
-
-  const groupRef = useRef<Group>(null);
-  const ringRefs = useRef<(Mesh | null)[]>([]);
-  const ambient = calm ? 0 : 1;
-  // The handoff from the still image: nothing is drawn until the shaders are
-  // compiled, and the canvas is only revealed once a real frame is on screen.
-  const handoff = useRef({ compiled: false, framesDrawn: 0, startedAt: 0 });
-  const pointer = useRef({ x: 0, y: 0 });
-  // Idle spin: accumulated angle, and a smoothed 0..1 "page is moving" level.
-  const spin = useRef({ angle: 0, speed: 0 });
-
-  const geometries = useMemo(() => buildRingSpecs().map(buildRingGeometry), []);
-  const material = useMemo(
-    () =>
-      new MeshStandardMaterial({
-        color: CHROME,
-        metalness: 1,
-        roughness: 0.07,
-        envMapIntensity: 1.1,
-      }),
-    [],
-  );
-
-  useEffect(() => {
-    let cancelled = false;
-    const state = handoff.current;
-    const environment = createStudioEnvironment(gl);
-    setEnvironment(scene, environment.texture);
-
-    // Compile in the background where the browser allows it, so the page
-    // does not stall on the first frame. The group stays hidden until then.
-    const reveal = () => {
-      if (cancelled) return;
-      state.compiled = true;
-      if (groupRef.current) groupRef.current.visible = true;
-    };
-    if (gl.extensions.has("KHR_parallel_shader_compile")) {
-      gl.compileAsync(scene, camera).then(reveal, reveal);
-    } else {
-      gl.compile(scene, camera);
-      reveal();
-    }
-
-    return () => {
-      cancelled = true;
-      state.compiled = false;
-      state.framesDrawn = 0;
-      setEnvironment(scene, null);
-      environment.dispose();
-    };
-  }, [gl, scene, camera]);
-
-  useEffect(() => {
-    return () => {
-      geometries.forEach((geometry) => geometry.dispose());
-      material.dispose();
-    };
-  }, [geometries, material]);
-
-  useFrame((state, delta) => {
-    const group = groupRef.current;
-    const stage = handoff.current;
-    if (!group || !stage.compiled) return;
-
-    // This runs before each draw, so the second call means one frame is
-    // already on screen and the still image can fade out.
-    if (stage.framesDrawn === 0) stage.startedAt = state.clock.elapsedTime;
-    if (stage.framesDrawn === 1) onReady();
-    if (stage.framesDrawn < 2) stage.framesDrawn += 1;
-
-    const dt = Math.min(delta, 0.05);
-    // Ambient motion starts from zero at the handoff, where the still image is.
-    const time = state.clock.elapsedTime - stage.startedAt;
-    const input = motion.current;
-    const progress = input.progress;
-
-    pointer.current.x = MathUtils.damp(
-      pointer.current.x,
-      input.pointerX,
-      3.5,
-      dt,
-    );
-    pointer.current.y = MathUtils.damp(
-      pointer.current.y,
-      input.pointerY,
-      3.5,
-      dt,
-    );
-
-    spin.current.speed = MathUtils.damp(
-      spin.current.speed,
-      IDLE_SPIN_SPEED * (1 - input.activity) * ambient,
-      2.5,
-      dt,
-    );
-    spin.current.angle += spin.current.speed * dt;
-
-    const pose = computePose({
-      progress,
-      time,
-      ambient,
-      spin: spin.current.angle,
-      slotCenter: input.slotCenter,
-      slotSize: input.slotSize,
-      pointerX: pointer.current.x,
-      pointerY: pointer.current.y,
-      viewWidth: state.viewport.width,
-      viewHeight: state.viewport.height,
-    });
-
-    group.scale.setScalar(pose.scale);
-    group.position.set(pose.x, pose.y, 0);
-    group.rotation.set(pose.rotationX, pose.rotationY, pose.rotationZ);
-
-    for (let index = 0; index < RING_COUNT; index += 1) {
-      const ring = ringRefs.current[index];
-      if (!ring) continue;
-      ring.position.z = ringZ(index, pose, time);
-      ring.rotation.z = ringTwist(index, pose);
-    }
-
-    updateFinish(material, pose.satin, pose.twist);
-    updateReflections(state.scene, time, progress, ambient);
-  });
-
-  return (
-    <group ref={groupRef} visible={false}>
-      {geometries.map((geometry, index) => (
-        <mesh
-          key={index}
-          ref={(node) => {
-            ringRefs.current[index] = node;
-          }}
-          geometry={geometry}
-          material={material}
-          frustumCulled={false}
-        />
-      ))}
-    </group>
-  );
-}
-
 export default function ChromeScene({
   motion,
   active,
@@ -226,32 +79,196 @@ export default function ChromeScene({
   onReady,
   onFail,
 }: ChromeSceneProps) {
-  return (
-    <Canvas
-      frameloop={active ? "always" : "never"}
-      dpr={[1, 1.6]}
-      camera={{
-        position: [0, 0, CAMERA_DISTANCE],
-        fov: CAMERA_FOV_DEGREES,
-        near: 0.1,
-        far: 60,
-      }}
-      gl={{
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+  // Read by the frame loop, so changing them never rebuilds the scene.
+  const live = useRef({ active, calm });
+  const loop = useRef<{ start: () => void; stop: () => void } | null>(null);
+
+  useEffect(() => {
+    live.current.active = active;
+    live.current.calm = calm;
+    if (active) loop.current?.start();
+    else loop.current?.stop();
+  }, [active, calm]);
+
+  useEffect(() => {
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    let renderer: WebGLRenderer;
+    try {
+      renderer = new WebGLRenderer({
+        canvas,
         antialias: true,
         alpha: true,
         powerPreference: "high-performance",
-        toneMapping: ACESFilmicToneMapping,
-        toneMappingExposure: 1,
-      }}
-      onCreated={({ gl }) => {
-        gl.domElement.addEventListener("webglcontextlost", (event) => {
-          event.preventDefault();
-          onFail("The graphics context was lost.");
-        });
-      }}
-      aria-hidden
-    >
-      <Sculpture motion={motion} calm={calm} onReady={onReady} />
-    </Canvas>
-  );
+      });
+    } catch (error) {
+      onFail(error);
+      return;
+    }
+    renderer.toneMapping = ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1;
+
+    const scene = new Scene();
+    const camera = new PerspectiveCamera(CAMERA_FOV_DEGREES, 1, 0.1, 60);
+    camera.position.set(0, 0, CAMERA_DISTANCE);
+
+    const geometries = buildRingSpecs().map(buildRingGeometry);
+    const material = new MeshStandardMaterial({
+      color: CHROME,
+      metalness: 1,
+      roughness: 0.07,
+      envMapIntensity: 1.1,
+    });
+    const group = new Group();
+    const rings = geometries.map((geometry) => {
+      const ring = new Mesh(geometry, material);
+      ring.frustumCulled = false;
+      group.add(ring);
+      return ring;
+    });
+    scene.add(group);
+
+    const environment = createStudioEnvironment(renderer);
+    scene.environment = environment.texture;
+
+    const worldHeight = visibleWorldHeight();
+    let aspect = 1;
+    const resize = () => {
+      const width = Math.max(1, canvas.clientWidth);
+      const height = Math.max(1, canvas.clientHeight);
+      aspect = width / height;
+      renderer.setPixelRatio(
+        MathUtils.clamp(window.devicePixelRatio || 1, 1, MAX_PIXEL_RATIO),
+      );
+      renderer.setSize(width, height, false);
+      camera.aspect = aspect;
+      camera.updateProjectionMatrix();
+    };
+
+    let disposed = false;
+    let compiled = false;
+    let frame = 0;
+    let framesDrawn = 0;
+    let last = 0;
+    let time = 0;
+    let pointerX = 0;
+    let pointerY = 0;
+    let spinAngle = 0;
+    let spinSpeed = 0;
+
+    const draw = (now: number) => {
+      // Time only advances while frames are drawn, and starts from zero at
+      // the handoff, so the first frame is the pose in the still image.
+      const dt = last === 0 ? 0 : Math.min((now - last) / 1000, 0.05);
+      last = now;
+      time += dt;
+
+      const ambient = live.current.calm ? 0 : 1;
+      const input = motion.current;
+      const progress = input.progress;
+
+      pointerX = MathUtils.damp(pointerX, input.pointerX, 3.5, dt);
+      pointerY = MathUtils.damp(pointerY, input.pointerY, 3.5, dt);
+
+      spinSpeed = MathUtils.damp(
+        spinSpeed,
+        IDLE_SPIN_SPEED * (1 - input.activity) * ambient,
+        2.5,
+        dt,
+      );
+      spinAngle += spinSpeed * dt;
+
+      const pose = computePose({
+        progress,
+        time,
+        ambient,
+        spin: spinAngle,
+        slotCenter: input.slotCenter,
+        slotSize: input.slotSize,
+        pointerX,
+        pointerY,
+        viewWidth: worldHeight * aspect,
+        viewHeight: worldHeight,
+      });
+
+      group.scale.setScalar(pose.scale);
+      group.position.set(pose.x, pose.y, 0);
+      group.rotation.set(pose.rotationX, pose.rotationY, pose.rotationZ);
+
+      for (let index = 0; index < RING_COUNT; index += 1) {
+        const ring = rings[index];
+        ring.position.z = ringZ(index, pose, time);
+        ring.rotation.z = ringTwist(index, pose);
+      }
+
+      updateFinish(material, pose.satin, pose.twist);
+      updateReflections(scene, time, progress, ambient);
+      renderer.render(scene, camera);
+
+      // The still image fades out only once a live frame is on screen.
+      framesDrawn += 1;
+      if (framesDrawn === 2) onReady();
+    };
+
+    const tick = (now: number) => {
+      draw(now);
+      frame = requestAnimationFrame(tick);
+    };
+
+    const start = () => {
+      if (disposed || !compiled || frame !== 0) return;
+      last = 0;
+      frame = requestAnimationFrame(tick);
+    };
+    const stop = () => {
+      cancelAnimationFrame(frame);
+      frame = 0;
+    };
+    loop.current = { start, stop };
+
+    resize();
+    const observer = new ResizeObserver(() => {
+      resize();
+      // Resizing clears the canvas; redraw now so it never shows blank.
+      if (compiled) draw(performance.now());
+    });
+    observer.observe(canvas);
+
+    const onContextLost = (event: Event) => {
+      event.preventDefault();
+      onFail("The graphics context was lost.");
+    };
+    canvas.addEventListener("webglcontextlost", onContextLost);
+
+    // Compile in the background where the browser allows it, so the page
+    // does not stall on the first frame. Nothing is drawn until then.
+    const begin = () => {
+      if (disposed) return;
+      compiled = true;
+      if (live.current.active) start();
+      else draw(performance.now());
+    };
+    if (renderer.extensions.has("KHR_parallel_shader_compile")) {
+      renderer.compileAsync(scene, camera).then(begin, begin);
+    } else {
+      renderer.compile(scene, camera);
+      begin();
+    }
+
+    return () => {
+      disposed = true;
+      stop();
+      loop.current = null;
+      observer.disconnect();
+      canvas.removeEventListener("webglcontextlost", onContextLost);
+      environment.dispose();
+      geometries.forEach((geometry) => geometry.dispose());
+      material.dispose();
+      renderer.dispose();
+    };
+  }, [motion, onReady, onFail]);
+
+  return <canvas ref={canvasRef} className="alu-flat" aria-hidden />;
 }
