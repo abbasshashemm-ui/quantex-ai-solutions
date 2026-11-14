@@ -103,7 +103,6 @@ export default function FlatScene({
 }: FlatSceneProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const runtime = useRef({
-    intro: 0,
     pointerX: 0,
     pointerY: 0,
     last: 0,
@@ -123,7 +122,6 @@ export default function FlatScene({
 
     const ambient = calm ? 0 : 1;
     const state = runtime.current;
-    if (ambient === 0) state.intro = 1;
 
     const specs = buildRingSpecs();
     const loop = getUnitLoopPoints();
@@ -151,8 +149,6 @@ export default function FlatScene({
       const time = (now - state.start) / 1000;
       const input = motion.current;
 
-      if (state.intro < 1) state.intro = Math.min(1, state.intro + dt / 2.1);
-      const settle = ambient === 0 ? 1 : 1 - (1 - state.intro) ** 4;
       const progress = input.progress;
 
       state.pointerX = damp(state.pointerX, input.pointerX, 3.5, dt);
@@ -170,7 +166,6 @@ export default function FlatScene({
       const pose = computePose({
         progress,
         time,
-        settle,
         ambient,
         spin: state.spinAngle,
         centered: layout === "centered",

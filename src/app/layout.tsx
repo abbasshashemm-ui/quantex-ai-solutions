@@ -21,7 +21,8 @@ const condensed = Barlow_Condensed({
   variable: "--font-condensed",
   subsets: ["latin"],
   display: "swap",
-  weight: ["600", "700", "800"],
+  // Only the weights the design uses: each one is two preloaded files.
+  weight: ["700", "800"],
   style: ["normal", "italic"],
 });
 

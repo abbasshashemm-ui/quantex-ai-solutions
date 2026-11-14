@@ -76,12 +76,14 @@ function Sculpture({
 }: Pick<ChromeSceneProps, "motion" | "calm" | "onReady">) {
   const gl = useThree((state) => state.gl);
   const scene = useThree((state) => state.scene);
-  const invalidate = useThree((state) => state.invalidate);
+  const camera = useThree((state) => state.camera);
 
   const groupRef = useRef<Group>(null);
   const ringRefs = useRef<(Mesh | null)[]>([]);
   const ambient = calm ? 0 : 1;
-  const intro = useRef(ambient === 0 ? 1 : 0);
+  // The handoff from the still image: nothing is drawn until the shaders are
+  // compiled, and the canvas is only revealed once a real frame is on screen.
+  const handoff = useRef({ compiled: false, framesDrawn: 0, startedAt: 0 });
   const pointer = useRef({ x: 0, y: 0 });
   // Idle spin: accumulated angle, and a smoothed 0..1 "page is moving" level.
   const spin = useRef({ angle: 0, speed: 0 });
@@ -99,15 +101,33 @@ function Sculpture({
   );
 
   useEffect(() => {
+    let cancelled = false;
+    const state = handoff.current;
     const environment = createStudioEnvironment(gl);
     setEnvironment(scene, environment.texture);
-    invalidate();
-    onReady();
+
+    // Compile in the background where the browser allows it, so the page
+    // does not stall on the first frame. The group stays hidden until then.
+    const reveal = () => {
+      if (cancelled) return;
+      state.compiled = true;
+      if (groupRef.current) groupRef.current.visible = true;
+    };
+    if (gl.extensions.has("KHR_parallel_shader_compile")) {
+      gl.compileAsync(scene, camera).then(reveal, reveal);
+    } else {
+      gl.compile(scene, camera);
+      reveal();
+    }
+
     return () => {
+      cancelled = true;
+      state.compiled = false;
+      state.framesDrawn = 0;
       setEnvironment(scene, null);
       environment.dispose();
     };
-  }, [gl, scene, invalidate, onReady]);
+  }, [gl, scene, camera]);
 
   useEffect(() => {
     return () => {
@@ -118,16 +138,19 @@ function Sculpture({
 
   useFrame((state, delta) => {
     const group = groupRef.current;
-    if (!group) return;
+    const stage = handoff.current;
+    if (!group || !stage.compiled) return;
+
+    // This runs before each draw, so the second call means one frame is
+    // already on screen and the still image can fade out.
+    if (stage.framesDrawn === 0) stage.startedAt = state.clock.elapsedTime;
+    if (stage.framesDrawn === 1) onReady();
+    if (stage.framesDrawn < 2) stage.framesDrawn += 1;
 
     const dt = Math.min(delta, 0.05);
-    const time = state.clock.elapsedTime;
+    // Ambient motion starts from zero at the handoff, where the still image is.
+    const time = state.clock.elapsedTime - stage.startedAt;
     const input = motion.current;
-
-    if (intro.current < 1) {
-      intro.current = Math.min(1, intro.current + dt / 2.1);
-    }
-    const settle = ambient === 0 ? 1 : 1 - (1 - intro.current) ** 4;
     const progress = input.progress;
 
     pointer.current.x = MathUtils.damp(
@@ -154,7 +177,6 @@ function Sculpture({
     const pose = computePose({
       progress,
       time,
-      settle,
       ambient,
       spin: spin.current.angle,
       slotCenter: input.slotCenter,
@@ -181,7 +203,7 @@ function Sculpture({
   });
 
   return (
-    <group ref={groupRef}>
+    <group ref={groupRef} visible={false}>
       {geometries.map((geometry, index) => (
         <mesh
           key={index}
