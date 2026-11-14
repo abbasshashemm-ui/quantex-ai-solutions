@@ -23,12 +23,18 @@ export type Project = {
 };
 
 /**
- * Client work shown on the home page, in this order. Only projects with a
- * current, high-resolution screenshot are listed. To add one, put its
- * screenshot in public/projects and add its id here. With an odd number, the
- * first is shown full width, so it should be at least 1900px wide.
+ * Client work shown on the home page, in this order. With an odd number the
+ * first is shown full width, so it should have a screenshot at least 1900px
+ * wide. Hmayed is left out until its redesigned site has a new screenshot:
+ * add "hmayed" back here once that is in public/projects.
  */
-export const GALLERY_PROJECT_IDS = ["bahira", "shop-pro"] as const;
+export const GALLERY_PROJECT_IDS = [
+  "bahira",
+  "almanya",
+  "chandelier-solderie",
+  "trago",
+  "shop-pro",
+] as const;
 
 export const PROJECTS: Project[] = [
   {
