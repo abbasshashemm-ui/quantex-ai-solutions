@@ -31,10 +31,20 @@ export function RevealOnScroll() {
 
     root.classList.add("js-reveal");
     observeAll();
-    const mutation = new MutationObserver(observeAll);
+    // Streaming chat replies and route changes fire bursts of mutations; one
+    // scan per frame covers them all.
+    let scan = 0;
+    const mutation = new MutationObserver(() => {
+      if (scan) return;
+      scan = requestAnimationFrame(() => {
+        scan = 0;
+        observeAll();
+      });
+    });
     mutation.observe(document.body, { childList: true, subtree: true });
 
     return () => {
+      cancelAnimationFrame(scan);
       observer.disconnect();
       mutation.disconnect();
       root.classList.remove("js-reveal");
