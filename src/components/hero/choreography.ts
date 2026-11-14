@@ -43,8 +43,6 @@ export type PoseInput = {
   /** Scroll progress through the pinned stage, 0 to 1. */
   progress: number;
   time: number;
-  /** How far the intro has settled, 0 to 1. */
-  settle: number;
   /** 0 removes all autonomous motion (drift, sway, ripple, cursor parallax). */
   ambient: number;
   /** Accumulated idle spin about the sculpture's own axis, in radians. */
@@ -88,7 +86,6 @@ export function computePose(input: PoseInput): Pose {
   const {
     progress,
     time,
-    settle,
     ambient,
     spin,
     pointerX,
@@ -114,10 +111,12 @@ export function computePose(input: PoseInput): Pose {
     : smoothstep(0.55, 1, progress);
   const wide = width / height >= 1.15 && !centered;
 
-  // Wide screens keep their original, lively behaviour. The phone layout is
-  // calm: no vertical bobbing, no wild unwinding on load, and it spins gently
-  // only while the page is still.
-  const unsettled = wide ? (1 - settle) ** 2 : 0;
+  // The pose at progress 0 and time 0 is the one drawn in the still image
+  // (public/hero/chrome-mark.webp), so the live scene can fade in over it
+  // without a visible jump. Keep it that way: no entrance animation here.
+  //
+  // Wide screens bob and sway. The phone layout is calm: no vertical bobbing,
+  // and it spins gently only while the page is still.
   const bob = wide ? 1 : 0;
   const sway = wide ? 1 : 0;
   const idleSpin = wide ? 0 : spin;
@@ -143,10 +142,7 @@ export function computePose(input: PoseInput): Pose {
   const scale = fit / 1.5;
 
   return {
-    scale:
-      scale *
-      (wide ? 0.86 + 0.14 * settle : 0.94 + 0.06 * settle) *
-      (1 + (wide ? 0.08 : 0.04) * open),
+    scale: scale * (1 + (wide ? 0.08 : 0.04) * open),
     x: wide ? width * (0.215 + 0.03 * open) : 0,
     y,
     rotationX: 0.06 + 0.2 * open - 0.1 * twist - pointerY * 0.22 * ambient,
@@ -155,8 +151,8 @@ export function computePose(input: PoseInput): Pose {
       Math.sin(time * 0.3) * 0.05 * ambient * sway +
       progress * (centered ? 5.2 : 0.5) +
       idleSpin,
-    spacing: lerp(0.006, wide ? 0.075 : 0.05, open) + unsettled * 0.2,
-    twistPerRing: twist * 0.1 + unsettled * 1.7,
+    spacing: lerp(0.006, wide ? 0.075 : 0.05, open),
+    twistPerRing: twist * 0.1,
     ripple: (0.006 + 0.012 * open) * ambient,
     open,
     twist,
