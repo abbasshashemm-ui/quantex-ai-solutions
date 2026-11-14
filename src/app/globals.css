@@ -1153,6 +1153,154 @@ a:hover > .alu-link span[aria-hidden],
 }
 
 /* Process */
+/* Client work: framed screenshots. */
+.work-grid {
+  display: grid;
+  gap: 2.75rem 1.5rem;
+  margin-top: 3rem;
+}
+
+@media (min-width: 800px) {
+  .work-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3.25rem 2rem;
+  }
+}
+
+.work-card--lead {
+  grid-column: 1 / -1;
+}
+
+/* The lead screenshot is shown whole, at its own proportions. */
+.work-card--lead .work-frame__shot {
+  aspect-ratio: auto;
+}
+
+.work-card--lead .work-frame__shot img {
+  height: auto;
+}
+
+.work-grid > :only-child {
+  grid-column: 1 / -1;
+  max-width: 46rem;
+}
+
+.work-card__link {
+  display: block;
+}
+
+.work-frame {
+  overflow: hidden;
+  border: 1px solid var(--line-strong);
+  border-radius: 0.5rem;
+  background: var(--surface-elevated);
+  box-shadow:
+    0 34px 54px -34px rgba(18, 24, 34, 0.5),
+    0 2px 6px rgba(18, 24, 34, 0.06);
+}
+
+.work-frame__bar {
+  position: relative;
+  display: flex;
+  height: 2rem;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+  padding-inline: 0.75rem;
+}
+
+.work-frame__dots {
+  display: flex;
+  gap: 0.35rem;
+}
+
+.work-frame__address {
+  position: absolute;
+  left: 50%;
+  max-width: 70%;
+  overflow: hidden;
+  border-radius: 999px;
+  padding: 0.15rem 0.75rem;
+  background: color-mix(in srgb, var(--foreground) 6%, transparent);
+  font-size: 0.68rem;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  color: var(--muted);
+  transform: translateX(-50%);
+}
+
+.work-frame__shot {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 2.1 / 1;
+}
+
+.work-frame__shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform 0.7s var(--ease-out);
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .work-card__link:hover .work-frame__shot img {
+    transform: scale(1.03);
+  }
+}
+
+/* Marks a screenshot that shows sample figures rather than a client's own. */
+.work-frame__note {
+  position: absolute;
+  inset-inline-start: 0.6rem;
+  bottom: 0.6rem;
+  border-radius: 999px;
+  padding: 0.2rem 0.65rem;
+  background: rgba(11, 12, 15, 0.82);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: #fff;
+}
+
+.work-card__meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0.25rem 1rem;
+  margin-top: 1rem;
+}
+
+.work-card__title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+.work-card__tags {
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.work-card__body {
+  max-width: 34rem;
+  margin-top: 0.4rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.work-frame__dots i {
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: var(--line-strong);
+}
+
 .alu-steps {
   display: grid;
   gap: 1rem;

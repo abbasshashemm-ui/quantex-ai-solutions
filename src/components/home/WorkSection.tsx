@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
+import { ProjectGallery } from "@/components/work/ProjectGallery";
 import { EACML, EACML_PATH } from "@/lib/projects/eacml";
 import { PROJECTS, type Project } from "@/lib/projects/data";
 
@@ -82,12 +83,15 @@ export function WorkSection() {
             What we are building.
           </h2>
           <p className="alu-lede max-w-2xl">
-            Our flagship project: an AI platform for regulated work.
+            From websites that win customers to AI platforms for regulated
+            work.
           </p>
         </div>
 
+        <ProjectGallery />
+
         {lead ? (
-          <div className="mt-8">
+          <div className="mt-14">
             <LeadCard project={lead} />
           </div>
         ) : null}
