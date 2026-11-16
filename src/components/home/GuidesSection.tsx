@@ -36,8 +36,13 @@ export function GuidesSection() {
         </div>
 
         <ul className="rule-grid rule-grid--3">
-          {guides.map((guide) => (
-            <li key={guide.href} data-reveal>
+          {guides.map((guide, index) => (
+            // Phones show the first three; the rest are one tap away in "All guides".
+            <li
+              key={guide.href}
+              data-reveal
+              className={index >= 3 ? "hidden sm:block" : undefined}
+            >
               <Link
                 href={guide.href}
                 data-interactive

@@ -440,7 +440,7 @@ a:hover > .alu-link span[aria-hidden],
       rgba(255, 255, 255, 0) 58%
     ),
     conic-gradient(
-      from 200deg at 74% 46%,
+      from 200deg at 128% -22%,
       rgba(255, 255, 255, 0) 0 6%,
       rgba(255, 255, 255, 0.5) 13%,
       rgba(255, 255, 255, 0) 21%,
@@ -618,8 +618,25 @@ a:hover > .alu-link span[aria-hidden],
 
 @media (min-width: 900px) {
   .alu-h1 {
-    /* Sized so the longest line ("ASSISTANTS.") clears the sculpture. */
-    font-size: clamp(4.5rem, min(10.2vw, 18svh), 9.75rem);
+    /*
+     * The third limit keeps the longest line ("ASSISTANTS.", about 4.55em
+     * wide) clear of the sculpture: the space from the copy's left edge to the
+     * sculpture's left edge, less a 2.5rem gap. The sculpture is centred at
+     * 71.5% and is about 0.82 of the still image's width across.
+     */
+    font-size: clamp(
+      4rem,
+      min(
+        12.2vw,
+        20svh,
+        (
+            71.5vw - 0.41 * min(52vw, 80svh) -
+              max(1.5rem, (100vw - 80rem) / 2) - 2.5rem
+          ) /
+          4.55
+      ),
+      11.5rem
+    );
   }
 }
 
@@ -727,6 +744,13 @@ a:hover > .alu-link span[aria-hidden],
 @media (max-width: 899px) and (max-height: 620px) {
   .alu-hero .alu-lede {
     display: none;
+  }
+}
+
+/* Beside the sculpture, the hero paragraph stays inside the headline's column. */
+@media (min-width: 900px) {
+  .alu-hero .alu-lede {
+    max-width: min(34rem, 42vw);
   }
 }
 
@@ -1808,6 +1832,7 @@ a:hover > .alu-link span[aria-hidden],
 }
 
 /* Process */
+
 /* Small stand-alone logo sculptures drawn by MiniSculpture. */
 .mini-sculpture {
   width: 100%;
@@ -2530,7 +2555,7 @@ span.chat-panel__input {
   display: flex;
   justify-self: end;
   width: 100%;
-  height: clamp(24rem, calc(100svh - 8rem), 36rem);
+  height: clamp(22rem, calc(100svh - 8rem), 27rem);
   overflow: hidden;
   border-radius: var(--radius-card);
   border: 1px solid rgba(255, 255, 255, 0.75);
@@ -2555,6 +2580,11 @@ span.chat-panel__input {
   .hero-chat {
     min-width: 22rem;
   }
+}
+
+/* Like a messaging app: a short conversation rests on the input, not the top. */
+.hero-chat .chat-panel__messages > :first-child {
+  margin-top: auto;
 }
 
 .hero-chat .chat-panel {
@@ -2690,7 +2720,7 @@ span.chat-panel__input {
         rgba(255, 255, 255, 0) 58%
       ),
       conic-gradient(
-        from 200deg at 74% 46%,
+        from 200deg at 128% -22%,
         rgba(255, 255, 255, 0) 0 6%,
         rgba(255, 255, 255, 0.07) 13%,
         rgba(255, 255, 255, 0) 21%,
