@@ -48,7 +48,7 @@ export function LocalizedAbout({ locale }: { locale: Locale }) {
           <h2 id="about-story-heading" className="alu-display page-h2 mt-3 max-w-2xl">
             {a.story.title}
           </h2>
-          <div className="mt-6 max-w-3xl space-y-4 text-base leading-relaxed text-foreground/85 sm:text-[1.0625rem] sm:leading-[1.85]">
+          <div className="mt-6 max-w-3xl space-y-4 text-base leading-relaxed text-foreground/85 sm:text-lead sm:leading-[1.85]">
             {a.story.paragraphs.map((p, i) => (
               <p key={i}>
                 {typeof p === "string" ? (
@@ -89,8 +89,8 @@ export function LocalizedAbout({ locale }: { locale: Locale }) {
             {a.values.map((item) => (
               <li key={item.index} className="rule-item pb-2">
                 <span className="page-label">{item.index}</span>
-                <h3 className="alu-display mt-3 text-[2rem] sm:text-[2.4rem]">{item.title}</h3>
-                <p className="mt-3 text-[0.95rem] leading-relaxed text-foreground/80">{item.body}</p>
+                <h3 className="alu-display mt-3 page-h2">{item.title}</h3>
+                <p className="mt-3 text-body-sm leading-relaxed text-foreground/80">{item.body}</p>
               </li>
             ))}
           </ol>

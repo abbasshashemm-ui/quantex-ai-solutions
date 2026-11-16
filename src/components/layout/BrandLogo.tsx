@@ -26,7 +26,7 @@ export function BrandLogo({
   // so it needs no image and always matches the theme.
   if (variant === "full") {
     return (
-      <span className={`brand-wordmark ${className ?? "text-[1.75rem]"}`}>
+      <span className={`brand-wordmark ${className ?? "text-heading"}`}>
         Quantex
       </span>
     );

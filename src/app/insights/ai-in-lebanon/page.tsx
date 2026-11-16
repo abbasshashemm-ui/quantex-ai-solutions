@@ -116,7 +116,7 @@ export default function AiInLebanonArticle() {
             </p>
           </header>
 
-          <p className="aeo-answer alu-glass page-panel mt-8 text-base leading-relaxed text-foreground/90 sm:text-[1.0625rem] sm:leading-[1.75]">
+          <p className="aeo-answer alu-glass page-panel mt-8 text-base leading-relaxed text-foreground/90 sm:text-lead sm:leading-[1.75]">
             {AI_ARTICLE.summary}
           </p>
 
@@ -149,7 +149,7 @@ export default function AiInLebanonArticle() {
               >
                 {section.heading}
               </h2>
-              <div className="mt-5 space-y-4 text-base leading-relaxed text-foreground/85 sm:text-[1.0625rem] sm:leading-[1.75]">
+              <div className="mt-5 space-y-4 text-base leading-relaxed text-foreground/85 sm:text-lead sm:leading-[1.75]">
                 {section.paragraphs.map((p) => (
                   <p key={p}>{p}</p>
                 ))}
@@ -161,7 +161,7 @@ export default function AiInLebanonArticle() {
                       <h3 className="text-lg font-semibold text-foreground">
                         {item.title}
                       </h3>
-                      <p className="mt-2 text-[0.95rem] leading-relaxed text-foreground/80">
+                      <p className="mt-2 text-body-sm leading-relaxed text-foreground/80">
                         {item.body}
                       </p>
                     </li>

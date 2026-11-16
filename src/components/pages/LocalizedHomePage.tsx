@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { Ticker } from "@/components/home/Ticker";
 import { HeroStage } from "@/components/hero/HeroStage";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
@@ -36,7 +35,9 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
     <div lang={c.htmlLang} dir={c.dir} className={rtl ? "rtl-page" : undefined}>
       <HeroStage>
         <div className="alu-hero">
-          <PageEyebrow>{h.hero.eyebrow}</PageEyebrow>
+          <PageEyebrow>
+            {h.hero.eyebrow} · {h.hero.chips[0]} · {h.hero.chips[1]}
+          </PageEyebrow>
           <h1 className="alu-display alu-h1">
             {h.hero.headline.map((line, index) => (
               <span key={line} className="alu-h1__line" style={{ "--i": index } as React.CSSProperties}>
@@ -59,13 +60,6 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
               {h.hero.secondary}
             </a>
           </div>
-          <ul className="alu-chips" aria-label={h.hero.eyebrow}>
-            <li className="alu-chip">
-              <span className="alu-chip__dot" aria-hidden />
-              {h.hero.chips[0]}
-            </li>
-            <li className="alu-chip">{h.hero.chips[1]}</li>
-          </ul>
         </div>
 
         {h.beats.map((beat, i) => (
@@ -79,8 +73,6 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
           </div>
         ))}
       </HeroStage>
-
-      <Ticker />
 
       <section id="work" className="alu-section" aria-labelledby="work-heading">
         <div className="alu-section__inner">
@@ -100,7 +92,7 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
           <div data-reveal className="alu-glass flex flex-col gap-5 px-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:px-8 sm:py-7">
             <div className="min-w-0">
               <p className="page-label">{h.siteCheck.label}</p>
-              <h2 className="alu-display mt-2 text-[1.9rem] sm:text-[2.4rem]">{h.siteCheck.title}</h2>
+              <h2 className="alu-display mt-2 page-h2">{h.siteCheck.title}</h2>
               <p className="mt-2 max-w-xl text-sm text-foreground/80 sm:text-base">{h.siteCheck.text}</p>
             </div>
             <Link
@@ -125,7 +117,7 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
             </h2>
           </div>
           <div>
-            <div className="aeo-answer space-y-4 text-base leading-[1.8] text-foreground/85 sm:text-[1.0625rem]">
+            <div className="aeo-answer space-y-4 text-base leading-[1.8] text-foreground/85 sm:text-lead">
               {h.aeo.paragraphs.map((p) => (
                 <p key={p}>{p}</p>
               ))}
@@ -254,7 +246,7 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
                 <li key={guide.href} data-reveal>
                   <Link href={guide.href} data-interactive className="rule-item rule-item--link flex h-full flex-col">
                     <h3 className="rule-item__title">{guide.title}</h3>
-                    <p className="mt-2 flex-1 text-[0.95rem] leading-relaxed text-foreground/80">{guide.description}</p>
+                    <p className="mt-2 flex-1 text-body-sm leading-relaxed text-foreground/80">{guide.description}</p>
                     <span className="mt-4 text-sm font-semibold text-foreground underline underline-offset-4">
                       {h.guides.readGuide}
                     </span>
@@ -294,7 +286,7 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
               <li key={item.question}>
                 <details className="faq-item faq-card faq-card--plain group">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 marker:content-none [&::-webkit-details-marker]:hidden">
-                    <h3 className="text-base font-semibold sm:text-[1.0625rem]">{item.question}</h3>
+                    <h3 className="text-base font-semibold sm:text-lead">{item.question}</h3>
                     <span className="text-xl leading-none transition-transform group-open:rotate-45" aria-hidden>
                       +
                     </span>

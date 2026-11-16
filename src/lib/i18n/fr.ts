@@ -14,8 +14,8 @@ export const FR: LocaleContent = {
       "Quantex est un studio de Beyrouth, au Liban. Sites web qui convainquent, assistants IA sur WhatsApp, logiciels sur mesure, automatisation et SEO.",
     hero: {
       eyebrow: "Beyrouth · Studio IA",
-      headline: ["Automatisez.", "Développez.", "Dominez."],
-      lede: "Des sites web qui attirent les clients et des assistants IA qui leur répondent. Conçus par un studio de Beyrouth que vous pouvez contacter directement.",
+      headline: ["Sites web.", "Assistants.", "Clients."],
+      lede: "Conçus par un studio de Beyrouth que vous pouvez contacter directement",
       primary: "Lancer un projet",
       secondary: "Voir ce que nous créons",
       chips: ["Plus de 10 clients payants", "Réponse sous 24 heures"],
@@ -23,14 +23,14 @@ export const FR: LocaleContent = {
     beats: [
       {
         index: "01 / Sites web",
-        title: "Des sites qui convertissent.",
+        title: "Des sites qui convertissent",
         lede: "Rapides, clairs et conçus autour d'un seul objectif : transformer les visiteurs en demandes.",
         link: "Voir les sites web",
         slug: "high-converting-websites",
       },
       {
         index: "02 / Assistants",
-        title: "Des assistants qui répondent.",
+        title: "Des assistants qui répondent",
         lede: "Un chatbot qui connaît votre activité, répond sur votre site et sur WhatsApp, et vous passe la main quand une personne est nécessaire.",
         link: "Voir les assistants",
         slug: "custom-intelligent-chatbots",
@@ -59,13 +59,13 @@ export const FR: LocaleContent = {
     },
     services: {
       eyebrow: "Ce que nous créons",
-      title: "Un studio. Six façons de grandir.",
+      title: "Un studio, six façons de grandir",
       lede: "Commencez par un site et un assistant, ou choisissez exactement ce dont vous avez besoin. Tout est conçu pour fonctionner ensemble.",
       learnMore: "En savoir plus",
     },
     work: {
       eyebrow: "Réalisations",
-      title: "Ce que nous avons livré.",
+      title: "Ce que nous avons livré",
       lede: "Des sites et des applications en service chez des entreprises au Liban et dans la région.",
       visit: "Voir le site",
     },
@@ -82,25 +82,25 @@ export const FR: LocaleContent = {
       stages: [
         {
           n: "01",
-          code: "PLAN",
+          code: "Plan",
           title: "Valider le plan",
           body: "Nous discutons de vos objectifs et repartons avec un plan écrit et clair.",
         },
         {
           n: "02",
-          code: "CRÉER",
+          code: "Créer",
           title: "Nous construisons",
           body: "Le travail avance par courtes étapes, et vous validez chacune d'elles.",
         },
         {
           n: "03",
-          code: "LANCER",
+          code: "Lancer",
           title: "Tester et lancer",
           body: "Nous vérifions tout sur de vrais appareils, puis nous mettons en ligne ensemble.",
         },
         {
           n: "04",
-          code: "SUIVI",
+          code: "Suivi",
           title: "Assurer la suite",
           body: "Restez sur un forfait d'entretien si vous le souhaitez. Sinon, tout vous appartient.",
         },
@@ -180,7 +180,7 @@ export const FR: LocaleContent = {
           body: "Vous parlez à la personne qui construit votre projet, sur WhatsApp ou par e-mail.",
         },
       ],
-      title: "Dites-nous ce dont vous avez besoin.",
+      title: "Dites-nous ce dont vous avez besoin",
       primary: "Lancer un projet",
       whatsapp: "Écrivez-nous sur WhatsApp",
     },
@@ -476,7 +476,7 @@ export const FR: LocaleContent = {
     back: "Accueil",
     hero: {
       eyebrow: "À propos de Quantex",
-      title: "Un studio de Beyrouth qui tient ses promesses.",
+      title: "Un studio de Beyrouth qui tient ses promesses",
       lead: "Quantex est un studio basé à Beyrouth. Nous créons des sites web qui attirent des clients, des assistants IA qui leur répondent, ainsi que les logiciels et l'automatisation qui soutiennent votre activité, et nous expliquons tout en langage simple, dès le premier appel.",
     },
     story: {
@@ -541,7 +541,7 @@ export const FR: LocaleContent = {
       "Écrivez à Quantex pour un site web, un assistant IA, un logiciel sur mesure ou de l'automatisation. Une vraie personne vous répond sous 24 heures.",
     back: "Accueil",
     eyebrow: "Contact",
-    title: "Dites-nous ce dont vous avez besoin.",
+    title: "Dites-nous ce dont vous avez besoin",
     lead: "Nous répondons sous 24 heures.",
     intro:
       "Un site web, un assistant IA, un logiciel sur mesure ou de l'automatisation : envoyez un bref message et nous vous indiquerons la prochaine étape.",

@@ -34,7 +34,7 @@ export function PricingPlans({
     <section aria-labelledby={`price-${group.id}`}>
       <Heading
         id={`price-${group.id}`}
-        className="alu-display text-[1.9rem] sm:text-[2.4rem]"
+        className="alu-display page-h2"
       >
         {group.title}
       </Heading>
@@ -55,7 +55,7 @@ export function PricingPlans({
               {plan.name}
               {plan.featured ? (ar ? " · الأكثر اختياراً" : lang === "fr" ? " · Le plus choisi" : " · Most chosen") : ""}
             </p>
-            <p className="alu-display mt-3 text-[2.6rem] leading-none">
+            <p className="alu-display mt-3 text-figure leading-none">
               <Money text={plan.price} />
               {plan.period ? (
                 <span className="ml-1 text-base normal-case text-foreground/70">
@@ -67,7 +67,7 @@ export function PricingPlans({
               <p className="mt-1 text-sm text-foreground/70"><Money text={plan.setup} /></p>
             ) : null}
             <p className="mt-4 text-sm text-foreground/85">{plan.blurb}</p>
-            <ul className="mt-4 space-y-2 text-[0.92rem] leading-relaxed text-foreground/88">
+            <ul className="mt-4 space-y-2 text-body-sm leading-relaxed text-foreground/88">
               {plan.features.map((f) => (
                 <li key={f} className="flex gap-2.5">
                   <span aria-hidden className="mt-2 h-1.5 w-1.5 shrink-0 bg-signal" />

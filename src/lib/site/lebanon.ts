@@ -39,7 +39,7 @@ export const LEBANON_EN: LebanonContent = {
   ],
   schemaName: "AI solutions in Lebanon",
   eyebrow: "AI solutions in Lebanon",
-  title: "AI solutions in Lebanon, built by a Beirut studio.",
+  title: "AI solutions in Lebanon, built by a Beirut studio",
   lead: "Quantex builds AI assistants, automation and custom software for businesses across Lebanon: from Beirut and Tripoli to Jounieh, Sidon and Zahle. Everything works in Arabic, French and English, on WhatsApp and your website, and is trained on your own information.",
   answer: {
     question: "Who builds AI solutions in Lebanon?",
@@ -61,7 +61,7 @@ export const LEBANON_EN: LebanonContent = {
   },
   cities: {
     eyebrow: "Across Lebanon",
-    title: "AI solutions for businesses in every region of Lebanon.",
+    title: "AI solutions for businesses in every region of Lebanon",
     body: "Quantex is based in Beirut and delivers its work remotely, so distance is never a barrier. We work with businesses in:",
     list: ["Beirut", "Tripoli", "Jounieh", "Sidon", "Zahle", "Tyre", "Byblos (Jbeil)", "Batroun", "Aley", "Baalbek"],
     note: "Not in the list? We work with businesses in every part of Lebanon and in the Gulf, Europe and beyond.",
@@ -133,7 +133,7 @@ export const LEBANON_AR: LebanonContent = {
   ],
   schemaName: "حلول الذكاء الاصطناعي في لبنان",
   eyebrow: "حلول الذكاء الاصطناعي في لبنان",
-  title: "حلول الذكاء الاصطناعي في لبنان، من استوديو في بيروت.",
+  title: "حلول الذكاء الاصطناعي في لبنان، من استوديو في بيروت",
   lead: "تبني كوانتكس مساعدين أذكياء وأتمتة وبرمجيات مخصصة للشركات في أنحاء لبنان: من بيروت وطرابلس إلى جونية وصيدا وزحلة. كل شيء يعمل بالعربية والفرنسية والإنكليزية، على واتساب وموقعك، ومدرَّب على معلوماتك الخاصة.",
   answer: {
     question: "من يبني حلول الذكاء الاصطناعي في لبنان؟",
@@ -155,7 +155,7 @@ export const LEBANON_AR: LebanonContent = {
   },
   cities: {
     eyebrow: "في أنحاء لبنان",
-    title: "حلول ذكاء اصطناعي للشركات في كل مناطق لبنان.",
+    title: "حلول ذكاء اصطناعي للشركات في كل مناطق لبنان",
     body: "مقر كوانتكس في بيروت، ونسلّم عملنا عن بُعد، فالمسافة ليست عائقاً. نعمل مع شركات في:",
     list: ["بيروت", "طرابلس", "جونية", "صيدا", "زحلة", "صور", "جبيل", "البترون", "عاليه", "بعلبك"],
     note: "مدينتك ليست في القائمة؟ نعمل مع شركات في كل أنحاء لبنان وفي الخليج وأوروبا وغيرها.",

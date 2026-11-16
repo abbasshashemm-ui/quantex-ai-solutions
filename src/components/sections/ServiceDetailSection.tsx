@@ -145,14 +145,14 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
 
         <div className="service-page__panels mt-12 grid gap-10 lg:mt-14 lg:grid-cols-2 lg:gap-12">
           <section className="service-page__panel rule-item">
-            <h2 className="alu-display text-[1.9rem] sm:text-[2.4rem]">
+            <h2 className="alu-display page-h2">
               What you get
             </h2>
             <ul className="mt-6 space-y-3.5">
               {detail.deliverables.map((item) => (
                 <li
                   key={item}
-                  className="flex gap-3 text-[0.95rem] leading-relaxed text-foreground/88"
+                  className="flex gap-3 text-body-sm leading-relaxed text-foreground/88"
                 >
                   <CheckIcon />
                   <span>{item}</span>
@@ -162,7 +162,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
           </section>
 
           <section className="service-page__panel rule-item">
-            <h2 className="alu-display text-[1.9rem] sm:text-[2.4rem]">
+            <h2 className="alu-display page-h2">
               How it works
             </h2>
             <ol className="service-page__timeline mt-6 space-y-0">
@@ -172,7 +172,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
                   className="service-page__timeline-item relative flex gap-4 pb-6 last:pb-0"
                 >
                   <div className="flex flex-col items-center">
-                    <span className="page-icon h-9 w-9 rounded-full text-[0.7rem] font-semibold tabular-nums">
+                    <span className="page-icon h-9 w-9 rounded-full text-xs font-semibold tabular-nums">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     {i < detail.processSteps.length - 1 ? (
@@ -183,7 +183,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
                     <p className="text-sm font-semibold text-foreground">
                       {step.label}
                     </p>
-                    <p className="mt-1 text-[0.95rem] leading-relaxed text-foreground/80">
+                    <p className="mt-1 text-body-sm leading-relaxed text-foreground/80">
                       {step.detail}
                     </p>
                   </div>
@@ -197,7 +197,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
 
         {workIds ? (
           <section className="mt-14 sm:mt-20" aria-labelledby="service-work">
-            <h2 id="service-work" className="alu-display text-[1.9rem] sm:text-[2.4rem]">
+            <h2 id="service-work" className="alu-display page-h2">
               Recent work
             </h2>
             <ProjectGallery only={workIds} />
@@ -218,7 +218,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
         {customScope ? (
           <section className="service-page__panel alu-glass page-panel mt-14 sm:mt-20 sm:p-8">
             <p className="page-label">Pricing</p>
-            <h2 className="alu-display mt-3 text-[1.9rem] sm:text-[2.4rem]">
+            <h2 className="alu-display mt-3 page-h2">
               Scoped per project
             </h2>
             <p className="mt-3 max-w-2xl text-base text-foreground/85">

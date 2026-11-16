@@ -4,7 +4,7 @@ export const AI_SOLUTIONS_PATH = "/ai-solutions";
 
 export const AI_SOLUTIONS_HERO = {
   eyebrow: "AI solutions in Lebanon and worldwide",
-  title: "AI solutions that make your business faster, sharper and easier to run.",
+  title: "AI solutions that make your business faster, sharper and easier to run",
   lead: "Quantex is a Beirut studio that builds AI systems for real businesses: assistants that answer customers on your website and WhatsApp, automation that removes repetitive work, and custom AI software built around how you operate. We serve companies across Lebanon and around the world.",
 } as const;
 
@@ -74,7 +74,7 @@ export const AI_BENEFITS = [
 
 export const AI_LEBANON = {
   eyebrow: "Why Lebanon",
-  title: "AI for Lebanese businesses, built by a Beirut team.",
+  title: "AI for Lebanese businesses, built by a Beirut team",
   lead: "Businesses here operate under conditions that generic overseas tools were not designed for. We build with those conditions in mind.",
   points: [
     {
@@ -98,7 +98,7 @@ export const AI_LEBANON = {
 
 export const AI_WORLDWIDE = {
   eyebrow: "Worldwide",
-  title: "Working with businesses across the Middle East and beyond.",
+  title: "Working with businesses across the Middle East and beyond",
   body: "Everything we build is delivered remotely, so distance is not a barrier. We work with companies in the Gulf, Europe, North America and anywhere else that needs a reliable AI partner, with the same direct contact and the same ownership terms for every client.",
 } as const;
 

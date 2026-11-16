@@ -49,7 +49,7 @@ export function AboutPageContent() {
           >
             {ABOUT_STORY.title}
           </h2>
-          <div className="mt-6 max-w-3xl space-y-4 text-base leading-relaxed text-foreground/85 sm:text-[1.0625rem] sm:leading-[1.75]">
+          <div className="mt-6 max-w-3xl space-y-4 text-base leading-relaxed text-foreground/85 sm:text-lead sm:leading-[1.75]">
             {ABOUT_STORY.paragraphs.map((paragraph, index) => (
               <p key={index}>
                 {typeof paragraph === "string" ? (
@@ -111,10 +111,10 @@ export function AboutPageContent() {
                 className="about-page__value rule-item pb-2"
               >
                 <span className="page-label">{item.index}</span>
-                <h3 className="alu-display mt-3 text-[2rem] sm:text-[2.4rem]">
+                <h3 className="alu-display mt-3 page-h2">
                   {item.title}
                 </h3>
-                <p className="mt-3 text-[0.95rem] leading-relaxed text-foreground/80">
+                <p className="mt-3 text-body-sm leading-relaxed text-foreground/80">
                   {item.body}
                 </p>
               </li>

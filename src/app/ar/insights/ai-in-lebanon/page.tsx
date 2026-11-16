@@ -39,7 +39,7 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 const BODY =
-  "text-base leading-relaxed text-foreground/85 sm:text-[1.0625rem] sm:leading-[1.9]";
+  "text-base leading-relaxed text-foreground/85 sm:text-lead sm:leading-[1.9]";
 
 export default function AiInLebanonArticleAr() {
   const figure = getArticleFigure("ar", "ai-in-lebanon");
@@ -152,7 +152,7 @@ export default function AiInLebanonArticleAr() {
                       <h3 className="text-lg font-semibold text-foreground">
                         {item.title}
                       </h3>
-                      <p className="mt-2 text-[0.95rem] leading-[1.9] text-foreground/80">
+                      <p className="mt-2 text-body-sm leading-[1.9] text-foreground/80">
                         {item.body}
                       </p>
                     </li>

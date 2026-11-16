@@ -38,7 +38,7 @@ export function WorkSection() {
         <div data-reveal>
           <PageEyebrow>Selected work</PageEyebrow>
           <h2 id="work-heading" className="alu-display alu-section__title">
-            Work we have shipped.
+            Work we have shipped
           </h2>
           <p className="alu-lede max-w-2xl">
             Websites and apps running today for businesses in Lebanon and the

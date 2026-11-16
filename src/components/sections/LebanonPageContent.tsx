@@ -6,7 +6,7 @@ import { CONTACT } from "@/lib/site/contact";
 import { LEBANON_PATH, getLebanonContent } from "@/lib/site/lebanon";
 
 const BODY =
-  "text-base leading-relaxed text-foreground/85 sm:text-[1.0625rem] sm:leading-[1.8]";
+  "text-base leading-relaxed text-foreground/85 sm:text-lead sm:leading-[1.8]";
 const LINK =
   "inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4";
 
@@ -77,7 +77,7 @@ export function LebanonPageContent({ lang }: { lang: Lang }) {
             {c.services.items.map((item) => (
               <li key={item.title} className="rule-item pb-2">
                 <h3 className="text-lg font-semibold text-foreground">{item.title}</h3>
-                <p className="mt-3 text-[0.95rem] leading-relaxed text-foreground/80">{item.body}</p>
+                <p className="mt-3 text-body-sm leading-relaxed text-foreground/80">{item.body}</p>
                 <Link href={item.href} data-interactive className={`mt-4 ${LINK}`}>
                   {c.services.more}
                   <span className="sr-only">: {item.title}</span>
@@ -112,7 +112,7 @@ export function LebanonPageContent({ lang }: { lang: Lang }) {
             {c.fit.items.map((item) => (
               <li key={item.title} className="rule-item pb-2">
                 <h3 className="text-lg font-semibold text-foreground">{item.title}</h3>
-                <p className="mt-3 text-[0.95rem] leading-relaxed text-foreground/80">{item.body}</p>
+                <p className="mt-3 text-body-sm leading-relaxed text-foreground/80">{item.body}</p>
               </li>
             ))}
           </ul>
@@ -144,7 +144,7 @@ export function LebanonPageContent({ lang }: { lang: Lang }) {
               <li key={step.label} className="rule-item pb-2">
                 <span className="page-label">{String(index + 1).padStart(2, "0")}</span>
                 <h3 className="mt-3 text-lg font-semibold text-foreground">{step.label}</h3>
-                <p className="mt-2 text-[0.95rem] leading-relaxed text-foreground/80">{step.detail}</p>
+                <p className="mt-2 text-body-sm leading-relaxed text-foreground/80">{step.detail}</p>
               </li>
             ))}
           </ol>
@@ -173,7 +173,7 @@ export function LebanonPageContent({ lang }: { lang: Lang }) {
               <li key={item.question}>
                 <details className="faq-item faq-card faq-card--plain group">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 marker:content-none [&::-webkit-details-marker]:hidden">
-                    <h3 className="text-base font-semibold sm:text-[1.0625rem]">{item.question}</h3>
+                    <h3 className="text-base font-semibold sm:text-lead">{item.question}</h3>
                     <span className="text-xl leading-none transition-transform group-open:rotate-45" aria-hidden>
                       +
                     </span>

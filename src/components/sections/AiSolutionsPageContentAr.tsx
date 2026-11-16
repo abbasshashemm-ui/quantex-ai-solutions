@@ -15,7 +15,7 @@ import { AI_ARTICLE_AR_PATH } from "@/lib/site/ai-in-lebanon-ar";
 import { CONTACT } from "@/lib/site/contact";
 
 const BODY =
-  "text-base leading-relaxed text-foreground/85 sm:text-[1.0625rem] sm:leading-[1.9]";
+  "text-base leading-relaxed text-foreground/85 sm:text-lead sm:leading-[1.9]";
 
 export function AiSolutionsPageContentAr() {
   return (
@@ -94,7 +94,7 @@ export function AiSolutionsPageContentAr() {
                 <h3 className="text-lg font-semibold text-foreground">
                   {item.title}
                 </h3>
-                <p className="mt-3 text-[0.95rem] leading-[1.9] text-foreground/80">
+                <p className="mt-3 text-body-sm leading-[1.9] text-foreground/80">
                   {item.body}
                 </p>
                 <Link
@@ -121,10 +121,10 @@ export function AiSolutionsPageContentAr() {
                 <span className="page-label">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <h3 className="alu-display mt-3 text-[1.5rem] sm:text-[1.8rem]">
+                <h3 className="alu-display mt-3 text-heading">
                   {item.title}
                 </h3>
-                <p className="mt-3 text-[0.95rem] leading-[1.9] text-foreground/80">
+                <p className="mt-3 text-body-sm leading-[1.9] text-foreground/80">
                   {item.body}
                 </p>
               </li>
@@ -144,7 +144,7 @@ export function AiSolutionsPageContentAr() {
                 <h3 className="text-lg font-semibold text-foreground">
                   {item.title}
                 </h3>
-                <p className="mt-3 text-[0.95rem] leading-[1.9] text-foreground/80">
+                <p className="mt-3 text-body-sm leading-[1.9] text-foreground/80">
                   {item.body}
                 </p>
               </li>
@@ -199,7 +199,7 @@ export function AiSolutionsPageContentAr() {
                 <h3 className="mt-3 text-lg font-semibold text-foreground">
                   {step.label}
                 </h3>
-                <p className="mt-2 text-[0.95rem] leading-[1.9] text-foreground/80">
+                <p className="mt-2 text-body-sm leading-[1.9] text-foreground/80">
                   {step.detail}
                 </p>
               </li>
@@ -220,7 +220,7 @@ export function AiSolutionsPageContentAr() {
               <li key={item.question}>
                 <details className="faq-item faq-card faq-card--plain group">
                   <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 marker:content-none [&::-webkit-details-marker]:hidden">
-                    <h3 className="text-base font-semibold sm:text-[1.0625rem]">
+                    <h3 className="text-base font-semibold sm:text-lead">
                       {item.question}
                     </h3>
                     <span

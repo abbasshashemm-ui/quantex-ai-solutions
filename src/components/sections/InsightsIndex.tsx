@@ -108,7 +108,7 @@ export function InsightsIndex({ lang }: { lang: Lang }) {
                     <h3 className="mt-3 text-lg font-semibold leading-snug text-foreground">
                       {item.title}
                     </h3>
-                    <p className="mt-2 flex-1 text-[0.9rem] leading-relaxed text-foreground/75">
+                    <p className="mt-2 flex-1 text-body-sm leading-relaxed text-foreground/75">
                       {item.description}
                     </p>
                     <span

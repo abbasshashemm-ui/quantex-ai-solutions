@@ -36,11 +36,11 @@ export function Footer() {
       <div className="mx-auto max-w-7xl py-8 pb-[calc(2rem+env(safe-area-inset-bottom))] sm:py-10">
         <div className="grid grid-cols-2 gap-4 sm:gap-5 md:gap-6 lg:grid-cols-3 lg:gap-8">
           <div className="col-span-2 lg:col-span-1">
-            <BrandLogo className="text-[1.5rem] sm:text-[1.75rem]" />
+            <BrandLogo className="text-heading" />
             <p className="mt-3 max-w-sm text-xs leading-relaxed text-foreground/75 sm:text-sm">
               {t.footer.tagline}
             </p>
-            <p className="mt-2 text-[0.7rem] font-semibold tracking-[0.16em] text-foreground/60 uppercase">
+            <p className="mt-2 text-xs font-semibold text-foreground/60">
               {t.footer.place} · <bdi dir="ltr">33.89° N 35.50° E</bdi>
             </p>
             <ul className="mt-4 flex flex-wrap items-center gap-2">
@@ -134,7 +134,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h2 className="text-[0.7rem] font-semibold tracking-[0.18em] text-metallic uppercase sm:text-xs">
+            <h2 className="text-xs font-semibold text-metallic">
               {t.footer.contact}
             </h2>
             <ul className="mt-2 space-y-0.5 text-xs sm:text-sm">
@@ -155,7 +155,7 @@ export function Footer() {
           </div>
 
           <div>
-            <h2 className="text-[0.7rem] font-semibold tracking-[0.18em] text-metallic uppercase sm:text-xs">
+            <h2 className="text-xs font-semibold text-metallic">
               {t.footer.navigate}
             </h2>
             <ul className="mt-2 space-y-0.5 text-xs sm:text-sm">
@@ -173,7 +173,7 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-6 flex flex-col gap-3 border-t border-line pt-4 text-[0.7rem] text-foreground/70 sm:mt-8 sm:flex-row sm:items-center sm:justify-between sm:pt-5 sm:text-xs">
+        <div className="mt-6 flex flex-col gap-3 border-t border-line pt-4 text-xs text-foreground/70 sm:mt-8 sm:flex-row sm:items-center sm:justify-between sm:pt-5 sm:text-xs">
           <p>
             <bdi dir="ltr">
               &copy; {year} {COMPANY.name}

@@ -205,7 +205,7 @@ export function ServiceMock({ kind, locale = "en" }: ServiceMockProps) {
 
   return (
     <section className="mt-14 sm:mt-20" aria-labelledby="service-mock">
-      <h2 id="service-mock" className="alu-display text-[1.9rem] sm:text-[2.4rem]">
+      <h2 id="service-mock" className="alu-display page-h2">
         {copy.heading}
       </h2>
       <p className="page-label mt-3">{copy.label}</p>

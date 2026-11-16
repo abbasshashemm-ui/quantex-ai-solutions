@@ -44,7 +44,7 @@ export const PROJECTS: Project[] = [
     description:
       "An on-premises AI platform that checks concept drawing packages against planning and building regulations, and helps case officers review the results.",
     url: "On-premises · in development",
-    tags: ["AI PLATFORM", "REGULATION", "ON-PREMISES"],
+    tags: ["AI platform", "Regulation", "On-premises"],
     status: "in-progress",
     highlights: [
       "Reads drawing packages of 30 to 50 sheets (PDF, DXF and DWG) and measures the geometry.",
@@ -61,7 +61,7 @@ export const PROJECTS: Project[] = [
       "An interactive 3D trip site for a Beirut expedition company. Visitors travel the route from Kathmandu to Annapurna Base Camp as they scroll, with the altitude tracked live, then reserve a seat.",
     url: "bahiralb.com",
     href: "https://www.bahiralb.com/",
-    tags: ["WEBSITE", "INTERACTIVE 3D"],
+    tags: ["Website", "Interactive 3D"],
     imageSrc: "/projects/bahira.webp",
     imageAlt: "Bahira Expeditions website: a 3D mountain landscape with the trip summary and an altitude gauge",
     imageWidth: 1902,
@@ -75,7 +75,7 @@ export const PROJECTS: Project[] = [
       "Luxury lighting atelier site for a Lebanon-based brand—curated chandeliers, pendants, and sculptural lighting.",
     // No public address is shown or linked for this project.
     url: "Luxury lighting · Lebanon",
-    tags: ["WEBSITE", "LUXURY"],
+    tags: ["Website", "Luxury"],
     imageSrc: "/projects/chandelier-solderie.png",
     imageAlt: "Chandelier Solderie luxury lighting website preview",
     imageWidth: 1024,
@@ -89,7 +89,7 @@ export const PROJECTS: Project[] = [
       "Portfolio for a content creator—cinema, restaurant work, and brand presence in one immersive site.",
     url: "hmayed.online",
     href: "https://hmayed.online",
-    tags: ["PORTFOLIO", "WEB"],
+    tags: ["Portfolio", "Web"],
     imageSrc: "/projects/hmayed.png",
     imageAlt: "Hmayed portfolio website preview",
     imageWidth: 1024,
@@ -102,7 +102,7 @@ export const PROJECTS: Project[] = [
     description:
       "Custom sales and stock app built for Hachem Services—orders, inventory, dashboards, and day-to-day operations.",
     url: "Hachem Services · internal",
-    tags: ["CUSTOM APP", "SALES & STOCK"],
+    tags: ["Custom app", "Sales and stock"],
     sampleData: true,
     imageSrc: "/projects/shop-pro.webp",
     imageAlt: "Shop Pro dashboard with sales totals, a revenue chart, sales by category and recent orders",
@@ -117,7 +117,7 @@ export const PROJECTS: Project[] = [
       "Website for an industrial lubricants manufacturer in Egypt—product line, certificates, and quote requests.",
     url: "almanya-luboil.com",
     href: "https://almanya-luboil.com",
-    tags: ["WEBSITE", "INDUSTRIAL"],
+    tags: ["Website", "Industrial"],
     imageSrc: "/projects/almanya.png",
     imageAlt: "Almanya Lubricants Factory website preview",
     imageWidth: 1024,
@@ -130,7 +130,7 @@ export const PROJECTS: Project[] = [
     description:
       "Digital-to-physical fabrication site for DTF and plexiglass—upload a canvas and craft tangible pieces.",
     url: "TRAGO house",
-    tags: ["WEBSITE", "FABRICATION"],
+    tags: ["Website", "Fabrication"],
     imageSrc: "/projects/trago.png",
     imageAlt: "TRAGO house website preview",
     imageWidth: 1024,

@@ -16,7 +16,7 @@ export function PageEyebrow({
   return (
     <p
       {...props}
-      className={`page-eyebrow text-[0.7rem] font-medium tracking-[0.22em] text-metallic uppercase sm:text-xs sm:tracking-[0.28em] ${alignClass} ${className}`.trim()}
+      className={`page-eyebrow text-xs font-medium text-metallic ${alignClass} ${className}`.trim()}
     >
       {children}
     </p>

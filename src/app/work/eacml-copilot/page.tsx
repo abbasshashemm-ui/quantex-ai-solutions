@@ -30,7 +30,7 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 const BODY =
-  "text-base leading-relaxed text-foreground/85 sm:text-[1.0625rem] sm:leading-[1.75]";
+  "text-base leading-relaxed text-foreground/85 sm:text-lead sm:leading-[1.75]";
 
 export default function EacmlCopilotPage() {
   return (
@@ -105,7 +105,7 @@ export default function EacmlCopilotPage() {
           <section className="mt-20 sm:mt-28" aria-labelledby="eacml-how">
             <PageEyebrow>How it works</PageEyebrow>
             <h2 id="eacml-how" className="alu-display page-h2 mt-3 max-w-3xl">
-              From upload to a reviewed result.
+              From upload to a reviewed result
             </h2>
             <div className="mt-8">
               <ArticleFigure lang="en" data={EACML_FIGURE} />
@@ -114,8 +114,8 @@ export default function EacmlCopilotPage() {
               {EACML.steps.map((step, index) => (
                 <li key={step.label} className="rule-item pb-2">
                   <span className="page-label">{String(index + 1).padStart(2, "0")}</span>
-                  <h3 className="alu-display mt-3 text-[1.9rem]">{step.label}</h3>
-                  <p className="mt-3 text-[0.9rem] leading-relaxed text-foreground/80">{step.detail}</p>
+                  <h3 className="alu-display mt-3 text-heading">{step.label}</h3>
+                  <p className="mt-3 text-body-sm leading-relaxed text-foreground/80">{step.detail}</p>
                 </li>
               ))}
             </ol>
@@ -130,7 +130,7 @@ export default function EacmlCopilotPage() {
             <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {EACML.principle.states.map((state) => (
                 <li key={state.name} className="border border-line-strong p-4">
-                  <p className="alu-display text-[1.5rem]">{state.name}</p>
+                  <p className="alu-display text-heading">{state.name}</p>
                   <p className="mt-2 text-sm leading-relaxed text-foreground/80">{state.detail}</p>
                 </li>
               ))}
@@ -139,22 +139,22 @@ export default function EacmlCopilotPage() {
 
           <section className="mt-20 grid gap-5 sm:mt-28 lg:grid-cols-2" aria-label="What it does and does not do">
             <div className="rule-item pb-2">
-              <h2 className="alu-display text-[2.2rem]">What it does</h2>
+              <h2 className="alu-display page-h2">What it does</h2>
               <ul className="mt-5 space-y-3">
                 {EACML.does.map((item) => (
-                  <li key={item} className="flex gap-3 text-[0.95rem] leading-relaxed text-foreground/85">
-                    <span className="mt-[0.6rem] h-1.5 w-1.5 shrink-0 bg-foreground" aria-hidden />
+                  <li key={item} className="flex gap-3 text-body-sm leading-relaxed text-foreground/85">
+                    <span className="mt-2.5 h-1.5 w-1.5 shrink-0 bg-foreground" aria-hidden />
                     {item}
                   </li>
                 ))}
               </ul>
             </div>
             <div className="rule-item pb-2">
-              <h2 className="alu-display text-[2.2rem]">What it does not do</h2>
+              <h2 className="alu-display page-h2">What it does not do</h2>
               <ul className="mt-5 space-y-3">
                 {EACML.doesNot.map((item) => (
-                  <li key={item} className="flex gap-3 text-[0.95rem] leading-relaxed text-foreground/85">
-                    <span className="mt-[0.6rem] h-1.5 w-1.5 shrink-0 border border-foreground" aria-hidden />
+                  <li key={item} className="flex gap-3 text-body-sm leading-relaxed text-foreground/85">
+                    <span className="mt-2.5 h-1.5 w-1.5 shrink-0 border border-foreground" aria-hidden />
                     {item}
                   </li>
                 ))}
@@ -171,7 +171,7 @@ export default function EacmlCopilotPage() {
               {EACML.secure.items.map((item) => (
                 <li key={item.title} className="rule-item pb-2">
                   <h3 className="text-lg font-semibold text-foreground">{item.title}</h3>
-                  <p className="mt-3 text-[0.95rem] leading-relaxed text-foreground/80">{item.body}</p>
+                  <p className="mt-3 text-body-sm leading-relaxed text-foreground/80">{item.body}</p>
                 </li>
               ))}
             </ul>
@@ -185,7 +185,7 @@ export default function EacmlCopilotPage() {
             <ul className="mt-6 max-w-3xl space-y-3">
               {EACML.build.items.map((item) => (
                 <li key={item} className={`flex gap-3 ${BODY}`}>
-                  <span className="mt-[0.7rem] h-1.5 w-1.5 shrink-0 bg-foreground" aria-hidden />
+                  <span className="mt-3 h-1.5 w-1.5 shrink-0 bg-foreground" aria-hidden />
                   {item}
                 </li>
               ))}

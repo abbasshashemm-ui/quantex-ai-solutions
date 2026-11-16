@@ -46,7 +46,7 @@ export function GuidesSection() {
                 <h3 className="rule-item__title">
                   {guide.title}
                 </h3>
-                <p className="mt-2 flex-1 text-[0.95rem] leading-relaxed text-foreground/80">
+                <p className="mt-2 flex-1 text-body-sm leading-relaxed text-foreground/80">
                   {guide.description}
                 </p>
                 <span className="mt-4 text-sm font-semibold text-foreground underline underline-offset-4">

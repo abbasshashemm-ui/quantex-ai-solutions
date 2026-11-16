@@ -121,7 +121,7 @@ export function PricingPageContent({ lang = "en" }: { lang?: "en" | "ar" | "fr" 
         <section className="mt-16 sm:mt-24" aria-labelledby="price-custom">
           <h2
             id="price-custom"
-            className="alu-display text-[1.9rem] sm:text-[2.4rem]"
+            className="alu-display page-h2"
           >
             {t.customTitle}
           </h2>
@@ -132,7 +132,7 @@ export function PricingPageContent({ lang = "en" }: { lang?: "en" | "ar" | "fr" 
             {scopes.map((item) => (
               <li key={item.slug} className="rule-item pb-2">
                 <p className="page-label">{t.scoped}</p>
-                <h3 className="alu-display mt-3 text-[1.9rem]">{item.title}</h3>
+                <h3 className="alu-display mt-3 text-heading">{item.title}</h3>
                 <p className="mt-3 text-sm text-foreground/85">{item.text}</p>
                 <Link
                   href={`/services/${item.slug}`}
@@ -147,7 +147,7 @@ export function PricingPageContent({ lang = "en" }: { lang?: "en" | "ar" | "fr" 
         </section>
 
         <section className="mt-16 sm:mt-24" aria-labelledby="price-faq">
-          <h2 id="price-faq" className="alu-display text-[1.9rem] sm:text-[2.4rem]">
+          <h2 id="price-faq" className="alu-display page-h2">
             {t.faq}
           </h2>
           <dl className="mt-6 grid gap-4 md:grid-cols-2">

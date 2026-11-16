@@ -33,7 +33,7 @@ export function FaqSection() {
             <li key={item.question}>
               <details className="faq-item faq-card faq-card--plain group">
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 marker:content-none [&::-webkit-details-marker]:hidden">
-                  <h3 className="text-base font-semibold sm:text-[1.0625rem]">
+                  <h3 className="text-base font-semibold sm:text-lead">
                     {item.question}
                   </h3>
                   <span

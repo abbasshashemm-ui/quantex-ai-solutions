@@ -128,10 +128,10 @@ export function LocalizedServiceDetail({
 
         <div className="mt-12 grid gap-10 lg:mt-14 lg:grid-cols-2 lg:gap-12">
           <section className="rule-item">
-            <h2 className="alu-display text-[1.9rem] sm:text-[2.4rem]">{ui.whatYouGet}</h2>
+            <h2 className="alu-display page-h2">{ui.whatYouGet}</h2>
             <ul className="mt-6 space-y-3.5">
               {t.deliverables.map((item) => (
-                <li key={item} className="flex gap-3 text-[0.95rem] leading-relaxed text-foreground/88">
+                <li key={item} className="flex gap-3 text-body-sm leading-relaxed text-foreground/88">
                   <CheckIcon />
                   <span>{item}</span>
                 </li>
@@ -140,12 +140,12 @@ export function LocalizedServiceDetail({
           </section>
 
           <section className="rule-item">
-            <h2 className="alu-display text-[1.9rem] sm:text-[2.4rem]">{ui.howItWorks}</h2>
+            <h2 className="alu-display page-h2">{ui.howItWorks}</h2>
             <ol className="mt-6 space-y-0">
               {t.steps.map((step, i) => (
                 <li key={step.label} className="relative flex gap-4 pb-6 last:pb-0">
                   <div className="flex flex-col items-center">
-                    <span className="page-icon h-9 w-9 rounded-full text-[0.7rem] font-semibold tabular-nums">
+                    <span className="page-icon h-9 w-9 rounded-full text-xs font-semibold tabular-nums">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     {i < t.steps.length - 1 ? (
@@ -154,7 +154,7 @@ export function LocalizedServiceDetail({
                   </div>
                   <div className="min-w-0 pt-1">
                     <p className="text-sm font-semibold text-foreground">{step.label}</p>
-                    <p className="mt-1 text-[0.95rem] leading-relaxed text-foreground/80">{step.detail}</p>
+                    <p className="mt-1 text-body-sm leading-relaxed text-foreground/80">{step.detail}</p>
                   </div>
                 </li>
               ))}
@@ -166,7 +166,7 @@ export function LocalizedServiceDetail({
 
         {workIds ? (
           <section className="mt-14 sm:mt-20" aria-labelledby="service-work">
-            <h2 id="service-work" className="alu-display text-[1.9rem] sm:text-[2.4rem]">
+            <h2 id="service-work" className="alu-display page-h2">
               {c.home.work.eyebrow}
             </h2>
             <ProjectGallery only={workIds} visitLabel={c.home.work.visit} showDescriptions={false} locale={locale} />
@@ -187,7 +187,7 @@ export function LocalizedServiceDetail({
         {unpriced ? (
           <section className="alu-glass page-panel mt-14 sm:mt-20 sm:p-8">
             <p className="page-label">{ui.pricingTitle}</p>
-            <h2 className="alu-display mt-3 text-[1.9rem] sm:text-[2.4rem]">{ui.scopedTitle}</h2>
+            <h2 className="alu-display mt-3 page-h2">{ui.scopedTitle}</h2>
             <Link href={localePath(locale, "/contact")} data-interactive className="btn-primary mt-6 inline-flex">
               {ui.getQuote}
             </Link>

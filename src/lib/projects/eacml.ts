@@ -36,7 +36,7 @@ export const EACML = {
     { value: "1 mm", label: "Measurement precision, no margin" },
   ],
   problem: {
-    title: "A review that starts with hours of measuring.",
+    title: "A review that starts with hours of measuring",
     body: [
       "Case officers receive concept packages of 30 to 50 drawings. Much of the first review is mechanical: setbacks, parking stall sizes, stair and corridor widths. It is careful, repetitive work, and it has to be done the same way every time.",
       "EACML Copilot does that part consistently and shows its working, so officers spend their time on judgement.",
@@ -51,7 +51,7 @@ export const EACML = {
   ],
   principle: {
     eyebrow: "The one rule",
-    title: "The AI never decides.",
+    title: "The AI never decides",
     body: "A deterministic rules engine produces every pass and fail. The AI explains, proposes and asks questions. And if the platform cannot measure something reliably, the answer is not a guess: it is CANNOT VERIFY, and a person decides.",
     states: [
       { name: "PASS", detail: "Measured from the drawing, within the limit." },
@@ -74,7 +74,7 @@ export const EACML = {
     "Replace the specialist technical reports, which stay with people.",
   ],
   secure: {
-    title: "Built for sensitive, regulated work.",
+    title: "Built for sensitive, regulated work",
     items: [
       { title: "On-premises", body: "It runs inside the organisation and talks only to a model on the same machine or a private address. Nothing leaves the building." },
       { title: "Fully auditable", body: "Every officer action is logged with a name and a reason, in a tamper-evident audit log." },
@@ -83,7 +83,7 @@ export const EACML = {
     ],
   },
   build: {
-    title: "A serious build.",
+    title: "A serious build",
     items: [
       "A rules engine with every rule written as data, so a change to a regulation is a reviewed change to a file.",
       "An interpretation layer that rebuilds what a drawing means, proves it where it can, and asks where it cannot.",
@@ -93,7 +93,7 @@ export const EACML = {
     ],
   },
   status: {
-    title: "Where it stands.",
+    title: "Where it stands",
     body: "The checking engine, the portal and the interpretation layer work today. EACML Copilot is in development, with the remaining work focused on the regulatory rulings and data it depends on and on going live.",
   },
   cta: {
