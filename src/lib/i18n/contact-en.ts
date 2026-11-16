@@ -5,7 +5,7 @@ export const CONTACT_EN: LocalizedContact = {
   metaDescription: "Start a project with Quantex.",
   back: "Home",
   eyebrow: "Contact",
-  title: "Tell us what you need.",
+  title: "Tell us what you need",
   lead: "We reply within 24 hours.",
   intro:
     "A website, an AI assistant, custom software or automation: send a short brief and we'll point you to the right next step.",

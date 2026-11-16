@@ -60,7 +60,7 @@ export function ArticleView({ lang, article }: Props) {
   const t = UI[lang];
   const rtl = lang === "ar";
   const other: Lang = rtl ? "en" : "ar";
-  const bodyClass = `text-base leading-relaxed text-foreground/85 sm:text-[1.0625rem] ${t.body}`;
+  const bodyClass = `text-base leading-relaxed text-foreground/85 sm:text-lead ${t.body}`;
   const figure = getArticleFigure(lang, article.slug);
   const related = getArticleListing(lang).filter(
     (item) => item.href !== articlePath(lang, article.slug),
@@ -155,11 +155,11 @@ export function ArticleView({ lang, article }: Props) {
             {section.list ? (
               <ul className="mt-6 space-y-4">
                 {section.list.map((item) => (
-                  <li key={item.title} className="alu-glass page-panel">
+                  <li key={item.title} className="rule-item pb-2">
                     <h3 className="text-lg font-semibold text-foreground">
                       {item.title}
                     </h3>
-                    <p className="mt-2 text-[0.95rem] leading-relaxed text-foreground/80">
+                    <p className="mt-2 text-body-sm leading-relaxed text-foreground/80">
                       {item.body}
                     </p>
                   </li>

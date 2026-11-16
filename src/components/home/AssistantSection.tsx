@@ -12,7 +12,7 @@ export function AssistantSection() {
         <div data-reveal>
           <PageEyebrow>Try it now</PageEyebrow>
           <h2 id="assistant-heading" className="alu-display alu-section__title">
-            Ask the studio anything.
+            Ask the studio anything
           </h2>
           <p className="alu-lede">
             This is the kind of assistant we build for clients. Ask it about

@@ -6,25 +6,25 @@ export const PROCESS = {
   stages: [
     {
       n: "01",
-      code: "PLAN",
+      code: "Plan",
       title: "Agree the plan",
       body: "We talk through your goals and leave with a clear, written plan.",
     },
     {
       n: "02",
-      code: "BUILD",
+      code: "Build",
       title: "We build it",
       body: "Work happens in short rounds, and you review each one.",
     },
     {
       n: "03",
-      code: "LAUNCH",
+      code: "Launch",
       title: "Test and launch",
       body: "We check everything on real devices, then go live together.",
     },
     {
       n: "04",
-      code: "SUPPORT",
+      code: "Support",
       title: "Keep it running",
       body: "Stay on a care plan if you want us. If not, everything is yours.",
     },

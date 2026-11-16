@@ -12,7 +12,7 @@ export function SiteCheckBand() {
             <p className="page-label">Free tool · 20 seconds</p>
             <h2
               id="site-check-band-heading"
-              className="alu-display mt-2 text-[1.9rem] sm:text-[2.4rem]"
+              className="alu-display mt-2 page-h2"
             >
               Can customers and AI find your website?
             </h2>

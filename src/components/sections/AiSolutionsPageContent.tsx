@@ -71,7 +71,7 @@ export function AiSolutionsPageContent() {
           >
             {AI_SOLUTIONS_ANSWER.question}
           </h2>
-          <p className="mt-3 max-w-3xl text-base leading-relaxed text-foreground/85 sm:text-[1.0625rem] sm:leading-[1.75]">
+          <p className="mt-3 max-w-3xl text-base leading-relaxed text-foreground/85 sm:text-lead sm:leading-[1.75]">
             {AI_SOLUTIONS_ANSWER.answer}
           </p>
         </section>
@@ -89,11 +89,11 @@ export function AiSolutionsPageContent() {
           </h2>
           <ul className="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3">
             {AI_USE_CASES.map((item) => (
-              <li key={item.title} className="alu-glass page-panel">
+              <li key={item.title} className="rule-item pb-2">
                 <h3 className="text-lg font-semibold text-foreground">
                   {item.title}
                 </h3>
-                <p className="mt-3 text-[0.95rem] leading-relaxed text-foreground/80">
+                <p className="mt-3 text-body-sm leading-relaxed text-foreground/80">
                   {item.body}
                 </p>
                 {item.href ? (
@@ -124,14 +124,14 @@ export function AiSolutionsPageContent() {
           </h2>
           <ol className="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5">
             {AI_BENEFITS.map((item, index) => (
-              <li key={item.title} className="alu-glass page-panel">
+              <li key={item.title} className="rule-item pb-2">
                 <span className="page-label">
                   {String(index + 1).padStart(2, "0")}
                 </span>
-                <h3 className="alu-display mt-3 text-[1.6rem] sm:text-[2rem]">
+                <h3 className="alu-display mt-3 text-heading">
                   {item.title}
                 </h3>
-                <p className="mt-3 text-[0.95rem] leading-relaxed text-foreground/80">
+                <p className="mt-3 text-body-sm leading-relaxed text-foreground/80">
                   {item.body}
                 </p>
               </li>
@@ -153,11 +153,11 @@ export function AiSolutionsPageContent() {
           <p className="alu-lede max-w-2xl">{AI_LEBANON.lead}</p>
           <ul className="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5">
             {AI_LEBANON.points.map((item) => (
-              <li key={item.title} className="alu-glass page-panel">
+              <li key={item.title} className="rule-item pb-2">
                 <h3 className="text-lg font-semibold text-foreground">
                   {item.title}
                 </h3>
-                <p className="mt-3 text-[0.95rem] leading-relaxed text-foreground/80">
+                <p className="mt-3 text-body-sm leading-relaxed text-foreground/80">
                   {item.body}
                 </p>
               </li>
@@ -176,7 +176,7 @@ export function AiSolutionsPageContent() {
           >
             {AI_WORLDWIDE.title}
           </h2>
-          <p className="mt-6 max-w-3xl text-base leading-relaxed text-foreground/85 sm:text-[1.0625rem] sm:leading-[1.75]">
+          <p className="mt-6 max-w-3xl text-base leading-relaxed text-foreground/85 sm:text-lead sm:leading-[1.75]">
             {AI_WORLDWIDE.body}
           </p>
           <p className="mt-6">
@@ -219,14 +219,14 @@ export function AiSolutionsPageContent() {
           </h2>
           <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
             {AI_STEPS.map((step, index) => (
-              <li key={step.label} className="alu-glass page-panel">
+              <li key={step.label} className="rule-item pb-2">
                 <span className="page-label">
                   {String(index + 1).padStart(2, "0")}
                 </span>
                 <h3 className="mt-3 text-lg font-semibold text-foreground">
                   {step.label}
                 </h3>
-                <p className="mt-2 text-[0.95rem] leading-relaxed text-foreground/80">
+                <p className="mt-2 text-body-sm leading-relaxed text-foreground/80">
                   {step.detail}
                 </p>
               </li>
@@ -245,12 +245,12 @@ export function AiSolutionsPageContent() {
           >
             AI solutions: common questions
           </h2>
-          <ul className="mt-8 max-w-3xl space-y-3">
+          <ul className="mt-8 max-w-3xl">
             {AI_SOLUTIONS_FAQ.map((item) => (
               <li key={item.question}>
-                <details className="faq-item faq-card alu-glass group">
-                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-4 marker:content-none sm:px-5 [&::-webkit-details-marker]:hidden">
-                    <h3 className="text-base font-semibold sm:text-[1.0625rem]">
+                <details className="faq-item faq-card faq-card--plain group">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 marker:content-none [&::-webkit-details-marker]:hidden">
+                    <h3 className="text-base font-semibold sm:text-lead">
                       {item.question}
                     </h3>
                     <span
@@ -260,7 +260,7 @@ export function AiSolutionsPageContent() {
                       +
                     </span>
                   </summary>
-                  <div className="faq-card__answer px-4 pb-4 pt-3 text-base leading-[1.7] sm:px-5 sm:pb-5">
+                  <div className="faq-card__answer pb-5 text-base leading-[1.7]">
                     {item.answer}
                   </div>
                 </details>
@@ -271,7 +271,7 @@ export function AiSolutionsPageContent() {
 
         <section className="about-page__cta alu-glass mt-20 px-5 py-12 text-center sm:mt-28 sm:px-10 sm:py-16">
           <p className="page-label">{AI_SOLUTIONS_CTA.eyebrow}</p>
-          <h2 className="alu-display mx-auto mt-3 max-w-3xl text-[clamp(2.4rem,6vw,4.5rem)]">
+          <h2 className="alu-display mx-auto mt-3 max-w-3xl text-[clamp(2.25rem,4.4vw,3.75rem)]">
             {AI_SOLUTIONS_CTA.title}
           </h2>
           <p className="mx-auto mt-4 max-w-lg text-base text-foreground/80">

@@ -13,7 +13,7 @@ export function ServicesSection() {
         <header data-reveal>
           <PageEyebrow>What we build</PageEyebrow>
           <h2 id="services-heading" className="alu-display alu-section__title">
-            One studio. Six ways to grow.
+            One studio, six ways to grow
           </h2>
           <p className="alu-lede">
             Start with a website and an assistant, or pick exactly what you

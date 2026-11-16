@@ -28,7 +28,7 @@ export const metadata: Metadata = createPageMetadata({
 });
 
 const BODY =
-  "text-base leading-relaxed text-foreground/85 sm:text-[1.0625rem] sm:leading-[1.75]";
+  "text-base leading-relaxed text-foreground/85 sm:text-lead sm:leading-[1.75]";
 
 export default function EacmlCopilotArPage() {
   return (
@@ -87,7 +87,7 @@ export default function EacmlCopilotArPage() {
 
           <dl className="mt-14 grid grid-cols-2 gap-3 sm:mt-20 sm:gap-5 lg:grid-cols-4" aria-label="المشروع في لمحة">
             {EACML.stats.map((stat) => (
-              <div key={stat.label} className="alu-stat alu-glass">
+              <div key={stat.label} className="alu-stat alu-stat--plain">
                 <dd className="alu-stat__value">{stat.value}</dd>
                 <dt className="alu-stat__label">{stat.label}</dt>
               </div>
@@ -116,10 +116,10 @@ export default function EacmlCopilotArPage() {
             </div>
             <ol className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
               {EACML.steps.map((step, index) => (
-                <li key={step.label} className="alu-glass page-panel">
+                <li key={step.label} className="rule-item pb-2">
                   <span className="page-label">{String(index + 1).padStart(2, "0")}</span>
-                  <h3 className="alu-display mt-3 text-[1.9rem]">{step.label}</h3>
-                  <p className="mt-3 text-[0.9rem] leading-relaxed text-foreground/80">{step.detail}</p>
+                  <h3 className="alu-display mt-3 text-heading">{step.label}</h3>
+                  <p className="mt-3 text-body-sm leading-relaxed text-foreground/80">{step.detail}</p>
                 </li>
               ))}
             </ol>
@@ -127,14 +127,14 @@ export default function EacmlCopilotArPage() {
 
           <section className="alu-glass page-panel mt-20 sm:mt-28" aria-labelledby="eacml-principle">
             <PageEyebrow>{EACML.principle.eyebrow}</PageEyebrow>
-            <h2 id="eacml-principle" className="alu-display mt-3 text-[clamp(3rem,9vw,6.5rem)]">
+            <h2 id="eacml-principle" className="alu-display mt-3 text-[clamp(2.25rem,4.4vw,3.75rem)]">
               {EACML.principle.title}
             </h2>
             <p className={`mt-6 max-w-3xl ${BODY}`}>{EACML.principle.body}</p>
             <ul className="mt-8 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {EACML.principle.states.map((state) => (
                 <li key={state.name} className="border border-line-strong p-4">
-                  <p className="alu-display text-[1.5rem]">{state.name}</p>
+                  <p className="alu-display text-heading">{state.name}</p>
                   <p className="mt-2 text-sm leading-relaxed text-foreground/80">{state.detail}</p>
                 </li>
               ))}
@@ -142,23 +142,23 @@ export default function EacmlCopilotArPage() {
           </section>
 
           <section className="mt-20 grid gap-5 sm:mt-28 lg:grid-cols-2" aria-label="ما يفعله وما لا يفعله">
-            <div className="alu-glass page-panel">
-              <h2 className="alu-display text-[2.2rem]">ما يفعله</h2>
+            <div className="rule-item pb-2">
+              <h2 className="alu-display page-h2">ما يفعله</h2>
               <ul className="mt-5 space-y-3">
                 {EACML.does.map((item) => (
-                  <li key={item} className="flex gap-3 text-[0.95rem] leading-relaxed text-foreground/85">
-                    <span className="mt-[0.6rem] h-1.5 w-1.5 shrink-0 bg-foreground" aria-hidden />
+                  <li key={item} className="flex gap-3 text-body-sm leading-relaxed text-foreground/85">
+                    <span className="mt-2.5 h-1.5 w-1.5 shrink-0 bg-foreground" aria-hidden />
                     {item}
                   </li>
                 ))}
               </ul>
             </div>
-            <div className="alu-glass page-panel">
-              <h2 className="alu-display text-[2.2rem]">ما لا يفعله</h2>
+            <div className="rule-item pb-2">
+              <h2 className="alu-display page-h2">ما لا يفعله</h2>
               <ul className="mt-5 space-y-3">
                 {EACML.doesNot.map((item) => (
-                  <li key={item} className="flex gap-3 text-[0.95rem] leading-relaxed text-foreground/85">
-                    <span className="mt-[0.6rem] h-1.5 w-1.5 shrink-0 border border-foreground" aria-hidden />
+                  <li key={item} className="flex gap-3 text-body-sm leading-relaxed text-foreground/85">
+                    <span className="mt-2.5 h-1.5 w-1.5 shrink-0 border border-foreground" aria-hidden />
                     {item}
                   </li>
                 ))}
@@ -173,9 +173,9 @@ export default function EacmlCopilotArPage() {
             </h2>
             <ul className="mt-8 grid gap-4 sm:grid-cols-2 sm:gap-5">
               {EACML.secure.items.map((item) => (
-                <li key={item.title} className="alu-glass page-panel">
+                <li key={item.title} className="rule-item pb-2">
                   <h3 className="text-lg font-semibold text-foreground">{item.title}</h3>
-                  <p className="mt-3 text-[0.95rem] leading-relaxed text-foreground/80">{item.body}</p>
+                  <p className="mt-3 text-body-sm leading-relaxed text-foreground/80">{item.body}</p>
                 </li>
               ))}
             </ul>
@@ -189,7 +189,7 @@ export default function EacmlCopilotArPage() {
             <ul className="mt-6 max-w-3xl space-y-3">
               {EACML.build.items.map((item) => (
                 <li key={item} className={`flex gap-3 ${BODY}`}>
-                  <span className="mt-[0.7rem] h-1.5 w-1.5 shrink-0 bg-foreground" aria-hidden />
+                  <span className="mt-3 h-1.5 w-1.5 shrink-0 bg-foreground" aria-hidden />
                   {item}
                 </li>
               ))}
@@ -205,7 +205,7 @@ export default function EacmlCopilotArPage() {
           </section>
 
           <section className="about-page__cta alu-glass mt-20 px-5 py-12 text-center sm:mt-28 sm:px-10 sm:py-16">
-            <h2 className="alu-display mx-auto max-w-3xl text-[clamp(2.4rem,6vw,4.5rem)]">
+            <h2 className="alu-display mx-auto max-w-3xl text-[clamp(2.25rem,4.4vw,3.75rem)]">
               {EACML.cta.title}
             </h2>
             <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-foreground/80">{EACML.cta.lead}</p>

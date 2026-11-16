@@ -49,7 +49,7 @@ export function AboutPageContent() {
           >
             {ABOUT_STORY.title}
           </h2>
-          <div className="mt-6 max-w-3xl space-y-4 text-base leading-relaxed text-foreground/85 sm:text-[1.0625rem] sm:leading-[1.75]">
+          <div className="mt-6 max-w-3xl space-y-4 text-base leading-relaxed text-foreground/85 sm:text-lead sm:leading-[1.75]">
             {ABOUT_STORY.paragraphs.map((paragraph, index) => (
               <p key={index}>
                 {typeof paragraph === "string" ? (
@@ -86,7 +86,7 @@ export function AboutPageContent() {
           aria-label="Company highlights"
         >
           {ABOUT_STATS.map((stat) => (
-            <div key={stat.label} className="alu-stat alu-glass">
+            <div key={stat.label} className="alu-stat alu-stat--plain">
               <dd className="alu-stat__value">{stat.value}</dd>
               <dt className="alu-stat__label">{stat.label}</dt>
             </div>
@@ -108,13 +108,13 @@ export function AboutPageContent() {
             {ABOUT_VALUES.map((item) => (
               <li
                 key={item.index}
-                className="about-page__value alu-glass page-panel"
+                className="about-page__value rule-item pb-2"
               >
                 <span className="page-label">{item.index}</span>
-                <h3 className="alu-display mt-3 text-[2rem] sm:text-[2.4rem]">
+                <h3 className="alu-display mt-3 page-h2">
                   {item.title}
                 </h3>
-                <p className="mt-3 text-[0.95rem] leading-relaxed text-foreground/80">
+                <p className="mt-3 text-body-sm leading-relaxed text-foreground/80">
                   {item.body}
                 </p>
               </li>
@@ -164,7 +164,7 @@ export function AboutPageContent() {
 
         <section className="about-page__cta alu-glass mt-20 px-5 py-12 text-center sm:mt-28 sm:px-10 sm:py-16">
           <p className="page-label">{ABOUT_CTA.eyebrow}</p>
-          <h2 className="alu-display mx-auto mt-3 max-w-3xl text-[clamp(3rem,7vw,5.5rem)]">
+          <h2 className="alu-display mx-auto mt-3 max-w-3xl text-[clamp(2.25rem,4.4vw,3.75rem)]">
             {ABOUT_CTA.title}
           </h2>
           <p className="mx-auto mt-4 max-w-lg text-base text-foreground/80">

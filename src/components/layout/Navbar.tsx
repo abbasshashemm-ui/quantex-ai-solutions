@@ -33,7 +33,7 @@ export function Navbar() {
           href="/"
           className="relative z-[41] inline-flex min-h-11 shrink-0 items-center sm:min-h-12"
         >
-          <BrandLogo className="text-[1.9rem] sm:text-[2.1rem] lg:text-[2.3rem]" />
+          <BrandLogo className="text-heading lg:text-[2.3rem]" />
         </Link>
 
         <ul className="hidden items-center gap-1 whitespace-nowrap lg:flex xl:gap-2">

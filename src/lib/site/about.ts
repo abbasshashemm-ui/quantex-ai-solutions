@@ -6,7 +6,7 @@ export const FOUNDER = {
 
 export const ABOUT_HERO = {
   eyebrow: "About Quantex",
-  title: "A Beirut studio that builds what it promises.",
+  title: "A Beirut studio that builds what it promises",
   lead: "Quantex is a Beirut studio. We build websites that win customers, AI assistants that answer them, and the software and automation behind your business—and we explain everything in plain language, from the first call.",
 } as const;
 
@@ -27,7 +27,7 @@ export const ABOUT_STORY = {
 
 export const ABOUT_STATS = [
   { value: "10+", label: "Paying clients" },
-  { value: "6", label: "Services" },
+  { value: "3", label: "Languages" },
   { value: "24h", label: "Reply time" },
 ] as const;
 

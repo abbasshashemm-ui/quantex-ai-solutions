@@ -4,7 +4,6 @@ import { ClosingCta } from "@/components/home/ClosingCta";
 import { GuidesSection } from "@/components/home/GuidesSection";
 import { WorkSection } from "@/components/home/WorkSection";
 import { SiteCheckBand } from "@/components/home/SiteCheckBand";
-import { Ticker } from "@/components/home/Ticker";
 import { HeroCopy } from "@/components/hero/HeroCopy";
 import { HeroStage } from "@/components/hero/HeroStage";
 import { FaqSection } from "@/components/sections/FaqSection";
@@ -18,15 +17,14 @@ export function HomePage() {
       <HeroStage>
         <HeroCopy />
       </HeroStage>
-      <Ticker />
-      <SiteCheckBand />
-      <AeoBlock />
-      <AssistantSection />
-      <ServicesSection />
-      <StatBand />
       <WorkSection />
+      <ServicesSection />
+      <AssistantSection />
+      <StatBand />
       <ProcessSection />
+      <SiteCheckBand />
       <GuidesSection />
+      <AeoBlock />
       <FaqSection />
       <ClosingCta />
     </>

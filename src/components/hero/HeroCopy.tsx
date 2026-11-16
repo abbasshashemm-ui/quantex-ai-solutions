@@ -2,14 +2,16 @@ import Link from "next/link";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
 
-const HEADLINE = ["Automate.", "Scale.", "Dominate."] as const;
+const HEADLINE = ["Websites.", "Assistants.", "Customers."] as const;
 
 /** Hero copy plus the two scroll beats that follow it. */
 export function HeroCopy() {
   return (
     <>
       <div className="alu-hero">
-        <PageEyebrow>Beirut · AI studio</PageEyebrow>
+        <PageEyebrow>
+          Beirut AI studio · 10+ paying clients · Replies within 24 hours
+        </PageEyebrow>
         <h1 className="alu-display alu-h1">
           {HEADLINE.map((line, index) => (
             <span
@@ -22,8 +24,7 @@ export function HeroCopy() {
           ))}
         </h1>
         <p className="alu-lede">
-          Websites that win customers and AI assistants that answer them. Built
-          by a Beirut studio you can message directly.
+          Built by a Beirut studio you can message directly
         </p>
         <div className="alu-ctas">
           <Link
@@ -39,13 +40,6 @@ export function HeroCopy() {
             See what we build
           </a>
         </div>
-        <ul className="alu-chips" aria-label="Studio facts">
-          <li className="alu-chip">
-            <span className="alu-chip__dot" aria-hidden />
-            10+ paying clients
-          </li>
-          <li className="alu-chip">Replies within 24 hours</li>
-        </ul>
       </div>
 
       <p className="sr-only">
@@ -57,7 +51,7 @@ export function HeroCopy() {
 
       <div className="alu-beat alu-beat--one">
         <p className="alu-beat__index">01 / Websites</p>
-        <h2 className="alu-display alu-beat__title">Websites that convert.</h2>
+        <h2 className="alu-display alu-beat__title">Websites that convert</h2>
         <p className="alu-lede">
           Fast, clear, and built around one goal: turning visitors into
           enquiries.
@@ -73,7 +67,7 @@ export function HeroCopy() {
 
       <div className="alu-beat alu-beat--two">
         <p className="alu-beat__index">02 / Assistants</p>
-        <h2 className="alu-display alu-beat__title">Assistants that answer.</h2>
+        <h2 className="alu-display alu-beat__title">Assistants that answer</h2>
         <p className="alu-lede">
           A chatbot that knows your business, replies on your website and
           WhatsApp, and hands over to you when a person is needed.
