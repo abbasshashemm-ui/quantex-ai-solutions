@@ -1,7 +1,11 @@
 "use client";
 
 import { LocalLink as Link } from "@/components/ui/LocalLink";
-import { useState, type ChangeEvent, type FormEvent } from "react";
+import { useEffect, useState, type ChangeEvent, type FormEvent } from "react";
+import { useChrome } from "@/lib/i18n/use-chrome";
+import { getProfile } from "@/lib/visitor/profiles";
+import { useVisitorAnswer } from "@/lib/visitor/store";
+import { ASK_UI } from "@/lib/visitor/ui";
 import { CONTACT } from "@/lib/site/contact";
 import { CONTACT_EN } from "@/lib/i18n/contact-en";
 import type { LocalizedContact } from "@/lib/i18n/types";
@@ -52,6 +56,20 @@ export function ContactForm({
 }) {
   const [form, setForm] = useState<ContactFormFields>(initialState);
   const [error, setError] = useState<string | null>(null);
+  const { lang } = useChrome();
+  const answer = useVisitorAnswer();
+
+  // Start the message from what the visitor said on the home page, unless
+  // they have already typed something of their own.
+  useEffect(() => {
+    if (!answer) return;
+    const opening = getProfile(answer.profile, lang).whatsapp;
+    const id = window.setTimeout(
+      () => setForm((prev) => (prev.message ? prev : { ...prev, message: opening })),
+      0,
+    );
+    return () => window.clearTimeout(id);
+  }, [answer, lang]);
 
   const update =
     (field: keyof ContactFormFields) =>
@@ -190,6 +208,10 @@ export function ContactForm({
           {copy.submit}
           <span aria-hidden>{rtl ? "←" : "→"}</span>
         </button>
+        <p className="contact-form__promise">
+          <span className="live-dot" aria-hidden />
+          {ASK_UI[lang].replyPromise}
+        </p>
       </form>
     </div>
   );

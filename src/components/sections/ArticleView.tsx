@@ -1,6 +1,7 @@
 import { LocalLink as Link } from "@/components/ui/LocalLink";
 import { ArticleFigure } from "@/components/figures/ArticleFigure";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
+import { ArticleToc } from "./ArticleToc";
 import { getArticleFigure } from "@/lib/figures/data";
 import { SITE } from "@/lib/seo/site";
 import {
@@ -73,7 +74,7 @@ export function ArticleView({ lang, article }: Props) {
       className={`about-page page-shell${rtl ? " rtl-page" : ""}`}
     >
       <div className="page-grid-bg absolute inset-0" aria-hidden />
-      <div className="relative mx-auto max-w-3xl">
+      <div className="relative mx-auto max-w-6xl">
         <div className="page-hero" data-force-dark data-dark-zone>
           <div className="flex items-center justify-between gap-4">
             <Link
@@ -108,31 +109,21 @@ export function ArticleView({ lang, article }: Props) {
           </header>
         </div>
 
-        <p className={`aeo-answer alu-glass page-panel mt-8 ${bodyClass}`}>
-          {article.summary}
-        </p>
+        <div className="article-layout">
+          <ArticleToc
+            label={t.contents}
+            heading={t.inGuide}
+            items={article.sections.map(({ id, heading }) => ({ id, heading }))}
+          />
 
-        <nav aria-label={t.contents} className="mt-8">
-          <p className="page-label">{t.inGuide}</p>
-          <ol className="mt-3 space-y-1 text-sm">
-            {figure?.after === "top" ? (
+          <div className="article-body">
+        <p className="aeo-answer article-summary">{article.summary}</p>
+
+        {figure?.after === "top" ? (
           <div className="mt-10">
             <ArticleFigure lang={lang} data={figure.data} />
           </div>
         ) : null}
-
-        {article.sections.map((section) => (
-              <li key={section.id}>
-                <a
-                  href={`#${section.id}`}
-                  className="inline-flex min-h-11 items-center text-foreground/80 underline underline-offset-4 hover:text-foreground"
-                >
-                  {section.heading}
-                </a>
-              </li>
-            ))}
-          </ol>
-        </nav>
 
         {article.sections.map((section) => (
           <div key={section.id}>
@@ -231,32 +222,40 @@ export function ArticleView({ lang, article }: Props) {
           </p>
         </section>
 
-        <section className="mt-14" aria-labelledby="more-guides">
-          <h2 id="more-guides" className="page-label">
+          </div>
+        </div>
+
+        <section className="mt-20" aria-labelledby="more-guides">
+          <h2 id="more-guides" className="alu-display page-h2">
             {t.more}
           </h2>
-          <ul className="mt-3 space-y-1">
-            {related.map((item) => (
+          <ol className="guide-rows">
+            {related.slice(0, 4).map((item, index) => (
               <li key={item.href}>
-                <Link
-                  href={item.href}
-                  data-interactive
-                  className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
-                >
-                  {item.title}
+                <Link href={item.href} data-interactive className="guide-row">
+                  <span className="guide-row__n" aria-hidden>
+                    0{index + 1}
+                  </span>
+                  <span className="guide-row__text">
+                    <strong className="guide-row__title">{item.title}</strong>
+                    <span className="guide-row__body">{item.description}</span>
+                  </span>
+                  <span className="guide-row__meta">
+                    {item.readingTime} <span aria-hidden>{rtl ? "←" : "→"}</span>
+                  </span>
                 </Link>
               </li>
             ))}
-            <li>
-              <Link
-                href={INSIGHTS_PATH[lang]}
-                data-interactive
-                className="inline-flex min-h-11 items-center text-sm text-foreground/80 underline underline-offset-4"
-              >
-                {t.all}
-              </Link>
-            </li>
-          </ul>
+          </ol>
+          <p className="mt-6">
+            <Link
+              href={INSIGHTS_PATH[lang]}
+              data-interactive
+              className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
+            >
+              {t.all}
+            </Link>
+          </p>
         </section>
       </div>
     </article>

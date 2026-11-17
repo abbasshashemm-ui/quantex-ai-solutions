@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
 import type { Service } from "@/lib/services/data";
+import { ServiceGlyph } from "./ServiceGlyph";
 
 type ServiceCardProps = {
   service: Service;
@@ -82,6 +83,7 @@ export function ServiceCard({
       className={lead ? "offer offer--lead alu-glass" : "offer"}
     >
       <span className="offer__text">
+        {lead ? null : <ServiceGlyph slug={service.slug} className="offer__glyph" />}
         <span className="offer__index">{index}</span>
         <h3 className="alu-display offer__title">{label}</h3>
         <p className="offer__body">{description}</p>
@@ -94,7 +96,11 @@ export function ServiceCard({
           <SiteVisual />
         ) : service.slug === "custom-intelligent-chatbots" ? (
           <ChatVisual locale={locale} />
-        ) : null
+        ) : (
+          <span className="offer-visual offer-visual--glyph" aria-hidden>
+            <ServiceGlyph slug={service.slug} />
+          </span>
+        )
       ) : null}
     </Link>
   );
