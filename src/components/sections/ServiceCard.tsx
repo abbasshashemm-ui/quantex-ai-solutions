@@ -12,6 +12,8 @@ type ServiceCardProps = {
   learnMore?: string;
   arrow?: string;
   locale?: "en" | "ar" | "fr";
+  /** Where the card sits in the list; defaults to the service's own order. */
+  position?: number;
 };
 
 /** A cropped client site, standing in for "this is what you get". */
@@ -66,9 +68,10 @@ export function ServiceCard({
   learnMore = "Learn more",
   arrow = "→",
   locale = "en",
+  position = service.index,
 }: ServiceCardProps) {
-  const index = String(service.index + 1).padStart(2, "0");
-  const lead = service.index < 2;
+  const index = String(position + 1).padStart(2, "0");
+  const lead = position < 2;
 
   return (
     <Link
@@ -86,7 +89,13 @@ export function ServiceCard({
           {learnMore} <span aria-hidden>{arrow}</span>
         </span>
       </span>
-      {lead ? service.index === 0 ? <SiteVisual /> : <ChatVisual locale={locale} /> : null}
+      {lead ? (
+        service.slug === "high-converting-websites" ? (
+          <SiteVisual />
+        ) : service.slug === "custom-intelligent-chatbots" ? (
+          <ChatVisual locale={locale} />
+        ) : null
+      ) : null}
     </Link>
   );
 }

@@ -60,6 +60,8 @@ export type PoseInput = {
    * square box, calm like the phone layout, with its own idle spin.
    */
   centered?: boolean;
+  /** The hero's reaction to the visitor (see presence.ts). */
+  presence?: { open: number; twist: number; turn: number };
 };
 
 export type Pose = {
@@ -95,17 +97,25 @@ export function computePose(input: PoseInput): Pose {
     slotCenter = 0,
     slotSize = 0,
     centered = false,
+    presence,
   } = input;
 
   // The hero has three beats, so its morph is front-loaded. A stand-alone
   // sculpture (the four process steps) spreads its changes over the whole
   // progress range, so each quarter is a clearly different shape.
-  const open = centered
-    ? smoothstep(0, 0.8, progress)
-    : smoothstep(0, 0.5, progress);
-  const twist = centered
-    ? smoothstep(0.2, 1, progress)
-    : smoothstep(0.45, 1, progress);
+  // The visitor's presence adds to the scroll-driven shape, never past fully open.
+  const open = clamp(
+    (centered ? smoothstep(0, 0.8, progress) : smoothstep(0, 0.5, progress)) +
+      (presence?.open ?? 0),
+    0,
+    1,
+  );
+  const twist = clamp(
+    (centered ? smoothstep(0.2, 1, progress) : smoothstep(0.45, 1, progress)) +
+      (presence?.twist ?? 0),
+    0,
+    1,
+  );
   const satin = centered
     ? smoothstep(0.4, 1, progress)
     : smoothstep(0.55, 1, progress);
@@ -150,7 +160,8 @@ export function computePose(input: PoseInput): Pose {
     rotationZ:
       Math.sin(time * 0.3) * 0.05 * ambient * sway +
       progress * (centered ? 5.2 : 0.5) +
-      idleSpin,
+      idleSpin +
+      (presence?.turn ?? 0),
     spacing: lerp(0.006, wide ? 0.075 : 0.05, open),
     twistPerRing: twist * 0.1,
     ripple: (0.006 + 0.012 * open) * ambient,

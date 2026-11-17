@@ -36,6 +36,18 @@ export type Profile = {
   outcomes: [string, string, string];
   /** Opening line for the WhatsApp message. */
   whatsapp: string;
+  /** The name at the top of the sample conversation. */
+  chatName: string;
+  /** Header button text once this is the visitor's answer; null keeps the default. */
+  cta: string | null;
+  /** The closing line of the home page. */
+  closing: string;
+  /** Service slugs in the order they matter to this kind of business. */
+  services: string[];
+  /** The guide to show first, when there is one for this kind of business. */
+  guide: string | null;
+  /** The shape the hero sculpture settles into for this answer. */
+  pose: { open: number; twist: number; turn: number };
 };
 
 const WEBSITE = "/services/high-converting-websites";
@@ -88,6 +100,19 @@ export const PROFILES: Profile[] = [
       "Allergy and complaint messages go straight to a person",
     ],
     whatsapp: "Hi, I run a restaurant and want to talk about a website and an assistant.",
+    chatName: "Your restaurant",
+    cta: "Start your restaurant project",
+    closing: "Tell us about your restaurant",
+    services: [
+      "custom-intelligent-chatbots",
+      "high-converting-websites",
+      "seo",
+      "business-process-automation",
+      "custom-software-development",
+      "custom-system-architectures",
+    ],
+    guide: "/insights/ai-for-restaurants-lebanon",
+    pose: { open: 0.22, twist: 0.18, turn: 0.5 },
   },
   {
     id: "clinic",
@@ -133,6 +158,19 @@ export const PROFILES: Profile[] = [
       "Anything medical is handed to your staff, every time",
     ],
     whatsapp: "Hi, I run a clinic and want to talk about a website and an assistant.",
+    chatName: "Your clinic",
+    cta: "Start your clinic project",
+    closing: "Tell us about your clinic",
+    services: [
+      "custom-intelligent-chatbots",
+      "high-converting-websites",
+      "seo",
+      "business-process-automation",
+      "custom-software-development",
+      "custom-system-architectures",
+    ],
+    guide: "/insights/ai-for-clinics-lebanon",
+    pose: { open: 0.12, twist: 0.05, turn: -0.35 },
   },
   {
     id: "real-estate",
@@ -177,6 +215,19 @@ export const PROFILES: Profile[] = [
       "Negotiation and offers go straight to an agent",
     ],
     whatsapp: "Hi, I run a real estate agency and want to talk about a website and an assistant.",
+    chatName: "Your agency",
+    cta: "Start your agency project",
+    closing: "Tell us about your agency",
+    services: [
+      "custom-intelligent-chatbots",
+      "high-converting-websites",
+      "seo",
+      "business-process-automation",
+      "custom-software-development",
+      "custom-system-architectures",
+    ],
+    guide: "/insights/ai-for-real-estate-lebanon",
+    pose: { open: 0.3, twist: 0.1, turn: 0.9 },
   },
   {
     id: "shop",
@@ -222,6 +273,19 @@ export const PROFILES: Profile[] = [
       "Returns and complaints go straight to a person",
     ],
     whatsapp: "Hi, I run a shop and want to talk about an online store and an assistant.",
+    chatName: "Your shop",
+    cta: "Start your shop project",
+    closing: "Tell us about your shop",
+    services: [
+      "high-converting-websites",
+      "custom-intelligent-chatbots",
+      "business-process-automation",
+      "seo",
+      "custom-software-development",
+      "custom-system-architectures",
+    ],
+    guide: null,
+    pose: { open: 0.26, twist: 0.3, turn: -0.7 },
   },
   {
     id: "services",
@@ -269,6 +333,19 @@ export const PROFILES: Profile[] = [
       "Quotes and anything unusual go straight to you",
     ],
     whatsapp: "Hi, I run a service business and want to talk about a website and an assistant.",
+    chatName: "Your business",
+    cta: null,
+    closing: "Tell us about your business",
+    services: [
+      "high-converting-websites",
+      "custom-intelligent-chatbots",
+      "seo",
+      "business-process-automation",
+      "custom-software-development",
+      "custom-system-architectures",
+    ],
+    guide: null,
+    pose: { open: 0.16, twist: 0.22, turn: 0.25 },
   },
   {
     id: "general",
@@ -309,6 +386,19 @@ export const PROFILES: Profile[] = [
       "A person takes over whenever one is asked for",
     ],
     whatsapp: "Hi, I want to talk about a website and an assistant for my business.",
+    chatName: "Your business",
+    cta: null,
+    closing: "Tell us what you need",
+    services: [
+      "high-converting-websites",
+      "custom-intelligent-chatbots",
+      "business-process-automation",
+      "custom-software-development",
+      "seo",
+      "custom-system-architectures",
+    ],
+    guide: null,
+    pose: { open: 0.1, twist: 0.12, turn: 0.15 },
   },
 ];
 

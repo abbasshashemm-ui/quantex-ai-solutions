@@ -1,7 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import {
+  useEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type FormEvent,
+} from "react";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
 import {
@@ -11,15 +17,50 @@ import {
   type ProfileId,
 } from "@/lib/visitor/profiles";
 import { setVisitorAnswer, useVisitorAnswer } from "@/lib/visitor/store";
+import {
+  nudgePresence,
+  setPresenceRest,
+  setPresenceThinking,
+} from "./presence";
 
 /** How long the sculpture "thinks" before the answer appears. */
 const THINK_MS = 700;
 
-function setThinking(on: boolean) {
-  const stage = document.querySelector<HTMLElement>(".alu-stage");
-  if (!stage) return;
-  if (on) stage.dataset.thinking = "true";
-  else delete stage.dataset.thinking;
+/** Milliseconds per character when the answer writes itself. */
+const TYPE_MS = 26;
+
+/**
+ * A line that writes itself, as a reply does. The full text is always in the
+ * page (and read out once); only the visible part is revealed, so the layout
+ * never shifts while it types.
+ */
+function TypedLine({ text }: { text: string }) {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      const id = window.setTimeout(() => setCount(text.length), 0);
+      return () => window.clearTimeout(id);
+    }
+    let shown = 0;
+    const id = window.setInterval(() => {
+      shown += 1;
+      setCount(shown);
+      if (shown >= text.length) window.clearInterval(id);
+    }, TYPE_MS);
+    return () => window.clearInterval(id);
+  }, [text]);
+
+  const done = count >= text.length;
+  return (
+    <>
+      <span className="sr-only">{text}</span>
+      <span aria-hidden className="typed" data-done={done ? "true" : undefined}>
+        <span>{text.slice(0, count)}</span>
+        <span className="typed__rest">{text.slice(count)}</span>
+      </span>
+    </>
+  );
 }
 
 /**
@@ -36,10 +77,16 @@ export function HeroAsk() {
   useEffect(
     () => () => {
       window.clearTimeout(timer.current);
-      setThinking(false);
+      setPresenceThinking(false);
+      setPresenceRest(null);
     },
     [],
   );
+
+  // The sculpture holds a different shape for each kind of business.
+  useEffect(() => {
+    setPresenceRest(answer ? getProfile(answer.profile).pose : null);
+  }, [answer]);
 
   const respond = (profile: ProfileId, said: string) => {
     if (pending) return;
@@ -47,14 +94,14 @@ export function HeroAsk() {
     const commit = () => {
       setVisitorAnswer({ profile, text: said.slice(0, 80) });
       setPending(false);
-      setThinking(false);
+      setPresenceThinking(false);
     };
     if (reduce) {
       commit();
       return;
     }
     setPending(true);
-    setThinking(true);
+    setPresenceThinking(true);
     timer.current = window.setTimeout(commit, THINK_MS);
   };
 
@@ -76,13 +123,18 @@ export function HeroAsk() {
 
   if (answer) {
     const profile = getProfile(answer.profile);
+    const line = `For ${profile.noun}, start here`;
     return (
-      <div className="alu-hero ask ask--answered" aria-live="polite">
+      <div
+        className="alu-hero ask ask--answered"
+        aria-live="polite"
+        style={{ "--type-ms": `${line.length * TYPE_MS}ms` } as CSSProperties}
+      >
         <PageEyebrow>
           You said: <q>{answer.text}</q>
         </PageEyebrow>
         <h1 className="alu-display ask__title ask__title--answer">
-          For {profile.noun}, start here
+          <TypedLine key={line} text={line} />
         </h1>
         <ol className="ask-steps">
           {profile.steps.map((step, index) => (
@@ -133,7 +185,10 @@ export function HeroAsk() {
           maxLength={80}
           placeholder="A dental clinic"
           value={text}
-          onChange={(event) => setText(event.target.value)}
+          onChange={(event) => {
+            setText(event.target.value);
+            nudgePresence();
+          }}
           disabled={pending}
         />
         <button

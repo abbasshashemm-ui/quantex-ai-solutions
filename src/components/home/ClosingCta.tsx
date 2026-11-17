@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
+import { ClosingTitle } from "./ClosingTitle";
 import { CONTACT } from "@/lib/site/contact";
 
 const PROMISES = [
@@ -37,9 +38,7 @@ export function ClosingCta() {
         </ul>
 
         <div className="alu-final">
-          <h2 className="alu-display alu-section__title">
-            Tell us what you need
-          </h2>
+          <ClosingTitle />
           <div className="alu-ctas">
             <Link
               href="/contact"

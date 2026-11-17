@@ -854,6 +854,11 @@ a:hover > .alu-link span[aria-hidden],
   .ask__title--answer {
     font-size: clamp(2.25rem, min(3.8vw, 7svh), 3.5rem);
   }
+
+  /* The answered sculpture opens wider, so the answer keeps a narrower column. */
+  .ask--answered {
+    max-width: min(36rem, 40vw);
+  }
 }
 
 .ask-form {
@@ -1012,11 +1017,6 @@ a:hover > .alu-link span[aria-hidden],
   .ask--answered > :nth-child(4) {
     animation-delay: 180ms;
   }
-
-  /* While it works out an answer, the sculpture leans in. */
-  .alu-stage[data-thinking="true"] .alu-stage__visual {
-    animation: ask-think 0.7s var(--ease-out);
-  }
 }
 
 @keyframes ask-in {
@@ -1026,40 +1026,82 @@ a:hover > .alu-link span[aria-hidden],
   }
 }
 
-@keyframes ask-think {
-  40% {
-    transform: scale(1.04) rotate(-2deg);
+/*
+ * The answer writes itself. The rest of the line is in place but invisible, so
+ * the heading keeps its size and line breaks while it types.
+ */
+.typed__rest {
+  visibility: hidden;
+}
+
+.typed:not([data-done])::after {
+  content: "";
+  display: inline-block;
+  width: 0.08em;
+  height: 0.8em;
+  margin-inline-start: 0.06em;
+  background: currentColor;
+  vertical-align: baseline;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* The three steps and the buttons wait for the line to finish. */
+  .ask--answered > :nth-child(n + 3) {
+    animation-delay: calc(var(--type-ms, 0ms) + 80ms);
+  }
+
+  .ask--answered > :nth-child(4) {
+    animation-delay: calc(var(--type-ms, 0ms) + 160ms);
   }
 }
 
-/* The section the answer unlocks, straight after the hero. */
+/*
+ * ——— Dark zones ———
+ * The hero is always dark, in both themes: chrome reads far better on black.
+ * [data-force-dark] gives a subtree the dark theme's tokens (see the theme
+ * block at the end of this file), and the header wears it while the hero is
+ * still underneath.
+ */
+.alu-stage[data-force-dark] {
+  background: var(--void);
+  color: var(--foreground);
+}
+
+.site-header[data-force-dark]::before {
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+  background: linear-gradient(
+    180deg,
+    rgba(12, 14, 18, 0.72),
+    rgba(12, 14, 18, 0.4)
+  );
+  box-shadow: none;
+}
+
+.site-header[data-force-dark] {
+  color: var(--foreground);
+}
+
+/* The section the answer unlocks: a dark band that continues the hero. */
+.for-you-band {
+  background: var(--void);
+  color: var(--foreground);
+}
+
 .for-you {
   display: grid;
-  gap: 2.5rem;
-  margin-top: 3rem;
+  gap: 3rem;
 }
 
 @media (min-width: 900px) {
   .for-you {
-    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
     gap: 4rem;
     align-items: center;
   }
 }
 
-.for-you__chat {
-  margin: 0;
-}
-
-.for-you__caption {
-  border-top: 1px solid var(--line);
-  padding: 0.5rem 1.25rem;
-  font-size: var(--text-label);
-  color: var(--muted);
-}
-
 .for-you__outcomes {
-  margin-top: 1rem;
+  margin-top: 2rem;
   border-top: 1px solid var(--line-strong);
   padding: 0;
   list-style: none;
@@ -1074,6 +1116,109 @@ a:hover > .alu-link span[aria-hidden],
   padding: 1rem 0;
   font-size: 1.0625rem;
   line-height: 1.45;
+}
+
+/* A phone, drawn in CSS, holding the sample conversation. */
+.phone {
+  width: min(100%, 21rem);
+  margin: 0;
+  margin-inline: auto;
+}
+
+.phone__screen {
+  display: flex;
+  min-height: 34rem;
+  flex-direction: column;
+  border: 0.5rem solid #23272e;
+  border-radius: 2.5rem;
+  background: var(--surface);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 40px 80px -30px rgba(0, 0, 0, 0.9);
+  overflow: hidden;
+}
+
+.phone__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 1px solid var(--line);
+  padding: 1.25rem 1rem 0.75rem;
+  background: var(--surface-elevated);
+}
+
+.phone__bar > span:last-child {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9375rem;
+}
+
+.phone__bar small {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.phone__thread {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+.phone__msg {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.phone__msg[data-shown] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.25s var(--ease-out),
+    transform 0.25s var(--ease-out);
+}
+
+.phone__typing {
+  display: inline-flex;
+  gap: 0.25rem;
+  align-self: flex-end;
+  margin-top: auto;
+  border-radius: 0.9rem 0.9rem 0.2rem 0.9rem;
+  padding: 0.6rem 0.75rem;
+  background: var(--foreground);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.phone__typing[data-on] {
+  opacity: 1;
+}
+
+.phone__typing i {
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+  background: var(--void);
+  opacity: 0.7;
+}
+
+.phone__caption {
+  margin-top: 1rem;
+  font-size: var(--text-label);
+  color: var(--muted);
+  text-align: center;
+}
+
+.services-note {
+  margin-top: 2rem;
+}
+
+.services-note + .alu-offers {
+  margin-top: 1rem;
 }
 
 /* ——— Sections ——— */
@@ -2931,7 +3076,8 @@ span.chat-panel__input {
  * on purpose: it re-skins the same classes with graphite metal and
  * light-on-dark glass, and changes nothing else.
  */
-:root[data-theme="dark"] {
+:root[data-theme="dark"],
+[data-force-dark] {
   --void: #0c0e12;
   --surface: #13161b;
   --surface-elevated: #1a1e25;
@@ -3160,11 +3306,13 @@ span.chat-panel__input {
   display: none;
 }
 
-:root[data-theme="dark"] .brand-logo-light {
+:root[data-theme="dark"] .brand-logo-light,
+[data-force-dark] .brand-logo-light {
   display: none;
 }
 
-:root[data-theme="dark"] .brand-logo-dark {
+:root[data-theme="dark"] .brand-logo-dark,
+[data-force-dark] .brand-logo-dark {
   display: block;
 }
 
