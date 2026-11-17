@@ -2520,6 +2520,28 @@ li:first-child > .faq-card--plain {
   text-align: right;
 }
 
+/*
+ * The live assistant sits in the same phone as the sample conversation above
+ * it, so the real product does not look plainer than its demo.
+ */
+.band-dark .hero-chat.hero-chat {
+  width: min(100%, 22rem);
+  max-width: none;
+  height: min(36rem, calc(100svh - 7rem));
+  margin-inline: auto;
+  justify-self: center;
+  border: 0.5rem solid #23272e;
+  border-radius: 2.5rem;
+  background: var(--surface);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 40px 80px -30px rgba(0, 0, 0, 0.9);
+}
+
+.band-dark .hero-chat .chat-panel__header {
+  padding-top: 1.25rem;
+}
+
 /* Figures */
 .stat-wall__row {
   display: grid;
