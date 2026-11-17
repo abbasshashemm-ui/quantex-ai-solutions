@@ -16,6 +16,11 @@ export type Project = {
   highlights?: string[];
   /** The screenshot shows sample figures, not the client's own. Labelled on the page. */
   sampleData?: boolean;
+  /**
+   * A short muted screen recording (mp4, under about 3 MB) in public/projects.
+   * It plays over the screenshot on hover, or while on screen on phones.
+   */
+  videoSrc?: string;
   imageSrc?: string;
   imageAlt?: string;
   imageWidth?: number;

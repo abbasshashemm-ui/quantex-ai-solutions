@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { getGalleryProjects, type Project } from "@/lib/projects/data";
+import { ProjectVideo } from "./ProjectVideo";
 
 type ProjectGalleryProps = {
   /** Label for the outbound link, in the page's language. */
@@ -52,6 +53,7 @@ function Frame({
               : "(max-width: 799px) 100vw, (max-width: 1360px) 50vw, 640px"
           }
         />
+        {project.videoSrc ? <ProjectVideo src={project.videoSrc} /> : null}
         {project.sampleData ? (
           <span className="work-frame__note">{sampleLabel}</span>
         ) : null}

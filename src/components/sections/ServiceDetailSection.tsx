@@ -10,6 +10,7 @@ import { ServiceMock } from "@/components/services/ServiceMock";
 import { SERVICE_MOCKS } from "@/lib/services/mocks";
 import { ProjectGallery } from "@/components/work/ProjectGallery";
 import { SERVICE_PROJECT_IDS } from "@/lib/projects/data";
+import { AnswerNote } from "@/components/visitor/AnswerNote";
 import { PricingPlans } from "@/components/sections/PricingPlans";
 import { CUSTOM_SCOPES, PRICE_GROUPS } from "@/lib/pricing/data";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
@@ -85,6 +86,7 @@ export function ServiceDetailSection({ service }: ServiceDetailSectionProps) {
                 {navMeta?.label ?? service.title}
               </h1>
               <p className="alu-lede max-w-xl">{service.description}</p>
+              <AnswerNote slug={service.slug} />
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                 <Link href="/contact" data-interactive className="btn-primary">
                   Start a project

@@ -4,6 +4,7 @@ import { ServiceMock } from "@/components/services/ServiceMock";
 import { SERVICE_MOCKS } from "@/lib/services/mocks";
 import { ProjectGallery } from "@/components/work/ProjectGallery";
 import { SERVICE_PROJECT_IDS } from "@/lib/projects/data";
+import { AnswerNote } from "@/components/visitor/AnswerNote";
 import { PricingPlans } from "@/components/sections/PricingPlans";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
@@ -82,6 +83,7 @@ export function LocalizedServiceDetail({
               </PageEyebrow>
               <h1 className="alu-display page-title mt-4">{t.label}</h1>
               <p className="alu-lede max-w-xl">{t.description}</p>
+              <AnswerNote slug={service.slug} locale={locale} />
               <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                 <Link href={localePath(locale, "/contact")} data-interactive className="btn-primary">
                   {ui.startProject}

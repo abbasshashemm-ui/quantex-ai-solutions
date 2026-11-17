@@ -1,6 +1,7 @@
 import { LocalLink as Link } from "@/components/ui/LocalLink";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { PricingPlans } from "@/components/sections/PricingPlans";
+import { AnswerOrdered } from "@/components/visitor/AnswerOrdered";
 import {
   CUSTOM_SCOPES,
   PRICE_GROUPS,
@@ -115,9 +116,13 @@ export function PricingPageContent({ lang = "en" }: { lang?: "en" | "ar" | "fr" 
         </div>
 
         <div className="mt-12 space-y-16 sm:mt-16 sm:space-y-24">
-          {groups.map((group) => (
-            <PricingPlans key={group.id} group={group} lang={lang} />
-          ))}
+          <AnswerOrdered
+            locale={lang}
+            items={groups.map((group) => ({
+              slug: group.serviceSlug,
+              node: <PricingPlans group={group} lang={lang} />,
+            }))}
+          />
         </div>
 
         <section className="mt-16 sm:mt-24" aria-labelledby="price-custom">

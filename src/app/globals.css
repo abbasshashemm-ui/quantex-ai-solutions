@@ -1729,6 +1729,47 @@ a:hover > .alu-link span[aria-hidden],
   }
 }
 
+/* A recording laid over the screenshot; it shows only while it plays. */
+.work-frame__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.work-frame__video[data-playing] {
+  opacity: 1;
+}
+
+/* How a service fits the visitor's answer, in the page's dark title band. */
+.answer-note {
+  max-width: 34rem;
+  margin-top: 1.5rem;
+  border-inline-start: 2px solid var(--signal);
+  padding-inline-start: 1rem;
+}
+
+.answer-note__title {
+  margin-top: 0.25rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
+}
+
+.answer-note__body {
+  margin-top: 0.125rem;
+  font-size: var(--text-body-sm);
+  color: var(--ink-soft);
+}
+
+/* Sits just above the first group, not a full section gap away from it. */
+.answer-note-line.answer-note-line {
+  margin-block: 0 1rem;
+}
+
 /* Marks a screenshot that shows sample figures rather than a client's own. */
 .work-frame__note {
   position: absolute;
