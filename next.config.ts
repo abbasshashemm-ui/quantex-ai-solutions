@@ -10,6 +10,9 @@ const immutableAssetHeaders = [
 const nextConfig: NextConfig = {
   compress: true,
   experimental: {
+    // Each language has its own root layout, so the site-wide 404 page is
+    // app/global-not-found.tsx. See that file.
+    globalNotFound: true,
     optimizePackageImports: ["ai", "@ai-sdk/react"],
     staleTimes: {
       dynamic: 30,
