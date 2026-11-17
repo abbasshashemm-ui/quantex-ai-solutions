@@ -71,7 +71,7 @@ export const FR: LocaleContent = {
     },
     stats: [
       { value: "10+", label: "Clients payants" },
-      { value: "3", label: "Langues" },
+      { value: "100%", label: "À vous : code, domaine, comptes" },
       { value: "24h", label: "Délai de réponse" },
     ],
     process: {
@@ -495,7 +495,7 @@ export const FR: LocaleContent = {
     },
     stats: [
       { value: "10+", label: "Clients payants" },
-      { value: "3", label: "Langues" },
+      { value: "100%", label: "À vous : code, domaine, comptes" },
       { value: "24h", label: "Délai de réponse" },
     ],
     values: [
