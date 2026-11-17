@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
+import { MiniSculpture } from "@/components/hero/MiniSculpture";
 import { ClosingTitle } from "./ClosingTitle";
 import { CONTACT } from "@/lib/site/contact";
 
@@ -20,7 +21,11 @@ const PROMISES = [
 
 export function ClosingCta() {
   return (
-    <section className="alu-section alu-section--last">
+    <section
+      className="alu-section alu-section--last band-dark"
+      data-force-dark
+      data-dark-zone
+    >
       <div className="alu-section__inner">
         <ul className="alu-promises">
           {PROMISES.map((promise) => (
@@ -38,6 +43,9 @@ export function ClosingCta() {
         </ul>
 
         <div className="alu-final">
+          <div className="alu-final__sculpture" aria-hidden>
+            <MiniSculpture mode="idle" minWidth={900} />
+          </div>
           <ClosingTitle />
           <div className="alu-ctas">
             <Link

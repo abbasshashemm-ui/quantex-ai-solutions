@@ -20,7 +20,7 @@ export function useHeaderOverDark(fallback: boolean, deps: unknown[]): boolean {
       const under = document
         .elementsFromPoint(window.innerWidth / 2, y)
         .find((node) => !header?.contains(node));
-      setOver(Boolean(under?.closest("[data-force-dark]")));
+      setOver(Boolean(under?.closest("[data-dark-zone]")));
     };
     const schedule = () => {
       if (!frame) frame = window.requestAnimationFrame(read);

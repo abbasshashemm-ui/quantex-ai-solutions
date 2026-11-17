@@ -37,10 +37,11 @@ export function GuidesSection() {
         </div>
 
         <GuidesList
-          guides={guides.map(({ href, title, description }) => ({
+          guides={guides.map(({ href, title, description, readingTime }) => ({
             href,
             title,
             description,
+            readingTime,
           }))}
         />
 

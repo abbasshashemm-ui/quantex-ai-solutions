@@ -2377,6 +2377,380 @@ li:first-child > .faq-card--plain {
   gap: 1rem;
 }
 
+/*
+ * ——— Below the services ———
+ * Each section has its own shape: a dark band for the live assistant, a wall
+ * of figures, a line that fills, a tool you can use in place, numbered guide
+ * rows, and a dark close that brings the sculpture back.
+ */
+.band-dark,
+.site-footer {
+  background: var(--void);
+  color: var(--foreground);
+}
+
+.band-dark__title {
+  margin-top: 1rem;
+  font-size: clamp(2.75rem, 6vw, 5.5rem);
+  line-height: 0.9;
+  text-wrap: balance;
+}
+
+.live-dot {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-inline-end: 0.25rem;
+  border-radius: 50%;
+  background: var(--signal);
+  vertical-align: middle;
+}
+
+/* Figures */
+.stat-wall__row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-block: 1px solid var(--line-strong);
+}
+
+.stat-wall__item {
+  min-width: 0;
+  padding: clamp(1.25rem, 3vw, 2.5rem) clamp(0.5rem, 2vw, 2rem);
+}
+
+.stat-wall__item + .stat-wall__item {
+  border-inline-start: 1px solid var(--line-strong);
+}
+
+.stat-wall__value {
+  font-family: var(--font-condensed), var(--font-outfit), sans-serif;
+  font-size: clamp(3.25rem, 13vw, 11rem);
+  font-weight: 800;
+  font-style: italic;
+  line-height: 0.82;
+  color: var(--foreground);
+}
+
+.stat-wall__label {
+  margin-top: 0.75rem;
+  font-size: clamp(0.75rem, 1.2vw, 1rem);
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* Process: one line, four stops */
+.process-line {
+  position: relative;
+  display: grid;
+  gap: 2rem;
+  margin-top: 3.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.process-line__step {
+  position: relative;
+  border-inline-start: 2px solid var(--line-strong);
+  padding-inline-start: 1.5rem;
+}
+
+.process-line__step::before {
+  content: "";
+  position: absolute;
+  top: 0.5rem;
+  inset-inline-start: -0.4375rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  border: 2px solid var(--foreground);
+  border-radius: 50%;
+  background: var(--void);
+}
+
+.process-line__n {
+  display: block;
+  font-family: var(--font-condensed), var(--font-outfit), sans-serif;
+  font-size: clamp(3.5rem, 6vw, 5.5rem);
+  font-weight: 800;
+  font-style: italic;
+  line-height: 0.85;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--foreground);
+}
+
+.process-line__code {
+  margin-top: 1rem;
+  font-size: var(--text-label);
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.process-line__title {
+  margin-top: 0.25rem;
+  font-size: var(--text-heading);
+}
+
+.process-line__body {
+  margin-top: 0.5rem;
+  font-size: var(--text-body-sm);
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+@media (min-width: 900px) {
+  .process-line {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    border-top: 2px solid var(--line-strong);
+  }
+
+  /* The line fills from the start as the section comes into view. */
+  .process-line::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    inset-inline: 0;
+    height: 2px;
+    background: var(--foreground);
+    transform-origin: left center;
+  }
+
+  .rtl-page .process-line::before {
+    transform-origin: right center;
+  }
+
+  .process-line__step {
+    border-inline-start: 0;
+    padding: 2rem 0 0;
+  }
+
+  .process-line__step::before {
+    top: -0.4375rem;
+    inset-inline-start: 0;
+  }
+
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .process-line::before {
+        animation: process-fill linear both;
+        animation-timeline: view();
+        animation-range: entry 30% cover 60%;
+      }
+    }
+  }
+}
+
+@keyframes process-fill {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+/* Site check: a dark panel you can type into */
+.check-band {
+  display: grid;
+  gap: 2.5rem;
+  border-radius: var(--radius-card);
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+  background: var(--void);
+  color: var(--foreground);
+}
+
+@media (min-width: 900px) {
+  .check-band {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 4rem;
+  }
+}
+
+.check-band__title {
+  margin-top: 0.75rem;
+  font-size: var(--text-title);
+  line-height: 0.92;
+  text-wrap: balance;
+}
+
+.check-band__text {
+  max-width: 34rem;
+  margin-top: 1rem;
+  color: var(--ink-soft);
+}
+
+.check-band__form {
+  max-width: 32rem;
+}
+
+.check-band__sample {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 1.5rem;
+  margin: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-card);
+  padding: 1.5rem;
+  background: var(--surface);
+}
+
+.check-band__sample ul {
+  display: grid;
+  gap: 0.75rem;
+  font-size: 0.8125rem;
+}
+
+.check-band__sample li {
+  display: grid;
+  gap: 0.375rem;
+  color: var(--ink-soft);
+}
+
+.check-band__sample i {
+  height: 0.25rem;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--signal) var(--w),
+    var(--line-strong) var(--w)
+  );
+}
+
+.check-band__sample figcaption {
+  grid-column: 1 / -1;
+  font-size: var(--text-label);
+  color: var(--muted);
+}
+
+/* Guides: numbered rows */
+.guide-rows {
+  margin-top: 3rem;
+  border-top: 1px solid var(--line-strong);
+  padding: 0;
+  list-style: none;
+}
+
+.guide-row {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  align-items: baseline;
+  gap: 0.5rem 1rem;
+  border-bottom: 1px solid var(--line-strong);
+  padding: 1.25rem 0;
+  color: var(--foreground);
+  transition:
+    background-color 0.16s ease,
+    padding 0.16s ease;
+}
+
+.guide-row__n {
+  font-family: var(--font-condensed), var(--font-outfit), sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  font-style: italic;
+  color: var(--metallic-dim);
+}
+
+.guide-row__text {
+  display: grid;
+  gap: 0.375rem;
+}
+
+.guide-row__title {
+  font-size: clamp(1.125rem, 1.8vw, 1.5rem);
+  font-weight: 600;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+.guide-row__body {
+  max-width: 44rem;
+  font-size: var(--text-body-sm);
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.guide-row__meta {
+  grid-column: 2;
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.guide-row__meta span {
+  display: inline-block;
+  transition: transform 0.16s var(--ease-out);
+}
+
+@media (min-width: 800px) {
+  .guide-row {
+    grid-template-columns: 3.5rem minmax(0, 1fr) auto;
+    gap: 2rem;
+    padding: 1.75rem 1rem;
+  }
+
+  .guide-row__meta {
+    grid-column: 3;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .guide-row:hover {
+    background: color-mix(in srgb, var(--foreground) 4%, transparent);
+  }
+
+  .guide-row:hover .guide-row__n {
+    color: var(--foreground);
+  }
+
+  .guide-row:hover .guide-row__meta span {
+    transform: translateX(4px);
+  }
+}
+
+/* "What does Quantex do?": the first paragraph is the statement */
+.aeo-answer--statement > p:first-child {
+  font-size: clamp(1.375rem, 2.3vw, 2rem);
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--foreground);
+  text-wrap: balance;
+}
+
+.faq-card--plain summary h3 {
+  font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+}
+
+.faq-card--plain summary {
+  padding-block: 1.25rem;
+}
+
+/* Close: the sculpture comes back beside the last line */
+.alu-final {
+  position: relative;
+}
+
+.alu-final__sculpture {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .alu-final {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) clamp(14rem, 24vw, 22rem);
+    align-items: center;
+    column-gap: 3rem;
+  }
+
+  .alu-final > :not(.alu-final__sculpture) {
+    grid-column: 1;
+  }
+
+  .alu-final__sculpture {
+    display: block;
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+}
+
 /* ——— Inner pages ——— */
 .page-shell {
   position: relative;

@@ -1,6 +1,7 @@
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { PROCESS } from "@/lib/site/process";
 
+/** Four steps on one line that fills in as the section scrolls into view. */
 export function ProcessSection() {
   return (
     <section id="process" className="alu-section" aria-labelledby="process-heading">
@@ -13,17 +14,15 @@ export function ProcessSection() {
           <p className="alu-lede">{PROCESS.support}</p>
         </header>
 
-        <ol className="rule-grid rule-grid--4">
+        <ol className="process-line">
           {PROCESS.stages.map((stage) => (
-            <li key={stage.n}>
-              <article className="alu-step rule-item h-full" data-reveal>
-                <p className="alu-step__meta">
-                  <span className="alu-step__n">{stage.n}</span>
-                  <span className="alu-step__code">{stage.code}</span>
-                </p>
-                <h3 className="alu-display alu-step__title">{stage.title}</h3>
-                <p className="alu-step__body">{stage.body}</p>
-              </article>
+            <li key={stage.n} className="process-line__step">
+              <span className="process-line__n" aria-hidden>
+                {stage.n}
+              </span>
+              <p className="process-line__code">{stage.code}</p>
+              <h3 className="alu-display process-line__title">{stage.title}</h3>
+              <p className="process-line__body">{stage.body}</p>
             </li>
           ))}
         </ol>

@@ -114,6 +114,7 @@ export function ForYouSection() {
       id="for-you"
       className="alu-section for-you-band"
       data-force-dark
+      data-dark-zone
       aria-labelledby="for-you-heading"
     >
       <div className="alu-section__inner for-you">
