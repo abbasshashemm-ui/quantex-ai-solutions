@@ -2724,7 +2724,8 @@ li:has(> .plan-marker) {
 
 .stat-wall__value {
   font-family: var(--font-condensed), var(--font-outfit), sans-serif;
-  font-size: clamp(3.25rem, 13vw, 11rem);
+  /* Sized so the widest figure ("100%") fits a third of a 320px screen. */
+  font-size: clamp(2rem, 11vw, 11rem);
   font-weight: 800;
   font-style: italic;
   line-height: 0.82;

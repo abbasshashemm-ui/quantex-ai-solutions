@@ -70,7 +70,7 @@ export const AR: LocaleContent = {
     },
     stats: [
       { value: "10+", label: "عملاء يدفعون" },
-      { value: "3", label: "لغات" },
+      { value: "100%", label: "ملكك: الشيفرة والنطاق والحسابات" },
       { value: "24h", label: "مدة الرد" },
     ],
     process: {
@@ -452,7 +452,7 @@ export const AR: LocaleContent = {
     },
     stats: [
       { value: "10+", label: "عملاء يدفعون" },
-      { value: "3", label: "لغات" },
+      { value: "100%", label: "ملكك: الشيفرة والنطاق والحسابات" },
       { value: "24h", label: "مدة الرد" },
     ],
     values: [
