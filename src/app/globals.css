@@ -7,6 +7,7 @@
  */
 
 :root {
+  --page-fade: #eef0f3;
   --void: #e6e9ed;
   --surface: #eef0f3;
   --surface-elevated: #f7f8fa;
@@ -406,10 +407,6 @@ a:hover > .alu-link span[aria-hidden],
   position: relative;
   height: 320vh;
   height: 320svh;
-}
-
-.alu-stage {
-  border-bottom: 1px solid var(--line);
 }
 
 .alu-stage__panel {
@@ -1055,6 +1052,11 @@ a:hover > .alu-link span[aria-hidden],
   }
 }
 
+/* In the dark theme the page itself is dark, so the fades have nothing to do. */
+:root[data-theme="dark"] {
+  --page-fade: transparent;
+}
+
 /*
  * ——— Dark zones ———
  * The hero is always dark, in both themes: chrome reads far better on black.
@@ -1067,18 +1069,109 @@ a:hover > .alu-link span[aria-hidden],
   color: var(--foreground);
 }
 
-.site-header[data-force-dark]::before {
-  border-bottom-color: rgba(255, 255, 255, 0.08);
+/*
+ * Dark and light bands melt into each other. Each full-width dark band fades
+ * to the page colour over its first and last stretch, and keeps its content
+ * clear of the fade. Where two dark bands meet, there is no fade between them.
+ */
+[data-dark-zone] {
+  --fade: clamp(5rem, 12vw, 10rem);
+  position: relative;
+}
+
+[data-dark-zone]::before,
+[data-dark-zone]::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  z-index: 2;
+  height: var(--fade);
+  pointer-events: none;
+}
+
+[data-dark-zone]::before {
+  top: 0;
+  background: linear-gradient(180deg, var(--page-fade), transparent);
+}
+
+[data-dark-zone]::after {
+  bottom: 0;
+  background: linear-gradient(0deg, var(--page-fade), transparent);
+}
+
+/* Sections make room for their fades; the hero only fades at its end. */
+.alu-section[data-dark-zone] {
+  padding-block: calc(var(--fade) + 2rem);
+}
+
+.alu-stage[data-dark-zone]::before,
+[data-dark-zone] + [data-dark-zone]::before,
+[data-dark-zone]:has(+ [data-dark-zone])::after,
+.alu-section--last[data-dark-zone]::after {
+  content: none;
+}
+
+[data-dark-zone] + [data-dark-zone] {
+  padding-top: 2rem;
+}
+
+.alu-section--last[data-dark-zone] {
+  padding-bottom: clamp(5rem, 9vw, 8rem);
+}
+
+/*
+ * The header has a dark glass layer under its light one and cross-fades
+ * between them, so it changes with the page instead of snapping.
+ */
+.site-header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   background: linear-gradient(
     180deg,
     rgba(12, 14, 18, 0.72),
     rgba(12, 14, 18, 0.4)
   );
-  box-shadow: none;
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.site-header::before {
+  transition: opacity 0.4s ease;
+}
+
+.site-header[data-force-dark]::after {
+  opacity: 1;
+}
+
+.site-header[data-force-dark]::before {
+  opacity: 0;
 }
 
 .site-header[data-force-dark] {
   color: var(--foreground);
+}
+
+.site-header a,
+.site-header button {
+  transition:
+    color 0.4s ease,
+    background-color 0.4s ease,
+    border-color 0.4s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header::before,
+  .site-header::after,
+  .site-header a,
+  .site-header button {
+    transition: none;
+  }
 }
 
 /* The section the answer unlocks: a dark band that continues the hero. */
