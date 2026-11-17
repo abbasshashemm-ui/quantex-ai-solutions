@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
+import { AnswerTitle } from "@/components/visitor/AnswerTitle";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
 import { CONTACT_EN } from "@/lib/i18n/contact-en";
 import type { LocalizedContact } from "@/lib/i18n/types";
@@ -125,7 +126,7 @@ export function ContactSection({
           <header className="contact-page__header mx-auto mt-8 max-w-3xl text-center sm:mt-10">
             <PageEyebrow align="center">{copy.eyebrow}</PageEyebrow>
             <h1 className="alu-display page-title page-title--sm mt-4">
-              {copy.title}
+              <AnswerTitle fallback={copy.title} />
               <span className="block text-foreground/55">{copy.lead}</span>
             </h1>
             {copy.intro ? (

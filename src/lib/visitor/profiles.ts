@@ -50,6 +50,8 @@ export type Profile = {
   closing: string;
   /** Service slugs in the order they matter to this kind of business. */
   services: string[];
+  /** Price plan ids (src/lib/pricing/data.ts) to mark as the place to start. */
+  plans: string[];
   /** The guide to show first, when there is one for this kind of business. */
   guide: string | null;
   /** The shape the hero sculpture settles into for this answer. */
@@ -119,6 +121,7 @@ const BASE: BaseProfile[] = [
       "custom-software-development",
       "custom-system-architectures",
     ],
+    plans: ["assistant-whatsapp", "business"],
     guide: "/insights/ai-for-restaurants-lebanon",
     pose: { open: 0.22, twist: 0.18, turn: 0.5 },
   },
@@ -177,6 +180,7 @@ const BASE: BaseProfile[] = [
       "custom-software-development",
       "custom-system-architectures",
     ],
+    plans: ["assistant-whatsapp", "business"],
     guide: "/insights/ai-for-clinics-lebanon",
     pose: { open: 0.12, twist: 0.05, turn: -0.35 },
   },
@@ -234,6 +238,7 @@ const BASE: BaseProfile[] = [
       "custom-software-development",
       "custom-system-architectures",
     ],
+    plans: ["assistant-whatsapp", "growth"],
     guide: "/insights/ai-for-real-estate-lebanon",
     pose: { open: 0.3, twist: 0.1, turn: 0.9 },
   },
@@ -292,6 +297,7 @@ const BASE: BaseProfile[] = [
       "custom-software-development",
       "custom-system-architectures",
     ],
+    plans: ["store", "assistant-whatsapp"],
     guide: null,
     pose: { open: 0.26, twist: 0.3, turn: -0.7 },
   },
@@ -352,6 +358,7 @@ const BASE: BaseProfile[] = [
       "custom-software-development",
       "custom-system-architectures",
     ],
+    plans: ["growth", "assistant-web", "seo-foundation"],
     guide: null,
     pose: { open: 0.16, twist: 0.22, turn: 0.25 },
   },
@@ -405,6 +412,7 @@ const BASE: BaseProfile[] = [
       "seo",
       "custom-system-architectures",
     ],
+    plans: ["business", "assistant-web"],
     guide: null,
     pose: { open: 0.1, twist: 0.12, turn: 0.15 },
   },

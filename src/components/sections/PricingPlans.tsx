@@ -1,5 +1,6 @@
 import { LocalLink as Link } from "@/components/ui/LocalLink";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
+import { PlanMarker } from "@/components/visitor/PlanMarker";
 import type { PriceGroup } from "@/lib/pricing/data";
 
 // Keep "$700" reading left-to-right inside Arabic text.
@@ -51,6 +52,7 @@ export function PricingPlans({
               plan.featured ? "ring-1 ring-foreground/40" : ""
             }`}
           >
+            <PlanMarker planId={plan.id} locale={lang} />
             <p className="page-label">
               {plan.name}
               {plan.featured ? (ar ? " · الأكثر اختياراً" : lang === "fr" ? " · Le plus choisi" : " · Most chosen") : ""}

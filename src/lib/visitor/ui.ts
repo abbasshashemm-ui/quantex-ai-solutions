@@ -18,6 +18,8 @@ export type AskUi = {
   prices: string;
   checkInput: string;
   checkSample: [string, string, string, string];
+  /** Under the contact form's button. */
+  replyPromise: string;
   arrow: string;
 };
 
@@ -39,6 +41,7 @@ export const ASK_UI: Record<ProfileLocale, AskUi> = {
     prices: "See all prices",
     checkInput: "Your website address",
     checkSample: ["Google", "AI search", "Mobile speed", "Sample report"],
+    replyPromise: "A real reply within 24 hours, from the person who would build it",
     arrow: "→",
   },
   ar: {
@@ -58,6 +61,7 @@ export const ASK_UI: Record<ProfileLocale, AskUi> = {
     prices: "كل الأسعار",
     checkInput: "عنوان موقعك",
     checkSample: ["غوغل", "بحث الذكاء الاصطناعي", "سرعة الهاتف", "تقرير نموذجي"],
+    replyPromise: "رد حقيقي خلال 24 ساعة، من الشخص الذي سيبني مشروعك",
     arrow: "←",
   },
   fr: {
@@ -77,6 +81,7 @@ export const ASK_UI: Record<ProfileLocale, AskUi> = {
     prices: "Voir tous les tarifs",
     checkInput: "L'adresse de votre site",
     checkSample: ["Google", "Recherche IA", "Vitesse mobile", "Rapport d'exemple"],
+    replyPromise: "Une vraie réponse sous 24 heures, de la personne qui réalisera votre projet",
     arrow: "→",
   },
 };
