@@ -7,7 +7,7 @@ export const runtime = "nodejs";
 export const maxDuration = 30;
 
 export async function POST(request: Request) {
-  if (!allowSiteCheck(`check:${getClientIp(request)}`)) {
+  if (!(await allowSiteCheck(`check:${getClientIp(request)}`))) {
     return Response.json(
       { error: "You have run several checks already. Please try again in an hour, or message us on WhatsApp." },
       { status: 429 },

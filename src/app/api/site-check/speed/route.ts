@@ -7,7 +7,7 @@ export const runtime = "nodejs";
 export const maxDuration = 60;
 
 export async function POST(request: Request) {
-  if (!allowSiteCheck(`speed:${getClientIp(request)}`)) {
+  if (!(await allowSiteCheck(`speed:${getClientIp(request)}`))) {
     return Response.json({ error: "Too many checks. Please try again in an hour." }, { status: 429 });
   }
   let raw: unknown;
