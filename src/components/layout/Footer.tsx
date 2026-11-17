@@ -30,8 +30,8 @@ export function Footer() {
     <footer
       id="contact"
       dir={rtl ? "rtl" : undefined}
-      className={`relative z-20 border-t border-line bg-surface/70 px-4 backdrop-blur-xl sm:px-6${rtl ? " rtl-page" : ""}`}
-      data-reveal
+      data-force-dark
+      className={`site-footer relative z-20 border-t border-line px-4 sm:px-6${rtl ? " rtl-page" : ""}`}
     >
       <div className="mx-auto max-w-7xl py-8 pb-[calc(2rem+env(safe-area-inset-bottom))] sm:py-10">
         <div className="grid grid-cols-2 gap-4 sm:gap-5 md:gap-6 lg:grid-cols-3 lg:gap-8">

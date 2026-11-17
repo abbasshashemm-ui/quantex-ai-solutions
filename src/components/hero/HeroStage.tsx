@@ -326,6 +326,8 @@ export function HeroStage({ children }: HeroStageProps) {
     <section
       ref={stageRef}
       className="alu-stage"
+      data-force-dark
+      data-dark-zone
       data-beat="hero"
       data-ready={ready ? "true" : "false"}
       data-hero-mode={heroMode}

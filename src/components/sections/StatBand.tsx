@@ -1,16 +1,22 @@
 import { ABOUT_STATS } from "@/lib/site/about";
 
-export function StatBand() {
+/** Three figures, set as large as the page allows. */
+export function StatBand({
+  stats = ABOUT_STATS,
+  label = "Quantex at a glance",
+}: {
+  stats?: readonly { value: string; label: string }[];
+  label?: string;
+}) {
   return (
-    <section
-      className="alu-section alu-section--tight"
-      aria-label="Quantex at a glance"
-    >
-      <dl className="alu-section__inner alu-stats alu-stats--plain">
-        {ABOUT_STATS.map((stat) => (
-          <div key={stat.label} className="alu-stat" data-reveal>
-            <dd className="alu-stat__value">{stat.value}</dd>
-            <dt className="alu-stat__label">{stat.label}</dt>
+    <section className="alu-section stat-wall" aria-label={label}>
+      <dl className="alu-section__inner stat-wall__row">
+        {stats.map((stat) => (
+          <div key={stat.label} className="stat-wall__item" data-reveal>
+            <dd className="stat-wall__value" dir="ltr">
+              {stat.value}
+            </dd>
+            <dt className="stat-wall__label">{stat.label}</dt>
           </div>
         ))}
       </dl>

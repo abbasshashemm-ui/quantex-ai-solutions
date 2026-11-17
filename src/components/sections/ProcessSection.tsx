@@ -1,29 +1,39 @@
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { PROCESS } from "@/lib/site/process";
 
-export function ProcessSection() {
+/** Four steps on one line that fills in as the section scrolls into view. */
+type ProcessContent = {
+  eyebrow: string;
+  heading: string;
+  support: string;
+  stages: readonly { n: string; code: string; title: string; body: string }[];
+};
+
+export function ProcessSection({
+  process = PROCESS,
+}: {
+  process?: ProcessContent;
+}) {
   return (
     <section id="process" className="alu-section" aria-labelledby="process-heading">
       <div className="alu-section__inner">
         <header data-reveal>
-          <PageEyebrow>{PROCESS.eyebrow}</PageEyebrow>
+          <PageEyebrow>{process.eyebrow}</PageEyebrow>
           <h2 id="process-heading" className="alu-display alu-section__title">
-            {PROCESS.heading}
+            {process.heading}
           </h2>
-          <p className="alu-lede">{PROCESS.support}</p>
+          <p className="alu-lede">{process.support}</p>
         </header>
 
-        <ol className="rule-grid rule-grid--4">
-          {PROCESS.stages.map((stage) => (
-            <li key={stage.n}>
-              <article className="alu-step rule-item h-full" data-reveal>
-                <p className="alu-step__meta">
-                  <span className="alu-step__n">{stage.n}</span>
-                  <span className="alu-step__code">{stage.code}</span>
-                </p>
-                <h3 className="alu-display alu-step__title">{stage.title}</h3>
-                <p className="alu-step__body">{stage.body}</p>
-              </article>
+        <ol className="process-line">
+          {process.stages.map((stage) => (
+            <li key={stage.n} className="process-line__step">
+              <span className="process-line__n" aria-hidden>
+                {stage.n}
+              </span>
+              <p className="process-line__code">{stage.code}</p>
+              <h3 className="alu-display process-line__title">{stage.title}</h3>
+              <p className="process-line__body">{stage.body}</p>
             </li>
           ))}
         </ol>

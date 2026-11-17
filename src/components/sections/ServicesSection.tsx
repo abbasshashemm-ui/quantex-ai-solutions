@@ -1,6 +1,5 @@
-import { SERVICES } from "@/lib/services/data";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
-import { ServiceCard } from "./ServiceCard";
+import { ServicesList } from "./ServicesList";
 
 export function ServicesSection() {
   return (
@@ -21,13 +20,7 @@ export function ServicesSection() {
           </p>
         </header>
 
-        <ul className="alu-offers">
-          {SERVICES.map((service) => (
-            <li key={service.id} data-reveal>
-              <ServiceCard service={service} />
-            </li>
-          ))}
-        </ul>
+        <ServicesList />
       </div>
     </section>
   );

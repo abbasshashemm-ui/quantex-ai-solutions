@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState, type FormEvent } from "react";
+import { useState, type FormEvent, useEffect, useRef } from "react";
 import { CONVERSION_EVENTS, trackConversion } from "@/lib/analytics/events";
 import { bookCallHref, CONTACT } from "@/lib/site/contact";
 import type {
@@ -93,15 +93,14 @@ export function SiteCheckTool() {
   const [report, setReport] = useState<SiteCheckReport | null>(null);
   const [speed, setSpeed] = useState<SpeedReport | "loading" | null>(null);
 
-  async function onSubmit(event: FormEvent) {
-    event.preventDefault();
+  async function run(target: string) {
     if (busy) return;
     setBusy(true);
     trackConversion(CONVERSION_EVENTS.SITE_CHECK_RUN, { location: "site_check" });
     setError(null);
     setReport(null);
     setSpeed("loading");
-    const body = JSON.stringify({ url });
+    const body = JSON.stringify({ url: target });
     const headers = { "Content-Type": "application/json" };
 
     fetch("/api/site-check/speed", { method: "POST", headers, body })
@@ -135,6 +134,28 @@ export function SiteCheckTool() {
       setBusy(false);
     }
   }
+
+  function onSubmit(event: FormEvent) {
+    event.preventDefault();
+    void run(url);
+  }
+
+  // The home page band sends the address here as ?url=, and the check starts.
+  const started = useRef(false);
+  useEffect(() => {
+    if (started.current) return;
+    started.current = true;
+    const sent = new URLSearchParams(window.location.search).get("url")?.trim();
+    if (!sent) return;
+    const target = sent.slice(0, 300);
+    const id = window.setTimeout(() => {
+      setUrl(target);
+      void run(target);
+    }, 0);
+    return () => window.clearTimeout(id);
+    // Runs once, for the address the page was opened with.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const failing = report?.checks.filter((c) => c.status !== "pass") ?? [];
   const improvable = report ? report.checks.filter((c) => c.status === "pass" && c.next).length : 0;

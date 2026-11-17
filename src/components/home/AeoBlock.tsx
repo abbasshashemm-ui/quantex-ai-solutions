@@ -20,7 +20,7 @@ export function AeoBlock() {
           </h2>
         </div>
         <div>
-          <div className="aeo-answer space-y-4 text-base leading-[1.75] text-foreground/85 sm:text-lead">
+          <div className="aeo-answer aeo-answer--statement space-y-4 text-base leading-[1.75] text-foreground/85 sm:text-lead">
             <p>
               Quantex is a Beirut studio. We build websites that
               turn visitors into customers, and AI assistants that answer

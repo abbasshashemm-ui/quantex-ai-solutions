@@ -28,6 +28,7 @@ import {
   ringZ,
   visibleWorldHeight,
 } from "./choreography";
+import { stepPresence } from "./presence";
 import type { MotionState } from "./motion";
 
 // This file drives three.js directly, with named imports only, so the bundler
@@ -184,6 +185,7 @@ export default function ChromeScene({
         progress,
         time,
         ambient,
+        presence: ambient ? stepPresence(dt) : undefined,
         spin: spinAngle,
         slotCenter: input.slotCenter,
         slotSize: input.slotSize,

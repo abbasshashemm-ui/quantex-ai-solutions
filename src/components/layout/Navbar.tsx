@@ -8,7 +8,12 @@ import { MobileNav } from "./MobileNav";
 import { ThemeToggle } from "./ThemeToggle";
 import { ServicesNavDropdown } from "./ServicesNavDropdown";
 import { LanguageSwitcher } from "./LanguageSwitcher";
+import { usePathname } from "next/navigation";
+import { splitLang } from "@/lib/i18n/routes";
 import { useChrome } from "@/lib/i18n/use-chrome";
+import { useHeaderOverDark } from "@/lib/visitor/header-tone";
+import { getProfile } from "@/lib/visitor/profiles";
+import { useVisitorAnswer } from "@/lib/visitor/store";
 
 const NAV_LINKS = SITE_NAV.filter(
   (item) => item.href !== "/" && item.label !== "Solutions",
@@ -22,9 +27,19 @@ const NAV_KEY = {
 } as const;
 
 export function Navbar() {
-  const { t, rtl } = useChrome();
+  const { t, rtl, lang } = useChrome();
+  const pathname = usePathname() ?? "/";
+  // Home pages open on the dark hero, so the header starts dark there.
+  const answer = useVisitorAnswer();
+  const overHero = useHeaderOverDark(splitLang(pathname).base === "/", [
+    pathname,
+    answer?.profile,
+  ]);
+  const startLabel =
+    (answer ? getProfile(answer.profile, lang).cta : null) ??
+    t.nav.startProject;
   return (
-    <header dir={rtl ? "rtl" : undefined} className={`site-header fixed inset-x-0 top-0 z-50 px-4 pt-[env(safe-area-inset-top)] sm:px-6${rtl ? " rtl-page" : ""}`}>
+    <header data-force-dark={overHero ? "" : undefined} dir={rtl ? "rtl" : undefined} className={`site-header fixed inset-x-0 top-0 z-50 px-4 pt-[env(safe-area-inset-top)] sm:px-6${rtl ? " rtl-page" : ""}`}>
       <nav
         aria-label={t.nav.primary}
         className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 py-3 sm:py-3.5"
@@ -59,7 +74,7 @@ export function Navbar() {
             data-conversion-location="navbar"
             className="btn-primary site-header__cta min-h-11! whitespace-nowrap sm:px-4 lg:px-5"
           >
-            {t.nav.startProject}
+            {startLabel}
           </Link>
           <LanguageSwitcher className="hidden sm:flex" />
           <ThemeToggle />

@@ -7,6 +7,7 @@
  */
 
 :root {
+  --page-fade: #eef0f3;
   --void: #e6e9ed;
   --surface: #eef0f3;
   --surface-elevated: #f7f8fa;
@@ -406,10 +407,6 @@ a:hover > .alu-link span[aria-hidden],
   position: relative;
   height: 320vh;
   height: 320svh;
-}
-
-.alu-stage {
-  border-bottom: 1px solid var(--line);
 }
 
 .alu-stage__panel {
@@ -815,6 +812,506 @@ a:hover > .alu-link span[aria-hidden],
   .alu-beat__title {
     font-size: clamp(5rem, min(8.6vw, 16svh), 8rem);
   }
+}
+
+/*
+ * ——— The hero as a question ———
+ * The visitor says what their business does and the hero answers. Sizes are
+ * set by height as well as width so the form stays on screen on short phones.
+ */
+/* A text field's default width would otherwise stretch the hero past a phone's edge. */
+.ask {
+  min-width: 0;
+}
+
+.ask__title {
+  margin-top: 0.75rem;
+  font-size: clamp(2.25rem, min(11vw, 6.6svh), 3.5rem);
+  line-height: 0.9;
+}
+
+.ask__title span {
+  display: block;
+}
+
+.ask__title--answer {
+  font-size: clamp(2rem, min(9vw, 5.6svh), 3rem);
+  text-wrap: balance;
+}
+
+@media (min-width: 900px) {
+  .ask {
+    max-width: min(40rem, 44vw);
+  }
+
+  .ask__title {
+    font-size: clamp(3rem, min(6.2vw, 11svh), 6rem);
+  }
+
+  .ask__title--answer {
+    font-size: clamp(2.25rem, min(3.8vw, 7svh), 3.5rem);
+  }
+
+  /* The answered sculpture opens wider, so the answer keeps a narrower column. */
+  .ask--answered {
+    max-width: min(36rem, 40vw);
+  }
+}
+
+.ask-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.ask-form__input {
+  width: 0;
+  min-width: 0;
+  flex: 1 1 0;
+  min-height: 3.25rem;
+  border: 2px solid var(--foreground);
+  border-radius: var(--radius-control);
+  padding-inline: 1rem;
+  background: var(--surface-elevated);
+  /* 16px or more, so phones do not zoom the page on focus. */
+  font-size: 1.0625rem;
+  color: var(--foreground);
+}
+
+.ask-form__input::placeholder {
+  color: var(--metallic-dim);
+}
+
+.ask-form__input:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 3px;
+}
+
+.ask-form__submit {
+  flex-shrink: 0;
+}
+
+.ask-picks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.ask-picks .alu-chip {
+  cursor: pointer;
+}
+
+.ask [disabled] {
+  cursor: progress;
+  opacity: 0.6;
+}
+
+/* The answer: three numbered places to start. */
+.ask-steps {
+  margin-top: 1.25rem;
+  border-top: 1px solid var(--line-strong);
+  padding: 0;
+  list-style: none;
+}
+
+.ask-step {
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+  align-items: baseline;
+  gap: 0.25rem 0.75rem;
+  border-bottom: 1px solid var(--line-strong);
+  padding: 0.75rem 0;
+  color: var(--foreground);
+  transition: border-color 0.16s ease;
+}
+
+.ask-step__n {
+  font-family: var(--font-condensed), var(--font-outfit), sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  font-style: italic;
+  color: var(--muted);
+}
+
+.ask-step__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.ask-step__text strong {
+  font-size: 1.0625rem;
+  font-weight: 600;
+}
+
+.ask-step__text span,
+.ask-step__price {
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+}
+
+.ask-step__price {
+  grid-column: 2;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+@media (min-width: 640px) {
+  .ask-step {
+    grid-template-columns: 2.25rem minmax(0, 1fr) auto;
+  }
+
+  .ask-step__price {
+    grid-column: 3;
+    text-align: end;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ask-step:hover {
+    border-bottom-color: var(--foreground);
+  }
+
+  .ask-step:hover .ask-step__n {
+    color: var(--foreground);
+  }
+}
+
+.ask-reset {
+  min-height: 2.75rem;
+  padding-inline: 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+/* Short phones: the answer drops its detail lines to stay on one screen. */
+@media (max-width: 899px) and (max-height: 760px) {
+  .ask-step__text span {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ask--answered > * {
+    animation: ask-in 0.4s var(--ease-out) both;
+  }
+
+  .ask--answered > :nth-child(2) {
+    animation-delay: 60ms;
+  }
+
+  .ask--answered > :nth-child(3) {
+    animation-delay: 120ms;
+  }
+
+  .ask--answered > :nth-child(4) {
+    animation-delay: 180ms;
+  }
+}
+
+@keyframes ask-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+/*
+ * The answer writes itself. The rest of the line is in place but invisible, so
+ * the heading keeps its size and line breaks while it types.
+ */
+.typed__rest {
+  visibility: hidden;
+}
+
+.typed:not([data-done])::after {
+  content: "";
+  display: inline-block;
+  width: 0.08em;
+  height: 0.8em;
+  margin-inline-start: 0.06em;
+  background: currentColor;
+  vertical-align: baseline;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  /* The three steps and the buttons wait for the line to finish. */
+  .ask--answered > :nth-child(n + 3) {
+    animation-delay: calc(var(--type-ms, 0ms) + 80ms);
+  }
+
+  .ask--answered > :nth-child(4) {
+    animation-delay: calc(var(--type-ms, 0ms) + 160ms);
+  }
+}
+
+/* In the dark theme the page itself is dark, so the fades have nothing to do. */
+:root[data-theme="dark"] {
+  --page-fade: transparent;
+}
+
+/*
+ * ——— Dark zones ———
+ * The hero is always dark, in both themes: chrome reads far better on black.
+ * [data-force-dark] gives a subtree the dark theme's tokens (see the theme
+ * block at the end of this file), and the header wears it while the hero is
+ * still underneath.
+ */
+.alu-stage[data-force-dark] {
+  background: var(--void);
+  color: var(--foreground);
+}
+
+/*
+ * Dark and light bands melt into each other. Each full-width dark band fades
+ * to the page colour over its first and last stretch, and keeps its content
+ * clear of the fade. Where two dark bands meet, there is no fade between them.
+ */
+[data-dark-zone] {
+  --fade: clamp(5rem, 12vw, 10rem);
+  position: relative;
+}
+
+[data-dark-zone]::before,
+[data-dark-zone]::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  z-index: 2;
+  height: var(--fade);
+  pointer-events: none;
+}
+
+[data-dark-zone]::before {
+  top: 0;
+  background: linear-gradient(180deg, var(--page-fade), transparent);
+}
+
+[data-dark-zone]::after {
+  bottom: 0;
+  background: linear-gradient(0deg, var(--page-fade), transparent);
+}
+
+/* Sections make room for their fades; the hero only fades at its end. */
+.alu-section[data-dark-zone] {
+  padding-block: calc(var(--fade) + 2rem);
+}
+
+.alu-stage[data-dark-zone]::before,
+[data-dark-zone] + [data-dark-zone]::before,
+[data-dark-zone]:has(+ [data-dark-zone])::after,
+.alu-section--last[data-dark-zone]::after {
+  content: none;
+}
+
+[data-dark-zone] + [data-dark-zone] {
+  padding-top: 2rem;
+}
+
+.alu-section--last[data-dark-zone] {
+  padding-bottom: clamp(5rem, 9vw, 8rem);
+}
+
+/*
+ * The header has a dark glass layer under its light one and cross-fades
+ * between them, so it changes with the page instead of snapping.
+ */
+.site-header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(
+    180deg,
+    rgba(12, 14, 18, 0.72),
+    rgba(12, 14, 18, 0.4)
+  );
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  backdrop-filter: blur(24px) saturate(180%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.site-header::before {
+  transition: opacity 0.4s ease;
+}
+
+.site-header[data-force-dark]::after {
+  opacity: 1;
+}
+
+.site-header[data-force-dark]::before {
+  opacity: 0;
+}
+
+.site-header[data-force-dark] {
+  color: var(--foreground);
+}
+
+.site-header a,
+.site-header button {
+  transition:
+    color 0.4s ease,
+    background-color 0.4s ease,
+    border-color 0.4s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header::before,
+  .site-header::after,
+  .site-header a,
+  .site-header button {
+    transition: none;
+  }
+}
+
+/* The section the answer unlocks: a dark band that continues the hero. */
+.for-you-band {
+  background: var(--void);
+  color: var(--foreground);
+}
+
+.for-you {
+  display: grid;
+  gap: 3rem;
+}
+
+@media (min-width: 900px) {
+  .for-you {
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+    gap: 4rem;
+    align-items: center;
+  }
+}
+
+.for-you__outcomes {
+  margin-top: 2rem;
+  border-top: 1px solid var(--line-strong);
+  padding: 0;
+  list-style: none;
+}
+
+.for-you__outcomes li {
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+  align-items: baseline;
+  gap: 0.75rem;
+  border-bottom: 1px solid var(--line-strong);
+  padding: 1rem 0;
+  font-size: 1.0625rem;
+  line-height: 1.45;
+}
+
+/* A phone, drawn in CSS, holding the sample conversation. */
+.phone {
+  width: min(100%, 21rem);
+  margin: 0;
+  margin-inline: auto;
+}
+
+.phone__screen {
+  display: flex;
+  min-height: 34rem;
+  flex-direction: column;
+  border: 0.5rem solid #23272e;
+  border-radius: 2.5rem;
+  background: var(--surface);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 40px 80px -30px rgba(0, 0, 0, 0.9);
+  overflow: hidden;
+}
+
+.phone__bar {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 1px solid var(--line);
+  padding: 1.25rem 1rem 0.75rem;
+  background: var(--surface-elevated);
+}
+
+.phone__bar > span:last-child {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.9375rem;
+}
+
+.phone__bar small {
+  display: flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.phone__thread {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+.phone__msg {
+  opacity: 0;
+  transform: translateY(6px);
+}
+
+.phone__msg[data-shown] {
+  opacity: 1;
+  transform: none;
+  transition:
+    opacity 0.25s var(--ease-out),
+    transform 0.25s var(--ease-out);
+}
+
+.phone__typing {
+  display: inline-flex;
+  gap: 0.25rem;
+  align-self: flex-end;
+  margin-top: auto;
+  border-radius: 0.9rem 0.9rem 0.2rem 0.9rem;
+  padding: 0.6rem 0.75rem;
+  background: var(--foreground);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.phone__typing[data-on] {
+  opacity: 1;
+}
+
+.phone__typing i {
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+  background: var(--void);
+  opacity: 0.7;
+}
+
+.phone__caption {
+  margin-top: 1rem;
+  font-size: var(--text-label);
+  color: var(--muted);
+  text-align: center;
+}
+
+.services-note {
+  margin-top: 2rem;
+}
+
+.services-note + .alu-offers {
+  margin-top: 1rem;
 }
 
 /* ——— Sections ——— */
@@ -1973,6 +2470,417 @@ li:first-child > .faq-card--plain {
   gap: 1rem;
 }
 
+/*
+ * ——— Below the services ———
+ * Each section has its own shape: a dark band for the live assistant, a wall
+ * of figures, a line that fills, a tool you can use in place, numbered guide
+ * rows, and a dark close that brings the sculpture back.
+ */
+.band-dark,
+.site-footer {
+  background: var(--void);
+  color: var(--foreground);
+}
+
+.band-dark__title {
+  margin-top: 1rem;
+  font-size: clamp(2.75rem, 6vw, 5.5rem);
+  line-height: 0.9;
+  text-wrap: balance;
+}
+
+.live-dot {
+  display: inline-block;
+  width: 0.5rem;
+  height: 0.5rem;
+  margin-inline-end: 0.25rem;
+  border-radius: 50%;
+  background: var(--signal);
+  vertical-align: middle;
+}
+
+/*
+ * The floating chat button stays out of the dark bands, where it would sit on
+ * top of the question form and the closing buttons. It returns on the light
+ * sections in between.
+ */
+.chat-widget__launcher {
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s;
+}
+
+:root:has(.site-header[data-force-dark]) .chat-widget__launcher {
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* Figures keep their left-to-right order on Arabic pages, set from the right. */
+.rtl-page .stat-wall__value {
+  text-align: right;
+}
+
+/* Figures */
+.stat-wall__row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-block: 1px solid var(--line-strong);
+}
+
+.stat-wall__item {
+  min-width: 0;
+  padding: clamp(1.25rem, 3vw, 2.5rem) clamp(0.5rem, 2vw, 2rem);
+}
+
+.stat-wall__item + .stat-wall__item {
+  border-inline-start: 1px solid var(--line-strong);
+}
+
+.stat-wall__value {
+  font-family: var(--font-condensed), var(--font-outfit), sans-serif;
+  font-size: clamp(3.25rem, 13vw, 11rem);
+  font-weight: 800;
+  font-style: italic;
+  line-height: 0.82;
+  color: var(--foreground);
+}
+
+.stat-wall__label {
+  margin-top: 0.75rem;
+  font-size: clamp(0.75rem, 1.2vw, 1rem);
+  font-weight: 600;
+  color: var(--muted);
+}
+
+/* Process: one line, four stops */
+.process-line {
+  position: relative;
+  display: grid;
+  gap: 2rem;
+  margin-top: 3.5rem;
+  padding: 0;
+  list-style: none;
+}
+
+.process-line__step {
+  position: relative;
+  border-inline-start: 2px solid var(--line-strong);
+  padding-inline-start: 1.5rem;
+}
+
+.process-line__step::before {
+  content: "";
+  position: absolute;
+  top: 0.5rem;
+  inset-inline-start: -0.4375rem;
+  width: 0.75rem;
+  height: 0.75rem;
+  border: 2px solid var(--foreground);
+  border-radius: 50%;
+  background: var(--void);
+}
+
+.process-line__n {
+  display: block;
+  font-family: var(--font-condensed), var(--font-outfit), sans-serif;
+  font-size: clamp(3.5rem, 6vw, 5.5rem);
+  font-weight: 800;
+  font-style: italic;
+  line-height: 0.85;
+  color: transparent;
+  -webkit-text-stroke: 1.5px var(--foreground);
+}
+
+.process-line__code {
+  margin-top: 1rem;
+  font-size: var(--text-label);
+  font-weight: 600;
+  color: var(--muted);
+}
+
+.process-line__title {
+  margin-top: 0.25rem;
+  font-size: var(--text-heading);
+}
+
+.process-line__body {
+  margin-top: 0.5rem;
+  font-size: var(--text-body-sm);
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+@media (min-width: 900px) {
+  .process-line {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    border-top: 2px solid var(--line-strong);
+  }
+
+  /* The line fills from the start as the section comes into view. */
+  .process-line::before {
+    content: "";
+    position: absolute;
+    top: -2px;
+    inset-inline: 0;
+    height: 2px;
+    background: var(--foreground);
+    transform-origin: left center;
+  }
+
+  .rtl-page .process-line::before {
+    transform-origin: right center;
+  }
+
+  .process-line__step {
+    border-inline-start: 0;
+    padding: 2rem 0 0;
+  }
+
+  .process-line__step::before {
+    top: -0.4375rem;
+    inset-inline-start: 0;
+  }
+
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .process-line::before {
+        animation: process-fill linear both;
+        animation-timeline: view();
+        animation-range: entry 30% cover 60%;
+      }
+    }
+  }
+}
+
+@keyframes process-fill {
+  from {
+    transform: scaleX(0);
+  }
+}
+
+/* Site check: a dark panel you can type into */
+.check-band {
+  display: grid;
+  gap: 2.5rem;
+  border-radius: var(--radius-card);
+  padding: clamp(1.5rem, 4vw, 3.5rem);
+  background: var(--void);
+  color: var(--foreground);
+}
+
+@media (min-width: 900px) {
+  .check-band {
+    grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 4rem;
+  }
+}
+
+.check-band__title {
+  margin-top: 0.75rem;
+  font-size: var(--text-title);
+  line-height: 0.92;
+  text-wrap: balance;
+}
+
+.check-band__text {
+  max-width: 34rem;
+  margin-top: 1rem;
+  color: var(--ink-soft);
+}
+
+.check-band__form {
+  max-width: 32rem;
+  flex-wrap: wrap;
+}
+
+/* Longer button text (French, Arabic) wraps under the field instead of pushing the page wide. */
+.check-band__form .ask-form__input {
+  width: auto;
+  flex: 1 1 12rem;
+}
+
+.check-band__form .ask-form__submit {
+  max-width: 100%;
+  flex: 1 1 auto;
+  padding-block: 0.75rem;
+  line-height: 1.1;
+  text-align: center;
+  white-space: normal;
+}
+
+.check-band__sample {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  align-items: center;
+  gap: 1.5rem;
+  margin: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-card);
+  padding: 1.5rem;
+  background: var(--surface);
+}
+
+.check-band__sample ul {
+  display: grid;
+  gap: 0.75rem;
+  font-size: 0.8125rem;
+}
+
+.check-band__sample li {
+  display: grid;
+  gap: 0.375rem;
+  color: var(--ink-soft);
+}
+
+.check-band__sample i {
+  height: 0.25rem;
+  border-radius: 2px;
+  background: linear-gradient(
+    90deg,
+    var(--signal) var(--w),
+    var(--line-strong) var(--w)
+  );
+}
+
+.check-band__sample figcaption {
+  grid-column: 1 / -1;
+  font-size: var(--text-label);
+  color: var(--muted);
+}
+
+/* Guides: numbered rows */
+.guide-rows {
+  margin-top: 3rem;
+  border-top: 1px solid var(--line-strong);
+  padding: 0;
+  list-style: none;
+}
+
+.guide-row {
+  display: grid;
+  grid-template-columns: 2.5rem minmax(0, 1fr);
+  align-items: baseline;
+  gap: 0.5rem 1rem;
+  border-bottom: 1px solid var(--line-strong);
+  padding: 1.25rem 0;
+  color: var(--foreground);
+  transition:
+    background-color 0.16s ease,
+    padding 0.16s ease;
+}
+
+.guide-row__n {
+  font-family: var(--font-condensed), var(--font-outfit), sans-serif;
+  font-size: 1.5rem;
+  font-weight: 800;
+  font-style: italic;
+  color: var(--metallic-dim);
+}
+
+.guide-row__text {
+  display: grid;
+  gap: 0.375rem;
+}
+
+.guide-row__title {
+  font-size: clamp(1.125rem, 1.8vw, 1.5rem);
+  font-weight: 600;
+  line-height: 1.25;
+  text-wrap: balance;
+}
+
+.guide-row__body {
+  max-width: 44rem;
+  font-size: var(--text-body-sm);
+  line-height: 1.55;
+  color: var(--ink-soft);
+}
+
+.guide-row__meta {
+  grid-column: 2;
+  font-size: 0.875rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.guide-row__meta span {
+  display: inline-block;
+  transition: transform 0.16s var(--ease-out);
+}
+
+@media (min-width: 800px) {
+  .guide-row {
+    grid-template-columns: 3.5rem minmax(0, 1fr) auto;
+    gap: 2rem;
+    padding: 1.75rem 1rem;
+  }
+
+  .guide-row__meta {
+    grid-column: 3;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .guide-row:hover {
+    background: color-mix(in srgb, var(--foreground) 4%, transparent);
+  }
+
+  .guide-row:hover .guide-row__n {
+    color: var(--foreground);
+  }
+
+  .guide-row:hover .guide-row__meta span {
+    transform: translateX(4px);
+  }
+}
+
+/* "What does Quantex do?": the first paragraph is the statement */
+.aeo-answer--statement > p:first-child {
+  font-size: clamp(1.375rem, 2.3vw, 2rem);
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--foreground);
+  text-wrap: balance;
+}
+
+.faq-card--plain summary h3 {
+  font-size: clamp(1.0625rem, 1.5vw, 1.25rem);
+}
+
+.faq-card--plain summary {
+  padding-block: 1.25rem;
+}
+
+/* Close: the sculpture comes back beside the last line */
+.alu-final {
+  position: relative;
+}
+
+.alu-final__sculpture {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .alu-final {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) clamp(14rem, 24vw, 22rem);
+    align-items: center;
+    column-gap: 3rem;
+  }
+
+  .alu-final > :not(.alu-final__sculpture) {
+    grid-column: 1;
+  }
+
+  .alu-final__sculpture {
+    display: block;
+    grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+}
+
 /* ——— Inner pages ——— */
 .page-shell {
   position: relative;
@@ -2672,7 +3580,8 @@ span.chat-panel__input {
  * on purpose: it re-skins the same classes with graphite metal and
  * light-on-dark glass, and changes nothing else.
  */
-:root[data-theme="dark"] {
+:root[data-theme="dark"],
+[data-force-dark] {
   --void: #0c0e12;
   --surface: #13161b;
   --surface-elevated: #1a1e25;
@@ -2901,11 +3810,13 @@ span.chat-panel__input {
   display: none;
 }
 
-:root[data-theme="dark"] .brand-logo-light {
+:root[data-theme="dark"] .brand-logo-light,
+[data-force-dark] .brand-logo-light {
   display: none;
 }
 
-:root[data-theme="dark"] .brand-logo-dark {
+:root[data-theme="dark"] .brand-logo-dark,
+[data-force-dark] .brand-logo-dark {
   display: block;
 }
 

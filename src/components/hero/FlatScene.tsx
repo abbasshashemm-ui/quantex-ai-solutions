@@ -19,6 +19,7 @@ import {
   visibleWorldHeight,
   type Pose,
 } from "./choreography";
+import { stepPresence } from "./presence";
 import type { MotionState } from "./motion";
 
 /** Minimum time between drawn frames on phones (about 30 per second). */
@@ -167,6 +168,9 @@ export default function FlatScene({
         progress,
         time,
         ambient,
+        // Only the hero reacts to the visitor, not the small stand-alone sculpture.
+        presence:
+          ambient && layout !== "centered" ? stepPresence(dt) : undefined,
         spin: state.spinAngle,
         centered: layout === "centered",
         slotCenter: input.slotCenter,
