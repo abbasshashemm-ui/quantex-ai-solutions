@@ -2883,15 +2883,47 @@ li:first-child > .faq-card--plain {
 
 /* ——— Inner pages ——— */
 .page-shell {
+  --shell-top: calc(6rem + env(safe-area-inset-top));
   position: relative;
-  padding: calc(6rem + env(safe-area-inset-top)) 1rem 6rem;
+  padding: var(--shell-top) 1rem 6rem;
 }
 
 @media (min-width: 640px) {
   .page-shell {
+    --shell-top: 8rem;
     padding-inline: 1.5rem;
-    padding-top: 8rem;
   }
+}
+
+/*
+ * The title area of every inner page: a dark band that runs the full width of
+ * the screen and up under the header, then fades into the page, like the home
+ * page's hero. The band is painted with a border image that extends past the
+ * box on both sides, so the content keeps its column and nothing overflows.
+ */
+.page-hero {
+  --fade: clamp(4rem, 9vw, 7rem);
+  margin-top: calc(-1 * var(--shell-top));
+  margin-bottom: clamp(1rem, 3vw, 2.5rem);
+  padding: var(--shell-top) 0 calc(var(--fade) + 1.5rem);
+  color: var(--foreground);
+  border-image: linear-gradient(
+      180deg,
+      var(--void) 0,
+      var(--void) calc(100% - var(--fade)),
+      var(--page-fade) 100%
+    )
+    fill 0 / 0 / 0 100vmax;
+}
+
+/* The band paints its own fade; the generic dark-zone fades would only span the column. */
+.page-hero::before,
+.page-hero::after {
+  content: none;
+}
+
+.page-hero .page-title {
+  text-wrap: balance;
 }
 
 .page-back {

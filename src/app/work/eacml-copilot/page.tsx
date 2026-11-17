@@ -57,29 +57,31 @@ export default function EacmlCopilotPage() {
       <article className="about-page page-shell">
         <div className="page-grid-bg absolute inset-0" aria-hidden />
         <div className="relative mx-auto max-w-7xl">
-          <Link href="/#work" data-interactive className="page-back">
-            ← Work
-          </Link>
+          <div className="page-hero" data-force-dark data-dark-zone>
+            <Link href="/#work" data-interactive className="page-back">
+              ← Work
+            </Link>
 
-          <header className="mt-8 sm:mt-10">
-            <PageEyebrow>{EACML.eyebrow}</PageEyebrow>
-            <h1 className="alu-display page-title mt-4">{EACML.title}</h1>
-            <p className="alu-lede max-w-3xl">{EACML.pitch}</p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="/contact" data-interactive className="btn-primary w-full max-w-xs sm:w-auto">
-                Talk to us
-              </Link>
-              <a
-                href={CONTACT.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-interactive
-                className="btn-secondary w-full max-w-xs sm:w-auto"
-              >
-                WhatsApp
-              </a>
-            </div>
-          </header>
+            <header className="mt-8 sm:mt-10">
+              <PageEyebrow>{EACML.eyebrow}</PageEyebrow>
+              <h1 className="alu-display page-title mt-4">{EACML.title}</h1>
+              <p className="alu-lede max-w-3xl">{EACML.pitch}</p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Link href="/contact" data-interactive className="btn-primary w-full max-w-xs sm:w-auto">
+                  Talk to us
+                </Link>
+                <a
+                  href={CONTACT.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-interactive
+                  className="btn-secondary w-full max-w-xs sm:w-auto"
+                >
+                  WhatsApp
+                </a>
+              </div>
+            </header>
+          </div>
 
           <dl className="mt-14 grid grid-cols-2 gap-3 sm:mt-20 sm:gap-5 lg:grid-cols-4" aria-label="Project at a glance">
             {EACML.stats.map((stat) => (

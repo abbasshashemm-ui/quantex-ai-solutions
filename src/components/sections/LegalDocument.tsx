@@ -22,20 +22,22 @@ export function LegalDocument({
       <div className="page-grid-bg absolute inset-0" aria-hidden />
 
       <div className="relative mx-auto max-w-3xl">
-        <Link href="/" data-interactive className="page-back">
-          ← Home
-        </Link>
+        <div className="page-hero" data-force-dark data-dark-zone>
+          <Link href="/" data-interactive className="page-back">
+            ← Home
+          </Link>
 
-        <header className="mt-8 sm:mt-10">
-          <PageEyebrow>{eyebrow}</PageEyebrow>
-          <h1 className="alu-display page-title mt-4">{title}</h1>
-          <p className="mt-3 text-sm text-foreground/70">
-            Last updated: {lastUpdated}
-          </p>
-          <p className="mt-5 text-sm leading-relaxed text-foreground/85 sm:text-base">
-            {intro}
-          </p>
-        </header>
+          <header className="mt-8 sm:mt-10">
+            <PageEyebrow>{eyebrow}</PageEyebrow>
+            <h1 className="alu-display page-title mt-4">{title}</h1>
+            <p className="mt-3 text-sm text-foreground/70">
+              Last updated: {lastUpdated}
+            </p>
+            <p className="mt-5 text-sm leading-relaxed text-foreground/85 sm:text-base">
+              {intro}
+            </p>
+          </header>
+        </div>
 
         <div className="legal-page__sections mt-12 space-y-10 sm:mt-14 sm:space-y-12">
           {sections.map((section) => (

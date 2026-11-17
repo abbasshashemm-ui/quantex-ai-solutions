@@ -21,20 +21,22 @@ export function AboutPageContent() {
       <div className="page-grid-bg absolute inset-0" aria-hidden />
 
       <div className="relative mx-auto max-w-7xl">
-        <Link href="/" data-interactive className="page-back">
-          ← Home
-        </Link>
+        <div className="page-hero" data-force-dark data-dark-zone>
+          <Link href="/" data-interactive className="page-back">
+            ← Home
+          </Link>
 
-        <div className="about-page__intro mt-8 sm:mt-10">
-          <header className="about-page__hero">
-            <PageEyebrow>{ABOUT_HERO.eyebrow}</PageEyebrow>
-            <h1 className="alu-display page-title page-title--sm mt-4">
-              {ABOUT_HERO.title}
-            </h1>
-            <p className="alu-lede max-w-2xl">{ABOUT_HERO.lead}</p>
-          </header>
-          <div className="about-page__sculpture">
-            <MiniSculpture mode="idle" />
+          <div className="about-page__intro mt-8 sm:mt-10">
+            <header className="about-page__hero">
+              <PageEyebrow>{ABOUT_HERO.eyebrow}</PageEyebrow>
+              <h1 className="alu-display page-title page-title--sm mt-4">
+                {ABOUT_HERO.title}
+              </h1>
+              <p className="alu-lede max-w-2xl">{ABOUT_HERO.lead}</p>
+            </header>
+            <div className="about-page__sculpture">
+              <MiniSculpture mode="idle" />
+            </div>
           </div>
         </div>
 
@@ -82,13 +84,13 @@ export function AboutPageContent() {
         </section>
 
         <dl
-          className="about-page__stats alu-stats mt-16 sm:mt-20"
+          className="stat-wall__row mt-16 sm:mt-20"
           aria-label="Company highlights"
         >
           {ABOUT_STATS.map((stat) => (
-            <div key={stat.label} className="alu-stat alu-stat--plain">
-              <dd className="alu-stat__value">{stat.value}</dd>
-              <dt className="alu-stat__label">{stat.label}</dt>
+            <div key={stat.label} className="stat-wall__item">
+              <dd className="stat-wall__value" dir="ltr">{stat.value}</dd>
+              <dt className="stat-wall__label">{stat.label}</dt>
             </div>
           ))}
         </dl>

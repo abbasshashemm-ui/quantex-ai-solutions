@@ -7,6 +7,7 @@ export default function NotFound() {
     <article className="page-shell min-h-[100dvh]">
       <div className="page-grid-bg absolute inset-0" aria-hidden />
       <div className="relative mx-auto max-w-3xl">
+        <div className="page-hero" data-force-dark data-dark-zone>
         <PageEyebrow>Error 404</PageEyebrow>
         <h1 className="alu-display page-title page-title--sm mt-4">Page not found.</h1>
         <p className="alu-lede max-w-xl">
@@ -19,6 +20,7 @@ export default function NotFound() {
           <Link href="/contact" data-interactive className="btn-secondary">
             Contact us
           </Link>
+        </div>
         </div>
         <ul className="mt-12 grid gap-3 sm:grid-cols-2">
           {SERVICES.map((service) => (

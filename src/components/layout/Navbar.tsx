@@ -9,7 +9,6 @@ import { ThemeToggle } from "./ThemeToggle";
 import { ServicesNavDropdown } from "./ServicesNavDropdown";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { usePathname } from "next/navigation";
-import { splitLang } from "@/lib/i18n/routes";
 import { useChrome } from "@/lib/i18n/use-chrome";
 import { useHeaderOverDark } from "@/lib/visitor/header-tone";
 import { getProfile } from "@/lib/visitor/profiles";
@@ -29,9 +28,9 @@ const NAV_KEY = {
 export function Navbar() {
   const { t, rtl, lang } = useChrome();
   const pathname = usePathname() ?? "/";
-  // Home pages open on the dark hero, so the header starts dark there.
   const answer = useVisitorAnswer();
-  const overHero = useHeaderOverDark(splitLang(pathname).base === "/", [
+  // Every page opens on a dark band, so the header starts dark everywhere.
+  const overHero = useHeaderOverDark(true, [
     pathname,
     answer?.profile,
   ]);

@@ -74,37 +74,39 @@ export function ArticleView({ lang, article }: Props) {
     >
       <div className="page-grid-bg absolute inset-0" aria-hidden />
       <div className="relative mx-auto max-w-3xl">
-        <div className="flex items-center justify-between gap-4">
-          <Link
-            href={rtl ? AI_SOLUTIONS_AR_PATH : AI_SOLUTIONS_PATH}
-            data-interactive
-            className="page-back"
-          >
-            {t.back}
-          </Link>
-          <Link
-            href={articlePath(other, article.slug)}
-            hrefLang={other}
-            lang={other}
-            dir={rtl ? "ltr" : "rtl"}
-            data-interactive
-            className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
-          >
-            {t.switchLabel}
-          </Link>
-        </div>
+        <div className="page-hero" data-force-dark data-dark-zone>
+          <div className="flex items-center justify-between gap-4">
+            <Link
+              href={rtl ? AI_SOLUTIONS_AR_PATH : AI_SOLUTIONS_PATH}
+              data-interactive
+              className="page-back"
+            >
+              {t.back}
+            </Link>
+            <Link
+              href={articlePath(other, article.slug)}
+              hrefLang={other}
+              lang={other}
+              dir={rtl ? "ltr" : "rtl"}
+              data-interactive
+              className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
+            >
+              {t.switchLabel}
+            </Link>
+          </div>
 
-        <header className="mt-8 sm:mt-10">
-          <PageEyebrow>{t.eyebrow}</PageEyebrow>
-          <h1 className="alu-display page-title page-title--sm mt-4">
-            {article.title}
-          </h1>
-          <p className="mt-4 text-sm text-foreground/70">
-            {t.by} ·{" "}
-            <time dateTime={article.datePublished}>{article.displayDate}</time>{" "}
-            · {article.readingTime}
-          </p>
-        </header>
+          <header className="mt-8 sm:mt-10">
+            <PageEyebrow>{t.eyebrow}</PageEyebrow>
+            <h1 className="alu-display page-title page-title--sm mt-4">
+              {article.title}
+            </h1>
+            <p className="mt-4 text-sm text-foreground/70">
+              {t.by} ·{" "}
+              <time dateTime={article.datePublished}>{article.displayDate}</time>{" "}
+              · {article.readingTime}
+            </p>
+          </header>
+        </div>
 
         <p className={`aeo-answer alu-glass page-panel mt-8 ${bodyClass}`}>
           {article.summary}

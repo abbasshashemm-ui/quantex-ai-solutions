@@ -88,33 +88,35 @@ export default function AiInLebanonArticle() {
       <article className="about-page page-shell">
         <div className="page-grid-bg absolute inset-0" aria-hidden />
         <div className="relative mx-auto max-w-3xl">
-          <div className="flex items-center justify-between gap-4">
-            <Link href={AI_SOLUTIONS_PATH} data-interactive className="page-back">
-              ← AI Solutions
-            </Link>
-            <Link
-              href={AI_ARTICLE_AR_PATH}
-              hrefLang="ar"
-              lang="ar"
-              dir="rtl"
-              data-interactive
-              className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
-            >
-              العربية
-            </Link>
-          </div>
+          <div className="page-hero" data-force-dark data-dark-zone>
+            <div className="flex items-center justify-between gap-4">
+              <Link href={AI_SOLUTIONS_PATH} data-interactive className="page-back">
+                ← AI Solutions
+              </Link>
+              <Link
+                href={AI_ARTICLE_AR_PATH}
+                hrefLang="ar"
+                lang="ar"
+                dir="rtl"
+                data-interactive
+                className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
+              >
+                العربية
+              </Link>
+            </div>
 
-          <header className="mt-8 sm:mt-10">
-            <PageEyebrow>Guide</PageEyebrow>
-            <h1 className="alu-display page-title page-title--sm mt-4">
-              {AI_ARTICLE.title}
-            </h1>
-            <p className="mt-4 text-sm text-foreground/70">
-              By {SITE.founder} ·{" "}
-              <time dateTime={AI_ARTICLE.datePublished}>October 7, 2026</time>{" "}
-              · {AI_ARTICLE.readingTime}
-            </p>
-          </header>
+            <header className="mt-8 sm:mt-10">
+              <PageEyebrow>Guide</PageEyebrow>
+              <h1 className="alu-display page-title page-title--sm mt-4">
+                {AI_ARTICLE.title}
+              </h1>
+              <p className="mt-4 text-sm text-foreground/70">
+                By {SITE.founder} ·{" "}
+                <time dateTime={AI_ARTICLE.datePublished}>October 7, 2026</time>{" "}
+                · {AI_ARTICLE.readingTime}
+              </p>
+            </header>
+          </div>
 
           <p className="aeo-answer alu-glass page-panel mt-8 text-base leading-relaxed text-foreground/90 sm:text-lead sm:leading-[1.75]">
             {AI_ARTICLE.summary}
