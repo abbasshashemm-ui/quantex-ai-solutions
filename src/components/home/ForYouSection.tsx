@@ -5,7 +5,12 @@ import { useEffect, useRef, useState } from "react";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
 import { CONTACT } from "@/lib/site/contact";
-import { getProfile, type Profile } from "@/lib/visitor/profiles";
+import {
+  getProfile,
+  type Profile,
+  type ProfileLocale,
+} from "@/lib/visitor/profiles";
+import { ASK_UI, type AskUi } from "@/lib/visitor/ui";
 import { useVisitorAnswer } from "@/lib/visitor/store";
 
 /** Pause before a customer message and before the assistant's reply, in ms. */
@@ -13,7 +18,7 @@ const IN_MS = 650;
 const OUT_MS = 1100;
 
 /** The sample conversation in a phone, arriving one message at a time. */
-function Phone({ profile }: { profile: Profile }) {
+function Phone({ profile, ui }: { profile: Profile; ui: AskUi }) {
   const ref = useRef<HTMLDivElement>(null);
   const total = profile.chat.length + 1; // the handover line is the last step
   const [shown, setShown] = useState(0);
@@ -69,7 +74,7 @@ function Phone({ profile }: { profile: Profile }) {
           <span>
             <strong>{profile.chatName}</strong>
             <small>
-              <i className="mock-dot" aria-hidden /> Assistant online
+              <i className="mock-dot" aria-hidden /> {ui.online}
             </small>
           </span>
         </div>
@@ -96,17 +101,18 @@ function Phone({ profile }: { profile: Profile }) {
           </span>
         </div>
       </div>
-      <figcaption className="phone__caption">Sample conversation</figcaption>
+      <figcaption className="phone__caption">{ui.sample}</figcaption>
     </figure>
   );
 }
 
 /** Shown once the visitor has said what their business does. */
-export function ForYouSection() {
+export function ForYouSection({ locale = "en" }: { locale?: ProfileLocale }) {
   const answer = useVisitorAnswer();
   if (!answer) return null;
 
-  const profile = getProfile(answer.profile);
+  const ui = ASK_UI[locale];
+  const profile = getProfile(answer.profile, locale);
   const whatsapp = `${CONTACT.whatsapp}?text=${encodeURIComponent(profile.whatsapp)}`;
 
   return (
@@ -119,9 +125,9 @@ export function ForYouSection() {
     >
       <div className="alu-section__inner for-you">
         <div>
-          <PageEyebrow>Built around your answer</PageEyebrow>
+          <PageEyebrow>{ui.forYouEyebrow}</PageEyebrow>
           <h2 id="for-you-heading" className="alu-display alu-section__title">
-            How it would work for {profile.noun}
+            {profile.forYouTitle}
           </h2>
           <ol className="for-you__outcomes">
             {profile.outcomes.map((outcome, index) => (
@@ -141,15 +147,19 @@ export function ForYouSection() {
               data-conversion-location="for_you"
               className="btn-primary"
             >
-              Talk it through on WhatsApp
+              {ui.whatsapp}
             </a>
-            <Link href="/pricing" data-interactive className="btn-secondary">
-              See all prices
+            <Link
+              href={locale === "en" ? "/pricing" : `/${locale}/pricing`}
+              data-interactive
+              className="btn-secondary"
+            >
+              {ui.prices}
             </Link>
           </div>
         </div>
 
-        <Phone key={profile.id} profile={profile} />
+        <Phone key={`${profile.id}-${locale}`} profile={profile} ui={ui} />
       </div>
     </section>
   );

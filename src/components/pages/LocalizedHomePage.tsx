@@ -7,7 +7,15 @@ import { getLocaleContent, localePath } from "@/lib/i18n";
 import { EACML_AR } from "@/lib/i18n/eacml-ar";
 import type { Locale } from "@/lib/i18n/types";
 import { SERVICES } from "@/lib/services/data";
-import { ServiceCard } from "@/components/sections/ServiceCard";
+import { HeroAsk } from "@/components/hero/HeroAsk";
+import { MiniSculpture } from "@/components/hero/MiniSculpture";
+import { ClosingTitle } from "@/components/home/ClosingTitle";
+import { ForYouSection } from "@/components/home/ForYouSection";
+import { GuidesList } from "@/components/home/GuidesList";
+import { SiteCheckBand } from "@/components/home/SiteCheckBand";
+import { ProcessSection } from "@/components/sections/ProcessSection";
+import { ServicesList } from "@/components/sections/ServicesList";
+import { StatBand } from "@/components/sections/StatBand";
 import { ProjectGallery } from "@/components/work/ProjectGallery";
 import { CONTACT } from "@/lib/site/contact";
 
@@ -24,6 +32,16 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
   const h = c.home;
   const rtl = c.dir === "rtl";
   const arrow = rtl ? "←" : "→";
+  const cards = Object.fromEntries(
+    SERVICES.map((service) => [
+      service.slug,
+      {
+        href: localePath(locale, `/services/${service.slug}`),
+        label: c.services[service.slug].label,
+        description: c.services[service.slug].description,
+      },
+    ]),
+  );
   const guides =
     locale === "ar"
       ? getArticleListing("ar").filter(
@@ -34,33 +52,10 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
   return (
     <div lang={c.htmlLang} dir={c.dir} className={rtl ? "rtl-page" : undefined}>
       <HeroStage>
-        <div className="alu-hero">
-          <PageEyebrow>
-            {h.hero.eyebrow} · {h.hero.chips[0]} · {h.hero.chips[1]}
-          </PageEyebrow>
-          <h1 className="alu-display alu-h1">
-            {h.hero.headline.map((line, index) => (
-              <span key={line} className="alu-h1__line" style={{ "--i": index } as React.CSSProperties}>
-                {line}
-              </span>
-            ))}
-          </h1>
-          <p className="alu-lede">{h.hero.lede}</p>
-          <div className="alu-ctas">
-            <Link
-              href={localePath(locale, "/contact")}
-              data-interactive
-              data-conversion={CONVERSION_EVENTS.SOLUTIONS_CLICK}
-              data-conversion-location="hero"
-              className="btn-primary"
-            >
-              {h.hero.primary}
-            </Link>
-            <a href="#solutions" data-interactive className="btn-secondary">
-              {h.hero.secondary}
-            </a>
-          </div>
-        </div>
+        <HeroAsk
+          locale={locale}
+          eyebrow={`${h.hero.eyebrow} · ${h.hero.chips[0]} · ${h.hero.chips[1]}`}
+        />
 
         {h.beats.map((beat, i) => (
           <div key={beat.slug} className={`alu-beat alu-beat--${i === 0 ? "one" : "two"}`}>
@@ -73,6 +68,7 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
           </div>
         ))}
       </HeroStage>
+      <ForYouSection locale={locale} />
 
       <section id="work" className="alu-section" aria-labelledby="work-heading">
         <div className="alu-section__inner">
@@ -87,58 +83,6 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section className="alu-section !py-8 sm:!py-10">
-        <div className="alu-section__inner">
-          <div data-reveal className="alu-glass flex flex-col gap-5 px-5 py-6 sm:flex-row sm:items-center sm:justify-between sm:gap-8 sm:px-8 sm:py-7">
-            <div className="min-w-0">
-              <p className="page-label">{h.siteCheck.label}</p>
-              <h2 className="alu-display mt-2 page-h2">{h.siteCheck.title}</h2>
-              <p className="mt-2 max-w-xl text-sm text-foreground/80 sm:text-base">{h.siteCheck.text}</p>
-            </div>
-            <Link
-              href="/site-check"
-              data-interactive
-              data-conversion="cta_click"
-              data-conversion-location="site_check_band"
-              className="btn-primary w-full shrink-0 sm:w-auto"
-            >
-              {h.siteCheck.button}
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="aeo-block alu-section" aria-labelledby="aeo-heading">
-        <div className="alu-section__inner alu-split alu-split--top">
-          <div>
-            <PageEyebrow>{h.aeo.eyebrow}</PageEyebrow>
-            <h2 id="aeo-heading" className="alu-display alu-section__title">
-              {h.aeo.title}
-            </h2>
-          </div>
-          <div>
-            <div className="aeo-answer space-y-4 text-base leading-[1.8] text-foreground/85 sm:text-lead">
-              {h.aeo.paragraphs.map((p) => (
-                <p key={p}>{p}</p>
-              ))}
-            </div>
-            <ul className="mt-7 flex flex-wrap gap-2">
-              {h.aeo.pillars.map((item) => (
-                <li key={item.label}>
-                  <Link
-                    href={item.slug ? localePath(locale, `/services/${item.slug}`) : localePath(locale, item.path ?? "")}
-                    data-interactive
-                    className="alu-chip alu-chip--link"
-                  >
-                    {item.label}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
       <section id="solutions" className="alu-section" aria-labelledby="services-heading">
         <div className="alu-section__inner">
           <header data-reveal>
@@ -148,37 +92,16 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
             </h2>
             <p className="alu-lede">{h.services.lede}</p>
           </header>
-          <ul className="alu-offers">
-            {SERVICES.map((service) => {
-              const t = c.services[service.slug];
-              return (
-                <li key={service.id} data-reveal>
-                  <ServiceCard
-                    service={service}
-                    href={localePath(locale, `/services/${service.slug}`)}
-                    label={t.label}
-                    description={t.description}
-                    learnMore={h.services.learnMore}
-                    arrow={arrow}
-                    locale={locale}
-                  />
-                </li>
-              );
-            })}
-          </ul>
+          <ServicesList
+            locale={locale}
+            cards={cards}
+            learnMore={h.services.learnMore}
+            arrow={arrow}
+          />
         </div>
       </section>
 
-      <section className="alu-section alu-section--tight" aria-label={h.aeo.title}>
-        <dl className="alu-section__inner alu-stats alu-stats--plain">
-          {h.stats.map((stat) => (
-            <div key={stat.label} className="alu-stat" data-reveal>
-              <dd className="alu-stat__value">{stat.value}</dd>
-              <dt className="alu-stat__label">{stat.label}</dt>
-            </div>
-          ))}
-        </dl>
-      </section>
+      <StatBand stats={h.stats} label={h.aeo.title} />
 
       {locale === "ar" ? (
         <section id="flagship" className="alu-section" aria-labelledby="flagship-heading">
@@ -205,31 +128,9 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
         </section>
       ) : null}
 
-      <section id="process" className="alu-section" aria-labelledby="process-heading">
-        <div className="alu-section__inner">
-          <header data-reveal>
-            <PageEyebrow>{h.process.eyebrow}</PageEyebrow>
-            <h2 id="process-heading" className="alu-display alu-section__title">
-              {h.process.heading}
-            </h2>
-            <p className="alu-lede">{h.process.support}</p>
-          </header>
-          <ol className="rule-grid rule-grid--4">
-            {h.process.stages.map((stage) => (
-              <li key={stage.n}>
-                <article className="alu-step rule-item h-full" data-reveal>
-                  <p className="alu-step__meta">
-                    <span className="alu-step__n">{stage.n}</span>
-                    <span className="alu-step__code">{stage.code}</span>
-                  </p>
-                  <h3 className="alu-display alu-step__title">{stage.title}</h3>
-                  <p className="alu-step__body">{stage.body}</p>
-                </article>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
+      <ProcessSection process={h.process} />
+
+      <SiteCheckBand locale={locale} copy={h.siteCheck} />
 
       <section id="guides" className="alu-section" aria-labelledby="guides-heading">
         <div className="alu-section__inner">
@@ -241,19 +142,15 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
             <p className="alu-lede max-w-2xl">{h.guides.lede}</p>
           </div>
           {guides.length > 0 ? (
-            <ul className="rule-grid rule-grid--3">
-              {guides.map((guide) => (
-                <li key={guide.href} data-reveal>
-                  <Link href={guide.href} data-interactive className="rule-item rule-item--link flex h-full flex-col">
-                    <h3 className="rule-item__title">{guide.title}</h3>
-                    <p className="mt-2 flex-1 text-body-sm leading-relaxed text-foreground/80">{guide.description}</p>
-                    <span className="mt-4 text-sm font-semibold text-foreground underline underline-offset-4">
-                      {h.guides.readGuide}
-                    </span>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+            <GuidesList
+              locale={locale}
+              guides={guides.map(({ href, title, description, readingTime }) => ({
+                href,
+                title,
+                description,
+                readingTime,
+              }))}
+            />
           ) : null}
           <p className="mt-6 text-sm">
             <Link
@@ -264,6 +161,37 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
               {h.guides.viewAll}
             </Link>
           </p>
+        </div>
+      </section>
+
+      <section className="aeo-block alu-section" aria-labelledby="aeo-heading">
+        <div className="alu-section__inner alu-split alu-split--top">
+          <div>
+            <PageEyebrow>{h.aeo.eyebrow}</PageEyebrow>
+            <h2 id="aeo-heading" className="alu-display alu-section__title">
+              {h.aeo.title}
+            </h2>
+          </div>
+          <div>
+            <div className="aeo-answer aeo-answer--statement space-y-4 text-base leading-[1.8] text-foreground/85 sm:text-lead">
+              {h.aeo.paragraphs.map((p) => (
+                <p key={p}>{p}</p>
+              ))}
+            </div>
+            <ul className="mt-7 flex flex-wrap gap-2">
+              {h.aeo.pillars.map((item) => (
+                <li key={item.label}>
+                  <Link
+                    href={item.slug ? localePath(locale, `/services/${item.slug}`) : localePath(locale, item.path ?? "")}
+                    data-interactive
+                    className="alu-chip alu-chip--link"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </section>
 
@@ -299,7 +227,11 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
         </div>
       </section>
 
-      <section className="alu-section alu-section--last">
+      <section
+        className="alu-section alu-section--last band-dark"
+        data-force-dark
+        data-dark-zone
+      >
         <div className="alu-section__inner">
           <ul className="alu-promises">
             {h.closing.promises.map((promise) => (
@@ -310,7 +242,10 @@ export function LocalizedHomePage({ locale }: { locale: Locale }) {
             ))}
           </ul>
           <div className="alu-final">
-            <h2 className="alu-display alu-section__title">{h.closing.title}</h2>
+            <div className="alu-final__sculpture" aria-hidden>
+              <MiniSculpture mode="idle" minWidth={900} />
+            </div>
+            <ClosingTitle locale={locale} fallback={h.closing.title} />
             <div className="alu-ctas">
               <Link
                 href={localePath(locale, "/contact")}

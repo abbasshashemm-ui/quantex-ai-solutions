@@ -36,7 +36,7 @@ export function Navbar() {
     answer?.profile,
   ]);
   const startLabel =
-    (lang === "en" && answer ? getProfile(answer.profile).cta : null) ??
+    (answer ? getProfile(answer.profile, lang).cta : null) ??
     t.nav.startProject;
   return (
     <header data-force-dark={overHero ? "" : undefined} dir={rtl ? "rtl" : undefined} className={`site-header fixed inset-x-0 top-0 z-50 px-4 pt-[env(safe-area-inset-top)] sm:px-6${rtl ? " rtl-page" : ""}`}>

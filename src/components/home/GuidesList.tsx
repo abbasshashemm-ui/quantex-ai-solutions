@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { getProfile } from "@/lib/visitor/profiles";
+import { getProfile, type ProfileLocale } from "@/lib/visitor/profiles";
 import { useVisitorAnswer } from "@/lib/visitor/store";
 
 type Guide = {
@@ -15,9 +15,15 @@ type Guide = {
  * The featured guides as numbered rows, with the visitor's own industry first
  * when there is a guide for it.
  */
-export function GuidesList({ guides }: { guides: Guide[] }) {
+export function GuidesList({
+  guides,
+  locale = "en",
+}: {
+  guides: Guide[];
+  locale?: ProfileLocale;
+}) {
   const answer = useVisitorAnswer();
-  const first = answer ? getProfile(answer.profile).guide : null;
+  const first = answer ? getProfile(answer.profile, locale).guide : null;
   const ordered = first
     ? [...guides].sort(
         (a, b) => Number(b.href === first) - Number(a.href === first),
@@ -38,7 +44,8 @@ export function GuidesList({ guides }: { guides: Guide[] }) {
               <span className="guide-row__body">{guide.description}</span>
             </span>
             <span className="guide-row__meta">
-              {guide.readingTime} <span aria-hidden>→</span>
+              {guide.readingTime}{" "}
+              <span aria-hidden>{locale === "ar" ? "←" : "→"}</span>
             </span>
           </Link>
         </li>

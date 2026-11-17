@@ -2499,6 +2499,27 @@ li:first-child > .faq-card--plain {
   vertical-align: middle;
 }
 
+/*
+ * The floating chat button stays out of the dark bands, where it would sit on
+ * top of the question form and the closing buttons. It returns on the light
+ * sections in between.
+ */
+.chat-widget__launcher {
+  transition:
+    opacity 0.3s ease,
+    visibility 0.3s;
+}
+
+:root:has(.site-header[data-force-dark]) .chat-widget__launcher {
+  visibility: hidden;
+  opacity: 0;
+}
+
+/* Figures keep their left-to-right order on Arabic pages, set from the right. */
+.rtl-page .stat-wall__value {
+  text-align: right;
+}
+
 /* Figures */
 .stat-wall__row {
   display: grid;
@@ -2671,6 +2692,22 @@ li:first-child > .faq-card--plain {
 
 .check-band__form {
   max-width: 32rem;
+  flex-wrap: wrap;
+}
+
+/* Longer button text (French, Arabic) wraps under the field instead of pushing the page wide. */
+.check-band__form .ask-form__input {
+  width: auto;
+  flex: 1 1 12rem;
+}
+
+.check-band__form .ask-form__submit {
+  max-width: 100%;
+  flex: 1 1 auto;
+  padding-block: 0.75rem;
+  line-height: 1.1;
+  text-align: center;
+  white-space: normal;
 }
 
 .check-band__sample {

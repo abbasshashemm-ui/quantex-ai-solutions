@@ -7,15 +7,18 @@ import {
   useState,
   type CSSProperties,
   type FormEvent,
+  type ReactNode,
 } from "react";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
 import {
-  QUICK_PICKS,
   getProfile,
+  getQuickPicks,
   matchProfile,
   type ProfileId,
+  type ProfileLocale,
 } from "@/lib/visitor/profiles";
+import { ASK_UI } from "@/lib/visitor/ui";
 import { setVisitorAnswer, useVisitorAnswer } from "@/lib/visitor/store";
 import {
   nudgePresence,
@@ -67,7 +70,14 @@ function TypedLine({ text }: { text: string }) {
  * The hero as a question. The visitor says what their business does, and the
  * hero answers with where to start. The rest of the page reads the same answer.
  */
-export function HeroAsk() {
+export function HeroAsk({
+  locale = "en",
+  eyebrow = "Beirut AI studio · 10+ paying clients · Replies within 24 hours",
+}: {
+  locale?: ProfileLocale;
+  eyebrow?: ReactNode;
+}) {
+  const ui = ASK_UI[locale];
   const answer = useVisitorAnswer();
   const [text, setText] = useState("");
   const [pending, setPending] = useState(false);
@@ -122,8 +132,8 @@ export function HeroAsk() {
   };
 
   if (answer) {
-    const profile = getProfile(answer.profile);
-    const line = `For ${profile.noun}, start here`;
+    const profile = getProfile(answer.profile, locale);
+    const line = profile.answerLine;
     return (
       <div
         className="alu-hero ask ask--answered"
@@ -131,7 +141,7 @@ export function HeroAsk() {
         style={{ "--type-ms": `${line.length * TYPE_MS}ms` } as CSSProperties}
       >
         <PageEyebrow>
-          You said: <q>{answer.text}</q>
+          {ui.youSaid} <q>{answer.text}</q>
         </PageEyebrow>
         <h1 className="alu-display ask__title ask__title--answer">
           <TypedLine key={line} text={line} />
@@ -152,10 +162,10 @@ export function HeroAsk() {
         </ol>
         <div className="alu-ctas">
           <a href="#for-you" data-interactive className="btn-primary">
-            See how it would work
+            {ui.seeHow}
           </a>
           <button type="button" data-interactive className="ask-reset" onClick={reset}>
-            Change my answer
+            {ui.change}
           </button>
         </div>
       </div>
@@ -164,15 +174,13 @@ export function HeroAsk() {
 
   return (
     <div className="alu-hero ask" data-pending={pending ? "true" : undefined}>
-      <PageEyebrow>
-        Beirut AI studio · 10+ paying clients · Replies within 24 hours
-      </PageEyebrow>
+      <PageEyebrow>{eyebrow}</PageEyebrow>
       <h1 className="alu-display ask__title">
-        <span>What does your</span> <span>business do?</span>
+        <span>{ui.question[0]}</span> <span>{ui.question[1]}</span>
       </h1>
       <form className="ask-form" onSubmit={onSubmit}>
         <label htmlFor="ask-input" className="sr-only">
-          Describe your business in a few words
+          {ui.inputLabel}
         </label>
         <input
           id="ask-input"
@@ -183,7 +191,7 @@ export function HeroAsk() {
           inputMode="text"
           autoComplete="off"
           maxLength={80}
-          placeholder="A dental clinic"
+          placeholder={ui.placeholder}
           value={text}
           onChange={(event) => {
             setText(event.target.value);
@@ -199,11 +207,11 @@ export function HeroAsk() {
           className="btn-primary ask-form__submit"
           disabled={pending}
         >
-          {pending ? "Thinking" : "Show me"}
+          {pending ? ui.thinking : ui.submit}
         </button>
       </form>
-      <ul className="ask-picks" aria-label="Or pick one">
-        {QUICK_PICKS.map((pick) => (
+      <ul className="ask-picks" aria-label={ui.picksLabel}>
+        {getQuickPicks(locale).map((pick) => (
           <li key={pick.id}>
             <button
               type="button"

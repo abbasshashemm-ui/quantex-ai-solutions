@@ -5,6 +5,8 @@
  * src/lib/pricing/data.ts and must be kept in step with it.
  */
 
+import { PROFILE_TEXT_AR, PROFILE_TEXT_FR } from "./profiles-i18n";
+
 export type ProfileId =
   | "restaurant"
   | "clinic"
@@ -24,8 +26,12 @@ export type Profile = {
   id: ProfileId;
   /** Shown on the quick-pick button. */
   pick: string;
-  /** Fits "For {noun}, start here" and "How it would work for {noun}". */
+  /** English only: fits "For {noun}, start here". Other languages carry whole lines. */
   noun: string;
+  /** The hero's reply, the title of the section it unlocks, and the note above the services. */
+  answerLine: string;
+  forYouTitle: string;
+  servicesNote: string | null;
   /** Any of these in the visitor's answer selects this profile. */
   keywords: string[];
   steps: [ProfileStep, ProfileStep, ProfileStep];
@@ -55,7 +61,9 @@ const ASSISTANT = "/services/custom-intelligent-chatbots";
 const SEO = "/services/seo";
 const AUTOMATION = "/services/business-process-automation";
 
-export const PROFILES: Profile[] = [
+type BaseProfile = Omit<Profile, "answerLine" | "forYouTitle" | "servicesNote">;
+
+const BASE: BaseProfile[] = [
   {
     id: "restaurant",
     pick: "Restaurant",
@@ -402,10 +410,29 @@ export const PROFILES: Profile[] = [
   },
 ];
 
-export const QUICK_PICKS = PROFILES.map(({ id, pick }) => ({ id, pick }));
+export type ProfileLocale = "en" | "ar" | "fr";
 
-export function getProfile(id: ProfileId): Profile {
-  return PROFILES.find((profile) => profile.id === id) ?? PROFILES[PROFILES.length - 1];
+const TEXT = { ar: PROFILE_TEXT_AR, fr: PROFILE_TEXT_FR } as const;
+
+export const PROFILES: Profile[] = BASE.map((profile) => ({
+  ...profile,
+  answerLine: `For ${profile.noun}, start here`,
+  forYouTitle: `How it would work for ${profile.noun}`,
+  servicesNote:
+    profile.id === "general"
+      ? null
+      : `In the order that matters for ${profile.noun}`,
+}));
+
+/** The six kinds of business, for the quick-pick buttons, in the page's language. */
+export function getQuickPicks(locale: ProfileLocale = "en") {
+  return PROFILES.map(({ id }) => ({ id, pick: getProfile(id, locale).pick }));
+}
+
+/** A profile in the page's language. Wording is translated; everything else is shared. */
+export function getProfile(id: ProfileId, locale: ProfileLocale = "en"): Profile {
+  const base = PROFILES.find((profile) => profile.id === id) ?? PROFILES[PROFILES.length - 1];
+  return locale === "en" ? base : { ...base, ...TEXT[locale][base.id] };
 }
 
 /** Picks the profile whose keywords best match a free-text answer. */
@@ -413,7 +440,7 @@ export function matchProfile(answer: string): ProfileId {
   const text = answer.toLowerCase();
   let best: ProfileId = "general";
   let bestScore = 0;
-  for (const profile of PROFILES) {
+  for (const profile of BASE) {
     let score = 0;
     for (const keyword of profile.keywords) {
       // Longer keywords are more specific, so they count for more.
