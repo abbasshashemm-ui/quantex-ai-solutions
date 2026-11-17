@@ -21,27 +21,29 @@ export function LocalizedAbout({ locale }: { locale: Locale }) {
     >
       <div className="page-grid-bg absolute inset-0" aria-hidden />
       <div className="relative mx-auto max-w-7xl">
-        <div className="flex items-center justify-between gap-4">
-          <Link href={localePath(locale)} data-interactive className="page-back">
-            {rtl ? "→" : "←"} {a.back}
-          </Link>
-          <Link
-            href="/about"
-            hrefLang="en"
-            lang="en"
-            dir="ltr"
-            data-interactive
-            className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
-          >
-            {c.switcher.en}
-          </Link>
-        </div>
+        <div className="page-hero" data-force-dark data-dark-zone>
+          <div className="flex items-center justify-between gap-4">
+            <Link href={localePath(locale)} data-interactive className="page-back">
+              {rtl ? "→" : "←"} {a.back}
+            </Link>
+            <Link
+              href="/about"
+              hrefLang="en"
+              lang="en"
+              dir="ltr"
+              data-interactive
+              className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
+            >
+              {c.switcher.en}
+            </Link>
+          </div>
 
-        <header className="mt-8 sm:mt-10">
-          <PageEyebrow>{a.hero.eyebrow}</PageEyebrow>
-          <h1 className="alu-display page-title page-title--sm mt-4 max-w-4xl">{a.hero.title}</h1>
-          <p className="alu-lede max-w-2xl">{a.hero.lead}</p>
-        </header>
+          <header className="mt-8 sm:mt-10">
+            <PageEyebrow>{a.hero.eyebrow}</PageEyebrow>
+            <h1 className="alu-display page-title page-title--sm mt-4 max-w-4xl">{a.hero.title}</h1>
+            <p className="alu-lede max-w-2xl">{a.hero.lead}</p>
+          </header>
+        </div>
 
         <section className="mt-16 sm:mt-24" aria-labelledby="about-story-heading">
           <PageEyebrow>{a.story.eyebrow}</PageEyebrow>
@@ -75,11 +77,11 @@ export function LocalizedAbout({ locale }: { locale: Locale }) {
           </div>
         </section>
 
-        <dl className="alu-stats mt-16 sm:mt-20">
+        <dl className="stat-wall__row mt-16 sm:mt-20">
           {a.stats.map((stat) => (
-            <div key={stat.label} className="alu-stat alu-stat--plain">
-              <dd className="alu-stat__value">{stat.value}</dd>
-              <dt className="alu-stat__label">{stat.label}</dt>
+            <div key={stat.label} className="stat-wall__item">
+              <dd className="stat-wall__value" dir="ltr">{stat.value}</dd>
+              <dt className="stat-wall__label">{stat.label}</dt>
             </div>
           ))}
         </dl>

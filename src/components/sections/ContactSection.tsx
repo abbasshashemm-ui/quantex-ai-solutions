@@ -103,52 +103,54 @@ export function ContactSection({
       <div className="page-grid-bg absolute inset-0" aria-hidden />
 
       <div className="relative mx-auto max-w-7xl">
-        <div className="flex items-center justify-between gap-4">
-          <Link href={homeHref} data-interactive className="page-back">
-            {rtl ? "→" : "←"} {copy.back}
-          </Link>
-          {switchLink ? (
-            <Link
-              href={switchLink.href}
-              hrefLang={switchLink.lang}
-              lang={switchLink.lang}
-              dir={switchLink.lang === "ar" ? "rtl" : "ltr"}
-              data-interactive
-              className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
-            >
-              {switchLink.label}
+        <div className="page-hero" data-force-dark data-dark-zone>
+          <div className="flex items-center justify-between gap-4">
+            <Link href={homeHref} data-interactive className="page-back">
+              {rtl ? "→" : "←"} {copy.back}
             </Link>
-          ) : null}
-        </div>
+            {switchLink ? (
+              <Link
+                href={switchLink.href}
+                hrefLang={switchLink.lang}
+                lang={switchLink.lang}
+                dir={switchLink.lang === "ar" ? "rtl" : "ltr"}
+                data-interactive
+                className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
+              >
+                {switchLink.label}
+              </Link>
+            ) : null}
+          </div>
 
-        <header className="contact-page__header mx-auto mt-8 max-w-3xl text-center sm:mt-10">
-          <PageEyebrow align="center">{copy.eyebrow}</PageEyebrow>
-          <h1 className="alu-display page-title page-title--sm mt-4">
-            {copy.title}
-            <span className="block text-foreground/55">{copy.lead}</span>
-          </h1>
-          {copy.intro ? (
-            <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-foreground/80">
-              {copy.intro}
+          <header className="contact-page__header mx-auto mt-8 max-w-3xl text-center sm:mt-10">
+            <PageEyebrow align="center">{copy.eyebrow}</PageEyebrow>
+            <h1 className="alu-display page-title page-title--sm mt-4">
+              {copy.title}
+              <span className="block text-foreground/55">{copy.lead}</span>
+            </h1>
+            {copy.intro ? (
+              <p className="mx-auto mt-5 max-w-xl text-base leading-relaxed text-foreground/80">
+                {copy.intro}
+              </p>
+            ) : null}
+            <p className="mt-4 text-sm text-foreground/70">
+              {copy.browsing}{" "}
+              <Link
+                href={solutionsHref}
+                className="font-semibold text-foreground underline underline-offset-4"
+              >
+                {copy.seeBuild}
+              </Link>
+              {" · "}
+              <Link
+                href={aboutHref}
+                className="font-semibold text-foreground underline underline-offset-4"
+              >
+                {copy.aboutStudio}
+              </Link>
             </p>
-          ) : null}
-          <p className="mt-4 text-sm text-foreground/70">
-            {copy.browsing}{" "}
-            <Link
-              href={solutionsHref}
-              className="font-semibold text-foreground underline underline-offset-4"
-            >
-              {copy.seeBuild}
-            </Link>
-            {" · "}
-            <Link
-              href={aboutHref}
-              className="font-semibold text-foreground underline underline-offset-4"
-            >
-              {copy.aboutStudio}
-            </Link>
-          </p>
-        </header>
+          </header>
+        </div>
 
         <div className="contact-page__layout mt-10 grid gap-8 lg:mt-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.35fr)] lg:gap-10 xl:gap-14">
           <aside className="space-y-6">

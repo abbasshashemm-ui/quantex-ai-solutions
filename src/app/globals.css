@@ -1729,6 +1729,47 @@ a:hover > .alu-link span[aria-hidden],
   }
 }
 
+/* A recording laid over the screenshot; it shows only while it plays. */
+.work-frame__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.work-frame__video[data-playing] {
+  opacity: 1;
+}
+
+/* How a service fits the visitor's answer, in the page's dark title band. */
+.answer-note {
+  max-width: 34rem;
+  margin-top: 1.5rem;
+  border-inline-start: 2px solid var(--signal);
+  padding-inline-start: 1rem;
+}
+
+.answer-note__title {
+  margin-top: 0.25rem;
+  font-size: 1.0625rem;
+  font-weight: 600;
+}
+
+.answer-note__body {
+  margin-top: 0.125rem;
+  font-size: var(--text-body-sm);
+  color: var(--ink-soft);
+}
+
+/* Sits just above the first group, not a full section gap away from it. */
+.answer-note-line.answer-note-line {
+  margin-block: 0 1rem;
+}
+
 /* Marks a screenshot that shows sample figures rather than a client's own. */
 .work-frame__note {
   position: absolute;
@@ -2520,6 +2561,28 @@ li:first-child > .faq-card--plain {
   text-align: right;
 }
 
+/*
+ * The live assistant sits in the same phone as the sample conversation above
+ * it, so the real product does not look plainer than its demo.
+ */
+.band-dark .hero-chat.hero-chat {
+  width: min(100%, 22rem);
+  max-width: none;
+  height: min(36rem, calc(100svh - 7rem));
+  margin-inline: auto;
+  justify-self: center;
+  border: 0.5rem solid #23272e;
+  border-radius: 2.5rem;
+  background: var(--surface);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 40px 80px -30px rgba(0, 0, 0, 0.9);
+}
+
+.band-dark .hero-chat .chat-panel__header {
+  padding-top: 1.25rem;
+}
+
 /* Figures */
 .stat-wall__row {
   display: grid;
@@ -2883,15 +2946,47 @@ li:first-child > .faq-card--plain {
 
 /* ——— Inner pages ——— */
 .page-shell {
+  --shell-top: calc(6rem + env(safe-area-inset-top));
   position: relative;
-  padding: calc(6rem + env(safe-area-inset-top)) 1rem 6rem;
+  padding: var(--shell-top) 1rem 6rem;
 }
 
 @media (min-width: 640px) {
   .page-shell {
+    --shell-top: 8rem;
     padding-inline: 1.5rem;
-    padding-top: 8rem;
   }
+}
+
+/*
+ * The title area of every inner page: a dark band that runs the full width of
+ * the screen and up under the header, then fades into the page, like the home
+ * page's hero. The band is painted with a border image that extends past the
+ * box on both sides, so the content keeps its column and nothing overflows.
+ */
+.page-hero {
+  --fade: clamp(4rem, 9vw, 7rem);
+  margin-top: calc(-1 * var(--shell-top));
+  margin-bottom: clamp(1rem, 3vw, 2.5rem);
+  padding: var(--shell-top) 0 calc(var(--fade) + 1.5rem);
+  color: var(--foreground);
+  border-image: linear-gradient(
+      180deg,
+      var(--void) 0,
+      var(--void) calc(100% - var(--fade)),
+      var(--page-fade) 100%
+    )
+    fill 0 / 0 / 0 100vmax;
+}
+
+/* The band paints its own fade; the generic dark-zone fades would only span the column. */
+.page-hero::before,
+.page-hero::after {
+  content: none;
+}
+
+.page-hero .page-title {
+  text-wrap: balance;
 }
 
 .page-back {

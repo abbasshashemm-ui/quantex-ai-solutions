@@ -76,39 +76,41 @@ export default function AiInLebanonArticleAr() {
       <article lang="ar" dir="rtl" className="about-page page-shell rtl-page">
         <div className="page-grid-bg absolute inset-0" aria-hidden />
         <div className="relative mx-auto max-w-3xl">
-          <div className="flex items-center justify-between gap-4">
-            <Link
-              href={AI_SOLUTIONS_AR_PATH}
-              data-interactive
-              className="page-back"
-            >
-              → حلول الذكاء الاصطناعي
-            </Link>
-            <Link
-              href={AI_ARTICLE_PATH}
-              hrefLang="en"
-              lang="en"
-              dir="ltr"
-              data-interactive
-              className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
-            >
-              English
-            </Link>
-          </div>
+          <div className="page-hero" data-force-dark data-dark-zone>
+            <div className="flex items-center justify-between gap-4">
+              <Link
+                href={AI_SOLUTIONS_AR_PATH}
+                data-interactive
+                className="page-back"
+              >
+                → حلول الذكاء الاصطناعي
+              </Link>
+              <Link
+                href={AI_ARTICLE_PATH}
+                hrefLang="en"
+                lang="en"
+                dir="ltr"
+                data-interactive
+                className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
+              >
+                English
+              </Link>
+            </div>
 
-          <header className="mt-8 sm:mt-10">
-            <PageEyebrow>دليل</PageEyebrow>
-            <h1 className="alu-display page-title page-title--sm mt-4">
-              {AR_ARTICLE.title}
-            </h1>
-            <p className="mt-4 text-sm text-foreground/70">
-              بقلم عباس هاشم ·{" "}
-              <time dateTime={AR_ARTICLE.datePublished}>
-                {AR_ARTICLE.displayDate}
-              </time>{" "}
-              · {AR_ARTICLE.readingTime}
-            </p>
-          </header>
+            <header className="mt-8 sm:mt-10">
+              <PageEyebrow>دليل</PageEyebrow>
+              <h1 className="alu-display page-title page-title--sm mt-4">
+                {AR_ARTICLE.title}
+              </h1>
+              <p className="mt-4 text-sm text-foreground/70">
+                بقلم عباس هاشم ·{" "}
+                <time dateTime={AR_ARTICLE.datePublished}>
+                  {AR_ARTICLE.displayDate}
+                </time>{" "}
+                · {AR_ARTICLE.readingTime}
+              </p>
+            </header>
+          </div>
 
           <p className={`aeo-answer alu-glass page-panel mt-8 ${BODY}`}>
             {AR_ARTICLE.summary}

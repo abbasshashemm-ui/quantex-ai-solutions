@@ -44,42 +44,44 @@ export function InsightsIndex({ lang }: { lang: Lang }) {
     >
       <div className="page-grid-bg absolute inset-0" aria-hidden />
       <div className="relative mx-auto max-w-5xl">
-        <div className="flex items-center justify-between gap-4">
-          <Link href="/" data-interactive className="page-back">
-            {t.back}
-          </Link>
-          <Link
-            href={INSIGHTS_PATH[other]}
-            hrefLang={other}
-            lang={other}
-            dir={rtl ? "ltr" : "rtl"}
-            data-interactive
-            className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
-          >
-            {t.other}
-          </Link>
+        <div className="page-hero" data-force-dark data-dark-zone>
+          <div className="flex items-center justify-between gap-4">
+            <Link href="/" data-interactive className="page-back">
+              {t.back}
+            </Link>
+            <Link
+              href={INSIGHTS_PATH[other]}
+              hrefLang={other}
+              lang={other}
+              dir={rtl ? "ltr" : "rtl"}
+              data-interactive
+              className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
+            >
+              {t.other}
+            </Link>
+          </div>
+
+          <header className="mt-8 sm:mt-10">
+            <PageEyebrow>
+              {t.eyebrow} · {t.count(total)}
+            </PageEyebrow>
+            <h1 className="alu-display page-title mt-4">{t.title}</h1>
+            <p className="alu-lede max-w-2xl">{t.lead}</p>
+
+            <nav aria-label={t.jump} className="mt-8 flex flex-wrap gap-2">
+              {groups.map((group) => (
+                <a
+                  key={group.id}
+                  href={`#${group.id}`}
+                  data-interactive
+                  className="alu-chip alu-chip--link"
+                >
+                  {group.label}
+                </a>
+              ))}
+            </nav>
+          </header>
         </div>
-
-        <header className="mt-8 sm:mt-10">
-          <PageEyebrow>
-            {t.eyebrow} · {t.count(total)}
-          </PageEyebrow>
-          <h1 className="alu-display page-title mt-4">{t.title}</h1>
-          <p className="alu-lede max-w-2xl">{t.lead}</p>
-
-          <nav aria-label={t.jump} className="mt-8 flex flex-wrap gap-2">
-            {groups.map((group) => (
-              <a
-                key={group.id}
-                href={`#${group.id}`}
-                data-interactive
-                className="alu-chip alu-chip--link"
-              >
-                {group.label}
-              </a>
-            ))}
-          </nav>
-        </header>
 
         {groups.map((group) => (
           <section

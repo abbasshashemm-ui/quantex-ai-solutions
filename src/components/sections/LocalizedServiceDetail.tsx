@@ -4,6 +4,7 @@ import { ServiceMock } from "@/components/services/ServiceMock";
 import { SERVICE_MOCKS } from "@/lib/services/mocks";
 import { ProjectGallery } from "@/components/work/ProjectGallery";
 import { SERVICE_PROJECT_IDS } from "@/lib/projects/data";
+import { AnswerNote } from "@/components/visitor/AnswerNote";
 import { PricingPlans } from "@/components/sections/PricingPlans";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { CONVERSION_EVENTS } from "@/lib/analytics/events";
@@ -58,66 +59,69 @@ export function LocalizedServiceDetail({
     >
       <div className="page-grid-bg absolute inset-0" aria-hidden />
       <div className="relative mx-auto max-w-7xl">
-        <div className="flex items-center justify-between gap-4">
-          <Link href={localePath(locale, "/#solutions")} data-interactive className="page-back">
-            {rtl ? "→" : "←"} {ui.allServices}
-          </Link>
-          <Link
-            href={other.href}
-            hrefLang={other.lang}
-            lang={other.lang}
-            dir="ltr"
-            data-interactive
-            className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
-          >
-            {other.label}
-          </Link>
-        </div>
-
-        <header className="service-page__hero mt-8 grid gap-8 lg:mt-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-start lg:gap-12">
-          <div>
-            <PageEyebrow>
-              {index} · {ui.eyebrow}
-            </PageEyebrow>
-            <h1 className="alu-display page-title mt-4">{t.label}</h1>
-            <p className="alu-lede max-w-xl">{t.description}</p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-              <Link href={localePath(locale, "/contact")} data-interactive className="btn-primary">
-                {ui.startProject}
-              </Link>
-              <a href={CONTACT.whatsapp} target="_blank" rel="noopener noreferrer" data-interactive className="btn-secondary">
-                {ui.whatsapp}
-              </a>
-            </div>
+        <div className="page-hero" data-force-dark data-dark-zone>
+          <div className="flex items-center justify-between gap-4">
+            <Link href={localePath(locale, "/#solutions")} data-interactive className="page-back">
+              {rtl ? "→" : "←"} {ui.allServices}
+            </Link>
+            <Link
+              href={other.href}
+              hrefLang={other.lang}
+              lang={other.lang}
+              dir="ltr"
+              data-interactive
+              className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
+            >
+              {other.label}
+            </Link>
           </div>
 
-          <aside className="service-page__aside alu-glass page-panel">
-            <div className="flex items-start gap-4">
-              <div className="page-icon h-12 w-12">
-                <ServiceNavIcon icon={service.nav.icon} className="h-6 w-6" />
-              </div>
-              <div className="min-w-0">
-                <p className="page-label">{ui.inShort}</p>
-                <p className="mt-1 text-base font-medium text-foreground">{t.tagline}</p>
+          <header className="service-page__hero mt-8 grid gap-8 lg:mt-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)] lg:items-start lg:gap-12">
+            <div>
+              <PageEyebrow>
+                {index} · {ui.eyebrow}
+              </PageEyebrow>
+              <h1 className="alu-display page-title mt-4">{t.label}</h1>
+              <p className="alu-lede max-w-xl">{t.description}</p>
+              <AnswerNote slug={service.slug} locale={locale} />
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
+                <Link href={localePath(locale, "/contact")} data-interactive className="btn-primary">
+                  {ui.startProject}
+                </Link>
+                <a href={CONTACT.whatsapp} target="_blank" rel="noopener noreferrer" data-interactive className="btn-secondary">
+                  {ui.whatsapp}
+                </a>
               </div>
             </div>
-            <ul className="mt-5 flex flex-wrap gap-2">
-              {t.highlights.map((item) => (
-                <li key={item} className="alu-chip">
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <dl className="mt-6 grid grid-cols-3 gap-3 border-t border-line pt-5">
-              {ui.facts.map((fact) => (
-                <div key={fact.label}>
-                  <dt className="page-label">{fact.label}</dt>
-                  <dd className="mt-1 text-sm font-semibold text-foreground">{fact.value}</dd>
+
+            <aside className="service-page__aside alu-glass page-panel">
+              <div className="flex items-start gap-4">
+                <div className="page-icon h-12 w-12">
+                  <ServiceNavIcon icon={service.nav.icon} className="h-6 w-6" />
                 </div>
-              ))}
-            </dl>
-          </aside>
-        </header>
+                <div className="min-w-0">
+                  <p className="page-label">{ui.inShort}</p>
+                  <p className="mt-1 text-base font-medium text-foreground">{t.tagline}</p>
+                </div>
+              </div>
+              <ul className="mt-5 flex flex-wrap gap-2">
+                {t.highlights.map((item) => (
+                  <li key={item} className="alu-chip">
+                    {item}
+                  </li>
+                ))}
+              </ul>
+              <dl className="mt-6 grid grid-cols-3 gap-3 border-t border-line pt-5">
+                {ui.facts.map((fact) => (
+                  <div key={fact.label}>
+                    <dt className="page-label">{fact.label}</dt>
+                    <dd className="mt-1 text-sm font-semibold text-foreground">{fact.value}</dd>
+                  </div>
+                ))}
+              </dl>
+            </aside>
+          </header>
+        </div>
 
         <section className="rule-item mt-10 sm:mt-14">
           <h2 className="page-label">{ui.inPlainWords}</h2>

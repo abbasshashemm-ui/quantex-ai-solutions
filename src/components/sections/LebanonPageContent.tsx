@@ -23,43 +23,45 @@ export function LebanonPageContent({ lang }: { lang: Lang }) {
     >
       <div className="page-grid-bg absolute inset-0" aria-hidden />
       <div className="relative mx-auto max-w-7xl">
-        <div className="flex items-center justify-between gap-4">
-          <Link href="/" data-interactive className="page-back">
-            {c.ui.home}
-          </Link>
-          <Link
-            href={LEBANON_PATH[other]}
-            hrefLang={other}
-            lang={other}
-            dir={rtl ? "ltr" : "rtl"}
-            data-interactive
-            className={LINK}
-          >
-            {c.ui.other}
-          </Link>
-        </div>
-
-        <header className="mt-8 sm:mt-10">
-          <PageEyebrow>{c.eyebrow}</PageEyebrow>
-          <h1 className="alu-display page-title page-title--sm mt-4 max-w-4xl">
-            {c.title}
-          </h1>
-          <p className="alu-lede max-w-2xl">{c.lead}</p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link href="/contact" data-interactive className="btn-primary w-full max-w-xs sm:w-auto">
-              {c.cta.start}
+        <div className="page-hero" data-force-dark data-dark-zone>
+          <div className="flex items-center justify-between gap-4">
+            <Link href="/" data-interactive className="page-back">
+              {c.ui.home}
             </Link>
-            <a
-              href={CONTACT.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href={LEBANON_PATH[other]}
+              hrefLang={other}
+              lang={other}
+              dir={rtl ? "ltr" : "rtl"}
               data-interactive
-              className="btn-secondary w-full max-w-xs sm:w-auto"
+              className={LINK}
             >
-              {c.cta.whatsapp}
-            </a>
+              {c.ui.other}
+            </Link>
           </div>
-        </header>
+
+          <header className="mt-8 sm:mt-10">
+            <PageEyebrow>{c.eyebrow}</PageEyebrow>
+            <h1 className="alu-display page-title page-title--sm mt-4 max-w-4xl">
+              {c.title}
+            </h1>
+            <p className="alu-lede max-w-2xl">{c.lead}</p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link href="/contact" data-interactive className="btn-primary w-full max-w-xs sm:w-auto">
+                {c.cta.start}
+              </Link>
+              <a
+                href={CONTACT.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-interactive
+                className="btn-secondary w-full max-w-xs sm:w-auto"
+              >
+                {c.cta.whatsapp}
+              </a>
+            </div>
+          </header>
+        </div>
 
         <section className="aeo-answer alu-glass page-panel mt-14 sm:mt-20" aria-labelledby="leb-answer">
           <h2 id="leb-answer" className="text-lg font-semibold text-foreground sm:text-xl">

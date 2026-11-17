@@ -56,34 +56,36 @@ export default function EacmlCopilotArPage() {
       <article lang="ar" dir="rtl" className="about-page page-shell rtl-page">
         <div className="page-grid-bg absolute inset-0" aria-hidden />
         <div className="relative mx-auto max-w-7xl">
-          <div className="flex items-center justify-between gap-4">
-            <Link href="/ar#work" data-interactive className="page-back">
-              → أعمالنا
-            </Link>
-            <Link href={EACML_PATH} hrefLang="en" lang="en" dir="ltr" data-interactive className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4">
-              English
-            </Link>
-          </div>
-
-          <header className="mt-8 sm:mt-10">
-            <PageEyebrow>{EACML.eyebrow}</PageEyebrow>
-            <h1 className="alu-display page-title mt-4" dir="ltr">{EACML.title}</h1>
-            <p className="alu-lede max-w-3xl">{EACML.pitch}</p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <Link href="/ar/contact" data-interactive className="btn-primary w-full max-w-xs sm:w-auto">
-                تواصل معنا
+          <div className="page-hero" data-force-dark data-dark-zone>
+            <div className="flex items-center justify-between gap-4">
+              <Link href="/ar#work" data-interactive className="page-back">
+                → أعمالنا
               </Link>
-              <a
-                href={CONTACT.whatsapp}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-interactive
-                className="btn-secondary w-full max-w-xs sm:w-auto"
-              >
-                واتساب
-              </a>
+              <Link href={EACML_PATH} hrefLang="en" lang="en" dir="ltr" data-interactive className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4">
+                English
+              </Link>
             </div>
-          </header>
+
+            <header className="mt-8 sm:mt-10">
+              <PageEyebrow>{EACML.eyebrow}</PageEyebrow>
+              <h1 className="alu-display page-title mt-4" dir="ltr">{EACML.title}</h1>
+              <p className="alu-lede max-w-3xl">{EACML.pitch}</p>
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <Link href="/ar/contact" data-interactive className="btn-primary w-full max-w-xs sm:w-auto">
+                  تواصل معنا
+                </Link>
+                <a
+                  href={CONTACT.whatsapp}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  data-interactive
+                  className="btn-secondary w-full max-w-xs sm:w-auto"
+                >
+                  واتساب
+                </a>
+              </div>
+            </header>
+          </div>
 
           <dl className="mt-14 grid grid-cols-2 gap-3 sm:mt-20 sm:gap-5 lg:grid-cols-4" aria-label="المشروع في لمحة">
             {EACML.stats.map((stat) => (

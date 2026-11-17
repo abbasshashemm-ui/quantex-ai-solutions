@@ -28,47 +28,49 @@ export function AiSolutionsPageContentAr() {
       <div className="page-grid-bg absolute inset-0" aria-hidden />
 
       <div className="relative mx-auto max-w-7xl">
-        <div className="flex items-center justify-between gap-4">
-          <Link href="/" data-interactive className="page-back">
-            → الرئيسية
-          </Link>
-          <Link
-            href="/ai-solutions"
-            hrefLang="en"
-            lang="en"
-            dir="ltr"
-            data-interactive
-            className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
-          >
-            English
-          </Link>
-        </div>
-
-        <header className="mt-8 sm:mt-10">
-          <PageEyebrow>{AR_HERO.eyebrow}</PageEyebrow>
-          <h1 className="alu-display page-title page-title--sm mt-4 max-w-4xl">
-            {AR_HERO.title}
-          </h1>
-          <p className="alu-lede max-w-2xl">{AR_HERO.lead}</p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="/contact"
-              data-interactive
-              className="btn-primary w-full max-w-xs sm:w-auto"
-            >
-              ابدأ مشروعك
+        <div className="page-hero" data-force-dark data-dark-zone>
+          <div className="flex items-center justify-between gap-4">
+            <Link href="/" data-interactive className="page-back">
+              → الرئيسية
             </Link>
-            <a
-              href={CONTACT.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/ai-solutions"
+              hrefLang="en"
+              lang="en"
+              dir="ltr"
               data-interactive
-              className="btn-secondary w-full max-w-xs sm:w-auto"
+              className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
             >
-              راسلنا على واتساب
-            </a>
+              English
+            </Link>
           </div>
-        </header>
+
+          <header className="mt-8 sm:mt-10">
+            <PageEyebrow>{AR_HERO.eyebrow}</PageEyebrow>
+            <h1 className="alu-display page-title page-title--sm mt-4 max-w-4xl">
+              {AR_HERO.title}
+            </h1>
+            <p className="alu-lede max-w-2xl">{AR_HERO.lead}</p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/contact"
+                data-interactive
+                className="btn-primary w-full max-w-xs sm:w-auto"
+              >
+                ابدأ مشروعك
+              </Link>
+              <a
+                href={CONTACT.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-interactive
+                className="btn-secondary w-full max-w-xs sm:w-auto"
+              >
+                راسلنا على واتساب
+              </a>
+            </div>
+          </header>
+        </div>
 
         <section
           className="aeo-answer alu-glass page-panel mt-14 sm:mt-20"

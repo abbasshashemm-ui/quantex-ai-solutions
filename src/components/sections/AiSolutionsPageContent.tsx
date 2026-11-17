@@ -19,47 +19,49 @@ export function AiSolutionsPageContent() {
       <div className="page-grid-bg absolute inset-0" aria-hidden />
 
       <div className="relative mx-auto max-w-7xl">
-        <div className="flex items-center justify-between gap-4">
-          <Link href="/" data-interactive className="page-back">
-            ← Home
-          </Link>
-          <Link
-            href="/ar/ai-solutions"
-            hrefLang="ar"
-            lang="ar"
-            dir="rtl"
-            data-interactive
-            className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
-          >
-            العربية
-          </Link>
-        </div>
-
-        <header className="mt-8 sm:mt-10">
-          <PageEyebrow>{AI_SOLUTIONS_HERO.eyebrow}</PageEyebrow>
-          <h1 className="alu-display page-title page-title--sm mt-4 max-w-4xl">
-            {AI_SOLUTIONS_HERO.title}
-          </h1>
-          <p className="alu-lede max-w-2xl">{AI_SOLUTIONS_HERO.lead}</p>
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <Link
-              href="/contact"
-              data-interactive
-              className="btn-primary w-full max-w-xs sm:w-auto"
-            >
-              Start a project
+        <div className="page-hero" data-force-dark data-dark-zone>
+          <div className="flex items-center justify-between gap-4">
+            <Link href="/" data-interactive className="page-back">
+              ← Home
             </Link>
-            <a
-              href={CONTACT.whatsapp}
-              target="_blank"
-              rel="noopener noreferrer"
+            <Link
+              href="/ar/ai-solutions"
+              hrefLang="ar"
+              lang="ar"
+              dir="rtl"
               data-interactive
-              className="btn-secondary w-full max-w-xs sm:w-auto"
+              className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
             >
-              Chat on WhatsApp
-            </a>
+              العربية
+            </Link>
           </div>
-        </header>
+
+          <header className="mt-8 sm:mt-10">
+            <PageEyebrow>{AI_SOLUTIONS_HERO.eyebrow}</PageEyebrow>
+            <h1 className="alu-display page-title page-title--sm mt-4 max-w-4xl">
+              {AI_SOLUTIONS_HERO.title}
+            </h1>
+            <p className="alu-lede max-w-2xl">{AI_SOLUTIONS_HERO.lead}</p>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <Link
+                href="/contact"
+                data-interactive
+                className="btn-primary w-full max-w-xs sm:w-auto"
+              >
+                Start a project
+              </Link>
+              <a
+                href={CONTACT.whatsapp}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-interactive
+                className="btn-secondary w-full max-w-xs sm:w-auto"
+              >
+                Chat on WhatsApp
+              </a>
+            </div>
+          </header>
+        </div>
 
         <section
           className="aeo-answer alu-glass page-panel mt-14 sm:mt-20"

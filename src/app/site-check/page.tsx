@@ -30,20 +30,22 @@ export default function SiteCheckPage() {
       <article id="site-check-page" className="page-shell min-h-[100dvh]">
         <div className="page-grid-bg absolute inset-0" aria-hidden />
         <div className="relative mx-auto max-w-5xl">
-          <Link href="/" data-interactive className="page-back">
-            ← Home
-          </Link>
-          <header className="mt-8 sm:mt-10">
-            <PageEyebrow>Free tool</PageEyebrow>
-            <h1 className="alu-display page-title page-title--sm mt-4">
-              Can customers and AI find your website?
-            </h1>
-            <p className="alu-lede max-w-2xl">
-              Enter your address. In about 20 seconds you get a score, what is
-              holding you back on Google and AI search, and how to fix each
-              item. Free, no sign-up.
-            </p>
-          </header>
+          <div className="page-hero" data-force-dark data-dark-zone>
+            <Link href="/" data-interactive className="page-back">
+              ← Home
+            </Link>
+            <header className="mt-8 sm:mt-10">
+              <PageEyebrow>Free tool</PageEyebrow>
+              <h1 className="alu-display page-title page-title--sm mt-4">
+                Can customers and AI find your website?
+              </h1>
+              <p className="alu-lede max-w-2xl">
+                Enter your address. In about 20 seconds you get a score, what is
+                holding you back on Google and AI search, and how to fix each
+                item. Free, no sign-up.
+              </p>
+            </header>
+          </div>
           <div className="mt-10">
             <SiteCheckTool />
           </div>

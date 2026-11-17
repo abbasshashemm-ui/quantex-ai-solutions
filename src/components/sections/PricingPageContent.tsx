@@ -1,6 +1,7 @@
 import { LocalLink as Link } from "@/components/ui/LocalLink";
 import { PageEyebrow } from "@/components/ui/PageEyebrow";
 import { PricingPlans } from "@/components/sections/PricingPlans";
+import { AnswerOrdered } from "@/components/visitor/AnswerOrdered";
 import {
   CUSTOM_SCOPES,
   PRICE_GROUPS,
@@ -88,34 +89,40 @@ export function PricingPageContent({ lang = "en" }: { lang?: "en" | "ar" | "fr" 
     >
       <div className="page-grid-bg absolute inset-0" aria-hidden />
       <div className="relative mx-auto max-w-7xl">
-        <div className="flex items-center justify-between gap-4">
-          <Link href="/" data-interactive className="page-back">
-            {t.back}
-          </Link>
-          <Link
-            href={t.other.href}
-            hrefLang={t.other.lang}
-            lang={t.other.lang}
-            dir={t.other.lang === "ar" ? "rtl" : "ltr"}
-            data-interactive
-            className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
-          >
-            {t.other.label}
-          </Link>
+        <div className="page-hero" data-force-dark data-dark-zone>
+          <div className="flex items-center justify-between gap-4">
+            <Link href="/" data-interactive className="page-back">
+              {t.back}
+            </Link>
+            <Link
+              href={t.other.href}
+              hrefLang={t.other.lang}
+              lang={t.other.lang}
+              dir={t.other.lang === "ar" ? "rtl" : "ltr"}
+              data-interactive
+              className="inline-flex min-h-11 items-center text-sm font-semibold text-foreground underline underline-offset-4"
+            >
+              {t.other.label}
+            </Link>
+          </div>
+
+          <header className="mt-8 sm:mt-10">
+            <PageEyebrow>{t.eyebrow}</PageEyebrow>
+            <h1 className="alu-display page-title page-title--sm mt-4">
+              {t.title}
+            </h1>
+            <p className="alu-lede max-w-2xl">{t.lead}</p>
+          </header>
         </div>
 
-        <header className="mt-8 sm:mt-10">
-          <PageEyebrow>{t.eyebrow}</PageEyebrow>
-          <h1 className="alu-display page-title page-title--sm mt-4">
-            {t.title}
-          </h1>
-          <p className="alu-lede max-w-2xl">{t.lead}</p>
-        </header>
-
         <div className="mt-12 space-y-16 sm:mt-16 sm:space-y-24">
-          {groups.map((group) => (
-            <PricingPlans key={group.id} group={group} lang={lang} />
-          ))}
+          <AnswerOrdered
+            locale={lang}
+            items={groups.map((group) => ({
+              slug: group.serviceSlug,
+              node: <PricingPlans group={group} lang={lang} />,
+            }))}
+          />
         </div>
 
         <section className="mt-16 sm:mt-24" aria-labelledby="price-custom">
