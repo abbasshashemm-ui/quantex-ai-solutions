@@ -1,5 +1,6 @@
 import { AeoBlock } from "@/components/home/AeoBlock";
 import { AssistantSection } from "@/components/home/AssistantSection";
+import { ForYouSection } from "@/components/home/ForYouSection";
 import { ClosingCta } from "@/components/home/ClosingCta";
 import { GuidesSection } from "@/components/home/GuidesSection";
 import { WorkSection } from "@/components/home/WorkSection";
@@ -17,6 +18,7 @@ export function HomePage() {
       <HeroStage>
         <HeroCopy />
       </HeroStage>
+      <ForYouSection />
       <WorkSection />
       <ServicesSection />
       <AssistantSection />

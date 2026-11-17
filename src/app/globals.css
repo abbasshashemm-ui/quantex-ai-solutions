@@ -817,6 +817,265 @@ a:hover > .alu-link span[aria-hidden],
   }
 }
 
+/*
+ * ——— The hero as a question ———
+ * The visitor says what their business does and the hero answers. Sizes are
+ * set by height as well as width so the form stays on screen on short phones.
+ */
+/* A text field's default width would otherwise stretch the hero past a phone's edge. */
+.ask {
+  min-width: 0;
+}
+
+.ask__title {
+  margin-top: 0.75rem;
+  font-size: clamp(2.25rem, min(11vw, 6.6svh), 3.5rem);
+  line-height: 0.9;
+}
+
+.ask__title span {
+  display: block;
+}
+
+.ask__title--answer {
+  font-size: clamp(2rem, min(9vw, 5.6svh), 3rem);
+  text-wrap: balance;
+}
+
+@media (min-width: 900px) {
+  .ask {
+    max-width: min(40rem, 44vw);
+  }
+
+  .ask__title {
+    font-size: clamp(3rem, min(6.2vw, 11svh), 6rem);
+  }
+
+  .ask__title--answer {
+    font-size: clamp(2.25rem, min(3.8vw, 7svh), 3.5rem);
+  }
+}
+
+.ask-form {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+
+.ask-form__input {
+  width: 0;
+  min-width: 0;
+  flex: 1 1 0;
+  min-height: 3.25rem;
+  border: 2px solid var(--foreground);
+  border-radius: var(--radius-control);
+  padding-inline: 1rem;
+  background: var(--surface-elevated);
+  /* 16px or more, so phones do not zoom the page on focus. */
+  font-size: 1.0625rem;
+  color: var(--foreground);
+}
+
+.ask-form__input::placeholder {
+  color: var(--metallic-dim);
+}
+
+.ask-form__input:focus-visible {
+  outline: 2px solid var(--foreground);
+  outline-offset: 3px;
+}
+
+.ask-form__submit {
+  flex-shrink: 0;
+}
+
+.ask-picks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+  padding: 0;
+  list-style: none;
+}
+
+.ask-picks .alu-chip {
+  cursor: pointer;
+}
+
+.ask [disabled] {
+  cursor: progress;
+  opacity: 0.6;
+}
+
+/* The answer: three numbered places to start. */
+.ask-steps {
+  margin-top: 1.25rem;
+  border-top: 1px solid var(--line-strong);
+  padding: 0;
+  list-style: none;
+}
+
+.ask-step {
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+  align-items: baseline;
+  gap: 0.25rem 0.75rem;
+  border-bottom: 1px solid var(--line-strong);
+  padding: 0.75rem 0;
+  color: var(--foreground);
+  transition: border-color 0.16s ease;
+}
+
+.ask-step__n {
+  font-family: var(--font-condensed), var(--font-outfit), sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  font-style: italic;
+  color: var(--muted);
+}
+
+.ask-step__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.125rem;
+}
+
+.ask-step__text strong {
+  font-size: 1.0625rem;
+  font-weight: 600;
+}
+
+.ask-step__text span,
+.ask-step__price {
+  font-size: 0.875rem;
+  color: var(--ink-soft);
+}
+
+.ask-step__price {
+  grid-column: 2;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+@media (min-width: 640px) {
+  .ask-step {
+    grid-template-columns: 2.25rem minmax(0, 1fr) auto;
+  }
+
+  .ask-step__price {
+    grid-column: 3;
+    text-align: end;
+  }
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .ask-step:hover {
+    border-bottom-color: var(--foreground);
+  }
+
+  .ask-step:hover .ask-step__n {
+    color: var(--foreground);
+  }
+}
+
+.ask-reset {
+  min-height: 2.75rem;
+  padding-inline: 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--foreground);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+/* Short phones: the answer drops its detail lines to stay on one screen. */
+@media (max-width: 899px) and (max-height: 760px) {
+  .ask-step__text span {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .ask--answered > * {
+    animation: ask-in 0.4s var(--ease-out) both;
+  }
+
+  .ask--answered > :nth-child(2) {
+    animation-delay: 60ms;
+  }
+
+  .ask--answered > :nth-child(3) {
+    animation-delay: 120ms;
+  }
+
+  .ask--answered > :nth-child(4) {
+    animation-delay: 180ms;
+  }
+
+  /* While it works out an answer, the sculpture leans in. */
+  .alu-stage[data-thinking="true"] .alu-stage__visual {
+    animation: ask-think 0.7s var(--ease-out);
+  }
+}
+
+@keyframes ask-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes ask-think {
+  40% {
+    transform: scale(1.04) rotate(-2deg);
+  }
+}
+
+/* The section the answer unlocks, straight after the hero. */
+.for-you {
+  display: grid;
+  gap: 2.5rem;
+  margin-top: 3rem;
+}
+
+@media (min-width: 900px) {
+  .for-you {
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+    gap: 4rem;
+    align-items: center;
+  }
+}
+
+.for-you__chat {
+  margin: 0;
+}
+
+.for-you__caption {
+  border-top: 1px solid var(--line);
+  padding: 0.5rem 1.25rem;
+  font-size: var(--text-label);
+  color: var(--muted);
+}
+
+.for-you__outcomes {
+  margin-top: 1rem;
+  border-top: 1px solid var(--line-strong);
+  padding: 0;
+  list-style: none;
+}
+
+.for-you__outcomes li {
+  display: grid;
+  grid-template-columns: 2.25rem minmax(0, 1fr);
+  align-items: baseline;
+  gap: 0.75rem;
+  border-bottom: 1px solid var(--line-strong);
+  padding: 1rem 0;
+  font-size: 1.0625rem;
+  line-height: 1.45;
+}
+
 /* ——— Sections ——— */
 .alu-section {
   position: relative;

@@ -1,46 +1,11 @@
 import Link from "next/link";
-import { PageEyebrow } from "@/components/ui/PageEyebrow";
-import { CONVERSION_EVENTS } from "@/lib/analytics/events";
-
-const HEADLINE = ["Websites.", "Assistants.", "Customers."] as const;
+import { HeroAsk } from "./HeroAsk";
 
 /** Hero copy plus the two scroll beats that follow it. */
 export function HeroCopy() {
   return (
     <>
-      <div className="alu-hero">
-        <PageEyebrow>
-          Beirut AI studio · 10+ paying clients · Replies within 24 hours
-        </PageEyebrow>
-        <h1 className="alu-display alu-h1">
-          {HEADLINE.map((line, index) => (
-            <span
-              key={line}
-              className="alu-h1__line"
-              style={{ "--i": index } as React.CSSProperties}
-            >
-              {line}
-            </span>
-          ))}
-        </h1>
-        <p className="alu-lede">
-          Built by a Beirut studio you can message directly
-        </p>
-        <div className="alu-ctas">
-          <Link
-            href="/contact"
-            data-interactive
-            data-conversion={CONVERSION_EVENTS.SOLUTIONS_CLICK}
-            data-conversion-location="hero"
-            className="btn-primary"
-          >
-            Start a project
-          </Link>
-          <a href="#solutions" data-interactive className="btn-secondary">
-            See what we build
-          </a>
-        </div>
-      </div>
+      <HeroAsk />
 
       <p className="sr-only">
         Websites that convert: fast, clear, and built around one goal, turning
