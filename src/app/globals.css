@@ -418,6 +418,11 @@ a:hover > .alu-link span[aria-hidden],
   isolation: isolate;
 }
 
+/*
+ * The hero is always dark (see "Dark zones"). Its backdrop is a plain dark
+ * surface with one soft glow behind the sculpture: no brushed stripes and no
+ * streaks, so nothing competes with the chrome.
+ */
 .alu-stage__panel::before {
   content: "";
   position: absolute;
@@ -425,30 +430,25 @@ a:hover > .alu-link span[aria-hidden],
   z-index: -3;
   pointer-events: none;
   background:
-    repeating-linear-gradient(
-      90deg,
-      rgba(255, 255, 255, 0.07) 0 1px,
-      rgba(20, 24, 32, 0.008) 1px 2px,
-      rgba(255, 255, 255, 0) 2px 4px
-    ),
     radial-gradient(
-      120% 80% at 72% 0%,
-      rgba(255, 255, 255, 0.95) 0%,
-      rgba(255, 255, 255, 0) 58%
+      70% 60% at 72% 38%,
+      rgba(255, 255, 255, 0.09) 0%,
+      rgba(255, 255, 255, 0) 70%
     ),
-    conic-gradient(
-      from 200deg at 128% -22%,
-      rgba(255, 255, 255, 0) 0 6%,
-      rgba(255, 255, 255, 0.5) 13%,
-      rgba(255, 255, 255, 0) 21%,
-      rgba(20, 26, 36, 0.07) 33%,
-      rgba(255, 255, 255, 0) 45%,
-      rgba(255, 255, 255, 0.4) 62%,
-      rgba(255, 255, 255, 0) 74%,
-      rgba(20, 26, 36, 0.06) 88%,
-      rgba(255, 255, 255, 0) 100%
-    ),
-    linear-gradient(180deg, #edf0f3 0%, #dfe3e8 48%, #d1d6dd 100%);
+    linear-gradient(180deg, #14171c 0%, #0f1115 48%, #0b0c10 100%);
+}
+
+/* Phones: the sculpture sits top centre, so the glow does too. */
+@media (max-width: 899px) {
+  .alu-stage__panel::before {
+    background:
+      radial-gradient(
+        90% 42% at 50% 26%,
+        rgba(255, 255, 255, 0.09) 0%,
+        rgba(255, 255, 255, 0) 70%
+      ),
+      linear-gradient(180deg, #14171c 0%, #0f1115 48%, #0b0c10 100%);
+  }
 }
 
 .alu-stage__shadow {
@@ -3613,34 +3613,6 @@ span.chat-panel__input {
 
   body::before {
     background: linear-gradient(180deg, #14171c 0%, #0e1014 100%);
-  }
-
-  .alu-stage__panel::before {
-    background:
-      repeating-linear-gradient(
-        90deg,
-        rgba(255, 255, 255, 0.012) 0 1px,
-        rgba(0, 0, 0, 0.04) 1px 2px,
-        rgba(255, 255, 255, 0) 2px 4px
-      ),
-      radial-gradient(
-        120% 80% at 72% 0%,
-        rgba(255, 255, 255, 0.13) 0%,
-        rgba(255, 255, 255, 0) 58%
-      ),
-      conic-gradient(
-        from 200deg at 128% -22%,
-        rgba(255, 255, 255, 0) 0 6%,
-        rgba(255, 255, 255, 0.07) 13%,
-        rgba(255, 255, 255, 0) 21%,
-        rgba(0, 0, 0, 0.18) 33%,
-        rgba(255, 255, 255, 0) 45%,
-        rgba(255, 255, 255, 0.05) 62%,
-        rgba(255, 255, 255, 0) 74%,
-        rgba(0, 0, 0, 0.16) 88%,
-        rgba(255, 255, 255, 0) 100%
-      ),
-      linear-gradient(180deg, #171a20 0%, #0f1115 48%, #0a0b0e 100%);
   }
 
   /* Glass: light edges and a pale tint over the dark metal. */
