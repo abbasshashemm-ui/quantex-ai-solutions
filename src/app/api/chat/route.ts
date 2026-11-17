@@ -31,7 +31,7 @@ export async function POST(request: Request) {
   }
 
   const ip = getClientIp(request);
-  const rate = checkChatRateLimit(ip);
+  const rate = await checkChatRateLimit(ip);
   if (!rate.allowed) {
     return Response.json(
       { error: "Too many messages. Please try again later or message us on WhatsApp." },
