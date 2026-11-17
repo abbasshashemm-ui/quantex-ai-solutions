@@ -27,10 +27,10 @@ function SiteVisual() {
         <i />
       </span>
       <Image
-        src="/projects/chandelier-solderie.png"
+        src="/projects/chandelier-solderie.webp"
         alt=""
-        width={1024}
-        height={487}
+        width={1920}
+        height={914}
         quality={70}
         sizes="(max-width: 1023px) 90vw, 320px"
       />
